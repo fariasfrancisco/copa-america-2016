@@ -14,7 +14,7 @@ import Group from './group.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -22,7 +22,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
+  return function (entity) {
     var updated = _.merge(entity, updates);
     return updated.save()
       .then(updated => {
@@ -32,7 +32,7 @@ function saveUpdates(updates) {
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       return entity.remove()
         .then(() => {
@@ -43,7 +43,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if (!entity) {
       res.status(404).end();
       return null;
@@ -54,7 +54,7 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
@@ -79,6 +79,16 @@ export function create(req, res) {
   return Group.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
+}
+
+// Creates new Groups in the DB
+export function createBatch(req, res) {
+  var groups = req.body;
+  groups.forEach(function (current) {
+    Group.create(current)
+      .then(respondWithResult(res, 201))
+      .catch(handleError(res));
+  })
 }
 
 // Updates an existing Group in the DB
