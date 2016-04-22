@@ -7,10 +7,12 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <div ng-hide="$ctrl.isLoggedIn()" class="page-header">
-        <a href="#" class="button">Make a Bet!</a>
+      <div ng-show="$ctrl.mainSvc.getShowLoginForm()" login></div>
+      <div ng-show="$ctrl.mainSvc.getShowSignUpForm()" signup></div>
+      <div ng-show="$ctrl.mainSvc.getShowButton()" class="page-header">
+        <a href="#" class="button" ng-click="$ctrl.toggleLoginForm()">Make a Bet!</a>
       </div>
-      <div ng-show="$ctrl.isLoggedIn()" class="page-header row col-md-6 col-md-offset-2 custyle table-format"
+      <div ng-show="$ctrl.mainSvc.getShowTables()" class="page-header row col-md-6 col-md-offset-2 custyle table-format"
            ng-repeat="group in $ctrl.groups">
         <table class="table table-striped custab">
           <caption>{{group.fullName}}</caption>
