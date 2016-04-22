@@ -1,38 +1,21 @@
 'use strict';
 
-describe('Component: mainComponent', function() {
+describe('Component: MainComponent', function () {
 
   // load the controller's module
   beforeEach(module('copaamericaApp'));
-  beforeEach(module('stateMock'));
 
-  var scope;
-  var mainComponent;
-  var state;
-  var $httpBackend;
+  var MainComponent, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function(
-    _$httpBackend_,
-    $http,
-    $componentController,
-    $rootScope,
-    $state) {
-      $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('/api/things')
-        .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-
-      scope = $rootScope.$new();
-      state = $state;
-      mainComponent = $componentController('main', {
-        $http: $http,
-        $scope: scope
-      });
+  beforeEach(inject(function ($componentController, $rootScope) {
+    scope = $rootScope.$new();
+    MainComponent = $componentController('MainComponent', {
+      $scope: scope
+    });
   }));
 
-  it('should attach a list of things to the controller', function() {
-    mainComponent.$onInit();
-    $httpBackend.flush();
-    expect(mainComponent.awesomeThings.length).toBe(4);
+  it('should ...', function () {
+    expect(1).toEqual(1);
   });
 });

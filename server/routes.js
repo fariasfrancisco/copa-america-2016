@@ -14,6 +14,7 @@ export default function(app) {
   app.use('/api/groups', require('./api/group'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/init', require('./api/initializer'));
 
   app.use('/auth', require('./auth').default);
 

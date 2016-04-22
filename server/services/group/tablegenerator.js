@@ -1,12 +1,18 @@
+var moment = require('moment');
+
 module.exports = {};
+
+var isInArray = function (value, array) {
+  return array.indexOf(value) > -1;
+};
 
 var initializeTable = function (group) {
   var list = []
     , table = [];
 
-  group.matches.forEach(function (current) {
-    if (!current.home._team in list) list.push(current.home._team);
-    if (!current.away._team in list) list.push(current.away._team);
+  group.matches.forEach(function (match) {
+    if (!isInArray(match.home._team, list)) list.push(match.home._team);
+    if (!isInArray(match.away._team, list)) list.push(match.away._team);
   });
 
   list.forEach(function (current, index) {
@@ -24,6 +30,10 @@ var initializeTable = function (group) {
 
 var calculatePointsAndGoals = function (table, matches) {
   matches.forEach(function (current) {
+    var matchEndTime = moment(current.date).add(2, 'h');
+
+    if (moment().isBefore(matchEndTime)) return;
+
     var homeTeam = current.home._team
       , awayTeam = current.away._team
       , homeTeamIndex = 0
@@ -31,8 +41,8 @@ var calculatePointsAndGoals = function (table, matches) {
       , result;
 
     table.forEach(function (current, index) {
-      if (current === homeTeam) homeTeamIndex = index;
-      if (current === awayTeam) awayTeamIndex = index;
+      if (current.team === homeTeam) homeTeamIndex = index;
+      if (current.team === awayTeam) awayTeamIndex = index;
     });
 
     table[homeTeamIndex].goalsFor += current.home.goals;
@@ -47,21 +57,21 @@ var calculatePointsAndGoals = function (table, matches) {
       if (result < 0) {
         table[awayTeamIndex].points += 3;
       } else {
-        table[homeTeamIndex].points += 3;
-        table[awayTeamIndex].points += 3;
+        table[homeTeamIndex].points += 1;
+        table[awayTeamIndex].points += 1;
       }
     }
   });
 
-  return table;
+  table.forEach(function (current) {
+    current.goalDifference = current.goalsFor - current.goalsAgainst;
+  })
 };
 
 var swapPositions = function (table, a, b) {
   var aux = table[a].position;
   table[a].position = table[b].position;
   table[b].position = aux;
-
-  return table;
 };
 
 var calculatePositions = function (table) {
@@ -73,12 +83,10 @@ var calculatePositions = function (table) {
         table = swapPositions(table);
       } else {
         if (table[i].points === table[j].points) {
-          var iGoalDifference = table[i].goalsFor - table[i].goalsAgainst
-            , jGoalDifference = table[j].goalsFor - table[j].goalsAgainst;
-          if (iGoalDifference < jGoalDifference) {
+          if (table[i].goalDifference < table[j].goalDifference) {
             table = swapPositions(table);
           } else {
-            if (iGoalDifference === jGoalDifference) {
+            if (table[i].goalDifference === table[j].goalDifference) {
               if (table[i].goalsFor < table[j].goalsFor) {
                 table = swapPositions(table);
               }
@@ -88,14 +96,11 @@ var calculatePositions = function (table) {
       }
     }
   }
-
-  return table;
 };
 
 module.exports.generate = function (group) {
-  var table;
-  table = initializeTable(group);
-  table = calculatePointsAndGoals(table, group.matches);
-  table = calculatePositions(table);
+  var table = initializeTable(group);
+  calculatePointsAndGoals(table, group.matches);
+  calculatePositions(table);
   return table;
 };

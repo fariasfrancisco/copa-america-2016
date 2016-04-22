@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Group from './group.model';
+import tableGenerator from '../../services/group/tablegenerator';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -108,5 +109,24 @@ export function destroy(req, res) {
   return Group.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
+    .catch(handleError(res));
+}
+
+// Get all groups from the group stage from the DB
+export function getFromStage(req, res) {
+  return Group.find({'stage': req.params.stage}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Get the table of a group
+export function getTable(req, res) {
+  return Group.findOne({'name': req.params.name}).exec()
+    .then(handleEntityNotFound(res))
+    .then(function (response) {
+      var table = tableGenerator.generate(response);
+      res.status(200).json(table);
+    })
     .catch(handleError(res));
 }

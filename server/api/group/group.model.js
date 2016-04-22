@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const states = ['group', 'quater-final', 'semi-final', 'third-place', 'final'];
+const states = ['group', 'quarter-final', 'semi-final', 'third-place', 'final'];
 
 var GroupSchema = new mongoose.Schema({
   name: {type: String, required: true},
