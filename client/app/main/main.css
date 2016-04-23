@@ -54,36 +54,3 @@ a.button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
 }
-
-/**
- * Group Table
- */
-
-.custab {
-  border: 1px solid #ccc;
-  padding: 5px;
-  margin: 5% 0;
-  box-shadow: 3px 3px 2px #ccc;
-  transition: 0.5s;
-}
-
-.custab:hover {
-  box-shadow: 3px 3px 0px transparent;
-  transition: 0.5s;
-}
-
-.table-format {
-  width: 34%;
-  margin: 0px 8% 0px;
-}
-
-caption.ng-binding {
-  font-family: Arial, sans-serif;
-  font-size: large;
-  font-weight: bolder;
-  padding-bottom: 10px;
-}
-
-.table-cell {
-  text-align: center;
-}

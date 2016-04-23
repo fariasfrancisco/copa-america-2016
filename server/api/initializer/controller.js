@@ -9,7 +9,7 @@ var init = {};
 init.initialize = function () {
   groups.forEach(function (group) {
     group.matches.forEach(function (match) {
-      match.date = moment(match.date);
+      match.date = moment.utc(match.date);
     });
 
     Group.create(group).then(function (res) {

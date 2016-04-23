@@ -2,12 +2,10 @@
 
 angular.module('copaamericaApp')
   .service('MainService', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
     var showButton = true;
     var showLoginForm = false;
     var showSignUpForm = false;
-    var showTables = false;
-    
+
     return {
       setShowButton: function (value) {
         showButton = value;
@@ -31,14 +29,6 @@ angular.module('copaamericaApp')
 
       getShowSignUpForm: function () {
         return showSignUpForm;
-      },
-      
-      getShowTables: function() {
-        return showTables;
-      },
-      
-      setShowTables: function (value) {
-        showTables = value;
       }
     }
   });

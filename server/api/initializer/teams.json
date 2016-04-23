@@ -1,223 +1,255 @@
 [
   {
-    "_id": 1,
+    "_id": 0,
     "name": "Argentina",
     "players": [
       {
+        "_id": 0,
         "name": "Messi",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Aguero",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 2,
+    "_id": 1,
     "name": "Bolivia",
     "players": [
       {
+        "_id": 0,
         "name": "Bolita1",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Bolita2",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 3,
+    "_id": 2,
     "name": "Peru",
     "players": [
       {
+        "_id": 0,
         "name": "Peruka",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Mantero",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 4,
+    "_id": 3,
     "name": "Panama",
     "players": [
       {
+        "_id": 0,
         "name": "Pana1",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Pana2",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 5,
+    "_id": 4,
     "name": "Jamaica",
     "players": [
       {
+        "_id": 0,
         "name": "Mary",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Juana",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 6,
+    "_id": 5,
     "name": "Mexico",
     "players": [
       {
+        "_id": 0,
         "name": "Orale",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Guey",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 7,
+    "_id": 6,
     "name": "Paraguay",
     "players": [
       {
+        "_id": 0,
         "name": "Nderacore",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Chera",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 8,
+    "_id": 7,
     "name": "Haiti",
     "players": [
       {
+        "_id": 0,
         "name": "Terre",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Moto",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 9,
+    "_id": 8,
     "name": "Ecuador",
     "players": [
       {
+        "_id": 0,
         "name": "Terre2",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Moto2",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 10,
+    "_id": 9,
     "name": "Costa Rica",
     "players": [
       {
+        "_id": 0,
         "name": "ASD",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "QWE",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 11,
+    "_id": 10,
     "name": "Colombia",
     "players": [
       {
+        "_id": 0,
         "name": "Coca",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Ina",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 12,
+    "_id": 11,
     "name": "Brazil",
     "players": [
       {
+        "_id": 0,
         "name": "Cara",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Mane",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 13,
+    "_id": 12,
     "name": "Uruguay",
     "players": [
       {
+        "_id": 0,
         "name": "Washington",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Provinciano",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 14,
+    "_id": 13,
     "name": "United States",
     "players": [
       {
+        "_id": 0,
         "name": "Faggot",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Pussy",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 15,
+    "_id": 14,
     "name": "Chile",
     "players": [
       {
+        "_id": 0,
         "name": "Wea",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Fome",
         "goals": 0
       }
     ]
   },
   {
-    "_id": 16,
+    "_id": 15,
     "name": "Venezuela",
     "players": [
       {
+        "_id": 0,
         "name": "Chavez",
         "goals": 0
       },
       {
+        "_id": 1,
         "name": "Maduro",
         "goals": 0
       }

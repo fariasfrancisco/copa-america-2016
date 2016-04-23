@@ -8,7 +8,7 @@ var GroupSchema = new mongoose.Schema({
   name: {type: String, required: true},
   stage: {type: String, enum: states},
   matches: [{
-    _id: {type: Number, required: true, min: 1, max: 32},
+    _id: {type: Number, required: true, min: 0, max: 31},
     date: {type: Date, required: true},
     home: {
       _team: {type: Number, ref: 'Team'},

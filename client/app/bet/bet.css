@@ -1,0 +1,61 @@
+.row.grouptablerow{
+  margin-top:40px;
+  padding: 0 10px;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+.panel-heading.tableheading span {
+  margin-top: -20px;
+  font-size: 15px;
+}
+
+div.panel-body.tablebody {
+  padding: 0
+}
+
+div.row.col-md-12.grouptable {
+  padding: 0;
+  margin: 0 0 0 0;
+  text-align: left;
+}
+
+.col-md-3.coelho.ng-binding.date{
+  padding-left: 20px;
+  font-size: small;
+
+}
+
+.team-left {
+  text-align: right;
+}
+
+.team-right {
+  text-align: left;
+}
+
+.table > tbody > tr > td.coelho {
+  vertical-align: middle;
+  font-size: 0.92em;
+}
+
+input.form-control.scorearea {
+  padding: 2px;
+  height: 30px;
+  text-align: center;
+}
+
+td.col-md-1.score {
+  vertical-align: middle;
+}
+
+.table.table-striped{
+  margin: 0;
+}
+
+.panel-title.groupname.ng-binding{
+  text-align: center;
+  font-weight: bold;
+}

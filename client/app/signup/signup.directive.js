@@ -34,8 +34,7 @@ class SignupController {
           this.mainSvc.setShowLoginForm(false);
           this.mainSvc.setShowSignUpForm(false);
           this.mainSvc.setShowButton(false);
-          this.mainSvc.setShowTables(true);
-          this.$state.go('main');
+          this.$state.go('bet');
         })
         .catch(err => {
           err = err.data;

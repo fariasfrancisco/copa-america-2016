@@ -1,0 +1,38 @@
+<div class="container" ng-repeat="group in $ctrl.groups">
+  <div class="row grouptablerow">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{group.fullName}}</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row" ng-repeat="match in group.matches">
+                <td class="col-md-3 coelho date">{{match.date | date: 'short' : 'GMT-3'}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
+                       alt="{{match.home._team}}.png">
+                </td>
+                <td class="col-md-2 coelho team-left">{{match.home.teamName}}</td>
+                <td class="col-md-1 score">
+                  <input type="text" class="form-control scorearea" placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-1 score">
+                  <input type="text" class="form-control scorearea" placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-2 coelho team-right">{{match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
+                       alt="{{match.away._team}}.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="panelManipulator.js"></script>

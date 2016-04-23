@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="page-header row col-md-6 col-md-offset-2 custyle table-format"
+         ng-repeat="group in $ctrl.querySvc.getGroups()">
+      <table class="table table-striped custab">
+        <caption>{{group.fullName}}</caption>
+        <thead>
+        <tr>
+          <th class="table-cell">Team</th>
+          <th class="table-cell">Pts</th>
+          <th class="table-cell">GF</th>
+          <th class="table-cell">GA</th>
+          <th class="table-cell">GD</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="line in group.table">
+          <td>
+            <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{line.team}}.png">
+            {{line.teamName}}
+          </td>
+          <td class="table-cell">{{line.points}}</td>
+          <td class="table-cell">{{line.goalsFor}}</td>
+          <td class="table-cell">{{line.goalsAgainst}}</td>
+          <td class="table-cell">{{line.goalDifference}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
