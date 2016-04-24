@@ -48,6 +48,8 @@ class SignupController {
         });
     }
   }
+  
+  // TODO fix the sign up logic.
 }
 
 angular.module('copaamericaApp')

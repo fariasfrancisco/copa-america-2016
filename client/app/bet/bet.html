@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- TODO work out the styles -->
   <div class="row grouptablerow" ng-repeat="group in $ctrl.groups">
     <div class="col-md-6">
       <div class="panel panel-primary">
@@ -230,5 +231,49 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <a href="#" class="button" ng-show="$ctrl.thirdPlace && $ctrl.finals" ng-click="$ctrl.buildPodium()">Done</a>
+  </div>
+  <div class="row grouptablerow" ng-show="$ctrl.podium">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">Podium</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row">
+                <td class="col-md-1">1st Place</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.firstPlace._id}}.png"
+                       alt="{{$ctrl.podium.firstPlace._id}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{$ctrl.podium.firstPlace.name}}</td>
+              </tr>
+              <tr class="table-row">
+                <td class="col-md-1">2nd Place</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.secondPlace._id}}.png"
+                       alt="{{$ctrl.podium.secondPlace._id}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{$ctrl.podium.secondPlace.name}}</td>
+              </tr>
+              <tr class="table-row">
+                <td class="col-md-1">3rd Place</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.thirdPlace._id}}.png"
+                       alt="{{$ctrl.podium.thirdPlace._id}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{$ctrl.podium.thirdPlace.name}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TODO golden boot logic -->
 </div>
 <script src="panelManipulator.js"></script>

@@ -9,6 +9,8 @@
     $onInit() {
       this.querySvc.buildGroupsAndTeams();
     }
+
+    //TODO missing rest of the tournament logic.
   }
 
   angular.module('copaamericaApp')

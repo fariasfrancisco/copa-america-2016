@@ -37,6 +37,7 @@ class LoginController {
         });
     }
   }
+  //TODO fix the login.
 }
 
 angular.module('copaamericaApp')
