@@ -36,14 +36,18 @@ var calculatePointsAndGoals = function (table, matches) {
 
     var homeTeam = current.home._team
       , awayTeam = current.away._team
-      , homeTeamIndex = 0
-      , awayTeamIndex = 0
+      , homeTeamIndex = null
+      , awayTeamIndex = null
       , result;
 
     table.forEach(function (current, index) {
       if (current.team === homeTeam) homeTeamIndex = index;
       if (current.team === awayTeam) awayTeamIndex = index;
     });
+
+    if (homeTeamIndex === null || awayTeamIndex === null) {
+      throw new Error('could not find team index!');
+    }
 
     table[homeTeamIndex].goalsFor += current.home.goals;
     table[homeTeamIndex].goalsAgainst += current.away.goals;
@@ -68,28 +72,33 @@ var calculatePointsAndGoals = function (table, matches) {
   })
 };
 
-var swapPositions = function (table, a, b) {
-  var aux = table[a].position;
-  table[a].position = table[b].position;
-  table[b].position = aux;
-};
-
 var calculatePositions = function (table) {
-  var size = table.length;
+  var size = table.length
+    , aux;
 
   for (var i = 0; i < size - 1; i++) {
     for (var j = i + 1; j < size; j++) {
       if (table[i].points < table[j].points) {
-        table = swapPositions(table);
+        if (table[i].position < table[j].position) {
+          aux = table[i].position;
+          table[i].position = table[j].position;
+          table[j].position = aux;
+        }
       } else {
         if (table[i].points === table[j].points) {
           if (table[i].goalDifference < table[j].goalDifference) {
-            table = swapPositions(table);
+            if (table[i].position < table[j].position) {
+              aux = table[i].position;
+              table[i].position = table[j].position;
+              table[j].position = aux;
+            }
           } else {
-            if (table[i].goalDifference === table[j].goalDifference) {
-              if (table[i].goalsFor < table[j].goalsFor) {
-                table = swapPositions(table);
-              }
+            if (table[i].goalDifference === table[j].goalDifference
+              && table[i].goalsFor < table[j].goalsFor
+              && table[i].position < table[j].position) {
+              aux = table[i].position;
+              table[i].position = table[j].position;
+              table[j].position = aux;
             }
           }
         }

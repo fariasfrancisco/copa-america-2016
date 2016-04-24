@@ -1,5 +1,5 @@
-<div class="container" ng-repeat="group in $ctrl.groups">
-  <div class="row grouptablerow">
+<div class="container">
+  <div class="row grouptablerow" ng-repeat="group in $ctrl.groups">
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
@@ -10,22 +10,218 @@
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <tr class="table-row" ng-repeat="match in group.matches">
-                <td class="col-md-3 coelho date">{{match.date | date: 'short' : 'GMT-3'}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
                        alt="{{match.home._team}}.png">
                 </td>
-                <td class="col-md-2 coelho team-left">{{match.home.teamName}}</td>
+                <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
                 <td class="col-md-1 score">
-                  <input type="text" class="form-control scorearea" placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                  <input ng-model="match.home.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
                 </td>
                 <td class="col-md-1 score">
-                  <input type="text" class="form-control scorearea" placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                  <input ng-model="match.away.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
                 </td>
-                <td class="col-md-2 coelho team-right">{{match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
                        alt="{{match.away._team}}.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <a href="#" class="button" ng-click="$ctrl.buildQuarterFinals()">Done</a>
+  </div>
+  <div class="row grouptablerow" ng-show="$ctrl.quaterFinals">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{$ctrl.quaterFinals.fullName}}</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row" ng-repeat="match in $ctrl.quaterFinals.matches">
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
+                       alt="{{match.home._team}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.home.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.home.penalties" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.away.penalties" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.away.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
+                       alt="{{match.away._team}}.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <a href="#" class="button" ng-show="$ctrl.quaterFinals" ng-click="$ctrl.buildSemiFinals()">Done</a>
+  </div>
+  <div class="row grouptablerow" ng-show="$ctrl.semiFinals">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName}}</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
+                       alt="{{match.home._team}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.home.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.home.penalties" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.away.penalties" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="match.away.goals" ng-pattern="/^\d+$/" type="text" class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
+                       alt="{{match.away._team}}.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <a href="#" class="button" ng-show="$ctrl.semiFinals" ng-click="$ctrl.buildFinals()">Done</a>
+  </div>
+  <div class="row grouptablerow" ng-show="$ctrl.thirdPlace">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName}}</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row">
+                <td class="col-md-1">
+                  <img height="40" width="40"
+                       ng-src="assets/images/team_logos/{{$ctrl.thirdPlace.match.home._team}}.png"
+                       alt="{{$ctrl.thirdPlace.match.home._team}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{$ctrl.thirdPlace.match.home.teamName}}</td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.thirdPlace.match.home.goals" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.thirdPlace.match.home.penalties" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.thirdPlace.match.away.penalties" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.thirdPlace.match.away.goals" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-3 coelho team-right">{{$ctrl.thirdPlace.match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40"
+                       ng-src="assets/images/team_logos/{{$ctrl.thirdPlace.match.away._team}}.png"
+                       alt="{{$ctrl.thirdPlace.match.away._team}}.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row grouptablerow" ng-show="$ctrl.finals">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{$ctrl.finals.fullName}}</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 grouptable">
+            <table class="table table-striped">
+              <tr class="table-row">
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.finals.match.home._team}}.png"
+                       alt="{{$ctrl.finals.match.home._team}}.png">
+                </td>
+                <td class="col-md-3 coelho team-left">{{$ctrl.finals.match.home.teamName}}</td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.finals.match.home.goals" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.finals.match.home.penalties" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.finals.match.away.penalties" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
+                </td>
+                <td class="col-md-1 score">
+                  <input ng-model="$ctrl.finals.match.away.goals" ng-pattern="/^\d+$/" type="text"
+                         class="form-control scorearea"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
+                </td>
+                <td class="col-md-3 coelho team-right">{{$ctrl.finals.match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.finals.match.away._team}}.png"
+                       alt="{{$ctrl.finals.match.away._team}}.png">
                 </td>
               </tr>
             </table>
