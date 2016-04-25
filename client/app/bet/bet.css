@@ -7,6 +7,11 @@
   cursor: pointer;
 }
 
+.collapse-button {
+  position: relative;
+  top: -16px;
+}
+
 .panel-heading.tableheading span {
   margin-top: -20px;
   font-size: 15px;

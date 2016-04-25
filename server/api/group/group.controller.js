@@ -112,7 +112,7 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
-// Get all groups from the group stage from the DB
+// Get by stage from the DB
 export function getFromStage(req, res) {
   return Group.find({'stage': req.params.stage}).exec()
     .then(handleEntityNotFound(res))

@@ -72,39 +72,22 @@ var calculatePointsAndGoals = function (table, matches) {
   })
 };
 
-var calculatePositions = function (table) {
-  var size = table.length
-    , aux;
+var compareTable = function (a, b) {
+  if (a.points < b.points) return 1;
+  else if (a.points > b.points) return -1;
+  else if (a.goalDifference < b.goalDifference) return 1;
+  else if (a.goalDifference > b.goalDifference) return -1;
+  else if (a.goalsFor < b.goalsFor) return 1;
+  else if (a.goalsFor > b.goalsFor) return -1;
+  else return 0;
+};
 
-  for (var i = 0; i < size - 1; i++) {
-    for (var j = i + 1; j < size; j++) {
-      if (table[i].points < table[j].points) {
-        if (table[i].position < table[j].position) {
-          aux = table[i].position;
-          table[i].position = table[j].position;
-          table[j].position = aux;
-        }
-      } else {
-        if (table[i].points === table[j].points) {
-          if (table[i].goalDifference < table[j].goalDifference) {
-            if (table[i].position < table[j].position) {
-              aux = table[i].position;
-              table[i].position = table[j].position;
-              table[j].position = aux;
-            }
-          } else {
-            if (table[i].goalDifference === table[j].goalDifference
-              && table[i].goalsFor < table[j].goalsFor
-              && table[i].position < table[j].position) {
-              aux = table[i].position;
-              table[i].position = table[j].position;
-              table[j].position = aux;
-            }
-          }
-        }
-      }
-    }
-  }
+var calculatePositions = function (table) {
+  table.sort(compareTable);
+
+  table.forEach(function (current, index) {
+    current.position = index;
+  });
 };
 
 module.exports.generate = function (group) {
