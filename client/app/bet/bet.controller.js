@@ -1,6 +1,8 @@
 'use strict';
 (function () {
 
+  //TODO fix when user inputs invalid numbers
+
   class BetComponent {
     constructor(QueryService, TableCalculator) {
       this.querySvc = QueryService;

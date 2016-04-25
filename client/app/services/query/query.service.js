@@ -24,33 +24,36 @@ angular.module('copaamericaApp')
     return {
       buildGroupsAndTeams: function () {
         var self = this;
-        return $http.get('/api/groups/stage/group').then(function (response) {
-          groups = response.data;
-          groups.sort(compareGroup);
-          return $http.get('/api/teams').then(function (response) {
-            teams = response.data;
-            teams.sort(compareTeam);
-            groups.forEach(function (group) {
-              group.fullName = group.name.replace('G', 'Group ');
-              group.matches.forEach(function (match) {
-                match.home.teamName = teams[match.home._team].name;
-                match.away.teamName = teams[match.away._team].name;
-              });
-              self.buildTable(group);
-            });
-            return groups;
+        return $http.get('/api/groups/stage/group')
+          .then(function (response) {
+            groups = response.data;
+            groups.sort(compareGroup);
+            return $http.get('/api/teams')
+              .then(function (response) {
+                teams = response.data;
+                teams.sort(compareTeam);
+                groups.forEach(function (group) {
+                  group.fullName = group.name.replace('G', 'Group ');
+                  group.matches.forEach(function (match) {
+                    match.home.teamName = teams[match.home._team].name;
+                    match.away.teamName = teams[match.away._team].name;
+                  });
+                  self.buildTable(group);
+                });
+                return groups;
+              })
           })
-        })
       },
 
       buildTable: function (group) {
-        return $http.get('/api/groups/table/' + group.name).then(function (response) {
-          group.table = response.data;
-          group.table.sort(compareLine);
-          group.table.forEach(function (line) {
-            line.teamName = teams[line.team].name;
+        return $http.get('/api/groups/table/' + group.name)
+          .then(function (response) {
+            group.table = response.data;
+            group.table.sort(compareLine);
+            group.table.forEach(function (line) {
+              line.teamName = teams[line.team].name;
+            });
           });
-        });
       },
 
       getGroups: function () {
@@ -65,6 +68,14 @@ angular.module('copaamericaApp')
         return this.buildGroupsAndTeams().then(function (result) {
           return angular.copy(result);
         });
+      },
+
+      getStage: function (stage) {
+        return $http.get('/api/groups/stage/' + stage)
+          .then(function (response) {
+            console.log(response.data);
+            return response.data;
+          })
       }
     }
   }]);

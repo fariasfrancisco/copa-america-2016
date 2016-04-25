@@ -81,7 +81,11 @@ caption.ng-binding {
 }
 
 .c5 .block {
-  margin-top: 140px;
+  margin-top: 160px;
   text-align: right;
   border-bottom: solid 2px #334bf5;
+}
+
+.cup {
+  margin-top: 100px;
 }

@@ -4,6 +4,7 @@ angular.module('copaamericaApp', [
   'copaamericaApp.auth',
   'copaamericaApp.admin',
   'copaamericaApp.constants',
+  'ngAnimate',
   'ngCookies',
   'ngResource',
   'ngSanitize',
