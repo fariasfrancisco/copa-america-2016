@@ -12,7 +12,6 @@ export default function(app) {
   app.use('/api/bets', require('./api/bet'));
   app.use('/api/teams', require('./api/team'));
   app.use('/api/groups', require('./api/group'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/init', require('./api/initializer'));
 

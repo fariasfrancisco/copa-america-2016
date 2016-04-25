@@ -19,7 +19,7 @@ class LoginController {
 
   login(form) {
     this.submitted = true;
-
+console.log(form);
     if (form.$valid) {
       this.Auth.login({
           email: this.user.email,

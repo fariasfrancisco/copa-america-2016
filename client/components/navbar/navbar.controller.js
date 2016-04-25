@@ -8,6 +8,9 @@ class NavbarController {
   }, {
     'title': 'Tournament',
     'state': 'tournament'
+  }, {
+    'title': 'Bet Table',
+    'state': 'bettable'
   }];
 
   isCollapsed = true;

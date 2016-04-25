@@ -2,6 +2,7 @@ angular.module('copaamericaApp')
   .service('QueryService', ["$http", function ($http) {
     var groups = [];
     var teams = [];
+    var bets;
 
     var compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -76,6 +77,18 @@ angular.module('copaamericaApp')
             console.log(response.data);
             return response.data;
           })
+      },
+
+      getBets: function () {
+        if (!bets) {
+          return $http.get('/api/bets/').then(function (response) {
+            console.log(response.data);
+            bets = response.data;
+            return bets;
+          });
+        }
+
+        return bets;
       }
     }
   }]);

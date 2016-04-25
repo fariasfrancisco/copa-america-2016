@@ -87,5 +87,24 @@ caption.ng-binding {
 }
 
 .cup {
+  margin-top: 80px;
+}
+
+.graphParent {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.graphChild {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+div.team.ng-binding {
+  width: auto;
+}
+
+.cup {
+  float: left;
   margin-top: 100px;
 }
