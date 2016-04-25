@@ -23,34 +23,34 @@ angular.module('copaamericaApp')
 
     return {
       buildGroupsAndTeams: function () {
-        return $http.get('/api/groups/stage/group')
-          .then(function (response) {
-            groups = response.data;
-            groups.sort(compareGroup);
-            return $http.get('/api/teams')
-              .then(function (response) {
-                teams = response.data;
-                teams.sort(compareTeam);
-                groups.forEach(function (group) {
-                  group.fullName = group.name.replace('G', 'Group ');
-                  group.matches.forEach(function (match) {
-                    match.home.teamName = teams[match.home._team].name;
-                    match.away.teamName = teams[match.away._team].name;
-                  });
-                  //TODO figure out why the function returns before executing the code below, making the cloned group table-less
-                  //Its actually not so bad, since you don't need the table for the clone but it would be nice to know why.
-                  $http.get('/api/groups/table/' + group.name)
-                    .then(function (response) {
-                      group.table = response.data;
-                      group.table.sort(compareLine);
-                      group.table.forEach(function (line) {
-                        line.teamName = teams[line.team].name;
-                      });
-                    })
-                });
-                return groups;
-              })
+        var self = this;
+        return $http.get('/api/groups/stage/group').then(function (response) {
+          groups = response.data;
+          groups.sort(compareGroup);
+          return $http.get('/api/teams').then(function (response) {
+            teams = response.data;
+            teams.sort(compareTeam);
+            groups.forEach(function (group) {
+              group.fullName = group.name.replace('G', 'Group ');
+              group.matches.forEach(function (match) {
+                match.home.teamName = teams[match.home._team].name;
+                match.away.teamName = teams[match.away._team].name;
+              });
+              self.buildTable(group);
+            });
+            return groups;
           })
+        })
+      },
+
+      buildTable: function (group) {
+        return $http.get('/api/groups/table/' + group.name).then(function (response) {
+          group.table = response.data;
+          group.table.sort(compareLine);
+          group.table.forEach(function (line) {
+            line.teamName = teams[line.team].name;
+          });
+        });
       },
 
       getGroups: function () {

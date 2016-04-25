@@ -31,6 +31,57 @@ caption.ng-binding {
   text-align: center;
 }
 
-.team-img{
+.team-img {
   margin-right: 5px;
+}
+
+.team {
+  text-align: right;
+  line-height: 40px
+}
+
+.c1, .c2, .c3, .c4, .c5 {
+  float: left;
+  width: 140px
+}
+
+.c1 .team {
+  width: 100px;
+  height: 40px
+}
+
+.c2 .block, .c3 .block, .c4 .block {
+  margin-top: 40px;
+  height: 40px;
+  width: 140px;
+  border-top: solid 2px #334bf5;
+  border-right: solid 2px #334bf5;
+  border-bottom: solid 2px #334bf5;
+  text-align: right;
+  line-height: 40px;
+}
+
+.c2 .block.first {
+  margin-top: 20px;
+}
+
+.c3 .block {
+  height: 80px;
+  line-height: 80px;
+}
+
+.c3 .block.low {
+  margin-top: 80px;
+}
+
+.c4 .block {
+  height: 160px;
+  line-height: 160px;
+  margin-top: 80px;
+}
+
+.c5 .block {
+  margin-top: 140px;
+  text-align: right;
+  border-bottom: solid 2px #334bf5;
 }

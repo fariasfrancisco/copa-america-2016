@@ -32,4 +32,89 @@
          http://jsfiddle.net/4KZ6T/
     -->
   </div>
+  <div class="row">
+    <div class="c1">
+      <div class="team">
+        {{$ctrl.groups['GA'].first.teamName || 'GA-1'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].first.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GB'].second.teamName || 'GB-2'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].second.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GB'].first.teamName || 'GB-1'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].first.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GA'].second.teamName || 'GA-2'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].second.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GC'].first.teamName || 'GC-1'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].first.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GD'].second.teamName || 'GD-2'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].second.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GD'].first.teamName || 'GD-1'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].first.team || 'q'}}.png">
+      </div>
+      <div class="team">
+        {{$ctrl.groups['GC'].second.teamName || 'GC-2'}}
+        <img class="team-img" height="30" width="30"
+             ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].second.team || 'q'}}.png">
+      </div>
+    </div>
+
+    <div class="c2">
+      <div class="block first">
+        Argentin<!-- a - The 9th letter breaks the line-->
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/0.png">
+      </div>
+      <div class="block">
+        Chile
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/2.png">
+      </div>
+      <div class="block">
+        Chile
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/2.png">
+      </div>
+      <div class="block">
+        Chile
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/2.png">
+      </div>
+    </div>
+
+    <div class="c3">
+      <div class="block">
+        Argentina
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/0.png">
+      </div>
+      <div class="block low">
+        United States
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/0.png">
+      </div>
+    </div>
+
+    <div class="c4">
+      <div class="block">
+        Argentina
+        <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/0.png">
+      </div>
+    </div>
+
+    <div class="c5">
+      <div class="block">winner</div>
+    </div>
+  </div>
 </div>
