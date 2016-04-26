@@ -7,8 +7,8 @@ var isInArray = function (value, array) {
 };
 
 var initializeTable = function (group) {
-  var list = []
-    , table = [];
+  var list = [],
+    table = [];
 
   group.matches.forEach(function (match) {
     if (!isInArray(match.home._team, list)) list.push(match.home._team);
@@ -34,11 +34,11 @@ var calculatePointsAndGoals = function (table, matches) {
 
     if (moment().isBefore(matchEndTime)) return;
 
-    var homeTeam = current.home._team
-      , awayTeam = current.away._team
-      , homeTeamIndex = null
-      , awayTeamIndex = null
-      , result;
+    var homeTeam = current.home._team,
+      awayTeam = current.away._team,
+      homeTeamIndex = null,
+      awayTeamIndex = null,
+      result;
 
     table.forEach(function (current, index) {
       if (current.team === homeTeam) homeTeamIndex = index;

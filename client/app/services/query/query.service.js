@@ -1,8 +1,8 @@
 angular.module('copaamericaApp')
   .service('QueryService', ["$http", function ($http) {
-    var groups = [];
-    var teams = [];
-    var bets;
+    var groups = [],
+      teams = [],
+      bets;
 
     var compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -29,31 +29,33 @@ angular.module('copaamericaApp')
           .then(function (response) {
             groups = response.data;
             groups.sort(compareGroup);
-            return $http.get('/api/teams')
-              .then(function (response) {
-                teams = response.data;
-                teams.sort(compareTeam);
-                groups.forEach(function (group) {
-                  group.fullName = group.name.replace('G', 'Group ');
-                  group.matches.forEach(function (match) {
-                    match.home.teamName = teams[match.home._team].name;
-                    match.away.teamName = teams[match.away._team].name;
-                  });
-                  self.buildTable(group);
+            return $http.get('/api/teams').then(function (response) {
+              teams = response.data;
+              teams.sort(compareTeam);
+              groups.forEach(function (group) {
+                group.fullName = group.name.replace('G', 'Group ');
+                group.matches.forEach(function (match) {
+                  match.home.teamName = teams[match.home._team].name;
+                  match.away.teamName = teams[match.away._team].name;
                 });
-                return groups;
-              })
+                self.buildTable(group).then(function (table) {
+                  group.table = table;
+                });
+              });
+              return groups;
+            })
           })
       },
 
       buildTable: function (group) {
         return $http.get('/api/groups/table/' + group.name)
           .then(function (response) {
-            group.table = response.data;
-            group.table.sort(compareLine);
-            group.table.forEach(function (line) {
+            var table = response.data;
+            table.sort(compareLine);
+            table.forEach(function (line) {
               line.teamName = teams[line.team].name;
             });
+            return table;
           });
       },
 

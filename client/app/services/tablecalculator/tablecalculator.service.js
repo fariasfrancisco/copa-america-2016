@@ -7,8 +7,8 @@ angular.module('copaamericaApp')
     };
 
     var initializeTable = function (group) {
-      var list = []
-        , table = [];
+      var list = [],
+        table = [];
 
       group.matches.forEach(function (match) {
         if (!isInArray(match.home._team, list)) list.push(match.home._team);
@@ -29,11 +29,11 @@ angular.module('copaamericaApp')
 
     var calculatePointsAndGoals = function (table, matches) {
       matches.forEach(function (current) {
-        var homeTeam = current.home._team
-          , awayTeam = current.away._team
-          , homeTeamIndex = null
-          , awayTeamIndex = null
-          , result;
+        var homeTeam = current.home._team,
+          awayTeam = current.away._team,
+          homeTeamIndex = null,
+          awayTeamIndex = null,
+          result;
 
         table.forEach(function (current, index) {
           if (current.team === homeTeam) homeTeamIndex = index;
@@ -79,7 +79,7 @@ angular.module('copaamericaApp')
 
     var calculatePositions = function (table) {
       table.sort(compareTable);
-      
+
       table.forEach(function (current, index) {
         current.position = index;
       });

@@ -1,6 +1,6 @@
 # copaamerica
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.5.0.
+This project was done so that my friends and I could have a place to bet track the progress of the [Copa America 2016](http://www.ca2016.com/).
 
 ## Getting Started
 

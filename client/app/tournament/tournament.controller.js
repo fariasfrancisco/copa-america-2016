@@ -13,9 +13,9 @@
       this.querySvc.buildGroupsAndTeams()
         .then(function (groups) {
           groups.forEach(function (group) {
-            var allPlayed = true
-              , now = new Date()
-              , matchDate;
+            var allPlayed = true,
+              now = new Date(),
+              matchDate;
 
             group.matches.forEach(function (match) {
               matchDate = new Date(match.date);
@@ -36,8 +36,8 @@
       this.querySvc.getStage('quarter-final')
         .then(function (quarterFinals) {
           quarterFinals.forEach(function (current) {
-            var now = new Date()
-              , matchDate = new Date(current.matches[0].date);
+            var now = new Date(),
+              matchDate = new Date(current.matches[0].date);
 
             if (matchDate < now) {
               self[current.name] = {

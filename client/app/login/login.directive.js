@@ -10,7 +10,7 @@ class LoginController {
     this.Auth = Auth;
     this.$state = $state;
   }
-  
+
   toggleSignUpForm() {
     this.mainSvc.setShowSignUpForm(true);
     this.mainSvc.setShowLoginForm(false);
@@ -19,7 +19,6 @@ class LoginController {
 
   login(form) {
     this.submitted = true;
-console.log(form);
     if (form.$valid) {
       this.Auth.login({
           email: this.user.email,
@@ -37,6 +36,7 @@ console.log(form);
         });
     }
   }
+
   //TODO fix the login.
 }
 

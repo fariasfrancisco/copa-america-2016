@@ -42,8 +42,8 @@
     }
 
     buildQuarterFinals() {
-      var teams = {}
-        , self = this;
+      var teams = {},
+        self = this;
 
       this.groups.forEach(function (group) {
         group.matches.forEach(function (match) {
