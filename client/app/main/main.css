@@ -44,3 +44,13 @@ a.button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
 }
+a.button-disabled {
+  cursor: default;
+  color: rgba(30, 22, 54, 0.25);
+  box-shadow: rgba(30, 22, 54, 0.25) 0 0px 0px 2px inset;
+}
+a.button-disabled:hover {
+  color: rgba(30, 22, 54, 0.25);
+  box-shadow: rgba(30, 22, 54, 0.25) 0 0px 0px 2px inset;
+}
+
