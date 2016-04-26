@@ -1,9 +1,9 @@
-.row.grouptablerow{
-  margin-top:40px;
+.row.grouptablerow {
+  margin-top: 40px;
   padding: 0 10px;
 }
 
-.clickable{
+.clickable {
   cursor: pointer;
 }
 
@@ -43,12 +43,12 @@ input.form-control.scorearea {
   padding: 2px;
   height: 30px;
   text-align: center;
-  transition:all linear 0.5s;
+  transition: all linear 0.5s;
   background: transparent;
 }
 
-input.form-control.scorearea.ng-invalid{
-  color:white;
+input.form-control.scorearea.ng-invalid {
+  color: white;
   background: red;
 }
 
@@ -56,11 +56,11 @@ td.col-md-1.score {
   vertical-align: middle;
 }
 
-.table.table-striped{
+.table.table-striped {
   margin: 0;
 }
 
-.panel-title.groupname.ng-binding{
+.panel-title.groupname.ng-binding {
   text-align: center;
   font-weight: bold;
 }

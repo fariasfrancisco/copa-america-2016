@@ -16,7 +16,7 @@ var BetSchema = new mongoose.Schema({
     }
   }],
   groups: [{
-    _id: {type: String, required: true},
+    name: {type: String, required: true},
     first: {type: Number, min: 0, max: 15, required: true},
     second: {type: Number, min: 0, max: 15, required: true}
   }],

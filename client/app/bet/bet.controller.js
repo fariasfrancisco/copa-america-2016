@@ -4,12 +4,13 @@
   //TODO fix when user inputs invalid numbers
 
   class BetComponent {
-    constructor(QueryService, TableCalculator) {
+    constructor(Auth, QueryService, TableCalculator) {
+      this.isLoggedIn = Auth.isLoggedIn;
+      this.auth = Auth;
       this.querySvc = QueryService;
       this.tableCalc = TableCalculator;
       this.groups = {};
       this.bet = {
-        _user: '',
         matches: {},
         groups: {}
       };
@@ -17,6 +18,8 @@
 
     $onInit() {
       var self = this;
+
+      this.bet.user = this.auth.getCurrentUser()._id;
 
       self.querySvc.cloneGroups().then(function (result) {
         self.groups = result;
@@ -30,7 +33,7 @@
         })
       });
 
-      for (var i = 0; i < 31; i++) {
+      for (var i = 0; i < 32; i++) {
         this.bet.matches[i] = {
           home: {goals: 0, penalties: 0},
           away: {goals: 0, penalties: 0}
@@ -39,13 +42,15 @@
     }
 
     buildQuarterFinals() {
-      var self = this;
-      var teams = {};
+      var teams = {}
+        , self = this;
 
       this.groups.forEach(function (group) {
         group.matches.forEach(function (match) {
           if (match.home.goals === '') match.home.goals = 0;
           if (match.away.goals === '') match.away.goals = 0;
+          self.bet.matches[match._id].home.goals = match.home.goals;
+          self.bet.matches[match._id].away.goals = match.away.goals;
         });
 
         var groupTable = self.tableCalc.generate(group);
@@ -121,9 +126,20 @@
     }
 
     buildSemiFinals() {
-      var teams = {};
+      var teams = {}
+        , self = this;
 
       this.quaterFinals.matches.forEach(function (match) {
+        if (match.home.goals === '') match.home.goals = 0;
+        if (match.away.goals === '') match.away.goals = 0;
+        if (match.home.penalties === '') match.home.penalties = 0;
+        if (match.away.penalties === '') match.away.penalties = 0;
+
+        self.bet.matches[match._id].home.goals = match.home.goals;
+        self.bet.matches[match._id].away.goals = match.away.goals;
+        self.bet.matches[match._id].home.penalties = match.home.penalties;
+        self.bet.matches[match._id].away.penalties = match.away.penalties;
+
         if (match.home.goals > match.away.goals) {
           teams[match.shortName] = {
             team: match.home._team,
@@ -189,9 +205,20 @@
     }
 
     buildFinals() {
-      var teams = {};
+      var teams = {}
+        , self = this;
 
       this.semiFinals.matches.forEach(function (match) {
+        if (match.home.goals === '') match.home.goals = 0;
+        if (match.away.goals === '') match.away.goals = 0;
+        if (match.home.penalties === '') match.home.penalties = 0;
+        if (match.away.penalties === '') match.away.penalties = 0;
+
+        self.bet.matches[match._id].home.goals = match.home.goals;
+        self.bet.matches[match._id].away.goals = match.away.goals;
+        self.bet.matches[match._id].home.penalties = match.home.penalties;
+        self.bet.matches[match._id].away.penalties = match.away.penalties;
+
         if (match.home.goals > match.away.goals) {
           teams[match.shortName + 'W'] = {
             team: match.home._team,
@@ -280,6 +307,25 @@
 
     buildPodium() {
       var thirdPlace, secondPlace, firstPlace;
+      if (this.thirdPlace.match.home.goals === '') this.thirdPlace.match.home.goals = 0;
+      if (this.thirdPlace.match.away.goals === '') this.thirdPlace.match.away.goals = 0;
+      if (this.thirdPlace.match.home.penalties === '') this.thirdPlace.match.home.penalties = 0;
+      if (this.thirdPlace.match.away.penalties === '') this.thirdPlace.match.away.penalties = 0;
+
+      if (this.finals.match.home.goals === '') this.finals.match.home.goals = 0;
+      if (this.finals.match.away.goals === '') this.finals.match.away.goals = 0;
+      if (this.finals.match.home.penalties === '') this.finals.match.home.penalties = 0;
+      if (this.finals.match.away.penalties === '') this.finals.match.away.penalties = 0;
+
+      this.bet.matches[this.thirdPlace.match._id].home.goals = this.thirdPlace.match.home.goals;
+      this.bet.matches[this.thirdPlace.match._id].away.goals = this.thirdPlace.match.away.goals;
+      this.bet.matches[this.thirdPlace.match._id].home.penalties = this.thirdPlace.match.home.penalties;
+      this.bet.matches[this.thirdPlace.match._id].away.penalties = this.thirdPlace.match.away.penalties;
+
+      this.bet.matches[this.finals.match._id].home.goals = this.finals.match.home.goals;
+      this.bet.matches[this.finals.match._id].away.goals = this.finals.match.away.goals;
+      this.bet.matches[this.finals.match._id].home.penalties = this.finals.match.home.penalties;
+      this.bet.matches[this.finals.match._id].away.penalties = this.finals.match.away.penalties;
 
       if (this.thirdPlace.match.home.goals > this.thirdPlace.match.away.goals) {
         thirdPlace = {

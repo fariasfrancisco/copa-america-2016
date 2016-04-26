@@ -2,8 +2,7 @@
 (function () {
 
   class MainComponent {
-    constructor($http, Auth, MainService, QueryService) {
-      this.$http = $http;
+    constructor(Auth, MainService, QueryService) {
       this.isLoggedIn = Auth.isLoggedIn;
       this.mainSvc = MainService;
       this.querySvc = QueryService;

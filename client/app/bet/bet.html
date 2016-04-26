@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" ng-show="$ctrl.isLoggedIn()">
   <!-- TODO work out the styles -->
   <div class="row grouptablerow" ng-repeat="group in $ctrl.groups">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{group.fullName}}</h3>
@@ -43,7 +43,7 @@
     <a href="#" class="button" ng-click="$ctrl.buildQuarterFinals()">Done</a>
   </div>
   <div class="row grouptablerow" ng-show="$ctrl.quaterFinals">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.quaterFinals.fullName}}</h3>
@@ -90,7 +90,7 @@
     <a href="#" class="button" ng-show="$ctrl.quaterFinals" ng-click="$ctrl.buildSemiFinals()">Done</a>
   </div>
   <div class="row grouptablerow" ng-show="$ctrl.semiFinals">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName}}</h3>
@@ -137,7 +137,7 @@
     <a href="#" class="button" ng-show="$ctrl.semiFinals" ng-click="$ctrl.buildFinals()">Done</a>
   </div>
   <div class="row grouptablerow" ng-show="$ctrl.thirdPlace">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName}}</h3>
@@ -187,7 +187,7 @@
     </div>
   </div>
   <div class="row grouptablerow" ng-show="$ctrl.finals">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.finals.fullName}}</h3>
@@ -238,7 +238,7 @@
     <a href="#" class="button" ng-show="$ctrl.thirdPlace && $ctrl.finals" ng-click="$ctrl.buildPodium()">Done</a>
   </div>
   <div class="row grouptablerow" ng-show="$ctrl.podium">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">Podium</h3>

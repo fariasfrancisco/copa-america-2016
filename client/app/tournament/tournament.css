@@ -16,8 +16,12 @@
 }
 
 .table-format {
-  width: 34%;
-  margin: 0px 8% 0px;
+  width: 36%;
+  margin: 0px 7% 0px;
+}
+
+td.team-name.ng-binding {
+  font-size: 1.15em;
 }
 
 caption.ng-binding {
@@ -34,6 +38,10 @@ caption.ng-binding {
 .team-img {
   margin-right: 5px;
 }
+
+/**
+ * Brackets
+ */
 
 .team {
   text-align: right;
