@@ -41,6 +41,13 @@
       }
     }
 
+    changePenalties(home, away) {
+      if (home.goals != away.goals) {
+        home.penalties = 0;
+        away.penalties = 0
+      }
+    }
+
     buildQuarterFinals() {
       var teams = {},
         self = this;
@@ -126,8 +133,8 @@
     }
 
     buildSemiFinals() {
-      var teams = {}
-        , self = this;
+      var teams = {},
+        self = this;
 
       this.quaterFinals.matches.forEach(function (match) {
         if (match.home.goals === '') match.home.goals = 0;
@@ -165,6 +172,7 @@
                 }
               } else {
                 //TODO figure out how to handle this case
+                self.quarterFinalsError = "Que pa e";
               }
             }
           }
@@ -205,8 +213,8 @@
     }
 
     buildFinals() {
-      var teams = {}
-        , self = this;
+      var teams = {},
+        self = this;
 
       this.semiFinals.matches.forEach(function (match) {
         if (match.home.goals === '') match.home.goals = 0;
@@ -264,6 +272,7 @@
                 }
               } else {
                 //TODO figure out how to handle this case
+                self.semiFinalsError = "Que pa e";
               }
             }
           }
@@ -307,6 +316,7 @@
 
     buildPodium() {
       var thirdPlace, secondPlace, firstPlace;
+
       if (this.thirdPlace.match.home.goals === '') this.thirdPlace.match.home.goals = 0;
       if (this.thirdPlace.match.away.goals === '') this.thirdPlace.match.away.goals = 0;
       if (this.thirdPlace.match.home.penalties === '') this.thirdPlace.match.home.penalties = 0;
@@ -402,6 +412,7 @@
               };
             } else {
               //TODO figure out how to handle this case
+              self.finalsError = "Que pa e";
             }
           }
         }
