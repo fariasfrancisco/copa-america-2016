@@ -21,15 +21,15 @@
                 <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
                 <td class="col-md-1 score">
                   <input ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea"
-                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-disabled="$ctrl.quaterFinals">
+                         class="form-control scorearea" ng-disabled="$ctrl.quarterFinals"
+                         ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea"
-                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-disabled="$ctrl.quaterFinals">
+                         class="form-control scorearea" ng-disabled="$ctrl.quarterFinals"
+                         ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
+                         placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'">
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
@@ -43,22 +43,24 @@
       </div>
     </div>
   </div>
+
   <div class="row">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.quaterFinals}"
-       ng-click="$ctrl.quaterFinals||$ctrl.buildQuarterFinals()">Done</a>
+    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
+       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">Done</a>
   </div>
-  <div class="row grouptablerow" ng-show="$ctrl.quaterFinals">
+
+  <div class="row grouptablerow" ng-show="$ctrl.quarterFinals">
     <div class="col-md-6 col-md-push-3">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.quaterFinals.fullName}}</h3>
+          <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">Penalties</th>
-              <tr class="table-row" ng-repeat="match in $ctrl.quaterFinals.matches">
+              <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
                        alt="{{match.home._team}}.png">
@@ -68,23 +70,27 @@
                   <input ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.semiFinals"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeInvalidCharacters($ctrl.quarterFinals.matches)">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea" ng-disabled="$ctrl.semiFinals"
+                         class="form-control scorearea"
+                         ng-change="$ctrl.removeInvalidCharacters($ctrl.quarterFinals.matches)"
+                         ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea" ng-disabled="$ctrl.semiFinals"
+                         class="form-control scorearea"
+                         ng-change="$ctrl.removeInvalidCharacters($ctrl.quarterFinals.matches)"
+                         ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.semiFinals"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeInvalidCharacters($ctrl.quarterFinals.matches)">
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
@@ -104,8 +110,9 @@
   </div>
 
   <div class="row">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.semiFinals}" ng-show="$ctrl.quaterFinals"
-       ng-click="$ctrl.semiFinals||$ctrl.buildSemiFinals()">Done</a>
+    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
+       ng-show="$ctrl.quarterFinals"
+       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">Done</a>
   </div>
 
   <div class="row grouptablerow" ng-show="$ctrl.semiFinals">
@@ -128,17 +135,17 @@
                   <input ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.thirdPlace && $ctrl.finals"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeInvalidCharacters($ctrl.semiFinals.matches)">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea"
+                         class="form-control scorearea" ng-change="$ctrl.removeInvalidCharacters($ctrl.semiFinals.matches)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
-                         class="form-control scorearea"
+                         class="form-control scorearea" ng-change="$ctrl.removeInvalidCharacters($ctrl.semiFinals.matches)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals">
                 </td>
@@ -146,7 +153,7 @@
                   <input ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.thirdPlace && $ctrl.finals"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeInvalidCharacters($ctrl.semiFinals.matches)">
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
@@ -166,8 +173,9 @@
   </div>
 
   <div class="row">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals}"
-       ng-show="$ctrl.semiFinals" ng-click="($ctrl.thirdPlace && $ctrl.finals)||$ctrl.buildFinals()">Done</a>
+    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton}"
+       ng-show="$ctrl.semiFinals"
+       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">Done</a>
   </div>
 
   <div class="row grouptablerow" ng-show="$ctrl.thirdPlace">
@@ -191,17 +199,19 @@
                   <input ng-model="$ctrl.thirdPlace.match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.podium"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match)">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="$ctrl.thirdPlace.match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea"
+                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="$ctrl.thirdPlace.match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea"
+                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals">
                 </td>
@@ -209,7 +219,7 @@
                   <input ng-model="$ctrl.thirdPlace.match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.podium"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match)">
                 </td>
                 <td class="col-md-3 coelho team-right">{{$ctrl.thirdPlace.match.away.teamName}}</td>
                 <td class="col-md-1">
@@ -245,17 +255,19 @@
                   <input ng-model="$ctrl.finals.match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.podium"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.finals.match)">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="$ctrl.finals.match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea"
+                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.finals.match)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals">
                 </td>
                 <td class="col-md-1 score">
                   <input ng-model="$ctrl.finals.match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea"
+                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.finals.match)"
                          placeholder="p" onfocus="this.placeholder = ''" onblur="this.placeholder = 'p'"
                          ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals">
                 </td>
@@ -263,7 +275,7 @@
                   <input ng-model="$ctrl.finals.match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/" type="text"
                          class="form-control scorearea" ng-disabled="$ctrl.podium"
                          placeholder="0" onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"
-                         ng-change="$ctrl.changePenalties(match.home, match.away)">
+                         ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.finals.match)">
                 </td>
                 <td class="col-md-3 coelho team-right">{{$ctrl.finals.match.away.teamName}}</td>
                 <td class="col-md-1">
@@ -283,8 +295,8 @@
   </div>
 
   <div class="row">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium}" ng-show="$ctrl.thirdPlace && $ctrl.finals"
-       ng-click="$ctrl.buildPodium()">Done</a>
+    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
+       ng-show="$ctrl.thirdPlace && $ctrl.finals" ng-click="$ctrl.disableButton || $ctrl.buildPodium()">Done</a>
   </div>
 
   <div class="row grouptablerow" ng-show="$ctrl.podium">
