@@ -14,68 +14,25 @@
           <th class="table-cell">Semi-Finals</th>
           <th class="table-cell">Finals</th>
           <th class="table-cell">Golden Boot</th>
+          <th class="table-cell">Podium</th>
           <th class="table-cell">Total</th>
         </tr>
         </thead>
-        <tr>
-          <td class="table-cell">El_choto</td>
-          <td class="table-cell">23</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">31</td>
-          <td class="table-cell">95</td>
-          <td class="table-cell">55</td>
-          <td class="table-cell">10</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">32</td>
-        </tr>
-        <tr>
-          <td class="table-cell">El_choto</td>
-          <td class="table-cell">23</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">31</td>
-          <td class="table-cell">95</td>
-          <td class="table-cell">55</td>
-          <td class="table-cell">10</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">32</td>
-        </tr>
-        <tr>
-          <td class="table-cell">El_choto</td>
-          <td class="table-cell">23</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">31</td>
-          <td class="table-cell">95</td>
-          <td class="table-cell">55</td>
-          <td class="table-cell">10</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">32</td>
-        </tr>
-        <tr>
-          <td class="table-cell">El_choto</td>
-          <td class="table-cell">23</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">31</td>
-          <td class="table-cell">95</td>
-          <td class="table-cell">55</td>
-          <td class="table-cell">10</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">32</td>
-        </tr>
-        <tr>
-          <td class="table-cell">El_choto</td>
-          <td class="table-cell">23</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">31</td>
-          <td class="table-cell">95</td>
-          <td class="table-cell">55</td>
-          <td class="table-cell">10</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">12</td>
-          <td class="table-cell">32</td>
+
+        <tr ng-repeat="row in $ctrl.betRows">
+          <td class="table-cell">{{row.user}}</td>
+          <td class="table-cell">{{row.points.GA}}</td>
+          <td class="table-cell">{{row.points.GB}}</td>
+          <td class="table-cell">{{row.points.GC}}</td>
+          <td class="table-cell">{{row.points.GD}}</td>
+          <td class="table-cell">{{row.points.QF}}</td>
+          <td class="table-cell">{{row.points.SF}}</td>
+          <td class="table-cell">{{row.points.TP + row.points.F}}</td>
+          <td class="table-cell">{{row.points.POD}}</td>
+          <td class="table-cell">{{row.points.STR}}</td>
+          <td class="table-cell">{{row.points.GA + row.points.GB + row.points.GC + row.points.GD +
+            row.points.QF + row.points.SF + row.points.TP + row.points.F + row.points.POD + row.points.STR}}
+          </td>
         </tr>
       </table>
     </div>

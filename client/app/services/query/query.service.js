@@ -76,21 +76,14 @@ angular.module('copaamericaApp')
       getStage: function (stage) {
         return $http.get('/api/groups/stage/' + stage)
           .then(function (response) {
-            console.log(response.data);
             return response.data;
           })
       },
 
       getBets: function () {
-        if (!bets) {
-          return $http.get('/api/bets/').then(function (response) {
-            console.log(response.data);
-            bets = response.data;
-            return bets;
-          });
-        }
-
-        return bets;
+        return $http.get('/api/bets/').then(function (response) {
+          return response.data;
+        });
       }
     }
   }]);

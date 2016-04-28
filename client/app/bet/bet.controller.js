@@ -45,31 +45,19 @@
     }
 
     removeGroupInvalidCharacters(groups) {
-      var undef = false;
+      var self = this;
 
       groups.forEach(function (group) {
-        group.matches.forEach(function (match) {
-          if (typeof match.home.goals === 'undefined') undef = true;
-          if (typeof match.away.goals === 'undefined') undef = true;
-          if (typeof match.home.penalties === 'undefined') undef = true;
-          if (typeof match.away.penalties === 'undefined') undef = true;
-        });
+        self.removeInvalidCharacters(group.matches)
       });
-
-      this.disableButton = undef;
     }
 
     removeInvalidCharacters(matches) {
-      var undef = false;
+      var self = this;
 
       matches.forEach(function (match) {
-        if (typeof match.home.goals === 'undefined') undef = true;
-        if (typeof match.away.goals === 'undefined') undef = true;
-        if (typeof match.home.penalties === 'undefined') undef = true;
-        if (typeof match.away.penalties === 'undefined') undef = true;
+        self.removeFinalsInvalidCharacters(match)
       });
-
-      this.disableButton = undef;
     }
 
     removeFinalsInvalidCharacters(match) {
@@ -360,16 +348,6 @@
         self = this,
         err = false;
 
-      if (this.thirdPlace.match.home.goals === '') this.thirdPlace.match.home.goals = 0;
-      if (this.thirdPlace.match.away.goals === '') this.thirdPlace.match.away.goals = 0;
-      if (this.thirdPlace.match.home.penalties === '') this.thirdPlace.match.home.penalties = 0;
-      if (this.thirdPlace.match.away.penalties === '') this.thirdPlace.match.away.penalties = 0;
-
-      if (this.finals.match.home.goals === '') this.finals.match.home.goals = 0;
-      if (this.finals.match.away.goals === '') this.finals.match.away.goals = 0;
-      if (this.finals.match.home.penalties === '') this.finals.match.home.penalties = 0;
-      if (this.finals.match.away.penalties === '') this.finals.match.away.penalties = 0;
-
       this.bet.matches[this.thirdPlace.match._id].home.goals = this.thirdPlace.match.home.goals;
       this.bet.matches[this.thirdPlace.match._id].away.goals = this.thirdPlace.match.away.goals;
       this.bet.matches[this.thirdPlace.match._id].home.penalties = this.thirdPlace.match.home.penalties;
@@ -404,7 +382,7 @@
                 name: this.thirdPlace.match.away.teamName
               };
             } else {
-              //TODO figure out how to handle this case
+              err = true;
             }
           }
         }

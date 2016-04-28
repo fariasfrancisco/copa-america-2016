@@ -11,27 +11,25 @@
     $onInit() {
       var self = this;
 
-      this.querySvc.getBets()
-        .then(function (bets) {
-          self.bets = bets;
-          bets.forEach(function (bet) {
-            self.betRows.push({
-              user: bet._user,
-              points: {}
-            });
+      this.querySvc.getBets().then(function (bets) {
+        self.bets = bets;
+        bets.forEach(function (bet) {
+          self.betRows.push({
+            user: bet._user,
+            points: {}
           });
-
-          self.groups = self.querySvc.getGroups();
-          if (self.groups.length < 1) {
-            self.querySvc.buildGroupsAndTeams()
-              .then(function (groups) {
-                self.groups = groups;
-                self.processGroups();
-              });
-          } else {
-            self.processGroups();
-          }
         });
+
+        self.groups = self.querySvc.getGroups();
+        if (self.groups.length < 1) {
+          self.querySvc.buildGroupsAndTeams().then(function (groups) {
+            self.groups = groups;
+            self.processGroups();
+          });
+        } else {
+          self.processGroups();
+        }
+      });
     }
 
     processGroups() {
@@ -87,41 +85,44 @@
       this.processGoldenBoot();
     }
 
-    processStage(stage) {
+    processStage(st) {
       var self = this;
 
-      this.querySvc.getStage(stage.fullName)
+      this.querySvc.getStage(st.fullName)
         .then(function (stage) {
           var now, matchDate;
           stage.forEach(function (current) {
+            var matchHome = current.matches[0].home,
+              matchAway = current.matches[0].away;
+
             now = new Date();
             matchDate = new Date(current.matches[0].date);
 
             if (matchDate > now) {
               self.bets.forEach(function (bet, index) {
-                self.betRows[index].points[stage.shortName] = 0;
+                var betHome = bet.matches[current.matches[0]._id].matches[0].home,
+                  betAway = bet.matches[current.matches[0]._id].matches[0].away;
 
-                var mGoals = current.matches[0].home.goals - current.matches[0].away.goals,
-                  bGoals = bet.matches[current.matches[0]._id].home.goals - bet.matches[current.matches[0]._id].away.goals,
-                  mPenalties = mGoals === 0 ? current.matches[0].home.penalties - current.matches[0].away.penalties : 0,
-                  bPenalties = bGoals === 0 ? bet.matches[current.matches[0]._id].home.penalties - bet.matches[current.matches[0]._id].away.penalties : 0;
+                self.betRows[index].points[st.shortName] = 0;
 
-                if (Math.sign(mGoals) === Math.sign(bGoals)) {
-                  if (mGoals === 0) {
-                    if (Math.sign(mPenalties) === Math.sign(bPenalties)) {
-                      self.betRows[index].points[stage.shortName] += 2;
-                      if (current.matches[0].home.goals === bet.matches[current.matches[0]._id].home.goals
-                        && current.matches[0].away.goals === bet.matches[current.matches[0]._id].away.goals
-                        && current.matches[0].home.penalties === bet.matches[current.matches[0]._id].home.penalties
-                        && current.matches[0].away.penalties === bet.matches[current.matches[0]._id].away.penalties) {
-                        self.betRows[index].points[stage.shortName] += 3;
+                var matchGoals = matchHome.goals - matchAway.goals,
+                  betGoals = betHome.goals - betAway.goals,
+                  matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
+                  betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
+
+                if (Math.sign(matchGoals) === Math.sign(betGoals)) {
+                  if (matchGoals === 0) {
+                    if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
+                      self.betRows[index].points[st.shortName] += 2;
+                      if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
+                        && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
+                        self.betRows[index].points[st.shortName] += 3;
                       }
                     }
                   } else {
-                    self.betRows[index].points[stage.shortName] += 2;
-                    if (current.matches[0].home.goals === bet.matches[current.matches[0]._id].home.goals
-                      && current.matches[0].away.goals === bet.matches[current.matches[0]._id].away.goals) {
-                      self.betRows[index].points[stage.shortName] += 3;
+                    self.betRows[index].points[st.shortName] += 2;
+                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
+                      self.betRows[index].points[st.shortName] += 3;
                     }
                   }
                 }
@@ -137,110 +138,114 @@
       this.querySvc.getStage('third-place')
         .then(function (stage) {
           var now = new Date(),
-            matchDate = new Date(stage.matches[0].date);
+            matchDate = new Date(stage[0].matches[0].date),
+            matchHome = stage[0].matches[0].home,
+            matchAway = stage[0].matches[0].away;
 
           if (matchDate > now) {
             self.bets.forEach(function (bet, index) {
               self.betRows[index].points['TP'] = 0;
 
-              var mGoals = stage.matches[0].home.goals - stage.matches[0].away.goals,
-                bGoals = bet.matches[stage.matches[0]._id].home.goals - bet.matches[stage.matches[0]._id].away.goals,
-                mPenalties = mGoals === 0 ? stage.matches[0].home.penalties - stage.matches[0].away.penalties : 0,
-                bPenalties = bGoals === 0 ? bet.matches[stage.matches[0]._id].home.penalties - bet.matches[stage.matches[0]._id].away.penalties : 0;
+              var betHome = bet.matches[stage[0].matches[0]._id].matches[0].home,
+                betAway = bet.matches[stage[0].matches[0]._id].matches[0].away,
+                matchGoals = matchHome.goals - matchAway.goals,
+                betGoals = betHome.goals - betAway.goals,
+                matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
+                betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
 
-              if (Math.sign(mGoals) === Math.sign(bGoals)) {
-                if (mGoals === 0) {
-                  if (Math.sign(mPenalties) === Math.sign(bPenalties)) {
+              if (Math.sign(matchGoals) === Math.sign(betGoals)) {
+                if (matchGoals === 0) {
+                  if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
                     self.betRows[index].points['TP'] += 2;
-                    if (stage.matches[0].home.goals === bet.matches[stage.matches[0]._id].home.goals
-                      && stage.matches[0].away.goals === bet.matches[stage.matches[0]._id].away.goals
-                      && stage.matches[0].home.penalties === bet.matches[stage.matches[0]._id].home.penalties
-                      && stage.matches[0].away.penalties === bet.matches[stage.matches[0]._id].away.penalties) {
+                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
+                      && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
                       self.betRows[index].points['TP'] += 3;
                     }
                   }
                 } else {
                   self.betRows[index].points['TP'] += 2;
-                  if (stage.matches[0].home.goals === bet.matches[stage.matches[0]._id].home.goals
-                    && stage.matches[0].away.goals === bet.matches[stage.matches[0]._id].away.goals) {
+                  if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
                     self.betRows[index].points['TP'] += 3;
                   }
                 }
               }
             });
 
-            if (stage.matches[0].home.goals > stage.matches[0].away.goals) {
-              self.podium.third = stage.matches[0].home._team;
+            if (matchHome.goals > matchAway.goals) {
+              self.podium.third = matchHome._team;
             } else {
-              if (stage.matches[0].home.goals < stage.matches[0].away.goals) {
-                self.podium.third = stage.matches[0].away._team;
+              if (matchHome.goals < matchAway.goals) {
+                self.podium.third = matchAway._team;
               } else {
-                if (stage.matches[0].home.penalties > stage.matches[0].away.penalties) {
-                  self.podium.third = stage.matches[0].home._team;
+                if (matchHome.penalties > matchAway.penalties) {
+                  self.podium.third = matchHome._team;
                 } else {
-                  if (stage.matches[0].home.penalties < stage.matches[0].away.penalties) {
-                    self.podium.third = stage.matches[0].away._team;
+                  if (matchHome.penalties < matchAway.penalties) {
+                    self.podium.third = matchAway._team;
                   }
                 }
               }
             }
 
-            this.querySvc.getStage('final')
+            self.querySvc.getStage('final')
               .then(function (stage) {
                 var now = new Date(),
-                  matchDate = new Date(stage.matches[0].date);
+                  matchDate = new Date(stage[0].matches[0].date),
+                  matchHome = stage[0].matches[0].home,
+                  matchAway = stage[0].matches[0].away;
 
                 if (matchDate > now) {
                   self.bets.forEach(function (bet, index) {
                     self.betRows[index].points['F'] = 0;
 
-                    var mGoals = stage.matches[0].home.goals - stage.matches[0].away.goals,
-                      bGoals = bet.matches[stage.matches[0]._id].home.goals - bet.matches[stage.matches[0]._id].away.goals,
-                      mPenalties = mGoals === 0 ? stage.matches[0].home.penalties - stage.matches[0].away.penalties : 0,
-                      bPenalties = bGoals === 0 ? bet.matches[stage.matches[0]._id].home.penalties - bet.matches[stage.matches[0]._id].away.penalties : 0;
+                    var betHome = bet.matches[stage[0].matches[0]._id].matches[0].home,
+                      betAway = bet.matches[stage[0].matches[0]._id].matches[0].away,
+                      matchGoals = matchHome.goals - matchAway.goals,
+                      betGoals = betHome.goals - betAway.goals,
+                      matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
+                      betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
 
-                    if (Math.sign(mGoals) === Math.sign(bGoals)) {
-                      if (mGoals === 0) {
-                        if (Math.sign(mPenalties) === Math.sign(bPenalties)) {
+                    if (Math.sign(matchGoals) === Math.sign(betGoals)) {
+                      if (matchGoals === 0) {
+                        if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
                           self.betRows[index].points['F'] += 2;
-                          if (stage.matches[0].home.goals === bet.matches[stage.matches[0]._id].home.goals
-                            && stage.matches[0].away.goals === bet.matches[stage.matches[0]._id].away.goals
-                            && stage.matches[0].home.penalties === bet.matches[stage.matches[0]._id].home.penalties
-                            && stage.matches[0].away.penalties === bet.matches[stage.matches[0]._id].away.penalties) {
+                          if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
+                            && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
                             self.betRows[index].points['F'] += 3;
                           }
                         }
                       } else {
                         self.betRows[index].points['F'] += 2;
-                        if (stage.matches[0].home.goals === bet.matches[stage.matches[0]._id].home.goals
-                          && stage.matches[0].away.goals === bet.matches[stage.matches[0]._id].away.goals) {
+                        if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
                           self.betRows[index].points['F'] += 3;
                         }
                       }
                     }
                   });
 
-                  if (stage.matches[0].home.goals > stage.matches[0].away.goals) {
-                    self.podium.first = stage.matches[0].home._team;
-                    self.podium.second = stage.matches[0].away._team;
+                  if (matchHome.goals > matchAway.goals) {
+                    self.podium.first = matchHome._team;
+                    self.podium.second = matchAway._team;
                   } else {
-                    if (stage.matches[0].home.goals < stage.matches[0].away.goals) {
-                      self.podium.first = stage.matches[0].away._team;
-                      self.podium.second = stage.matches[0].home._team;
+                    if (matchHome.goals < matchAway.goals) {
+                      self.podium.first = matchAway._team;
+                      self.podium.second = matchHome._team;
                     } else {
-                      if (stage.matches[0].home.penalties > stage.matches[0].away.penalties) {
-                        self.podium.first = stage.matches[0].home._team;
-                        self.podium.second = stage.matches[0].away._team;
+                      if (matchHome.penalties > matchAway.penalties) {
+                        self.podium.first = matchHome._team;
+                        self.podium.second = matchAway._team;
                       } else {
-                        if (stage.matches[0].home.penalties < stage.matches[0].away.penalties) {
-                          self.podium.first = stage.matches[0].away._team;
-                          self.podium.second = stage.matches[0].home._team;
+                        if (matchHome.penalties < matchAway.penalties) {
+                          self.podium.first = matchAway._team;
+                          self.podium.second = matchHome._team;
                         }
                       }
                     }
                   }
 
                   self.bets.forEach(function (bet, index) {
+                    self.betRows[index].points['POD'] = 0;
+
                     var inPodium = false,
                       rightOrder = false;
 
@@ -267,7 +272,13 @@
     }
 
     processGoldenBoot() {
-//TODO logic here!
+      //TODO logic here!
+
+      var self = this;
+
+      this.bets.forEach(function (bet, index) {
+        self.betRows[index].points['STR'] = 0;
+      });
     }
   }
 
