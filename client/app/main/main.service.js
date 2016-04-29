@@ -2,9 +2,9 @@
 
 angular.module('copaamericaApp')
   .service('MainService', function () {
-    var showButton = true;
-    var showLoginForm = false;
-    var showSignUpForm = false;
+    let showButton = true,
+      showLoginForm = false,
+      showSignUpForm = false;
 
     return {
       setShowButton: function (value) {

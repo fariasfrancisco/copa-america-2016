@@ -4,8 +4,9 @@
   //TODO fix when user inputs invalid numbers
 
   class BetComponent {
-    constructor(Auth, QueryService, TableCalculator, $scope) {
-      this.$scope = $scope;
+    constructor(Auth, QueryService, TableCalculator, BetBuilder, $state) {
+      this.betBuilder = BetBuilder;
+      this.$state = $state;
       this.isLoggedIn = Auth.isLoggedIn;
       this.auth = Auth;
       this.querySvc = QueryService;
@@ -18,18 +19,18 @@
     }
 
     $onInit() {
-      var self = this;
+      let self = this;
 
-      this.bet.user = this.auth.getCurrentUser()._id;
+      this.bet.user = this.auth.getCurrentUser();
 
-      self.querySvc.cloneGroups().then(function (result) {
+      self.querySvc.cloneGroups().then(result => {
         self.groups = result;
-        self.groups.forEach(function (group) {
+        self.groups.forEach(group => {
           self.bet.groups[group.name] = {first: '', second: ''};
         })
       });
 
-      for (var i = 0; i < 32; i++) {
+      for (let i = 0; i < 32; i++) {
         this.bet.matches[i] = {
           home: {goals: 0, penalties: 0},
           away: {goals: 0, penalties: 0}
@@ -45,47 +46,53 @@
     }
 
     removeGroupInvalidCharacters(groups) {
-      var self = this;
+      let undef = false;
 
-      groups.forEach(function (group) {
-        self.removeInvalidCharacters(group.matches)
+      groups.forEach(group => {
+        group.matches.forEach(match => {
+          if (typeof match.home.goals === 'undefined') undef = true;
+          if (typeof match.away.goals === 'undefined') undef = true;
+          if (typeof match.home.penalties === 'undefined') undef = true;
+          if (typeof match.away.penalties === 'undefined') undef = true;
+        });
       });
+
+      this.disableButton = undef;
     }
 
-    removeInvalidCharacters(matches) {
-      var self = this;
-
-      matches.forEach(function (match) {
-        self.removeFinalsInvalidCharacters(match)
-      });
+    removeFinalsInvalidCharacters(TP, F) {
+      let matches = [TP, F];
+      this.removeMatchesInvalidCharacters(matches);
     }
 
-    removeFinalsInvalidCharacters(match) {
-      var undef = false;
+    removeMatchesInvalidCharacters(matches) {
+      let undef = false;
 
-      if (typeof match.home.goals === 'undefined') undef = true;
-      if (typeof match.away.goals === 'undefined') undef = true;
-      if (typeof match.home.penalties === 'undefined') undef = true;
-      if (typeof match.away.penalties === 'undefined') undef = true;
+      matches.forEach(match => {
+        if (typeof match.home.goals === 'undefined') undef = true;
+        if (typeof match.away.goals === 'undefined') undef = true;
+        if (typeof match.home.penalties === 'undefined') undef = true;
+        if (typeof match.away.penalties === 'undefined') undef = true;
+      });
 
       this.disableButton = undef;
     }
 
     buildQuarterFinals() {
-      var teams = {},
+      let teams = {},
         self = this;
 
-      this.groups.forEach(function (group) {
-        group.matches.forEach(function (match) {
+      this.groups.forEach(group => {
+        group.matches.forEach(match => {
           if (match.home.goals === '') match.home.goals = 0;
           if (match.away.goals === '') match.away.goals = 0;
           self.bet.matches[match._id].home.goals = match.home.goals;
           self.bet.matches[match._id].away.goals = match.away.goals;
         });
 
-        var groupTable = self.tableCalc.generate(group);
+        let groupTable = self.tableCalc.generate(group);
 
-        groupTable.forEach(function (current) {
+        groupTable.forEach(current => {
           teams[current.groupPosition] = {
             team: current.team,
             teamName: self.querySvc.getTeams()[current.team].name
@@ -156,11 +163,11 @@
     }
 
     buildSemiFinals() {
-      var teams = {},
+      let teams = {},
         self = this,
         err = false;
 
-      this.quarterFinals.matches.forEach(function (match) {
+      this.quarterFinals.matches.forEach(match => {
         self.bet.matches[match._id].home.goals = match.home.goals;
         self.bet.matches[match._id].away.goals = match.away.goals;
         self.bet.matches[match._id].home.penalties = match.home.penalties;
@@ -197,11 +204,9 @@
         }
       });
 
-      if (err) {
-        self.quarterFinalsError = "Oops! There's an error in this group of matches.";
-      } else {
-        delete self.quarterFinalsError;
-      }
+      if (err) self.quarterFinalsError = "Oops! There's an error in this group of matches.";
+      else delete self.quarterFinalsError;
+
 
       if (!self.quarterFinalsError) {
         this.semiFinals = {
@@ -239,11 +244,11 @@
     }
 
     buildFinals() {
-      var teams = {},
+      let teams = {},
         self = this,
         err = false;
 
-      this.semiFinals.matches.forEach(function (match) {
+      this.semiFinals.matches.forEach(match => {
         self.bet.matches[match._id].home.goals = match.home.goals;
         self.bet.matches[match._id].away.goals = match.away.goals;
         self.bet.matches[match._id].home.penalties = match.home.penalties;
@@ -300,11 +305,9 @@
         }
       });
 
-      if (err) {
-        self.semiFinalsError = "Oops! There's an error in this group of matches.";
-      } else {
-        delete self.semiFinalsError;
-      }
+      if (err) self.semiFinalsError = "Oops! There's an error in this group of matches.";
+      else delete self.semiFinalsError;
+
 
       if (!self.semiFinalsError) {
         this.thirdPlace = {
@@ -344,7 +347,7 @@
     }
 
     buildPodium() {
-      var thirdPlace, secondPlace, firstPlace,
+      let thirdPlace, secondPlace, firstPlace,
         self = this,
         err = false;
 
@@ -388,6 +391,11 @@
         }
       }
 
+      if (err) self.thirdPlaceError = "Oops! There's an error in this group of matches.";
+      else delete self.thirdPlaceError;
+
+      err = false;
+
       if (this.finals.match.home.goals > this.finals.match.away.goals) {
         firstPlace = {
           _id: this.finals.match.home._team,
@@ -421,7 +429,7 @@
               name: this.finals.match.away.teamName
             };
           } else {
-            if (this.thirdPlace.match.home.penalties < this.thirdPlace.match.away.penalties) {
+            if (this.finals.match.home.penalties < this.finals.match.away.penalties) {
               firstPlace = {
                 _id: this.finals.match.away._team,
                 name: this.finals.match.away.teamName
@@ -438,13 +446,14 @@
         }
       }
 
-      if (err) {
-        self.finalsError = "Oops! There's an error in this group of matches.";
-      } else {
-        delete self.finalsError;
-      }
+      if (err)  self.finalsError = "Oops! There's an error in this group of matches.";
+      else delete self.finalsError;
 
-      if (self.finalsError) {
+
+      if (!self.finalsError && !self.thirdPlaceError) {
+        this.goldenBootTeam = undefined;
+        this.goldenBootPlayer = undefined;
+
         this.podium = {
           firstPlace: firstPlace,
           secondPlace: secondPlace,
@@ -453,6 +462,18 @@
 
         this.bet.podium = this.podium;
       }
+    }
+
+    save() {
+      this.bet.goldenBoot = {
+        _team: this.goldenBootTeam._id,
+        _player: this.goldenBootPlayer._id
+      };
+
+      this.betBuilder.buildBet(this.bet)
+        .then(() => {
+          this.$state.go('main');
+        });
     }
   }
 

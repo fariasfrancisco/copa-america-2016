@@ -1,46 +1,45 @@
-var moment = require('moment');
+let moment = require('moment');
 
 module.exports = {};
 
-var isInArray = function (value, array) {
+let isInArray = function (value, array) {
   return array.indexOf(value) > -1;
 };
 
-var initializeTable = function (group) {
-  var list = [],
+let initializeTable = function (group) {
+  let list = [],
     table = [];
 
-  group.matches.forEach(function (match) {
+  group.matches.forEach(match => {
     if (!isInArray(match.home._team, list)) list.push(match.home._team);
     if (!isInArray(match.away._team, list)) list.push(match.away._team);
   });
 
-  list.forEach(function (current, index) {
+  list.forEach(current => {
     table.push({
       team: current,
       points: 0,
       goalsFor: 0,
-      goalsAgainst: 0,
-      position: index
+      goalsAgainst: 0
     })
   });
 
   return table;
 };
 
-var calculatePointsAndGoals = function (table, matches) {
-  matches.forEach(function (current) {
-    var matchEndTime = moment(current.date).add(2, 'h');
+let calculatePointsAndGoals = function (table, matches) {
+  matches.forEach(current => {
+    let matchEndTime = moment(current.date).add(2, 'h');
 
     if (moment().isBefore(matchEndTime)) return;
 
-    var homeTeam = current.home._team,
+    let homeTeam = current.home._team,
       awayTeam = current.away._team,
       homeTeamIndex = null,
       awayTeamIndex = null,
       result;
 
-    table.forEach(function (current, index) {
+    table.forEach((current, index) => {
       if (current.team === homeTeam) homeTeamIndex = index;
       if (current.team === awayTeam) awayTeamIndex = index;
     });
@@ -67,12 +66,12 @@ var calculatePointsAndGoals = function (table, matches) {
     }
   });
 
-  table.forEach(function (current) {
+  table.forEach(current => {
     current.goalDifference = current.goalsFor - current.goalsAgainst;
   })
 };
 
-var compareTable = function (a, b) {
+let compareTable = function (a, b) {
   if (a.points < b.points) return 1;
   else if (a.points > b.points) return -1;
   else if (a.goalDifference < b.goalDifference) return 1;
@@ -82,17 +81,18 @@ var compareTable = function (a, b) {
   else return 0;
 };
 
-var calculatePositions = function (table) {
+let calculatePositions = function (table) {
   table.sort(compareTable);
 
-  table.forEach(function (current, index) {
+  table.forEach((current, index) => {
     current.position = index;
   });
 };
 
 module.exports.generate = function (group) {
-  var table = initializeTable(group);
+  let table = initializeTable(group);
   calculatePointsAndGoals(table, group.matches);
   calculatePositions(table);
+  
   return table;
 };

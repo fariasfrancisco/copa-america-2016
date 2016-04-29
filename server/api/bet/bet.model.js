@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 var BetSchema = new mongoose.Schema({
   _user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  name: {type: String, required: true},
   matches: [{
     _id: {type: Number, min: 0, max: 31, required: true},
     home: {

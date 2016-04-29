@@ -2,7 +2,21 @@
   margin-top: 40px;
   padding: 0 10px;
 }
-
+.grouptable .gold{
+  background-color: #FFCF40;
+}
+.grouptable .silver{
+  background-color: #C0C0C0;
+}
+.grouptable .bronzodia{
+  background-color: #CD7F32;
+}
+.podium table {
+  margin-bottom: 0;
+}
+.podium tr {
+  border-top: white 4px solid;
+}
 .clickable {
   cursor: pointer;
 }
@@ -63,4 +77,8 @@ td.col-md-1.score {
 .panel-title.groupname.ng-binding {
   text-align: center;
   font-weight: bold;
+}
+
+.row.alert-danger {
+  text-align: center;
 }
