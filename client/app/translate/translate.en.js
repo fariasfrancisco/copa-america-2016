@@ -24,6 +24,8 @@ angular.module('copaamericaApp')
 
       //main
       MAKE_A_BET_BUTTON: 'Make a Bet!',
+      ENGLISH: 'English',
+      SPANISH: 'Spanish',
 
       //login & register
       LOGIN: 'Login',

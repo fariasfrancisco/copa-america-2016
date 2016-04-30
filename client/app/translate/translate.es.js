@@ -24,6 +24,8 @@ angular.module('copaamericaApp')
 
       //main
       MAKE_A_BET_BUTTON: 'Apostar!',
+      ENGLISH: 'Inglés',
+      SPANISH: 'Español',
 
       //login & register
       LOGIN: 'Ingresar',
@@ -37,7 +39,7 @@ angular.module('copaamericaApp')
       NAME_REQUIRED: 'Por favor, ingrese un Nombre.',
       CONNECT_WITH: 'Ingresar con',
       PASSWORD_CONFIRM: 'Confirmar Contraseña',
-      
+
       //group
       GROUP_A: 'Grupo A',
       GROUP_B: 'Grupo B',
