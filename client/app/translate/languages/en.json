@@ -74,5 +74,13 @@
   "PODIUM_P2": "But wait, There's more! If they are in the correct order you will get +35 more points. That's 70 points total!",
   "GOLDEN_BOOT_P1": "Pick your candidate for the Golden Boot and if you are right then you will get +50 points.",
   "GOLDEN_BOOT_P2": "If two or more players are tied for this award and your guess is one of them you still get the points!",
-  "TOTAL_P1": "Add all the points for a total of 300 points!"
+  "TOTAL_P1": "Add all the points for a total of 300 points!",
+  "WELCOME": "Welcome to the Prode",
+  "ID": "id",
+  "HOME_TEAM": "Home",
+  "HOME_GOALS": "Home Goals",
+  "HOME_PENALTIES": "Home Penalties",
+  "AWAY_TEAM": "Away",
+  "AWAY_GOALS": "Away Goals",
+  "AWAY_PENALTIES": "Away Penalties"
 }

@@ -1,11 +1,11 @@
 <section class="hero">
   <div class="row intro">
     <div class="small-centered medium-uncentered medium-6 large-7 columns">
-      <h1> Bienvenido al Prode </h1>
+      <h1> {{'WELCOME' | translate}} </h1>
     </div>
     <div class="small-centered medium-uncentered medium-6 large-5 columns">
       <div class="tech-img"></div>
-      <a href="#loginregister" class="button" ng-click="$ctrl.toggleLoginForm()">
+      <a href="#loginregister" class="button" ng-show="!$ctrl.isLoggedIn()">
         {{'MAKE_A_BET' | translate}}
       </a>
     </div>
@@ -17,10 +17,10 @@
     <div class="col-sm-4">
       <div class="col-padding">
         <h3>{{'REGISTER_COLUMN' | translate}}</h3>
-        <p>{{'REGISTER_COLUMN_P1' | translate}} facebook <i class="fa fa-facebook"
-                                                            aria-hidden="true"></i>,
-          twitter <i class="fa fa-twitter" aria-hidden="true"></i> & google+ <i class="fa fa-google-plus"
-                                                                                aria-hidden="true"></i>
+        <p>{{'REGISTER_COLUMN_P1' | translate}}
+          facebook <i class="fa fa-facebook" aria-hidden="true"></i>,
+          twitter <i class="fa fa-twitter" aria-hidden="true"></i> &
+          google+ <i class="fa fa-google-plus" aria-hidden="true"></i>
           .</p>
       </div>
     </div>
@@ -42,93 +42,85 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="text-center">{{'POINT_BREAKDOWN' | translate}}</h1>
-      <ul class="timeline">
-        <li>
-          <div class="timeline-image">
-            <img class="img-circle img-responsive" ng-src="assets/images/points/2-3.png" alt="">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>{{'MATCHES' | translate}}</h4>
-            </div>
-            <div class="timeline-body">
-              <p>{{'MATCHES_P1' | translate}}</p>
-              <p>{{'MATCHES_P2' | translate}}</p>
-            </div>
-          </div>
-          <div class="line"></div>
-        </li>
-        <li class="timeline-inverted">
-          <div class="timeline-image">
-            <img class="img-circle img-responsive" ng-src="assets/images/points/5.png" alt="">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>{{'GROUPS' | translate}}</h4>
-            </div>
-            <div class="timeline-body">
-              <p class="text-muted"> {{'GROUPS_P1' | translate}} </p>
-              <p class="text-muted"> {{'GROUPS_P2' | translate}} </p>
-            </div>
-          </div>
-          <div class="line"></div>
-        </li>
-        <li>
-          <div class="timeline-image">
-            <img class="img-circle img-responsive" ng-src="assets/images/points/25-35.png" alt="">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>{{'PODIUM' | translate}}</h4>
-            </div>
-            <div class="timeline-body">
-              <p class="text-muted"> {{'PODIUM_P1' | translate}} </p>
-              <p class="text-muted"> {{'PODIUM_P2' | translate}} </p>
-            </div>
-          </div>
-          <div class="line"></div>
-        </li>
-        <li class="timeline-inverted">
-          <div class="timeline-image">
-            <img class="img-circle img-responsive" ng-src="assets/images/points/50.png" alt="">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>{{'GOLDEN_BOOT' | translate}}</h4>
-            </div>
-            <div class="timeline-body">
-              <p class="text-muted"> {{'GOLDEN_BOOT_P1' | translate}} </p>
-              <p class="text-muted"> {{'GOLDEN_BOOT_P2' | translate}} </p>
-            </div>
-          </div>
-          <div class="line"></div>
-        </li>
-        <li>
-          <div class="timeline-image">
-            <img class="img-circle img-responsive" ng-src="assets/images/points/300.png" alt="">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>{{'TOTAL' | translate}}</h4>
-            </div>
-            <div class="timeline-body">
-              <p class="text-muted"> {{'TOTAL_P1' | translate}} </p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div class="page-header">
+    <h1 id="timeline">{{'POINT_BREAKDOWN' | translate}}</h1>
   </div>
+  <ul class="timeline">
+    <li>
+      <div class="timeline-badge">
+        <img class="img-circle img-responsive" ng-src="assets/images/points/2-3.png" alt="">
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{{'MATCHES' | translate}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{'MATCHES_P1' | translate}}</p>
+          <p>{{'MATCHES_P2' | translate}}</p>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge">
+        <img class="img-circle img-responsive" ng-src="assets/images/points/5.png" alt="">
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{{'GROUPS' | translate}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{'GROUPS_P1' | translate}}</p>
+          <p>{{'GROUPS_P2' | translate}}</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-badge">
+        <img class="img-circle img-responsive" ng-src="assets/images/points/25-35.png" alt="">
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{{'PODIUM' | translate}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{'PODIUM_P1' | translate}}</p>
+          <p>{{'PODIUM_P2' | translate}}</p>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge">
+        <img class="img-circle img-responsive" ng-src="assets/images/points/50.png" alt=""></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{{'GOLDEN_BOOT' | translate}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{'GOLDEN_BOOT_P1' | translate}}</p>
+          <p>{{'GOLDEN_BOOT_P2' | translate}}</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-badge">
+        <img class="img-circle img-responsive" ng-src="assets/images/points/300.png" alt=""></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">{{'TOTAL' | translate}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{'TOTAL_P1' | translate}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <div class="container">
   <div class="row" id="loginregister">
     <div class="col-lg-12">
-      <div ng-show="$ctrl.mainSvc.getShowLoginForm()" login></div>
-      <div ng-show="$ctrl.mainSvc.getShowSignUpForm()" signup></div>
+      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowLoginForm()" login></div>
+      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowSignUpForm()" signup></div>
     </div>
   </div>
 </div>

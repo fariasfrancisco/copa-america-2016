@@ -1,4 +1,42 @@
-<div class="container" ng-show="$ctrl.isLoggedIn()">
+<div class="container" ng-show="$ctrl.hasBet">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="row col-md-12 bet-table">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="col-md-1">{{'ID' | translate}}</th>
+                <th class="col-md-3">{{'HOME_TEAM' | translate}}</th>
+                <th class="col-md-1 poveda">{{'HOME_GOALS' | translate}}</th>
+                <th class="col-md-1 poveda">{{'HOME_PENALTIES' | translate}}</th>
+                <th class="col-md-1 poveda">{{'AWAY_PENALTIES' | translate}}</th>
+                <th class="col-md-1 poveda">{{'AWAY_GOALS' | translate}}</th>
+                <th class="col-md-3">{{'AWAY_TEAM' | translate}}</th>
+              </tr>
+              </thead>
+              <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
+                <td class="col-md-1">{{match._id}}</td>
+                <td class="col-md-3">{{match.home.teamName}}</td>
+                <td class="col-md-1 poveda">{{match.home.goals}}</td>
+                <td class="col-md-1 poveda">{{match.home.penalties}}</td>
+                <td class="col-md-1 poveda">{{match.away.penalties}}</td>
+                <td class="col-md-1 poveda">{{match.away.goals}}</td>
+                <td class="col-md-3">{{match.away.teamName}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-show="!$ctrl.hasBet">
   <div class="row">
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
@@ -56,9 +94,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          </div>
         </div>
-        <div class="panel-body tablebody">
+        <div uib-collapse="isCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -115,7 +156,8 @@
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
        ng-show="$ctrl.quarterFinals && !$ctrl.semiFinals"
-       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">{{'DONE_BUTTON' | translate}}</a>
+       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">{{'DONE_BUTTON' |
+      translate}}</a>
   </div>
 
   <div class="row" ng-show="$ctrl.semiFinals">
@@ -123,9 +165,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          </div>
         </div>
-        <div class="panel-body tablebody">
+        <div uib-collapse="isCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -191,9 +236,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          </div>
         </div>
-        <div class="panel-body tablebody">
+        <div uib-collapse="isCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -253,9 +301,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          </div>
         </div>
-        <div class="panel-body tablebody">
+        <div uib-collapse="isCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -311,7 +362,8 @@
   <div class="row">
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
        ng-show="$ctrl.thirdPlace && $ctrl.finals && !$ctrl.podium"
-       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">{{'DONE_BUTTON' | translate}}</a>
+       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">{{'DONE_BUTTON' |
+      translate}}</a>
   </div>
 
   <div class="row podium" ng-show="$ctrl.podium">
@@ -319,9 +371,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{'PODIUM' | translate}}</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          </div>
         </div>
-        <div class="panel-body tablebody">
+        <div uib-collapse="isCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table">
               <tr class="table-row gold">
@@ -361,8 +416,8 @@
       <div class="col-md-3">
         <p>{{'TEAM' | translate}}</p>
         <input type="text" ng-model="$ctrl.goldenBootTeam"
-               uib-typeahead="team as team.name for team in $ctrl.teams | filter:$viewValue | limitTo:8"
-               class="form-control" placeholder="{{$ctrl.teams[0].name}}">
+               uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8"
+               class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name}}">
       </div>
       <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
         <p>{{'PLAYER' | translate}}</p>
@@ -379,6 +434,8 @@
       translate}}</a>
   </div>
 
-  <!-- TODO fix the fold button from quarter finals onwards -->
+  <!-- TODO Fix the fold button from quarter finals onwards -->
+  <!-- TODO Add start again button to restart the betting form -->
+  <!-- TODO Add edit button for finished bets -->
 
 </div>

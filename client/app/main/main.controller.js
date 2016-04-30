@@ -11,7 +11,7 @@
 
     toggleLanguage(langKey) {
       let currentLang = this.$translate.use();
-      
+
       if (langKey !== currentLang) this.$translate.use(langKey);
     }
 
@@ -22,7 +22,7 @@
 
     $onInit() {
       this.mainSvc.setShowButton(true);
-      this.mainSvc.setShowLoginForm(false);
+      this.mainSvc.setShowLoginForm(true);
       this.mainSvc.setShowSignUpForm(false);
 
       if (this.isLoggedIn()) {

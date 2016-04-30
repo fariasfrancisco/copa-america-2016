@@ -70,6 +70,11 @@ td.col-md-1.score {
   vertical-align: middle;
 }
 
+td.col-md-1.poveda {
+  vertical-align: middle;
+  text-align: center;
+}
+
 .table.table-striped {
   margin: 0;
 }

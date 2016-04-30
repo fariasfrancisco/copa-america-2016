@@ -18,7 +18,7 @@ class SignupController {
     this.mainSvc.setShowLoginForm(true);
     this.mainSvc.setShowSignUpForm(false);
   }
-  
+
   register(form) {
     this.submitted = true;
 
@@ -47,8 +47,6 @@ class SignupController {
         });
     }
   }
-  
-  // TODO fix the sign up logic.
 }
 
 angular.module('copaamericaApp')

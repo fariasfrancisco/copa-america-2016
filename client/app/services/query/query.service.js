@@ -5,10 +5,11 @@ angular.module('copaamericaApp')
       bets;
 
     const GROUP_STAGE_API = '/api/groups/stage/group',
-      TEAMS_API = '/api/teams',
+      TEAMS_API = '/api/teams/',
       GROUP_TABLE_API = '/api/groups/table/',
       STAGE_API = '/api/groups/stage/',
-      BETS_API = '/api/bets/';
+      BETS_API = '/api/bets/',
+      BETS_API_USER = '/api/bets/user/';
 
     let compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -95,7 +96,18 @@ angular.module('copaamericaApp')
 
       getBets: function () {
         return $http.get(BETS_API).then(response => {
+          console.log(response.data);
           return response.data;
+        });
+      },
+
+      getBetByUser: function (user) {
+        let userBet = BETS_API_USER + user;
+
+        return $http.get(userBet).then(response => {
+          return response;
+        }, err => {
+          return err;
         });
       }
     }

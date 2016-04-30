@@ -1,8 +1,5 @@
 'use strict';
 (function () {
-
-  //TODO fix when user inputs invalid numbers
-
   class BetComponent {
     constructor(Auth, QueryService, TableCalculator, BetBuilder, $state) {
       this.betBuilder = BetBuilder;
@@ -16,26 +13,6 @@
         matches: {},
         groups: {}
       };
-    }
-
-    $onInit() {
-      let self = this;
-
-      this.bet.user = this.auth.getCurrentUser();
-
-      self.querySvc.cloneGroups().then(result => {
-        self.groups = result;
-        self.groups.forEach(group => {
-          self.bet.groups[group.name] = {first: '', second: ''};
-        })
-      });
-
-      for (let i = 0; i < 32; i++) {
-        this.bet.matches[i] = {
-          home: {goals: 0, penalties: 0},
-          away: {goals: 0, penalties: 0}
-        };
-      }
     }
 
     changePenalties(home, away) {
@@ -77,6 +54,144 @@
 
       this.disableButton = undef;
     }
+
+    $onInit() {
+      let self = this,
+        user = this.auth.getCurrentUser()._id;
+
+      this.querySvc.getBetByUser(user).then(res => {
+        if (res.status > 400) {
+          self.hasBet = false;
+          self.noBetInitialize();
+        } else {
+          self.userBet = res.data;
+          self.hasBet = true;
+          self.betInitialize();
+        }
+      });
+    }
+
+    betInitialize() {
+      let self = this;
+
+      this.querySvc.cloneGroups().then(groups => {
+        groups.forEach(group => {
+          group.matches.forEach(match => {
+            self.userBet.matches[match._id].home._team = match.home._team;
+            self.userBet.matches[match._id].away._team = match.away._team;
+          });
+        });
+
+        const qf = {
+          '24': [0, 1],
+          '25': [3, 2],
+          '26': [1, 0],
+          '27': [2, 3]
+        };
+
+        let qfIndex, winner, side, matchId,
+          desc = 4;
+
+        for (qfIndex = 24; qfIndex < 28; qfIndex++) {
+          this.userBet.matches[qfIndex].home._team = this.userBet.groups[qf[qfIndex][0]].first;
+          this.userBet.matches[qfIndex].away._team = this.userBet.groups[qf[qfIndex][1]].second;
+
+          if (this.userBet.matches[qfIndex].home.goals > this.userBet.matches[qfIndex].away.goals) {
+            winner = this.userBet.matches[qfIndex].home._team;
+          } else {
+            if (this.userBet.matches[qfIndex].home.goals < this.userBet.matches[qfIndex].away.goals) {
+              winner = this.userBet.matches[qfIndex].away._team;
+            } else {
+              if (this.userBet.matches[qfIndex].home.penalties > this.userBet.matches[qfIndex].away.penalties) {
+                winner = this.userBet.matches[qfIndex].home._team;
+              } else {
+                if (this.userBet.matches[qfIndex].home.penalties < this.userBet.matches[qfIndex].away.penalties) {
+                  winner = this.userBet.matches[qfIndex].away._team;
+                }
+              }
+            }
+          }
+
+          matchId = qfIndex + desc;
+
+          if (qfIndex % 2 == 0) {
+            side = 'home';
+            desc--
+          }
+          else {
+            side = 'away';
+          }
+
+          this.userBet.matches[matchId][side]._team = winner;
+        }
+
+        if (this.userBet.matches[28].home.goals > this.userBet.matches[28].away.goals) {
+          this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
+          this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
+        } else {
+          if (this.userBet.matches[28].home.goals < this.userBet.matches[28].away.goals) {
+            this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
+            this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
+          } else {
+            if (this.userBet.matches[28].home.penalties > this.userBet.matches[28].away.penalties) {
+              this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
+              this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
+            } else {
+              if (this.userBet.matches[28].home.penalties < this.userBet.matches[28].away.penalties) {
+                this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
+                this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
+              }
+            }
+          }
+        }
+
+        if (this.userBet.matches[29].home.goals > this.userBet.matches[29].away.goals) {
+          this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
+          this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+        } else {
+          if (this.userBet.matches[29].home.goals < this.userBet.matches[29].away.goals) {
+            this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
+            this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+          } else {
+            if (this.userBet.matches[29].home.penalties > this.userBet.matches[29].away.penalties) {
+              this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
+              this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+            } else {
+              if (this.userBet.matches[29].home.penalties < this.userBet.matches[29].away.penalties) {
+                this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
+                this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+              }
+            }
+          }
+        }
+
+        this.userBet.matches.forEach(match => {
+          match.home.teamName = self.querySvc.getTeams()[match.home._team].name;
+          match.away.teamName = self.querySvc.getTeams()[match.away._team].name;
+        });
+      });
+    }
+
+    noBetInitialize() {
+      let self = this;
+
+      this.bet.user = this.auth.getCurrentUser();
+
+      this.querySvc.cloneGroups().then(result => {
+        self.groups = result;
+        self.groups.forEach(group => {
+          self.bet.groups[group.name] = {first: '', second: ''};
+        })
+      });
+
+      for (let i = 0; i < 32; i++) {
+        this.bet.matches[i] = {
+          home: {goals: 0, penalties: 0},
+          away: {goals: 0, penalties: 0}
+        };
+      }
+    }
+
 
     buildQuarterFinals() {
       let teams = {},
@@ -477,9 +592,17 @@
     }
   }
 
-  angular.module('copaamericaApp')
-    .component('bet', {
-      templateUrl: 'app/bet/bet.html',
-      controller: BetComponent
-    });
+  angular
+    .module(
+      'copaamericaApp'
+    )
+    .component(
+      'bet'
+      , {
+        templateUrl: 'app/bet/bet.html'
+        ,
+        controller: BetComponent
+      }
+    )
+  ;
 })();
