@@ -18,7 +18,6 @@
     toggleLoginForm() {
       this.mainSvc.setShowLoginForm(true);
       this.mainSvc.setShowSignUpForm(false);
-      this.mainSvc.setShowButton(false);
     }
 
     $onInit() {

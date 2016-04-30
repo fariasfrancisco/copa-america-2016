@@ -49,3 +49,31 @@ footer.navbar {
   color: #000;
   padding: 0.2em 0;
 }
+
+
+/**
+ * Cabin Font
+ */
+
+@font-face {
+  font-family: Cabin;
+  src: url("../assets/fonts/cabin/Cabin-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Cabin;
+  font-weight: 900;
+  src: url("../assets/fonts/cabin/Cabin-SemiBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Cabin;
+  font-weight: bold;
+  src: url("../assets/fonts/cabin/Cabin-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Cabin;
+  font-style: italic;
+  src: url("../assets/fonts/cabin/Cabin-Italic.otf") format("opentype");
+}

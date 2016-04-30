@@ -14,7 +14,6 @@ class LoginController {
   toggleSignUpForm() {
     this.mainSvc.setShowSignUpForm(true);
     this.mainSvc.setShowLoginForm(false);
-    this.mainSvc.setShowButton(false);
   }
 
   login(form) {

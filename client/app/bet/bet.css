@@ -82,3 +82,13 @@ td.col-md-1.score {
 .row.alert-danger {
   text-align: center;
 }
+
+a.button-disabled {
+  cursor: default;
+  color: rgba(30, 22, 54, 0.25);
+  box-shadow: rgba(30, 22, 54, 0.25) 0 0 0 2px inset;
+}
+a.button-disabled:hover {
+  color: rgba(30, 22, 54, 0.25);
+  box-shadow: rgba(30, 22, 54, 0.25) 0 0 0 2px inset;
+}

@@ -361,8 +361,8 @@
       <div class="col-md-3">
         <p>{{'TEAM' | translate}}</p>
         <input type="text" ng-model="$ctrl.goldenBootTeam"
-               uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8"
-               class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name}}">
+               uib-typeahead="team as team.name for team in $ctrl.teams | filter:$viewValue | limitTo:8"
+               class="form-control" placeholder="{{$ctrl.teams[0].name}}">
       </div>
       <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
         <p>{{'PLAYER' | translate}}</p>

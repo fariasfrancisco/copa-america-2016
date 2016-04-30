@@ -2,8 +2,9 @@
 (function () {
 
   class BettableComponent {
-    constructor(QueryService) {
+    constructor(QueryService, GoldenBootCalculator) {
       this.querySvc = QueryService;
+      this.goldenBootCalc = GoldenBootCalculator;
       this.betRows = [];
       this.podium = {};
     }
@@ -259,8 +260,8 @@
                   }
                 }
 
-                if (inPodium) self.betRows[index].points['POD'] += 30;
-                if (rightOrder) self.betRows[index].points['POD'] += 60;
+                if (inPodium) self.betRows[index].points['POD'] += 25;
+                if (rightOrder) self.betRows[index].points['POD'] += 35;
               });
             }
           });
@@ -269,12 +270,19 @@
     }
 
     processGoldenBoot() {
-      //TODO logic here!
-
-      let self = this;
+      let self = this,
+        goldenBootPlayer = this.goldenBootCalc.getTopScorers();
 
       this.bets.forEach((bet, index) => {
-        self.betRows[index].points['STR'] = 0;
+        if (goldenBootPlayer.length > 0) {
+          goldenBootPlayer.forEach(player => {
+            if (bet.goldenBoot._team === player._team && bet.goldenBoot._player === player._id) {
+              self.betRows[index].points['STR'] = 50;
+            }
+          });
+        } else {
+          self.betRows[index].points['STR'] = 0;
+        }
       });
     }
   }
@@ -284,5 +292,4 @@
       templateUrl: 'app/bettable/bettable.html',
       controller: BettableComponent
     });
-
 })();
