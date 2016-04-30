@@ -17,57 +17,71 @@
           let allPlayed = true;
 
           group.matches.forEach(match => {
-            matchDate = new Date(match.date);
-            if (matchDate > now) allPlayed = false;
-          });
+           matchDate = new Date(match.date);
+           if (matchDate > now) allPlayed = false;
+           });
 
           if (allPlayed) {
-            self.querySvc.buildTable(group).then(() => {
+            self.querySvc.buildTable(group).then(table => {
               self.groups[group.name] = {
-                first: group.table[0],
-                second: group.table[1]
+                first: table[0],
+                second: table[1]
               };
             });
           }
         });
+        this.processBracket('quarter-final');
+        this.processBracket('semi-final');
+        this.processBracket('third-place');
+        this.processBracket('final');
       });
 
-      this.querySvc.getStage('quarter-final').then(quarterFinals => {
-        quarterFinals.forEach(current => {
+
+    }
+
+    processBracket(stageName) {
+      let self = this,
+        now = new Date(),
+        matchDate;
+
+      this.querySvc.getStage(stageName).then(stage => {
+        let winner, loser;
+
+        stage.forEach(current => {
           matchDate = new Date(current.matches[0].date);
 
           if (matchDate < now) {
-            self[current.name] = {
-              home: current.matches[0].home,
-              away: current.matches[0].away
-            };
-
             if (current.matches[0].home.goals > current.matches[0].away.goals) {
-              self[current.name].winner = {team: current.matches[0].home._team};
+              winner = {team: current.matches[0].home._team};
+              loser = {team: current.matches[0].away._team};
             } else {
               if (current.matches[0].home.goals < current.matches[0].away.goals) {
-                self[current.name].winner = {team: current.matches[0].away._team};
+                winner = {team: current.matches[0].away._team};
+                loser = {team: current.matches[0].home._team};
               } else {
                 if (current.matches[0].home.penalties > current.matches[0].away.penalties) {
-                  self[current.name].winner = {team: current.matches[0].home._team};
+                  winner = {team: current.matches[0].home._team};
+                  loser = {team: current.matches[0].away._team};
                 } else {
                   if (current.matches[0].home.penalties < current.matches[0].away.penalties) {
-                    self[current.name].winner = {team: current.matches[0].away._team};
-                  } else {
-                    // TODO same.
+                    winner = {team: current.matches[0].away._team};
+                    loser = {team: current.matches[0].home._team};
                   }
                 }
               }
             }
 
-            self[current.name].winner.teamName = self.querySvc.getTeams()[self[current.name].winner.team].name;
+            winner.teamName = self.querySvc.getTeams()[winner.team].name;
+            loser.teamName = self.querySvc.getTeams()[loser.team].name;
+
+            self[current.name] = {
+              winner: winner,
+              loser: loser
+            };
           }
         })
       });
-
     }
-
-    //TODO missing rest of the tournament logic.
   }
 
   angular.module('copaamericaApp')

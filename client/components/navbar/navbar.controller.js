@@ -3,13 +3,13 @@
 class NavbarController {
   //start-non-standard
   menu = [{
-    'title': 'Home',
+    'title': 'HOME',
     'state': 'main'
   }, {
-    'title': 'Tournament',
+    'title': 'TOURNAMENT',
     'state': 'tournament'
   }, {
-    'title': 'Bet Table',
+    'title': 'BET_TABLE',
     'state': 'bettable'
   }];
 

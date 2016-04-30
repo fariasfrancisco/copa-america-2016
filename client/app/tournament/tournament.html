@@ -3,14 +3,14 @@
     <div class="page-header row col-md-6 col-md-offset-2 custyle table-format"
          ng-repeat="group in $ctrl.querySvc.getGroups()">
       <table class="table table-striped custab">
-        <caption>{{group.fullName}}</caption>
+        <caption>{{group.fullName | translate}}</caption>
         <thead>
         <tr>
-          <th class="table-cell">Team</th>
-          <th class="table-cell">Pts</th>
-          <th class="table-cell">GF</th>
-          <th class="table-cell">GA</th>
-          <th class="table-cell">GD</th>
+          <th class="table-cell">{{'TEAM' | translate}}</th>
+          <th class="table-cell">{{'POINTS_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GOALS_FOR_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GOALS_AGAINST_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GOAL_DIFFERENCE_SHORT' | translate}}</th>
         </tr>
         </thead>
         <tr ng-repeat="line in group.table">
@@ -31,111 +31,100 @@
       <div class="c1">
         <div class="team">
           {{$ctrl.groups['GA'].first.teamName || 'GA-1'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].first.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q1">{{'- ' + $ctrl.Q1.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].first.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GB'].second.teamName || 'GB-2'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].second.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q1">{{'- ' + $ctrl.Q1.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].second.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GD'].first.teamName || 'GD-1'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].first.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q2">{{'- ' + $ctrl.Q2.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].first.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GC'].second.teamName || 'GC-2'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].second.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q2">{{'- ' + $ctrl.Q2.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].second.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GB'].first.teamName || 'GB-1'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].first.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q3">{{'- ' + $ctrl.Q3.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GB'].first.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GA'].second.teamName || 'GA-2'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].second.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q3">{{'- ' + $ctrl.Q3.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GA'].second.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GC'].first.teamName || 'GC-1'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].first.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q4">{{'- ' + $ctrl.Q4.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GC'].first.team || 'q'}}.png">
         </div>
         <div class="team">
           {{$ctrl.groups['GD'].second.teamName || 'GD-2'}}
-          <img class="team-img" height="30" width="30"
-               ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].second.team || 'q'}}.png">
-          <span ng-show="$ctrl.Q4">{{'- ' + $ctrl.Q4.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.groups['GD'].second.team || 'q'}}.png">
         </div>
       </div>
 
       <div class="c2">
         <div class="block first">
           {{$ctrl.Q1.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.Q1.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.S1">{{'- ' + $ctrl.S1.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.Q1.winner.team}}.png" alt="">
         </div>
         <div class="block">
           {{$ctrl.Q2.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.Q2.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.S1">{{'- ' + $ctrl.S1.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.Q2.winner.team}}.png" alt="">
         </div>
         <div class="block">
           {{$ctrl.Q3.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.Q3.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.S2">{{'- ' + $ctrl.S2.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.Q3.winner.team}}.png" alt="">
         </div>
         <div class="block">
           {{$ctrl.Q4.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.Q4.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.S2">{{'- ' + $ctrl.S2.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.Q4.winner.team}}.png" alt="">
         </div>
       </div>
 
       <div class="c3">
         <div class="block">
           {{$ctrl.S1.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.S1.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.F">{{'- ' + $ctrl.F.home.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.S1.winner.team}}.png" alt="">
         </div>
         <div class="block low">
           {{$ctrl.S2.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.S2.winner.team}}.png"
-               alt="">
-          <span ng-show="$ctrl.F">{{'- ' + $ctrl.F.away.goals}}</span>
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.S2.winner.team}}.png" alt="">
+        </div>
+        <div class="third-place">
+          {{$ctrl.S1.loser.teamName || ''}}
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.S1.winner.team}}.png" alt="">
+        </div>
+        <div class="third-place low">
+          {{$ctrl.S2.loser.teamName || ''}}
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.S2.winner.team}}.png" alt="">
         </div>
       </div>
 
       <div class="c4">
         <div class="block">
           {{$ctrl.F.winner.teamName || ''}}
-          <img class="team-img" height="30" width="30" ng-src="assets/images/team_logos/{{$ctrl.F.winner.team}}.png"
-               alt="">
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.F.winner.team}}.png" alt="">
+        </div>
+        <div class="block-3rd-place">
+          {{$ctrl.TP.winner.teamName || ''}}
+          <img class="team-img" ng-src="assets/images/team_logos/{{$ctrl.TP.winner.team}}.png" alt="">
         </div>
       </div>
 
       <div class="c5">
         <div class="block">
         </div>
+        <div class="block-3rd-place">
+        </div>
       </div>
 
       <div class="cup">
-        <img class="team-img" height="116" width="52" ng-src="assets/images/cup.png" alt="">
+        <img class="cup-img" ng-src="assets/images/cup.png" alt="">
+      </div>
+
+      <div class="third-place-prize">
+        <span>{{'THRID_PLACE_PODIUM' | translate}}</span>
       </div>
     </div>
   </div>

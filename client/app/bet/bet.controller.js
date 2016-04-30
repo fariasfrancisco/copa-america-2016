@@ -104,7 +104,7 @@
       });
 
       this.quarterFinals = {
-        fullName: 'Quarter Finals',
+        fullName: 'QUARTER_FINALS',
         matches: [
           {
             _id: 24, shortName: 'Q1',
@@ -204,13 +204,13 @@
         }
       });
 
-      if (err) self.quarterFinalsError = "Oops! There's an error in this group of matches.";
+      if (err) self.quarterFinalsError = "BET_ERROR";
       else delete self.quarterFinalsError;
 
 
       if (!self.quarterFinalsError) {
         this.semiFinals = {
-          fullName: 'Semi Finals',
+          fullName: 'SEMI_FINALS',
           matches: [
             {
               _id: 28, shortName: 'S1',
@@ -305,13 +305,13 @@
         }
       });
 
-      if (err) self.semiFinalsError = "Oops! There's an error in this group of matches.";
+      if (err) self.semiFinalsError = "BET_ERROR";
       else delete self.semiFinalsError;
 
 
       if (!self.semiFinalsError) {
         this.thirdPlace = {
-          fullName: 'Third Place',
+          fullName: 'THIRD_PLACE',
           match: {
             _id: 30, shortName: 'TP',
             home: {
@@ -328,7 +328,7 @@
         };
 
         this.finals = {
-          fullName: 'Finals',
+          fullName: 'FINALS',
           match: {
             _id: 31, shortName: 'F',
             home: {
@@ -391,7 +391,7 @@
         }
       }
 
-      if (err) self.thirdPlaceError = "Oops! There's an error in this group of matches.";
+      if (err) self.thirdPlaceError = "BET_ERROR";
       else delete self.thirdPlaceError;
 
       err = false;
@@ -446,7 +446,7 @@
         }
       }
 
-      if (err)  self.finalsError = "Oops! There's an error in this group of matches.";
+      if (err)  self.finalsError = "BET_ERROR";
       else delete self.finalsError;
 
 

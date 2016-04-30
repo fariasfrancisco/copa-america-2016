@@ -3,7 +3,7 @@
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{group.fullName}}</h3>
+          <h3 class="panel-title groupname">{{group.fullName | translate}}</h3>
           <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -47,20 +47,21 @@
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
        ng-hide="$ctrl.quarterFinals"
-       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">Done</a>
+       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">{{'DONE_BUTTON' |
+      translate}}</a>
   </div>
 
   <div class="row" ng-show="$ctrl.quarterFinals">
     <div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName}}</h3>
+          <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
-              <th class="text-center" colspan="8">Penalties</th>
+              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
@@ -107,27 +108,27 @@
   </div>
 
   <div class="row alert alert-danger" ng-show="$ctrl.quarterFinalsError">
-    <strong>{{$ctrl.quarterFinalsError}}</strong>
+    <strong>{{$ctrl.quarterFinalsError | translate}}</strong>
   </div>
 
   <div class="row">
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
        ng-show="$ctrl.quarterFinals && !$ctrl.semiFinals"
-       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">Done</a>
+       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">{{'DONE_BUTTON' | translate}}</a>
   </div>
 
   <div class="row" ng-show="$ctrl.semiFinals">
     <div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName}}</h3>
+          <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
-              <th class="text-center" colspan="8">Penalties</th>
+              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
@@ -174,27 +175,28 @@
   </div>
 
   <div class="row alert alert-danger" ng-show="$ctrl.semiFinalsError">
-    <strong>{{$ctrl.semiFinalsError}}</strong>
+    <strong>{{$ctrl.semiFinalsError | translate}}</strong>
   </div>
 
   <div class="row">
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton}"
        ng-show="$ctrl.semiFinals && !$ctrl.thirdPlace"
-       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">Done</a>
+       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">{{'DONE_BUTTON' |
+      translate}}</a>
   </div>
 
   <div class="row" ng-show="$ctrl.thirdPlace">
     <div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName}}</h3>
+          <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
-              <th class="text-center" colspan="8">Penalties</th>
+              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row">
                 <td class="col-md-1">
                   <img height="40" width="40"
@@ -243,20 +245,20 @@
   </div>
 
   <div class="row alert alert-danger" ng-show="$ctrl.thirdPlaceError">
-    <strong>{{$ctrl.thirdPlaceError}}</strong>
+    <strong>{{$ctrl.thirdPlaceError | translate}}</strong>
   </div>
 
   <div class="row" ng-show="$ctrl.finals">
     <div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.finals.fullName}}</h3>
+          <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
-              <th class="text-center" colspan="8">Penalties</th>
+              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row">
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.finals.match.home._team}}.png"
@@ -303,27 +305,27 @@
   </div>
 
   <div class="row alert alert-danger" ng-show="$ctrl.finalsError">
-    <strong>{{$ctrl.finalsError}}</strong>
+    <strong>{{$ctrl.finalsError | translate}}</strong>
   </div>
 
   <div class="row">
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
        ng-show="$ctrl.thirdPlace && $ctrl.finals && !$ctrl.podium"
-       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">Done</a>
+       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">{{'DONE_BUTTON' | translate}}</a>
   </div>
 
   <div class="row podium" ng-show="$ctrl.podium">
     <div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">Podium</h3>
+          <h3 class="panel-title groupname">{{'PODIUM' | translate}}</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table">
               <tr class="table-row gold">
-                <td class="col-md-1 coelho">1st Place</td>
+                <td class="col-md-1 coelho">{{'SECOND_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.firstPlace._id}}.png"
                        alt="{{$ctrl.podium.firstPlace._id}}.png">
@@ -331,7 +333,7 @@
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.firstPlace.name}}</td>
               </tr>
               <tr class="table-row silver">
-                <td class="col-md-1 coelho">2nd Place</td>
+                <td class="col-md-1 coelho">{{'THRID_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.secondPlace._id}}.png"
                        alt="{{$ctrl.podium.secondPlace._id}}.png">
@@ -339,7 +341,7 @@
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.secondPlace.name}}</td>
               </tr>
               <tr class="table-row bronzodia">
-                <td class="col-md-1 coelho">3rd Place</td>
+                <td class="col-md-1 coelho">{{'FIRST_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.thirdPlace._id}}.png"
                        alt="{{$ctrl.podium.thirdPlace._id}}.png">
@@ -354,16 +356,16 @@
   </div>
 
   <div class="row" ng-show="$ctrl.podium">
-    <h4>Select Golden Boot Winner (highest scorer of the tournament)</h4>
+    <h4>{{'GOLDEN_BOOT_HEADER' | translate}}</h4>
     <div class="row">
       <div class="col-md-3">
-        <p>Team</p>
+        <p>{{'TEAM' | translate}}</p>
         <input type="text" ng-model="$ctrl.goldenBootTeam"
                uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8"
                class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name}}">
       </div>
       <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
-        <p>Player</p>
+        <p>{{'PLAYER' | translate}}</p>
         <input type="text" ng-model="$ctrl.goldenBootPlayer"
                uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8"
                class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}">
@@ -373,7 +375,8 @@
 
   <div class="row">
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.disableButton}"
-       ng-show="$ctrl.goldenBootPlayer.name" ng-click="$ctrl.disableButton || $ctrl.save()">Save</a>
+       ng-show="$ctrl.goldenBootPlayer.name" ng-click="$ctrl.disableButton || $ctrl.save()">{{'SAVE_BET_BUTTON' |
+      translate}}</a>
   </div>
 
   <!-- TODO fix the fold button from quarter finals onwards -->

@@ -40,7 +40,7 @@ angular.module('copaamericaApp')
             teams.sort(compareTeam);
 
             groups.forEach(group => {
-              group.fullName = group.name.replace('G', 'Group ');
+              group.fullName = group.name.replace('G', 'GROUP_');
 
               group.matches.forEach(match => {
                 match.home.teamName = teams[match.home._team].name;

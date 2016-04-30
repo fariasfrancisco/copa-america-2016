@@ -5,10 +5,10 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col-xs-6">
-              <a href="#" id="login-form-link" ng-click="signupCtrl.toggleLoginForm()">Login</a>
+              <a href="#" id="login-form-link" ng-click="signupCtrl.toggleLoginForm()">{{'LOGIN' | translate}}</a>
             </div>
             <div class="col-xs-6">
-              <a href="#" class="active" id="register-form-link">Register</a>
+              <a href="#" class="active" id="register-form-link">{{'REGISTER' | translate}}</a>
             </div>
           </div>
           <hr>
@@ -20,27 +20,27 @@
 
                 <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && signupCtrl.submitted,
                                             'has-error': signupForm.name.$invalid && signupCtrl.submitted }">
-                  <label>Name</label>
+                  <label>{{'NAME' | translate}}</label>
 
                   <input type="text" name="name" class="form-control" ng-model="signupCtrl.user.name"
                          required/>
                   <p class="help-block" ng-show="signupForm.name.$error.required && signupCtrl.submitted">
-                    A name is required
+                    {{'NAME_REQUIRED' | translate}}
                   </p>
                 </div>
 
                 <div class="form-group" ng-class="{ 'has-success': signupForm.email.$valid && signupCtrl.submitted,
                                             'has-error': signupForm.email.$invalid && signupCtrl.submitted }">
-                  <label>Email</label>
+                  <label>{{'EMAIL' | translate}}</label>
 
                   <input type="email" name="email" class="form-control" ng-model="signupCtrl.user.email"
                          required
                          mongoose-error/>
                   <p class="help-block" ng-show="signupForm.email.$error.email && signupCtrl.submitted">
-                    Doesn't look like a valid email.
+                    {{'EMAIL_INVALID' | translate}}
                   </p>
                   <p class="help-block" ng-show="signupForm.email.$error.required && signupCtrl.submitted">
-                    What's your email address?
+                    {{'EMAIL_REQUIRED' | translate}}
                   </p>
                   <p class="help-block" ng-show="signupForm.email.$error.mongoose">
                     {{ signupCtrl.errors.email }}
@@ -49,7 +49,7 @@
 
                 <div class="form-group" ng-class="{ 'has-success': signupForm.password.$valid && signupCtrl.submitted,
                                             'has-error': signupForm.password.$invalid && signupCtrl.submitted }">
-                  <label>Password</label>
+                  <label>{{'PASSWORD' | translate}}</label>
 
                   <input type="password" name="password" class="form-control" ng-model="signupCtrl.user.password"
                          ng-minlength="3"
@@ -57,7 +57,7 @@
                          mongoose-error/>
                   <p class="help-block"
                      ng-show="(signupForm.password.$error.minlength || signupForm.password.$error.required) && signupCtrl.submitted">
-                    Password must be at least 3 characters.
+                    {{'NEW_PASSWORD_LENGTH' | translate}}
                   </p>
                   <p class="help-block" ng-show="signupForm.password.$error.mongoose">
                     {{ signupCtrl.errors.password }}
@@ -66,23 +66,24 @@
 
                 <div class="form-group" ng-class="{ 'has-success': signupForm.confirmPassword.$valid && signupCtrl.submitted,
                                             'has-error': signupForm.confirmPassword.$invalid && signupCtrl.submitted }">
-                  <label>Confirm Password</label>
+                  <label>{{'PASSWORD_CONFIRM' | translate}}</label>
                   <input type="password" name="confirmPassword" class="form-control"
                          ng-model="signupCtrl.user.confirmPassword"
                          match="signupCtrl.user.password"
                          ng-minlength="3" required/>
                   <p class="help-block"
                      ng-show="signupForm.confirmPassword.$error.match && signupCtrl.submitted">
-                    Passwords must match.
+                    {{'NEW_PASSWORD_MATCH' | translate}}
                   </p>
                 </div>
                 <hr/>
                 <div>
                   <div class="col-sm-6 col-sm-offset-3" ng-click="signupCtrl.register(signupForm)" style="cursor: pointer">
                     <a class="button" type="submit">
-                      Sign up
+                      {{'REGISTER' | translate}}
                     </a>
                   </div>
+                  <!-- TODO fix this button's style! -->
                 </div>
               </form>
             </div>
