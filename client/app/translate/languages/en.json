@@ -82,5 +82,10 @@
   "HOME_PENALTIES": "Home Penalties",
   "AWAY_TEAM": "Away",
   "AWAY_GOALS": "Away Goals",
-  "AWAY_PENALTIES": "Away Penalties"
+  "AWAY_PENALTIES": "Away Penalties",
+  "EDIT_BUTTON": "Edit",
+  "EDIT_WARN":"Are you sure? This will delete your Bet and you will have to start over!",
+  "CONTINUE":"Continue",
+  "RESTART_BUTTON":"Start Over",
+  "RESTART_WARN":"Are you sure? This will delete all your progress."
 }

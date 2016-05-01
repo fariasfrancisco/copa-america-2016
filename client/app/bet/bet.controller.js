@@ -1,18 +1,29 @@
 'use strict';
 (function () {
   class BetComponent {
-    constructor(Auth, QueryService, TableCalculator, BetBuilder, $state) {
+    constructor(Auth, QueryService, TableCalculator, BetBuilder, $state, $window) {
       this.betBuilder = BetBuilder;
       this.$state = $state;
+      this.$window = $window;
       this.isLoggedIn = Auth.isLoggedIn;
       this.auth = Auth;
       this.querySvc = QueryService;
       this.tableCalc = TableCalculator;
+      this.showEditWarn = false;
+      this.showRestartWarn = false;
       this.groups = {};
       this.bet = {
         matches: {},
         groups: {}
       };
+    }
+
+    showEditWarning(value) {
+      this.showEditWarn = value;
+    };
+
+    showRestartWarning(value) {
+      this.showRestartWarn = value;
     }
 
     changePenalties(home, away) {
@@ -53,6 +64,38 @@
       });
 
       this.disableButton = undef;
+    }
+
+    edit() {
+      let self = this,
+        id = this.userBet._id;
+
+      this.querySvc.deleteBet(id).then(res => {
+        if (res.status < 400) {
+          self.showWarn = false;
+          self.userBet = undefined;
+          self.startOver();
+
+        } else {
+          this.$window.alert('ERROR DELETING BET');
+        }
+      });
+    }
+
+    startOver() {
+      this.showRestartWarn = false;
+      this.hasBet = undefined;
+      this.groups = {};
+      this.bet = {matches: {}, groups: {}};
+      this.quarterFinals = undefined;
+      this.semiFinals = undefined;
+      this.thirdPlace = undefined;
+      this.finals = undefined;
+      this.goldenBootTeam = undefined;
+      this.goldenBootPlayer = undefined;
+      this.podium = undefined;
+
+      this.$onInit();
     }
 
     $onInit() {
@@ -167,7 +210,6 @@
         };
       }
     }
-
 
     buildQuarterFinals() {
       let teams = {},
@@ -298,7 +340,6 @@
       if (err) self.quarterFinalsError = "BET_ERROR";
       else delete self.quarterFinalsError;
 
-
       if (!self.quarterFinalsError) {
         this.semiFinals = {
           fullName: 'SEMI_FINALS',
@@ -398,7 +439,6 @@
 
       if (err) self.semiFinalsError = "BET_ERROR";
       else delete self.semiFinalsError;
-
 
       if (!self.semiFinalsError) {
         this.thirdPlace = {

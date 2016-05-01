@@ -4,7 +4,7 @@ angular.module('copaamericaApp')
       teams = [],
       bets;
 
-    const GROUP_STAGE_API = '/api/groups/stage/group',
+    const GROUP_STAGE_API = '/api/groups/stage/group/',
       TEAMS_API = '/api/teams/',
       GROUP_TABLE_API = '/api/groups/table/',
       STAGE_API = '/api/groups/stage/',
@@ -68,6 +68,16 @@ angular.module('copaamericaApp')
         let userBet = BETS_API_USER + user;
 
         return $http.get(userBet).then(response => {
+          return response;
+        }, err => {
+          return err;
+        });
+      },
+
+      deleteBet: function (id) {
+        let betApi = BETS_API + id;
+        
+        return $http.delete(betApi).then(response => {
           return response;
         }, err => {
           return err;

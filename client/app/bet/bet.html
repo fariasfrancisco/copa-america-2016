@@ -1,5 +1,20 @@
 <div class="container" ng-show="$ctrl.hasBet">
   <div class="row">
+    <a href="#" class="button" ng-click="$ctrl.showEditWarning(true)">{{'EDIT_BUTTON' | translate}}</a>
+  </div>
+
+  <div class="row" ng-show="$ctrl.showEditWarn">
+    <uib-alert type="warning" close="$ctrl.showEditWarning(false)">
+      {{"EDIT_WARN" | translate}}
+      <button type="button" class="btn btn-danger" ng-click="$ctrl.edit()">{{"CONTINUE" | translate}}</button>
+    </uib-alert>
+  </div>
+
+  <div class="row alert alert-danger" ng-show="$ctrl.quarterFinalsError">
+    <strong>{{$ctrl.quarterFinalsError | translate}}</strong>
+  </div>
+
+  <div class="row">
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
@@ -378,7 +393,7 @@
           <div class="row col-md-12 grouptable">
             <table class="table">
               <tr class="table-row gold">
-                <td class="col-md-1 coelho">{{'SECOND_PLACE_PODIUM' | translate}}</td>
+                <td class="col-md-1 coelho">{{'FIRST_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="assets/images/team_logos/{{$ctrl.podium.firstPlace._id}}.png"
                        alt="{{$ctrl.podium.firstPlace._id}}.png">
@@ -386,7 +401,7 @@
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.firstPlace.name}}</td>
               </tr>
               <tr class="table-row silver">
-                <td class="col-md-1 coelho">{{'THRID_PLACE_PODIUM' | translate}}</td>
+                <td class="col-md-1 coelho">{{'SECOND_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="assets/images/team_logos/{{$ctrl.podium.secondPlace._id}}.png"
                        alt="{{$ctrl.podium.secondPlace._id}}.png">
@@ -394,7 +409,7 @@
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.secondPlace.name}}</td>
               </tr>
               <tr class="table-row bronzodia">
-                <td class="col-md-1 coelho">{{'FIRST_PLACE_PODIUM' | translate}}</td>
+                <td class="col-md-1 coelho">{{'THRID_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="assets/images/team_logos/{{$ctrl.podium.thirdPlace._id}}.png"
                        alt="{{$ctrl.podium.thirdPlace._id}}.png">
@@ -432,8 +447,18 @@
       translate}}</a>
   </div>
 
+  <div class="row">
+    <a href="#" class="button" ng-click="$ctrl.showRestartWarning(true)">{{'RESTART_BUTTON' | translate}}</a>
+  </div>
+
+  <div class="row" ng-show="$ctrl.showRestartWarn">
+    <uib-alert type="warning" close="$ctrl.showRestartWarning(false)">
+      {{"RESTART_WARN" | translate}}
+      <button type="button" class="btn btn-danger" ng-click="$ctrl.startOver()">{{"CONTINUE" | translate}}</button>
+    </uib-alert>
+  </div>
+
   <!-- TODO Fix the fold button from quarter finals onwards -->
-  <!-- TODO Add start again button to restart the betting form -->
-  <!-- TODO Add edit button for finished bets -->
+  <!-- TODO S T Y L E ! ! ! -->
 
 </div>
