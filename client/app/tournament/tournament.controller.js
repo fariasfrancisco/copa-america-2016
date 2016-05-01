@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
 
   class TournamentComponent {
@@ -12,7 +13,9 @@
         now = new Date(),
         matchDate;
 
-      this.querySvc.buildGroupsAndTeams().then(groups => {
+      this.querySvc.buildGroupsAndTeams().then(() => {
+        let groups = self.querySvc.getGroups();
+
         groups.forEach(group => {
           let allPlayed = true;
 
@@ -30,6 +33,7 @@
             });
           }
         });
+
         this.processBracket('quarter-final');
         this.processBracket('semi-final');
         this.processBracket('third-place');
@@ -89,5 +93,4 @@
       templateUrl: 'app/tournament/tournament.html',
       controller: TournamentComponent
     });
-
 })();

@@ -2,21 +2,27 @@
   margin-top: 40px;
   padding: 0 10px;
 }
-.grouptable .gold{
+
+.grouptable .gold {
   background-color: #FFCF40;
 }
-.grouptable .silver{
+
+.grouptable .silver {
   background-color: #C0C0C0;
 }
-.grouptable .bronzodia{
+
+.grouptable .bronzodia {
   background-color: #CD7F32;
 }
+
 .podium table {
   margin-bottom: 0;
 }
+
 .podium tr {
   border-top: white 4px solid;
 }
+
 .clickable {
   cursor: pointer;
 }
@@ -93,7 +99,13 @@ a.button-disabled {
   color: rgba(30, 22, 54, 0.25);
   box-shadow: rgba(30, 22, 54, 0.25) 0 0 0 2px inset;
 }
+
 a.button-disabled:hover {
   color: rgba(30, 22, 54, 0.25);
   box-shadow: rgba(30, 22, 54, 0.25) 0 0 0 2px inset;
+}
+
+.col-md-1 img {
+  height: 40px;
+  width: 40px;
 }

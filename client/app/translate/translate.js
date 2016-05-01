@@ -4,6 +4,8 @@ angular.module('copaamericaApp')
       prefix: 'app/translate/languages/',
       suffix: '.json'
     });
+
     $translateProvider.preferredLanguage('es');
+    
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
   });

@@ -28,26 +28,26 @@ angular.module('copaamericaApp')
     };
 
     let calculatePointsAndGoals = function (table, matches) {
+      let homeTeam, awayTeam, homeTeamIndex, awayTeamIndex, result;
+
       matches.forEach(current => {
-        let homeTeam = current.home._team,
-          awayTeam = current.away._team,
-          homeTeamIndex = null,
-          awayTeamIndex = null,
-          result;
+        homeTeam = current.home._team;
+        awayTeam = current.away._team;
+        homeTeamIndex = null;
+        awayTeamIndex = null;
 
         table.forEach((current, index) => {
           if (current.team === homeTeam) homeTeamIndex = index;
           if (current.team === awayTeam) awayTeamIndex = index;
         });
 
-        if (homeTeamIndex === null || awayTeamIndex === null) {
-          throw new Error('could not find team index!');
-        }
-
+        if (homeTeamIndex === null || awayTeamIndex === null) throw new Error('could not find team index!');
+        
         table[homeTeamIndex].goalsFor += Number(current.home.goals);
         table[homeTeamIndex].goalsAgainst += Number(current.away.goals);
         table[awayTeamIndex].goalsFor += Number(current.away.goals);
         table[awayTeamIndex].goalsAgainst += Number(current.home.goals);
+        
         result = Number(current.home.goals) - Number(current.away.goals);
 
         if (result > 0) {
@@ -103,7 +103,7 @@ angular.module('copaamericaApp')
         calculatePointsAndGoals(table, group.matches);
         calculatePositions(table);
         cleanTable(table, group.name);
-        
+
         return table;
       }
     }

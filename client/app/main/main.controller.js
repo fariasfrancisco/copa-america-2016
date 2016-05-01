@@ -21,13 +21,8 @@
     }
 
     $onInit() {
-      this.mainSvc.setShowButton(true);
       this.mainSvc.setShowLoginForm(true);
       this.mainSvc.setShowSignUpForm(false);
-
-      if (this.isLoggedIn()) {
-        this.mainSvc.setShowButton(false);
-      }
     }
   }
 

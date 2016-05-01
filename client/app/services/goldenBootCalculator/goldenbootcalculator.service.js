@@ -38,6 +38,7 @@ angular.module('copaamericaApp')
       getTopScorers: function () {
         buildPlayersList();
         trimPlayersList();
+        
         return players;
       }
     }

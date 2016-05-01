@@ -27,7 +27,6 @@ class LoginController {
           // Logged in, redirect to home
           this.mainSvc.setShowLoginForm(false);
           this.mainSvc.setShowSignUpForm(false);
-          this.mainSvc.setShowButton(false);
           this.$state.go('bet');
         })
         .catch(err => {

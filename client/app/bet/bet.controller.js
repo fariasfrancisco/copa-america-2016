@@ -89,28 +89,20 @@
           '27': [2, 3]
         };
 
-        let qfIndex, winner, side, matchId,
+        let winner, side, matchId, qfHome, qfAway,
           desc = 4;
 
-        for (qfIndex = 24; qfIndex < 28; qfIndex++) {
-          this.userBet.matches[qfIndex].home._team = this.userBet.groups[qf[qfIndex][0]].first;
-          this.userBet.matches[qfIndex].away._team = this.userBet.groups[qf[qfIndex][1]].second;
+        for (let qfIndex = 24; qfIndex < 28; qfIndex++) {
+          qfHome = this.userBet.matches[qfIndex].home;
+          qfAway = this.userBet.matches[qfIndex].away;
 
-          if (this.userBet.matches[qfIndex].home.goals > this.userBet.matches[qfIndex].away.goals) {
-            winner = this.userBet.matches[qfIndex].home._team;
-          } else {
-            if (this.userBet.matches[qfIndex].home.goals < this.userBet.matches[qfIndex].away.goals) {
-              winner = this.userBet.matches[qfIndex].away._team;
-            } else {
-              if (this.userBet.matches[qfIndex].home.penalties > this.userBet.matches[qfIndex].away.penalties) {
-                winner = this.userBet.matches[qfIndex].home._team;
-              } else {
-                if (this.userBet.matches[qfIndex].home.penalties < this.userBet.matches[qfIndex].away.penalties) {
-                  winner = this.userBet.matches[qfIndex].away._team;
-                }
-              }
-            }
-          }
+          qfHome._team = this.userBet.groups[qf[qfIndex][0]].first;
+          qfAway._team = this.userBet.groups[qf[qfIndex][1]].second;
+
+          if (qfHome.goals > qfAway.goals) winner = qfHome._team;
+          else if (qfHome.goals < qfAway.goals) winner = qfAway._team;
+          else if (qfHome.penalties > qfAway.penalties) winner = qfHome._team;
+          else if (qfHome.penalties < qfAway.penalties) winner = qfAway._team;
 
           matchId = qfIndex + desc;
 
@@ -125,41 +117,25 @@
           this.userBet.matches[matchId][side]._team = winner;
         }
 
-        if (this.userBet.matches[28].home.goals > this.userBet.matches[28].away.goals) {
-          this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
-          this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
-        } else {
-          if (this.userBet.matches[28].home.goals < this.userBet.matches[28].away.goals) {
-            this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
-            this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
-          } else {
-            if (this.userBet.matches[28].home.penalties > this.userBet.matches[28].away.penalties) {
-              this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
-              this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
-            } else {
-              if (this.userBet.matches[28].home.penalties < this.userBet.matches[28].away.penalties) {
-                this.userBet.matches[31].home._team = this.userBet.matches[28].home._team;
-                this.userBet.matches[30].home._team = this.userBet.matches[28].away._team;
-              }
-            }
-          }
-        }
+        const f = {'28': 'home', '29': 'away'};
 
-        if (this.userBet.matches[29].home.goals > this.userBet.matches[29].away.goals) {
-          this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
-          this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
-        } else {
-          if (this.userBet.matches[29].home.goals < this.userBet.matches[29].away.goals) {
-            this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
-            this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+        for (let i = 28; i < 30; i++) {
+          if (this.userBet.matches[i].home.goals > this.userBet.matches[i].away.goals) {
+            this.userBet.matches[31][f[i]]._team = this.userBet.matches[i].home._team;
+            this.userBet.matches[30][f[i]]._team = this.userBet.matches[i].away._team;
           } else {
-            if (this.userBet.matches[29].home.penalties > this.userBet.matches[29].away.penalties) {
-              this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
-              this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+            if (this.userBet.matches[i].home.goals < this.userBet.matches[i].away.goals) {
+              this.userBet.matches[31][f[i]]._team = this.userBet.matches[i].home._team;
+              this.userBet.matches[30][f[i]]._team = this.userBet.matches[i].away._team;
             } else {
-              if (this.userBet.matches[29].home.penalties < this.userBet.matches[29].away.penalties) {
-                this.userBet.matches[31].away._team = this.userBet.matches[29].home._team;
-                this.userBet.matches[30].away._team = this.userBet.matches[29].away._team;
+              if (this.userBet.matches[i].home.penalties > this.userBet.matches[i].away.penalties) {
+                this.userBet.matches[31][f[i]]._team = this.userBet.matches[i].home._team;
+                this.userBet.matches[30][f[i]]._team = this.userBet.matches[i].away._team;
+              } else {
+                if (this.userBet.matches[i].home.penalties < this.userBet.matches[i].away.penalties) {
+                  this.userBet.matches[31][f[i]]._team = this.userBet.matches[i].home._team;
+                  this.userBet.matches[30][f[i]]._team = this.userBet.matches[i].away._team;
+                }
               }
             }
           }

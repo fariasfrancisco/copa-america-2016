@@ -10,7 +10,6 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th class="col-md-1">{{'ID' | translate}}</th>
                 <th class="col-md-3">{{'HOME_TEAM' | translate}}</th>
                 <th class="col-md-1 poveda">{{'HOME_GOALS' | translate}}</th>
                 <th class="col-md-1 poveda">{{'HOME_PENALTIES' | translate}}</th>
@@ -20,13 +19,18 @@
               </tr>
               </thead>
               <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
-                <td class="col-md-1">{{match._id}}</td>
+                <td class="col-md-1">
+                  <img ng-src="assets/images/team_logos/{{match.home._team}}.png">
+                </td>
                 <td class="col-md-3">{{match.home.teamName}}</td>
                 <td class="col-md-1 poveda">{{match.home.goals}}</td>
                 <td class="col-md-1 poveda">{{match.home.penalties}}</td>
                 <td class="col-md-1 poveda">{{match.away.penalties}}</td>
                 <td class="col-md-1 poveda">{{match.away.goals}}</td>
                 <td class="col-md-3">{{match.away.teamName}}</td>
+                <td class="col-md-1">
+                  <img ng-src="assets/images/team_logos/{{match.away._team}}.png">
+                </td>
               </tr>
             </table>
           </div>
@@ -52,8 +56,7 @@
             <table class="table table-striped">
               <tr class="table-row" ng-repeat="match in group.matches">
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
-                       alt="{{match.home._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.home._team}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
                 <td class="col-md-1 score">
@@ -70,8 +73,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
-                       alt="{{match.away._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.away._team}}.png">
                 </td>
               </tr>
             </table>
@@ -105,8 +107,7 @@
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
-                       alt="{{match.home._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.home._team}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
                 <td class="col-md-1 score">
@@ -137,8 +138,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
-                       alt="{{match.away._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.away._team}}.png">
                 </td>
               </tr>
             </table>
@@ -176,8 +176,7 @@
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.home._team}}.png"
-                       alt="{{match.home._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.home._team}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{match.home.teamName}}</td>
                 <td class="col-md-1 score">
@@ -208,8 +207,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right">{{match.away.teamName}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{match.away._team}}.png"
-                       alt="{{match.away._team}}.png">
+                  <img ng-src="assets/images/team_logos/{{match.away._team}}.png">
                 </td>
               </tr>
             </table>
@@ -312,7 +310,7 @@
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row">
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.finals.match.home._team}}.png"
+                  <img ng-src="assets/images/team_logos/{{$ctrl.finals.match.home._team}}.png"
                        alt="{{$ctrl.finals.match.home._team}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{$ctrl.finals.match.home.teamName}}</td>
@@ -344,7 +342,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right">{{$ctrl.finals.match.away.teamName}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.finals.match.away._team}}.png"
+                  <img ng-src="assets/images/team_logos/{{$ctrl.finals.match.away._team}}.png"
                        alt="{{$ctrl.finals.match.away._team}}.png">
                 </td>
               </tr>
@@ -382,7 +380,7 @@
               <tr class="table-row gold">
                 <td class="col-md-1 coelho">{{'SECOND_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.firstPlace._id}}.png"
+                  <img ng-src="assets/images/team_logos/{{$ctrl.podium.firstPlace._id}}.png"
                        alt="{{$ctrl.podium.firstPlace._id}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.firstPlace.name}}</td>
@@ -390,7 +388,7 @@
               <tr class="table-row silver">
                 <td class="col-md-1 coelho">{{'THRID_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.secondPlace._id}}.png"
+                  <img ng-src="assets/images/team_logos/{{$ctrl.podium.secondPlace._id}}.png"
                        alt="{{$ctrl.podium.secondPlace._id}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.secondPlace.name}}</td>
@@ -398,7 +396,7 @@
               <tr class="table-row bronzodia">
                 <td class="col-md-1 coelho">{{'FIRST_PLACE_PODIUM' | translate}}</td>
                 <td class="col-md-1">
-                  <img height="40" width="40" ng-src="assets/images/team_logos/{{$ctrl.podium.thirdPlace._id}}.png"
+                  <img ng-src="assets/images/team_logos/{{$ctrl.podium.thirdPlace._id}}.png"
                        alt="{{$ctrl.podium.thirdPlace._id}}.png">
                 </td>
                 <td class="col-md-3 coelho team-left">{{$ctrl.podium.thirdPlace.name}}</td>
