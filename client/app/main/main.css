@@ -46,14 +46,14 @@
 
 @media only screen and (min-width: 40.063em) {
   .hero .tech-img {
-    height: 40rem;
-    width: 40rem;
+    height: 35rem;
+    width: 35rem;
   }
 
   .hero h1 {
     padding-top: 4.5rem;
     text-align: center;
-    font-size: 5rem;
+    font-size: 4rem;
   }
 }
 
@@ -88,7 +88,7 @@ a.button:hover {
 }
 
 section div a.button {
-  margin: 2.5em auto;
+  margin: 2em auto;
 }
 
 /* Tablet and bigger */
@@ -121,11 +121,13 @@ section div a.button {
 
 .container.columns h3 {
   font-weight: bold;
-  font-size: 4rem
+  font-size: 3rem;
+  text-align: center;
+  padding-bottom: 0.5em;
 }
 
 .container.columns p {
-  font-size: 2rem
+  font-size: 1.75rem
 }
 
 .page-header h1 {
