@@ -38,17 +38,16 @@
 .hero .tech-img {
   background: url("../../assets/images/calogo.png") no-repeat center center;
   background-size: cover;
-  height: 30rem;
-  width: 30rem;
-  border-radius: 50%;
+  height: 20rem;
+  width: 20rem;
   display: block;
   margin: 0 auto;
 }
 
 @media only screen and (min-width: 40.063em) {
   .hero .tech-img {
-    height: 60rem;
-    width: 60rem;
+    height: 40rem;
+    width: 40rem;
   }
 
   .hero h1 {
@@ -86,6 +85,10 @@ a.button {
 a.button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgba(30, 22, 54, 0.7) 0 0 0 40px inset;
+}
+
+section div a.button {
+  margin: 2.5em auto;
 }
 
 /* Tablet and bigger */
@@ -294,4 +297,9 @@ a.button:hover {
     left: -14px;
     right: auto;
   }
+}
+
+.container.login-signup,
+.container.translate {
+  padding-top: 10px;
 }

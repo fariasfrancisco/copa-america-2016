@@ -2,10 +2,10 @@
 
 angular.module('copaamericaApp')
   .config(function ($translateProvider) {
-    $translateProvider.useStaticFilesLoader({
-      prefix: 'app/translate/languages/',
+    /*$translateProvider.useStaticFilesLoader({
+      prefix: '../../assets/languages/',
       suffix: '.json'
-    });
+    });*/
 
     $translateProvider.preferredLanguage('es');
     
