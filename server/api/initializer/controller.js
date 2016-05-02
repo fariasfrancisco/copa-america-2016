@@ -4,24 +4,26 @@ import Team from '../team/team.model.js';
 import groups from './groups.json';
 import teams from './teams.json';
 
-var init = {};
+let init = {};
 
-init.initialize = function () {
+init.initialize = function (req, res) {
   groups.forEach(function (group) {
     group.matches.forEach(function (match) {
       match.date = moment.utc(match.date);
     });
-
-    Group.create(group).then(function (res) {
-      console.log(res);
-    })
   });
 
-  teams.forEach(function (team) {
-    Team.create(team).then(function (res) {
-      console.log(res);
-    })
+  groups.forEach(group => {
+    Group.create(group);
   });
+
+  teams.forEach(team => {
+    Team.create(team);
+  });
+
+  return res.status(200)
+    .json({message: 'Done loading teams & groups'})
+    .end();
 };
 
 module.exports = init;

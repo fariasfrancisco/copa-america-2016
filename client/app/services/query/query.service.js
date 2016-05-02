@@ -52,9 +52,9 @@ angular.module('copaamericaApp')
       },
 
       getStage: function (stage) {
-        let stageApi = STAGE_API + stage;
+        const STAGE = STAGE_API + stage;
 
-        return $http.get(stageApi).then(response => {
+        return $http.get(STAGE).then(response => {
           return response.data;
         });
       },
@@ -66,9 +66,9 @@ angular.module('copaamericaApp')
       },
 
       getBetByUser: function (user) {
-        let userBet = BETS_API_USER + user;
+        let USER_BET = BETS_API_USER + user;
 
-        return $http.get(userBet).then(response => {
+        return $http.get(USER_BET).then(response => {
           return response;
         }, err => {
           return err;
@@ -76,9 +76,9 @@ angular.module('copaamericaApp')
       },
 
       deleteBet: function (id) {
-        let betApi = BETS_API + id;
+        let BET = BETS_API + id;
 
-        return $http.delete(betApi).then(response => {
+        return $http.delete(BET).then(response => {
           return response;
         }, err => {
           return err;
@@ -87,6 +87,7 @@ angular.module('copaamericaApp')
 
       buildGroupsAndTeams: function () {
         let self = this;
+        
         return queryTeams().then(response => {
           teams = response;
 
@@ -110,9 +111,9 @@ angular.module('copaamericaApp')
       },
 
       buildTable: function (group) {
-        let groupTable = GROUP_TABLE_API + group.name;
+        const GROUP_TABLE= GROUP_TABLE_API + group.name;
 
-        return $http.get(groupTable).then(function (response) {
+        return $http.get(GROUP_TABLE).then(function (response) {
           let table = response.data;
           table.sort(compareLine);
 

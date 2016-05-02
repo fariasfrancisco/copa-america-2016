@@ -2,11 +2,19 @@
   <script src></script>
   <ul class="list-group user-list">
     <li class="list-group-item" ng-repeat="user in admin.users">
-      <div class="user-info">
-        <strong>{{user.name}}</strong><br>
+      <div class="user-info" ng-class="{validated: user.valid}">
+        <strong>{{user.name}}</strong><i class="fa fa-check-circle" aria-hidden="true" ng-show="user.valid"></i><br>
         <span class="text-muted">{{user.email}}</span>
       </div>
-      <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+      <a ng-click="admin.adminSvc.validate(user, true)" class="valid" ng-show="!user.valid">
+        <span class="fa fa-check fa-2x"></span>
+      </a>
+      <a ng-click="admin.adminSvc.validate(user, false)" class="invalid" ng-show="user.valid">
+        <span class="fa fa-times fa-2x"></span>
+      </a>
+      <a ng-click="admin.delete(user)" class="trash">
+        <span class="fa fa-trash fa-2x"></span>
+      </a>
     </li>
   </ul>
 </div>

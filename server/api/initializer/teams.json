@@ -4,12 +4,10 @@
     "name": "Argentina",
     "players": [
       {
-        "_id": 0,
         "name": "Messi",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Aguero",
         "goals": 0
       }
@@ -20,12 +18,10 @@
     "name": "Bolivia",
     "players": [
       {
-        "_id": 0,
         "name": "Bolita1",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Bolita2",
         "goals": 0
       }
@@ -36,12 +32,10 @@
     "name": "Peru",
     "players": [
       {
-        "_id": 0,
         "name": "Peruka",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Mantero",
         "goals": 0
       }
@@ -52,12 +46,10 @@
     "name": "Panama",
     "players": [
       {
-        "_id": 0,
         "name": "Pana1",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Pana2",
         "goals": 0
       }
@@ -68,12 +60,10 @@
     "name": "Jamaica",
     "players": [
       {
-        "_id": 0,
         "name": "Mary",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Juana",
         "goals": 0
       }
@@ -84,12 +74,10 @@
     "name": "Mexico",
     "players": [
       {
-        "_id": 0,
         "name": "Orale",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Guey",
         "goals": 0
       }
@@ -100,12 +88,10 @@
     "name": "Paraguay",
     "players": [
       {
-        "_id": 0,
         "name": "Nderacore",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Chera",
         "goals": 0
       }
@@ -116,12 +102,10 @@
     "name": "Haiti",
     "players": [
       {
-        "_id": 0,
         "name": "Terre",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Moto",
         "goals": 0
       }
@@ -132,12 +116,10 @@
     "name": "Ecuador",
     "players": [
       {
-        "_id": 0,
         "name": "Terre2",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Moto2",
         "goals": 0
       }
@@ -148,12 +130,10 @@
     "name": "Costa Rica",
     "players": [
       {
-        "_id": 0,
         "name": "ASD",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "QWE",
         "goals": 0
       }
@@ -164,12 +144,10 @@
     "name": "Colombia",
     "players": [
       {
-        "_id": 0,
         "name": "Coca",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Ina",
         "goals": 0
       }
@@ -180,12 +158,10 @@
     "name": "Brazil",
     "players": [
       {
-        "_id": 0,
         "name": "Cara",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Mane",
         "goals": 0
       }
@@ -196,12 +172,10 @@
     "name": "Uruguay",
     "players": [
       {
-        "_id": 0,
         "name": "Washington",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Provinciano",
         "goals": 0
       }
@@ -212,12 +186,10 @@
     "name": "United States",
     "players": [
       {
-        "_id": 0,
         "name": "Faggot",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Pussy",
         "goals": 0
       }
@@ -228,12 +200,10 @@
     "name": "Chile",
     "players": [
       {
-        "_id": 0,
         "name": "Wea",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Fome",
         "goals": 0
       }
@@ -244,12 +214,10 @@
     "name": "Venezuela",
     "players": [
       {
-        "_id": 0,
         "name": "Chavez",
         "goals": 0
       },
       {
-        "_id": 1,
         "name": "Maduro",
         "goals": 0
       }
