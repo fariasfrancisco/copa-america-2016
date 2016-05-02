@@ -1,8 +1,9 @@
 'use strict';
 (function () {
   class BetComponent {
-    constructor(Auth, QueryService, TableCalculator, BetBuilder, $state, $window) {
+    constructor(Auth, QueryService, TableCalculator, BetBuilder, TeamLogoService, $state, $window) {
       this.betBuilder = BetBuilder;
+      this.logoPaths = TeamLogoService;
       this.$state = $state;
       this.$window = $window;
       this.isLoggedIn = Auth.isLoggedIn;

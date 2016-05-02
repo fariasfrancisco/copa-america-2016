@@ -3,8 +3,9 @@
 (function () {
 
   class TournamentComponent {
-    constructor(QueryService) {
+    constructor(QueryService, TeamLogoService) {
       this.querySvc = QueryService;
+      this.logoPaths = TeamLogoService;
       this.groups = {};
     }
 

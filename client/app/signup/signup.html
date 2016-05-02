@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container" id="signup-form">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-login">
         <div class="panel-heading">
           <div class="row">
             <div class="col-xs-6">
-              <a href="#" id="login-form-link" ng-click="signupCtrl.toggleLoginForm()">{{'LOGIN' | translate}}</a>
+              <a href="#login-form" id="login-form-link" ng-click="signupCtrl.toggleLoginForm()">{{'LOGIN' | translate}}</a>
             </div>
             <div class="col-xs-6">
-              <a href="#" class="active" id="register-form-link">{{'REGISTER' | translate}}</a>
+              <a href="#signup-form" class="active" id="register-form-link">{{'REGISTER' | translate}}</a>
             </div>
           </div>
           <hr>
