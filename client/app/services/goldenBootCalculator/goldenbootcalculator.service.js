@@ -4,21 +4,21 @@ angular.module('copaamericaApp')
   .service('GoldenBootCalculator', ['QueryService', function (QueryService) {
     let players = [];
 
+    let comparePlayers = function (a, b) {
+      if (a.goals > b.goals) return 1;
+      else if (a.goals < b.goals) return -1;
+      else return 0;
+    };
+
     let buildPlayersList = function () {
       QueryService.getTeams().forEach(team => {
         team.players.forEach(player => {
           player._team = team._id;
           if (player.goals > 0) players.push(player);
-        })
+        });
       });
 
       players.sort(comparePlayers);
-    };
-
-    let comparePlayers = function (a, b) {
-      if (a.goals > b.goals) return 1;
-      else if (a.goals < b.goals) return -1;
-      else return 0;
     };
 
     let trimPlayersList = function () {
@@ -38,8 +38,8 @@ angular.module('copaamericaApp')
       getTopScorers: function () {
         buildPlayersList();
         trimPlayersList();
-        
+
         return players;
       }
-    }
+    };
   }]);

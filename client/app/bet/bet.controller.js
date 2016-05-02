@@ -20,16 +20,16 @@
 
     showEditWarning(value) {
       this.showEditWarn = value;
-    };
+    }
 
     showRestartWarning(value) {
       this.showRestartWarn = value;
     }
 
     changePenalties(home, away) {
-      if (home.goals != away.goals) {
+      if (home.goals !== away.goals) {
         home.penalties = 0;
-        away.penalties = 0
+        away.penalties = 0;
       }
     }
 
@@ -149,9 +149,9 @@
 
           matchId = qfIndex + desc;
 
-          if (qfIndex % 2 == 0) {
+          if (qfIndex % 2 === 0) {
             side = 'home';
-            desc--
+            desc--;
           }
           else {
             side = 'away';
@@ -200,7 +200,7 @@
         self.groups = result;
         self.groups.forEach(group => {
           self.bet.groups[group.name] = {first: '', second: ''};
-        })
+        });
       });
 
       for (let i = 0; i < 32; i++) {
@@ -242,57 +242,57 @@
           {
             _id: 24, shortName: 'Q1',
             home: {
-              _team: teams['GA0'].team,
-              teamName: teams['GA0'].teamName,
+              _team: teams.GA0.team,
+              teamName: teams.GA0.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['GB1'].team,
-              teamName: teams['GB1'].teamName,
+              _team: teams.GB1.team,
+              teamName: teams.GB1.teamName,
               goals: 0, penalties: 0
             }
           },
           {
             _id: 25, shortName: 'Q2',
             home: {
-              _team: teams['GB0'].team,
-              teamName: teams['GB0'].teamName,
+              _team: teams.GB0.team,
+              teamName: teams.GB0.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['GA1'].team,
-              teamName: teams['GA1'].teamName,
+              _team: teams.GA1.team,
+              teamName: teams.GA1.teamName,
               goals: 0, penalties: 0
             }
           },
           {
             _id: 26, shortName: 'Q3',
             home: {
-              _team: teams['GC0'].team,
-              teamName: teams['GC0'].teamName,
+              _team: teams.GC0.team,
+              teamName: teams.GC0.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['GD1'].team,
-              teamName: teams['GD1'].teamName,
+              _team: teams.GD1.team,
+              teamName: teams.GD1.teamName,
               goals: 0, penalties: 0
             }
           },
           {
             _id: 27, shortName: 'Q4',
             home: {
-              _team: teams['GD0'].team,
-              teamName: teams['GD0'].teamName,
+              _team: teams.GD0.team,
+              teamName: teams.GD0.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['GC1'].team,
-              teamName: teams['GC1'].teamName,
+              _team: teams.GC1.team,
+              teamName: teams.GC1.teamName,
               goals: 0, penalties: 0
             }
           }
         ]
-      }
+      };
     }
 
     buildSemiFinals() {
@@ -337,7 +337,7 @@
         }
       });
 
-      if (err) self.quarterFinalsError = "BET_ERROR";
+      if (err) self.quarterFinalsError = 'BET_ERROR';
       else delete self.quarterFinalsError;
 
       if (!self.quarterFinalsError) {
@@ -347,31 +347,31 @@
             {
               _id: 28, shortName: 'S1',
               home: {
-                _team: teams['Q1'].team,
-                teamName: teams['Q1'].teamName,
+                _team: teams.Q1.team,
+                teamName: teams.Q1.teamName,
                 goals: 0, penalties: 0
               },
               away: {
-                _team: teams['Q3'].team,
-                teamName: teams['Q3'].teamName,
+                _team: teams.Q3.team,
+                teamName: teams.Q3.teamName,
                 goals: 0, penalties: 0
               }
             },
             {
               _id: 29, shortName: 'S2',
               home: {
-                _team: teams['Q2'].team,
-                teamName: teams['Q2'].teamName,
+                _team: teams.Q2.team,
+                teamName: teams.Q2.teamName,
                 goals: 0, penalties: 0
               },
               away: {
-                _team: teams['Q4'].team,
-                teamName: teams['Q4'].teamName,
+                _team: teams.Q4.team,
+                teamName: teams.Q4.teamName,
                 goals: 0, penalties: 0
               }
             }
           ]
-        }
+        };
       }
     }
 
@@ -437,7 +437,7 @@
         }
       });
 
-      if (err) self.semiFinalsError = "BET_ERROR";
+      if (err) self.semiFinalsError = 'BET_ERROR';
       else delete self.semiFinalsError;
 
       if (!self.semiFinalsError) {
@@ -446,13 +446,13 @@
           match: {
             _id: 30, shortName: 'TP',
             home: {
-              _team: teams['S1L'].team,
-              teamName: teams['S1L'].teamName,
+              _team: teams.S1L.team,
+              teamName: teams.S1L.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['S2L'].team,
-              teamName: teams['S2L'].teamName,
+              _team: teams.S2L.team,
+              teamName: teams.S2L.teamName,
               goals: 0, penalties: 0
             }
           }
@@ -463,13 +463,13 @@
           match: {
             _id: 31, shortName: 'F',
             home: {
-              _team: teams['S1W'].team,
-              teamName: teams['S1W'].teamName,
+              _team: teams.S1W.team,
+              teamName: teams.S1W.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams['S2W'].team,
-              teamName: teams['S2W'].teamName,
+              _team: teams.S2W.team,
+              teamName: teams.S2W.teamName,
               goals: 0, penalties: 0
             }
           }
@@ -522,7 +522,7 @@
         }
       }
 
-      if (err) self.thirdPlaceError = "BET_ERROR";
+      if (err) self.thirdPlaceError = 'BET_ERROR';
       else delete self.thirdPlaceError;
 
       err = false;
@@ -577,7 +577,7 @@
         }
       }
 
-      if (err)  self.finalsError = "BET_ERROR";
+      if (err)  self.finalsError = 'BET_ERROR';
       else delete self.finalsError;
 
 
@@ -608,17 +608,9 @@
     }
   }
 
-  angular
-    .module(
-      'copaamericaApp'
-    )
-    .component(
-      'bet'
-      , {
-        templateUrl: 'app/bet/bet.html'
-        ,
-        controller: BetComponent
-      }
-    )
-  ;
+  angular.module('copaamericaApp')
+    .component('bet', {
+      templateUrl: 'app/bet/bet.html',
+      controller: BetComponent
+    });
 })();

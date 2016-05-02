@@ -1,8 +1,9 @@
+'use strict';
+
 angular.module('copaamericaApp')
-  .service('QueryService', ["$http", function ($http) {
+  .service('QueryService', ['$http', function ($http) {
     let groups = [],
-      teams = [],
-      bets;
+      teams = [];
 
     const GROUP_STAGE_API = '/api/groups/stage/group/',
       TEAMS_API = '/api/teams/',
@@ -76,7 +77,7 @@ angular.module('copaamericaApp')
 
       deleteBet: function (id) {
         let betApi = BETS_API + id;
-        
+
         return $http.delete(betApi).then(response => {
           return response;
         }, err => {
@@ -105,7 +106,7 @@ angular.module('copaamericaApp')
               });
             });
           });
-        })
+        });
       },
 
       buildTable: function (group) {
@@ -128,5 +129,5 @@ angular.module('copaamericaApp')
           return angular.copy(groups);
         });
       }
-    }
+    };
   }]);

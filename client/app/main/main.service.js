@@ -8,8 +8,8 @@ angular.module('copaamericaApp')
     return {
       setShowLoginForm: function (value) {
         showLoginForm = value;
-      }
-      ,
+      },
+      
       getShowLoginForm: function () {
         return showLoginForm;
       },
@@ -21,5 +21,5 @@ angular.module('copaamericaApp')
       getShowSignUpForm: function () {
         return showSignUpForm;
       }
-    }
+    };
   });

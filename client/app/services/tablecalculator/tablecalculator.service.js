@@ -21,7 +21,7 @@ angular.module('copaamericaApp')
           points: 0,
           goalsFor: 0,
           goalsAgainst: 0
-        })
+        });
       });
 
       return table;
@@ -42,12 +42,12 @@ angular.module('copaamericaApp')
         });
 
         if (homeTeamIndex === null || awayTeamIndex === null) throw new Error('could not find team index!');
-        
+
         table[homeTeamIndex].goalsFor += Number(current.home.goals);
         table[homeTeamIndex].goalsAgainst += Number(current.away.goals);
         table[awayTeamIndex].goalsFor += Number(current.away.goals);
         table[awayTeamIndex].goalsAgainst += Number(current.home.goals);
-        
+
         result = Number(current.home.goals) - Number(current.away.goals);
 
         if (result > 0) {
@@ -86,14 +86,9 @@ angular.module('copaamericaApp')
     };
 
     let cleanTable = function (table, name) {
-      while (table.length > 2) {
-        table.forEach((current, index) => {
-          if (current.position > 1) table.splice(index, 1)
-        })
-      }
-
-      table.forEach(current => {
-        current.groupPosition = name + current.position;
+      table.forEach((current, index) => {
+        if (current.position > 1) table.splice(index, 1);
+        else current.groupPosition = name + current.position;
       });
     };
 
@@ -106,5 +101,5 @@ angular.module('copaamericaApp')
 
         return table;
       }
-    }
+    };
   });

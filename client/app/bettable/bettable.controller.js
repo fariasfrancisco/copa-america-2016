@@ -53,13 +53,13 @@
               matchDate = new Date(match.date);
 
               if (matchDate < now) {
-                let mGoals = match.home.goals - match.away.goals
-                  , bGoals = bet.matches[match._id].home.goals - bet.matches[match._id].away.goals;
+                let mGoals = match.home.goals - match.away.goals,
+                  bGoals = bet.matches[match._id].home.goals - bet.matches[match._id].away.goals;
 
                 if (Math.sign(mGoals) === Math.sign(bGoals)) {
                   self.betRows[index].points[group.name] += 2;
-                  if (match.home.goals === bet.matches[match._id].home.goals
-                    && match.away.goals === bet.matches[match._id].away.goals) {
+                  if (match.home.goals === bet.matches[match._id].home.goals &&
+                    match.away.goals === bet.matches[match._id].away.goals) {
                     self.betRows[index].points[group.name] += 3;
                   }
                 }
@@ -73,8 +73,8 @@
                 groupIndex++;
               }
 
-              if (table[0].team === bet.groups[groupIndex].first
-                && table[0].team === bet.groups[groupIndex].second) {
+              if (table[0].team === bet.groups[groupIndex].first &&
+                table[0].team === bet.groups[groupIndex].second) {
                 self.betRows[index].points[group.name] += 5;
               }
             }
@@ -116,8 +116,8 @@
                 if (matchGoals === 0) {
                   if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
                     self.betRows[index].points[st.shortName] += 2;
-                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
-                      && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
+                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
+                      matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
                       self.betRows[index].points[st.shortName] += 3;
                     }
                   }
@@ -145,7 +145,7 @@
 
           if (matchDate > now) {
             self.bets.forEach(function (bet, index) {
-              self.betRows[index].points['TP'] = 0;
+              self.betRows[index].points.TP = 0;
 
               let betHome = bet.matches[stage[0].matches[0]._id].home,
                 betAway = bet.matches[stage[0].matches[0]._id].away,
@@ -157,16 +157,16 @@
               if (Math.sign(matchGoals) === Math.sign(betGoals)) {
                 if (matchGoals === 0) {
                   if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
-                    self.betRows[index].points['TP'] += 2;
-                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
-                      && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
-                      self.betRows[index].points['TP'] += 3;
+                    self.betRows[index].points.TP += 2;
+                    if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
+                      matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
+                      self.betRows[index].points.TP += 3;
                     }
                   }
                 } else {
-                  self.betRows[index].points['TP'] += 2;
+                  self.betRows[index].points.TP += 2;
                   if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
-                    self.betRows[index].points['TP'] += 3;
+                    self.betRows[index].points.TP += 3;
                   }
                 }
               }
@@ -186,7 +186,7 @@
 
               if (matchDate > now) {
                 self.bets.forEach((bet, index) => {
-                  self.betRows[index].points['F'] = 0;
+                  self.betRows[index].points.F = 0;
 
                   let betHome = bet.matches[stage[0].matches[0]._id].home,
                     betAway = bet.matches[stage[0].matches[0]._id].away,
@@ -198,16 +198,16 @@
                   if (Math.sign(matchGoals) === Math.sign(betGoals)) {
                     if (matchGoals === 0) {
                       if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
-                        self.betRows[index].points['F'] += 2;
-                        if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals
-                          && matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
-                          self.betRows[index].points['F'] += 3;
+                        self.betRows[index].points.F += 2;
+                        if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
+                          matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
+                          self.betRows[index].points.F += 3;
                         }
                       }
                     } else {
-                      self.betRows[index].points['F'] += 2;
+                      self.betRows[index].points.F += 2;
                       if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
-                        self.betRows[index].points['F'] += 3;
+                        self.betRows[index].points.F += 3;
                       }
                     }
                   }
@@ -237,23 +237,23 @@
                   let inPodium = false,
                     rightOrder = false;
 
-                  self.betRows[index].points['POD'] = 0;
+                  self.betRows[index].points.POD = 0;
 
-                  if (bet.podium.first === self.podium.first
-                    && bet.podium.second === self.podium.second
-                    && bet.podium.third === self.podium.third) {
+                  if (bet.podium.first === self.podium.first &&
+                    bet.podium.second === self.podium.second &&
+                    bet.podium.third === self.podium.third) {
                     inPodium = true;
                     rightOrder = true;
                   } else {
-                    if ((bet.podium.first === self.podium.second || bet.podium.first === self.podium.third)
-                      && (bet.podium.second === self.podium.first || bet.podium.second === self.podium.third)
-                      && (bet.podium.third === self.podium.first || bet.podium.third === self.podium.second)) {
+                    if ((bet.podium.first === self.podium.second || bet.podium.first === self.podium.third) &&
+                      (bet.podium.second === self.podium.first || bet.podium.second === self.podium.third) &&
+                      (bet.podium.third === self.podium.first || bet.podium.third === self.podium.second)) {
                       inPodium = true;
                     }
                   }
 
-                  if (inPodium) self.betRows[index].points['POD'] += 25;
-                  if (rightOrder) self.betRows[index].points['POD'] += 35;
+                  if (inPodium) self.betRows[index].points.POD += 25;
+                  if (rightOrder) self.betRows[index].points.POD += 35;
                 });
               }
             });
@@ -270,11 +270,11 @@
         if (goldenBootPlayer.length > 0) {
           goldenBootPlayer.forEach(player => {
             if (bet.goldenBoot._team === player._team && bet.goldenBoot._player === player._id) {
-              self.betRows[index].points['STR'] = 50;
+              self.betRows[index].points.STR = 50;
             }
           });
         } else {
-          self.betRows[index].points['STR'] = 0;
+          self.betRows[index].points.STR = 0;
         }
       });
     }

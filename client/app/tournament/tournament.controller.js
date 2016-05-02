@@ -39,8 +39,6 @@
         this.processBracket('third-place');
         this.processBracket('final');
       });
-
-
     }
 
     processBracket(stageName) {
@@ -83,7 +81,7 @@
               loser: loser
             };
           }
-        })
+        });
       });
     }
   }
