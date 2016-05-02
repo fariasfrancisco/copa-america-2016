@@ -5,16 +5,6 @@ import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
-function saveUpdates(updates) {
-  return function (entity) {
-    var updated = _.merge(entity, updates);
-    return updated.save()
-      .then(updated => {
-        return updated;
-      });
-  };
-}
-
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function (err) {
