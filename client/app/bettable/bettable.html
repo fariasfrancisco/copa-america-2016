@@ -1,7 +1,8 @@
-<div class="container">
+<div class="container site-container">
   <div class="row">
     <div class="page-header row col-md-12 custyle bet-table-format">
-      <table class="table table-striped custab">
+      <h1 ng-hide="$ctrl.betRows.length">{{'EMPTY_BETS' | translate}}</h1>
+      <table ng-show="$ctrl.betRows.length" class="table table-striped custab">
         <caption>{{'BET_TABLE' | translate}}</caption>
         <thead>
         <tr>

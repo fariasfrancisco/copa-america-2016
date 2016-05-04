@@ -111,12 +111,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+          <div class="collapse-button pull-right clickable " ng-click="qfIsCollapsed = !qfIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
           </div>
         </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
+        <div uib-collapse="qfIsCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -180,12 +180,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+          <div class="collapse-button pull-right clickable " ng-click="sfIsCollapsed = !sfIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
           </div>
         </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
+        <div uib-collapse="sfIsCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -249,12 +249,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+          <div class="collapse-button pull-right clickable " ng-click="tpIsCollapsed = !tpIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
           </div>
         </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
+        <div uib-collapse="tpIsCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -314,12 +314,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+          <div class="collapse-button pull-right clickable " ng-click="fIsCollapsed = !fIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
           </div>
         </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
+        <div uib-collapse="fIsCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table table-striped">
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
@@ -384,12 +384,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{'PODIUM' | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+          <div class="collapse-button pull-right clickable " ng-click="pIsCollapsed = !pIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
           </div>
         </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
+        <div uib-collapse="pIsCollapsed" class="panel-body tablebody">
           <div class="row col-md-12 grouptable">
             <table class="table">
               <tr class="table-row gold">

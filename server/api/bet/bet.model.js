@@ -28,7 +28,7 @@ var BetSchema = new mongoose.Schema({
   },
   goldenBoot: {
     _team: {type: Number, min: 0, max: 15, required: true},
-    _player: {type: Number, min: 0, max: 22, required: true}
+    _player: {type: mongoose.Schema.Types.ObjectId, required: true}
   }
 });
 

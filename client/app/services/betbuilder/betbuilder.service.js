@@ -47,6 +47,9 @@ angular.module('copaamericaApp')
             matches: [],
             groups: []
           };
+        }, res => {
+          console.log(res);
+          throw new Error('Could not create Bet in the database', res.status)
         });
       }
     };
