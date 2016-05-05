@@ -6,19 +6,19 @@ angular.module('copaamericaApp')
       showSignUpForm = false;
 
     return {
-      setShowLoginForm: function (value) {
+      setShowLoginForm(value) {
         showLoginForm = value;
       },
       
-      getShowLoginForm: function () {
+      getShowLoginForm() {
         return showLoginForm;
       },
 
-      setShowSignUpForm: function (value) {
+      setShowSignUpForm(value) {
         showSignUpForm = value;
       },
 
-      getShowSignUpForm: function () {
+      getShowSignUpForm() {
         return showSignUpForm;
       }
     };

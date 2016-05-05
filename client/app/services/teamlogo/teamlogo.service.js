@@ -23,7 +23,7 @@ angular.module('copaamericaApp')
     ];
 
     return {
-      getPath: function (index) {
+      getPath(index) {
         return logoPaths[index];
       }
     };

@@ -43,15 +43,15 @@ angular.module('copaamericaApp')
     };
 
     return {
-      getGroups: function () {
+      getGroups() {
         return groups;
       },
 
-      getTeams: function () {
+      getTeams() {
         return teams;
       },
 
-      getStage: function (stage) {
+      getStage(stage) {
         const STAGE = STAGE_API + stage;
 
         return $http.get(STAGE).then(response => {
@@ -59,13 +59,13 @@ angular.module('copaamericaApp')
         });
       },
 
-      getBets: function () {
+      getBets() {
         return $http.get(BETS_API).then(response => {
           return response.data;
         });
       },
 
-      getBetByUser: function (user) {
+      getBetByUser(user) {
         let USER_BET = BETS_API_USER + user;
 
         return $http.get(USER_BET).then(response => {
@@ -75,7 +75,7 @@ angular.module('copaamericaApp')
         });
       },
 
-      deleteBet: function (id) {
+      deleteBet(id) {
         let BET = BETS_API + id;
 
         return $http.delete(BET).then(response => {
@@ -85,7 +85,7 @@ angular.module('copaamericaApp')
         });
       },
 
-      buildGroupsAndTeams: function () {
+      buildGroupsAndTeams() {
         let self = this;
         
         return queryTeams().then(response => {
@@ -110,7 +110,7 @@ angular.module('copaamericaApp')
         });
       },
 
-      buildTable: function (group) {
+      buildTable(group) {
         const GROUP_TABLE= GROUP_TABLE_API + group.name;
 
         return $http.get(GROUP_TABLE).then(function (response) {
@@ -125,7 +125,7 @@ angular.module('copaamericaApp')
         });
       },
 
-      cloneGroups: function () {
+      cloneGroups() {
         return this.buildGroupsAndTeams().then(() => {
           return angular.copy(groups);
         });
