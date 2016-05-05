@@ -66,15 +66,15 @@
       let self = this,
         id = this.userBet._id;
 
-      this.querySvc.deleteBet(id).then(res => {
-        if (res.status < 400) {
+      this.querySvc.deleteBet(id)
+        .then(() => {
           self.showWarn = false;
           delete self.userBet;
           self.startOver();
-        } else {
+        })
+        .catch(() => {
           this.$window.alert('ERROR DELETING BET');
-        }
-      });
+        });
     }
 
     startOver() {
@@ -97,16 +97,16 @@
       let self = this,
         user = this.auth.getCurrentUser()._id;
 
-      this.querySvc.getBetByUser(user).then(res => {
-        if (res.status > 400) {
-          self.hasBet = false;
-          self.noBetInitialize();
-        } else {
+      this.querySvc.getBetByUser(user)
+        .then(res => {
           self.userBet = res.data;
           self.hasBet = true;
           self.betInitialize();
-        }
-      });
+        })
+        .catch(() => {
+          self.hasBet = false;
+          self.noBetInitialize();
+        });
     }
 
     betInitialize() {
@@ -116,10 +116,11 @@
     noBetInitialize() {
       let self = this;
 
-      this.betSvc.noBetInitialize(this.auth.getCurrentUser()).then(obj => {
-        self.bet = obj.bet;
-        self.groups = obj.groups;
-      })
+      this.betSvc.noBetInitialize(this.auth.getCurrentUser())
+        .then(obj => {
+          self.bet = obj.bet;
+          self.groups = obj.groups;
+        })
     }
 
     buildQuarterFinals() {
@@ -174,9 +175,10 @@
 
       this.bet.podium = this.podium;
 
-      this.betBuilder.buildBet(this.bet).then(() => {
-        this.$state.go('main');
-      });
+      this.betBuilder.buildBet(this.bet)
+        .then(() => {
+          this.$state.go('main');
+        });
     }
   }
 

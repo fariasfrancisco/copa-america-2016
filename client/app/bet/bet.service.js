@@ -24,94 +24,96 @@ angular.module('copaamericaApp')
 
     return {
       betInitialize(bet) {
-        return QueryService.cloneGroups().then(groups => {
-          groups.forEach(group => {
-            group.matches.forEach(match => {
-              bet.matches[match._id].home._team = match.home._team;
-              bet.matches[match._id].away._team = match.away._team;
+        return QueryService.cloneGroups()
+          .then(groups => {
+            groups.forEach(group => {
+              group.matches.forEach(match => {
+                bet.matches[match._id].home._team = match.home._team;
+                bet.matches[match._id].away._team = match.away._team;
+              });
             });
-          });
 
-          let winner, side, matchId, qfHome, qfAway,
-            desc = 4;
+            let winner, side, matchId, qfHome, qfAway,
+              desc = 4;
 
-          for (let qfIndex = 24; qfIndex < 28; qfIndex++) {
-            qfHome = bet.matches[qfIndex].home;
-            qfAway = bet.matches[qfIndex].away;
+            for (let qfIndex = 24; qfIndex < 28; qfIndex++) {
+              qfHome = bet.matches[qfIndex].home;
+              qfAway = bet.matches[qfIndex].away;
 
-            qfHome._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][0]].first;
-            qfAway._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][1]].second;
+              qfHome._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][0]].first;
+              qfAway._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][1]].second;
 
-            if (qfHome.goals > qfAway.goals) winner = qfHome._team;
-            else if (qfHome.goals < qfAway.goals) winner = qfAway._team;
-            else if (qfHome.penalties > qfAway.penalties) winner = qfHome._team;
-            else if (qfHome.penalties < qfAway.penalties) winner = qfAway._team;
+              if (qfHome.goals > qfAway.goals) winner = qfHome._team;
+              else if (qfHome.goals < qfAway.goals) winner = qfAway._team;
+              else if (qfHome.penalties > qfAway.penalties) winner = qfHome._team;
+              else if (qfHome.penalties < qfAway.penalties) winner = qfAway._team;
 
-            //the following logic distributes the teams in the semi finals brackets.
+              //the following logic distributes the teams in the semi finals brackets.
 
-            matchId = qfIndex + desc;
+              matchId = qfIndex + desc;
 
-            if (qfIndex % 2 === 0) {
-              side = 'home';
-              desc--;
+              if (qfIndex % 2 === 0) {
+                side = 'home';
+                desc--;
+              }
+              else {
+                side = 'away';
+              }
+
+              bet.matches[matchId][side]._team = winner;
             }
-            else {
-              side = 'away';
-            }
 
-            bet.matches[matchId][side]._team = winner;
-          }
-
-          for (let i = 28; i < 30; i++) {
-            if (bet.matches[i].home.goals > bet.matches[i].away.goals) {
-              bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
-              bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
-            } else {
-              if (bet.matches[i].home.goals < bet.matches[i].away.goals) {
+            for (let i = 28; i < 30; i++) {
+              if (bet.matches[i].home.goals > bet.matches[i].away.goals) {
                 bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
                 bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
               } else {
-                if (bet.matches[i].home.penalties > bet.matches[i].away.penalties) {
+                if (bet.matches[i].home.goals < bet.matches[i].away.goals) {
                   bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
                   bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
                 } else {
-                  if (bet.matches[i].home.penalties < bet.matches[i].away.penalties) {
+                  if (bet.matches[i].home.penalties > bet.matches[i].away.penalties) {
                     bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
                     bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
+                  } else {
+                    if (bet.matches[i].home.penalties < bet.matches[i].away.penalties) {
+                      bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
+                      bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
+                    }
                   }
                 }
               }
             }
-          }
 
-          bet.matches.forEach(match => {
-            match.home.teamName = QueryService.getTeams()[match.home._team].name;
-            match.away.teamName = QueryService.getTeams()[match.away._team].name;
+            bet.matches.forEach(match => {
+              match.home.teamName = QueryService.getTeams()[match.home._team].name;
+              match.away.teamName = QueryService.getTeams()[match.away._team].name;
+            });
           });
-        });
       },
 
       noBetInitialize(user) {
-        return QueryService.cloneGroups().then(groups => {
-          let bet = {
-            user: user,
-            groups: {},
-            matches: {}
-          };
+        return QueryService.cloneGroups()
+          .then(groups => {
+            let bet = {
+              user: user,
+              groups: {},
+              matches: {}
+            };
 
-          for (let i = 0; i < 32; i++) {
-            bet.matches[i] = {
-              home: {goals: 0, penalties: 0},
-              away: {goals: 0, penalties: 0}
+            for (let i = 0; i < 32; i++) {
+              bet.matches[i] = {
+                home: {goals: 0, penalties: 0},
+                away: {goals: 0, penalties: 0}
+              }
             }
-          }
 
-          groups.forEach(group => {
-            bet.groups[group.name] = {first: '', second: ''};
+            groups.forEach(group => {
+              bet.groups[group.name] = {first: '', second: ''};
+            });
+
+            return {bet: bet, groups: groups};
           });
-
-          return {bet: bet, groups: groups};
-        });
       },
 
       buildQuarterFinals(groups, bet) {

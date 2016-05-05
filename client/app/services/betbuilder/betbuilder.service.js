@@ -42,15 +42,15 @@ angular.module('copaamericaApp')
           });
         }
 
-        return $http.post(BETS_API, bet).then(() => {
-          bet = {
-            matches: [],
-            groups: []
-          };
-        }, res => {
-          console.log(res);
-          throw {message: 'Could not create Bet in the database', status: res.status};
-        });
+        return $http.post(BETS_API, bet)
+          .then(() => {
+            bet = {
+              matches: [],
+              groups: []
+            };
+          }, res => {
+            throw {message: 'Could not create Bet in the database', status: res.status};
+          });
       }
     };
   }]);

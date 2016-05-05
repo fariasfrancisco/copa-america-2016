@@ -12,26 +12,28 @@
     $onInit() {
       let self = this;
 
-      this.querySvc.getBets().then(bets => {
-        self.bets = bets;
+      this.querySvc.getBets()
+        .then(bets => {
+          self.bets = bets;
 
-        bets.forEach(bet => {
-          self.betRows.push({
-            user: bet.name,
-            points: {}
+          bets.forEach(bet => {
+            self.betRows.push({
+              user: bet.name,
+              points: {}
+            });
           });
-        });
 
-        self.groups = self.querySvc.getGroups();
-        if (self.groups.length < 1) {
-          self.querySvc.buildGroupsAndTeams().then(() => {
-            self.groups = self.querySvc.getGroups();
+          self.groups = self.querySvc.getGroups();
+          if (self.groups.length < 1) {
+            self.querySvc.buildGroupsAndTeams()
+              .then(() => {
+                self.groups = self.querySvc.getGroups();
+                self.process();
+              });
+          } else {
             self.process();
-          });
-        } else {
-          self.process();
-        }
-      });
+          }
+        });
     }
 
     process() {
