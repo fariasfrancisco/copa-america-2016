@@ -1,8 +1,9 @@
 'use strict';
 (function () {
   class BetComponent {
-    constructor(Auth, QueryService, TableCalculator, BetBuilder, TeamLogoService, $state, $window) {
+    constructor(Auth, $uibModal, $log, QueryService, TableCalculator, BetBuilder, TeamLogoService, $state, $window) {
       this.betBuilder = BetBuilder;
+      this.$uibModal = $uibModal;
       this.logoPaths = TeamLogoService;
       this.$state = $state;
       this.$window = $window;
@@ -17,6 +18,16 @@
         matches: {},
         groups: {}
       };
+    }
+
+    openModal() {
+      console.log('modal');
+      var modalInstance = this.$uibModal.open({
+        animation: true,
+        templateUrl: "/app/modal/modal.html",
+        controller: 'ModalCtrl'
+      });
+
     }
 
     showEditWarning(value) {

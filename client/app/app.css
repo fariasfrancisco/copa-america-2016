@@ -1,7 +1,9 @@
+html {
+  overflow-y: scroll;
+}
 .container {
   padding-top: 60px;
 }
-
 .footer.navbar.navbar-default.navbar-static-bottom .container,
 .navbar.navbar-default.navbar-fixed-top .container {
   padding-top: 0;
