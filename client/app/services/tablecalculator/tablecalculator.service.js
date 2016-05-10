@@ -93,7 +93,7 @@ angular.module('copaamericaApp')
     };
 
     return {
-      generate: function (group) {
+      generate(group) {
         let table = initializeTable(group);
         calculatePointsAndGoals(table, group.matches);
         calculatePositions(table);

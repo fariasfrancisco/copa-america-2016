@@ -11,10 +11,11 @@ angular.module('copaamericaApp')
           body = {valid: Boolean(bool)};
 
         const USER_VALIDATE = USER_API + id + VALIDATE;
-        
-        return $http.put(USER_VALIDATE, body).then(() => {
-          user.valid = Boolean(bool);
-        });
+
+        return $http.put(USER_VALIDATE, body)
+          .then(() => {
+            user.valid = Boolean(bool);
+          });
       }
     };
   }]);

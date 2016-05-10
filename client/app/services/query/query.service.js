@@ -31,104 +31,115 @@ angular.module('copaamericaApp')
     };
 
     let queryGroups = function () {
-      return $http.get(GROUP_STAGE_API).then(response => {
-        return response.data.sort(compareGroup);
-      });
+      return $http.get(GROUP_STAGE_API)
+        .then(response => {
+          return response.data.sort(compareGroup);
+        });
     };
 
     let queryTeams = function () {
-      return $http.get(TEAMS_API).then(response => {
+      return $http.get(TEAMS_API
+      ).then(response => {
         return response.data.sort(compareTeam);
       });
     };
 
     return {
-      getGroups: function () {
+      getGroups() {
         return groups;
       },
 
-      getTeams: function () {
+      getTeams() {
         return teams;
       },
 
-      getStage: function (stage) {
+      getStage(stage) {
         const STAGE = STAGE_API + stage;
 
-        return $http.get(STAGE).then(response => {
-          return response.data;
-        });
+        return $http.get(STAGE)
+          .then(response => {
+            return response.data;
+          });
       },
 
-      getBets: function () {
-        return $http.get(BETS_API).then(response => {
-          return response.data;
-        });
+      getBets() {
+        return $http.get(BETS_API)
+          .then(response => {
+            return response.data;
+          });
       },
 
-      getBetByUser: function (user) {
+      getBetByUser(user) {
         let USER_BET = BETS_API_USER + user;
 
-        return $http.get(USER_BET).then(response => {
-          return response;
-        }, err => {
-          return err;
-        });
+        return $http.get(USER_BET)
+          .then(response => {
+            return response;
+          }, err => {
+            throw err;
+          });
       },
 
-      deleteBet: function (id) {
+      deleteBet(id) {
         let BET = BETS_API + id;
 
-        return $http.delete(BET).then(response => {
-          return response;
-        }, err => {
-          return err;
-        });
+        return $http.delete(BET)
+          .then(response => {
+            return response;
+          }, err => {
+            throw err;
+          });
       },
 
-      buildGroupsAndTeams: function () {
+      buildGroupsAndTeams() {
         let self = this;
-        
-        return queryTeams().then(response => {
-          teams = response;
 
-          return queryGroups().then(response => {
-            groups = response;
+        return queryTeams()
+          .then(response => {
+            teams = response;
 
-            groups.forEach(group => {
-              group.fullName = group.name.replace('G', 'GROUP_');
+            return queryGroups()
+              .then(response => {
+                groups = response;
 
-              group.matches.forEach(match => {
-                match.home.teamName = teams[match.home._team].name;
-                match.away.teamName = teams[match.away._team].name;
+                groups.forEach(group => {
+                  group.fullName = group.name.replace('G', 'GROUP_');
+
+                  group.matches.forEach(match => {
+                    match.home.teamName = teams[match.home._team].name;
+                    match.away.teamName = teams[match.away._team].name;
+                  });
+
+                  self.buildTable(group)
+                    .then(table => {
+                      group.table = table;
+                    });
+                });
               });
+          });
+      },
 
-              self.buildTable(group).then(table => {
-                group.table = table;
-              });
+      buildTable(group) {
+        const GROUP_TABLE = GROUP_TABLE_API + group.name;
+
+        return $http.get(GROUP_TABLE)
+          .then(function (response) {
+            let table = response.data;
+            table.sort(compareLine);
+
+            table.forEach(line => {
+              line.teamName = teams[line.team].name;
             });
+
+            return table;
           });
-        });
       },
 
-      buildTable: function (group) {
-        const GROUP_TABLE= GROUP_TABLE_API + group.name;
-
-        return $http.get(GROUP_TABLE).then(function (response) {
-          let table = response.data;
-          table.sort(compareLine);
-
-          table.forEach(line => {
-            line.teamName = teams[line.team].name;
+      cloneGroups() {
+        return this.buildGroupsAndTeams()
+          .then(() => {
+            return angular.copy(groups);
           });
-
-          return table;
-        });
-      },
-
-      cloneGroups: function () {
-        return this.buildGroupsAndTeams().then(() => {
-          return angular.copy(groups);
-        });
       }
     };
   }]);

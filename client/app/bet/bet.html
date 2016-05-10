@@ -103,8 +103,9 @@
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
        ng-hide="$ctrl.quarterFinals"
-       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">{{'DONE_BUTTON' |
-      translate}}</a>
+       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">
+      {{'DONE_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row" ng-show="$ctrl.quarterFinals">
@@ -172,8 +173,9 @@
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
        ng-show="$ctrl.quarterFinals && !$ctrl.semiFinals"
-       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">{{'DONE_BUTTON' |
-      translate}}</a>
+       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">
+      {{'DONE_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row" ng-show="$ctrl.semiFinals">
@@ -241,8 +243,9 @@
     <a href="#" class="button"
        ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton}"
        ng-show="$ctrl.semiFinals && !$ctrl.thirdPlace"
-       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">{{'DONE_BUTTON' |
-      translate}}</a>
+       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">
+      {{'DONE_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row" ng-show="$ctrl.thirdPlace">
@@ -376,8 +379,9 @@
   <div class="row">
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
        ng-show="$ctrl.thirdPlace && $ctrl.finals && !$ctrl.podium"
-       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">{{'DONE_BUTTON' |
-      translate}}</a>
+       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">
+      {{'DONE_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row podium" ng-show="$ctrl.podium">
@@ -444,22 +448,26 @@
 
   <div class="row">
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.disableButton}"
-       ng-show="$ctrl.goldenBootPlayer.name" ng-click="$ctrl.disableButton || $ctrl.save()">{{'SAVE_BET_BUTTON' |
-      translate}}</a>
+       ng-show="$ctrl.goldenBootPlayer.name" ng-click="$ctrl.disableButton || $ctrl.save()">
+      {{'SAVE_BET_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row">
-    <a href="#" class="button" ng-click="$ctrl.showRestartWarning(true)">{{'RESTART_BUTTON' | translate}}</a>
+    <a href="#" class="button" ng-click="$ctrl.showRestartWarning(true)">
+      {{'RESTART_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row" ng-show="$ctrl.showRestartWarn">
     <uib-alert type="warning" close="$ctrl.showRestartWarning(false)">
       {{"RESTART_WARN" | translate}}
-      <button type="button" class="btn btn-danger" ng-click="$ctrl.startOver()">{{"CONTINUE" | translate}}</button>
+      <button type="button" class="btn btn-danger" ng-click="$ctrl.startOver()">
+        {{"CONTINUE" | translate}}
+      </button>
     </uib-alert>
   </div>
 
-  <!-- TODO Fix the fold button from quarter finals onwards -->
   <!-- TODO S T Y L E ! ! ! -->
 
 </div>

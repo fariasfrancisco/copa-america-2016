@@ -3,10 +3,12 @@
 (function () {
 
   class TournamentComponent {
-    constructor(QueryService, TeamLogoService) {
+    constructor(QueryService, TeamLogoService, TournamentService) {
       this.querySvc = QueryService;
       this.logoPaths = TeamLogoService;
+      this.tournamentSvc = TournamentService;
       this.groups = {};
+      this.brackets = {};
     }
 
     $onInit() {
@@ -14,77 +16,36 @@
         now = new Date(),
         matchDate;
 
-      this.querySvc.buildGroupsAndTeams().then(() => {
-        let groups = self.querySvc.getGroups();
+      this.querySvc.buildGroupsAndTeams()
+        .then(() => {
+          let groups = self.querySvc.getGroups();
 
-        groups.forEach(group => {
-          let allPlayed = true;
+          groups.forEach(group => {
+            let allPlayed = true;
 
-          group.matches.forEach(match => {
-           matchDate = new Date(match.date);
-           if (matchDate > now) allPlayed = false;
-           });
-
-          if (allPlayed) {
-            self.querySvc.buildTable(group).then(table => {
-              self.groups[group.name] = {
-                first: table[0],
-                second: table[1]
-              };
+            group.matches.forEach(match => {
+              matchDate = new Date(match.date);
+              if (matchDate > now) allPlayed = false;
             });
-          }
-        });
 
-        this.processBracket('quarter-final');
-        this.processBracket('semi-final');
-        this.processBracket('third-place');
-        this.processBracket('final');
-      });
-    }
-
-    processBracket(stageName) {
-      let self = this,
-        now = new Date(),
-        matchDate;
-
-      this.querySvc.getStage(stageName).then(stage => {
-        let winner, loser;
-
-        stage.forEach(current => {
-          matchDate = new Date(current.matches[0].date);
-
-          if (matchDate < now) {
-            if (current.matches[0].home.goals > current.matches[0].away.goals) {
-              winner = {team: current.matches[0].home._team};
-              loser = {team: current.matches[0].away._team};
-            } else {
-              if (current.matches[0].home.goals < current.matches[0].away.goals) {
-                winner = {team: current.matches[0].away._team};
-                loser = {team: current.matches[0].home._team};
-              } else {
-                if (current.matches[0].home.penalties > current.matches[0].away.penalties) {
-                  winner = {team: current.matches[0].home._team};
-                  loser = {team: current.matches[0].away._team};
-                } else {
-                  if (current.matches[0].home.penalties < current.matches[0].away.penalties) {
-                    winner = {team: current.matches[0].away._team};
-                    loser = {team: current.matches[0].home._team};
-                  }
-                }
-              }
+            if (allPlayed) {
+              self.querySvc.buildTable(group)
+                .then(table => {
+                  self.groups[group.name] = {
+                    first: table[0],
+                    second: table[1]
+                  };
+                });
             }
+          });
 
-            winner.teamName = self.querySvc.getTeams()[winner.team].name;
-            loser.teamName = self.querySvc.getTeams()[loser.team].name;
-
-            self[current.name] = {
-              winner: winner,
-              loser: loser
-            };
-          }
+          this.tournamentSvc.processBracket('quarter-final', this.brackets);
+          this.tournamentSvc.processBracket('semi-final', this.brackets);
+          this.tournamentSvc.processBracket('third-place', this.brackets);
+          this.tournamentSvc.processBracket('final', this.brackets);
         });
-      });
     }
+
   }
 
   angular.module('copaamericaApp')

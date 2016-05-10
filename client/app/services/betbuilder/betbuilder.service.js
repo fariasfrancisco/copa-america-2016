@@ -11,7 +11,7 @@ angular.module('copaamericaApp')
     };
 
     return {
-      buildBet(betData){
+      buildBet(betData) {
         bet._user = betData.user._id;
         bet.name = betData.user.name;
         bet.goldenBoot = betData.goldenBoot;
@@ -42,15 +42,15 @@ angular.module('copaamericaApp')
           });
         }
 
-        return $http.post(BETS_API, bet).then(() => {
-          bet = {
-            matches: [],
-            groups: []
-          };
-        }, res => {
-          console.log(res);
-          throw new Error('Could not create Bet in the database', res.status)
-        });
+        return $http.post(BETS_API, bet)
+          .then(() => {
+            bet = {
+              matches: [],
+              groups: []
+            };
+          }, res => {
+            throw {message: 'Could not create Bet in the database', status: res.status};
+          });
       }
     };
   }]);
