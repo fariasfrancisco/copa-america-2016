@@ -374,8 +374,8 @@
     </a>
   </div>
 
-  <div class="row podium" ng-show="$ctrl.podium">
-    <div class="col-md-push-3 col-md-6">
+  <div class="row podium" ng-show="!$ctrl.podium">
+    <!--<div class="col-md-push-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{'PODIUM' | translate}}</h3>
@@ -413,6 +413,29 @@
               </tr>
             </table>
           </div>
+        </div>
+      </div>
+    </div>-->
+    <div class="col-md-push-3 col-md-6">
+      <h1 class="podium-title text-center">{{'PODIUM' | translate}}</h1>
+      <div class="flex-box">
+        <div class="first">
+          <div class="team-holder gold">
+            <img src="/assets/images/team_logos/0.png" alt="">
+          </div>
+          <h3 class="text-center">Argentina</h3>
+        </div>
+        <div class="second">
+          <div class="team-holder silver">
+            <img src="/assets/images/team_logos/1.png" alt="">
+          </div>
+          <h3 class="text-center">Bolivia</h3>
+        </div>
+        <div class="third">
+          <div class="team-holder bronze">
+            <img src="/assets/images/team_logos/10.png" alt="">
+          </div>
+          <h3 class="text-center">Colombia</h3>
         </div>
       </div>
     </div>

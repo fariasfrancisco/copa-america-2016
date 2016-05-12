@@ -15,13 +15,6 @@
   background-color: #CD7F32;
 }
 
-.podium table {
-  margin-bottom: 0;
-}
-
-.podium tr {
-  border-top: white 4px solid;
-}
 
 .clickable {
   cursor: pointer;
@@ -108,4 +101,112 @@ a.button-disabled:hover {
 .col-md-1 img {
   height: 40px;
   width: 40px;
+}
+
+/* PODIUM STYLES */
+
+.podium .flex-box{
+  display: flex;
+  align-items: center;
+}
+.podium table {
+  margin-bottom: 0;
+}
+
+.podium tr {
+  border-top: white 4px solid;
+}
+.podium .team-holder{
+  display: flex;
+  background-color: #EFEFEF;
+  border: 5px solid #DEDEDE;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.2);
+}
+.podium .first {
+  order: 2;
+}
+.podium .second {
+  order: 1;
+}
+.podium .third {
+  order: 3;
+}
+
+.podium .team-holder.gold {
+  background: linear-gradient(90deg, #FBFF00 10%, #FDB446 90%);
+}
+.podium .team-holder.silver {
+  background: linear-gradient(90deg, #E6E7E8 10%, #A3A5A8 90%);
+}
+.podium .team-holder.bronze {
+  background: linear-gradient(90deg, #E6924A 10%, #cd6532 90%);
+}
+
+.podium .team-holder img {
+  margin: auto;
+}
+
+.podium .first .team-holder {
+  width: 90px;
+  height: 90px;
+}
+.podium .first .team-holder img {
+  width: 80px;
+  height: 80px;
+}
+
+.podium .second .team-holder {
+  width: 80px;
+  height: 80px;
+}
+.podium .second .team-holder img {
+  width: 70px;
+  height: 70px;
+}
+
+.podium .third .team-holder {
+  width: 60px;
+  height: 60px;
+}
+.podium .third .team-holder img {
+  width: 50px;
+  height: 50px;
+}
+@media (min-width: 768px) {
+  .podium .flex-box {
+    justify-content: space-between;
+  }
+  .podium .team-holder img {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+  }
+
+  .podium .first .team-holder {
+    width: 180px;
+    height: 180px;
+  }
+  .podium .first .team-holder img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .podium .second .team-holder {
+    width: 150px;
+    height: 150px;
+  }
+  .podium .second .team-holder img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .podium .third .team-holder {
+    width: 140px;
+    height: 140px;
+  }
+  .podium .third .team-holder img {
+    width: 90px;
+    height: 90px;
+  }
 }
