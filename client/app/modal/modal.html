@@ -1,17 +1,11 @@
 <div class="modal-header">
-  <h3 class="modal-title">I'm a modal!</h3>
+  <h3 class="modal-title">{{ "WARNING" | translate }}</h3>
 </div>
 <div class="modal-body">
-  <p>Hoaaaa</p>
-  <ul>
-    <li>
-    <li>Casa</li>
-    <li>Aasd</li>
-    <li>Dsa</li>
-  </ul>
-  Selected:
+  <span ng-show="modalSvc.getEditWarn()">{{ "EDIT_WARN" | translate }}</span>
+  <span ng-show="modalSvc.getRestartWarn()">{{ "RESTART_WARN" | translate }}</span>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button">OK</button>
-  <button class="btn btn-warning" type="button">Cancel</button>
+  <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

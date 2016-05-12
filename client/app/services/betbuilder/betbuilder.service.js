@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('BetBuilder', ['$http', function ($http) {
+  .service('BetBuilderService', ['$http', function ($http) {
     const GROUP_NAMES = ['GA', 'GB', 'GC', 'GD'],
       BETS_API = '/api/bets/';
 

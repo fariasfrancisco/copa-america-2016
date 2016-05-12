@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('BetService', ["QueryService", "TableCalculator", function (QueryService, TableCalculator) {
+  .service('BetService', ['QueryService', 'TableCalculator', function (QueryService, TableCalculator) {
 
     /**
      * The following constant help me distribute teams in the quarter finals bracket,
@@ -105,7 +105,7 @@ angular.module('copaamericaApp')
               bet.matches[i] = {
                 home: {goals: 0, penalties: 0},
                 away: {goals: 0, penalties: 0}
-              }
+              };
             }
 
             groups.forEach(group => {
@@ -474,8 +474,8 @@ angular.module('copaamericaApp')
         if (thirdPlaceErr || finalsErr) {
           let ex = {};
 
-          if (thirdPlaceErr) ex.thirdPlaceException = "tieException";
-          if (finalsErr) ex.finalsException = "tieException";
+          if (thirdPlaceErr) ex.thirdPlaceException = 'tieException';
+          if (finalsErr) ex.finalsException = 'tieException';
 
           throw ex;
         }

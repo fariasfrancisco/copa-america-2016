@@ -1,17 +1,8 @@
 <div class="container" ng-show="$ctrl.hasBet">
   <div class="row">
-    <a href="#" class="button" ng-click="$ctrl.showEditWarning(true)">{{'EDIT_BUTTON' | translate}}</a>
-  </div>
-
-  <div class="row" ng-show="$ctrl.showEditWarn">
-    <uib-alert type="warning" close="$ctrl.showEditWarning(false)">
-      {{"EDIT_WARN" | translate}}
-      <button type="button" class="btn btn-danger" ng-click="$ctrl.edit()">{{"CONTINUE" | translate}}</button>
-    </uib-alert>
-  </div>
-
-  <div class="row alert alert-danger" ng-show="$ctrl.quarterFinalsError">
-    <strong>{{$ctrl.quarterFinalsError | translate}}</strong>
+    <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
+      {{'EDIT_BUTTON' | translate}}
+    </a>
   </div>
 
   <div class="row">
@@ -56,7 +47,6 @@
 </div>
 
 <div class="container" ng-show="!$ctrl.hasBet">
-  <button class="btn btn-danger" ng-click="$ctrl.openModal()">Open Me!</button>
   <div class="row">
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
@@ -454,18 +444,9 @@
   </div>
 
   <div class="row">
-    <a href="#" class="button" ng-click="$ctrl.showRestartWarning(true)">
+    <a href="#" class="button" ng-click="$ctrl.openModal('restart')">
       {{'RESTART_BUTTON' | translate}}
     </a>
-  </div>
-
-  <div class="row" ng-show="$ctrl.showRestartWarn">
-    <uib-alert type="warning" close="$ctrl.showRestartWarning(false)">
-      {{"RESTART_WARN" | translate}}
-      <button type="button" class="btn btn-danger" ng-click="$ctrl.startOver()">
-        {{"CONTINUE" | translate}}
-      </button>
-    </uib-alert>
   </div>
 
   <!-- TODO S T Y L E ! ! ! -->

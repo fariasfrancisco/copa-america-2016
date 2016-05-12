@@ -1,36 +1,43 @@
 'use strict';
+
 (function () {
   class BetComponent {
-    constructor(Auth, BetService, $uibModal, $log, QueryService, TableCalculator, BetBuilder, TeamLogoService, $state, $window) {
+    constructor(Auth, BetService, QueryService, BetBuilderService, ModalService, TeamLogoService, $uibModal, $state, $window) {
+      this.auth = Auth;
       this.betSvc = BetService;
-      this.betBuilder = BetBuilder;
-      this.$uibModal = $uibModal;
+      this.querySvc = QueryService;
+      this.betBuilderSvc = BetBuilderService;
+      this.modalSvc = ModalService;
       this.logoPaths = TeamLogoService;
+      this.$uibModal = $uibModal;
       this.$state = $state;
       this.$window = $window;
-      this.isLoggedIn = Auth.isLoggedIn;
-      this.auth = Auth;
-      this.querySvc = QueryService;
-      this.showEditWarn = false;
-      this.showRestartWarn = false;
     }
 
-    openModal() {
-      console.log('modal');
-      var modalInstance = this.$uibModal.open({
+    openModal(target) {
+      let self = this;
+
+      if (target === 'edit') {
+        this.modalSvc.setEditWarn(true);
+      }
+      
+      if (target === 'restart') {
+        this.modalSvc.setRestartWarn(true);
+      }
+
+      let modalInstance = this.$uibModal.open({
         animation: true,
         templateUrl: "/app/modal/modal.html",
         controller: 'ModalCtrl'
       });
 
-    }
-
-    showEditWarning(value) {
-      this.showEditWarn = value;
-    }
-
-    showRestartWarning(value) {
-      this.showRestartWarn = value;
+      modalInstance.result
+        .then(() => {
+          if (self.modalSvc.getEditWarn()) self.edit();
+          else self.startOver();
+        }, () => {
+          self.modalSvc.init();
+        });
     }
 
     changePenalties(home, away) {
@@ -79,7 +86,6 @@
 
       this.querySvc.deleteBet(id)
         .then(() => {
-          self.showWarn = false;
           delete self.userBet;
           self.startOver();
         })
@@ -89,7 +95,6 @@
     }
 
     startOver() {
-      this.showRestartWarn = false;
       this.groups = {};
       this.bet = {};
       delete this.hasBet;
@@ -107,6 +112,8 @@
     $onInit() {
       let self = this,
         user = this.auth.getCurrentUser()._id;
+
+      this.modalSvc.init();
 
       this.querySvc.getBetByUser(user)
         .then(res => {
@@ -131,7 +138,7 @@
         .then(obj => {
           self.bet = obj.bet;
           self.groups = obj.groups;
-        })
+        });
     }
 
     buildQuarterFinals() {
@@ -186,7 +193,7 @@
 
       this.bet.podium = this.podium;
 
-      this.betBuilder.buildBet(this.bet)
+      this.betBuilderSvc.buildBet(this.bet)
         .then(() => {
           this.$state.go('main');
         });

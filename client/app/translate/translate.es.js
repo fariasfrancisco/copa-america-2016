@@ -101,6 +101,7 @@ angular.module('copaamericaApp')
       THIRD_PLACE: 'Tercer Puesto',
       THRID_PLACE_PODIUM: '3er Lugar',
       USER: 'Usuario',
-      TOTAL: 'Total'
+      TOTAL: 'Total',
+      WARNING: 'Warning!'
     });
   });
