@@ -15,10 +15,7 @@ var UserSchema = new Schema({
   password: String,
   provider: String,
   salt: String,
-  facebook: {},
-  twitter: {},
-  google: {},
-  github: {}
+  facebook: {}
 });
 
 /**
@@ -135,7 +132,7 @@ UserSchema.methods = {
    * @return {Boolean}
    * @api public
    */
-  authenticate(password, callback) {
+    authenticate(password, callback) {
     if (!callback) {
       return this.password === this.encryptPassword(password);
     }
@@ -161,7 +158,7 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  makeSalt(byteSize, callback) {
+    makeSalt(byteSize, callback) {
     var defaultByteSize = 16;
 
     if (typeof arguments[0] === 'function') {
@@ -196,7 +193,7 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  encryptPassword(password, callback) {
+    encryptPassword(password, callback) {
     if (!password || !this.salt) {
       return null;
     }

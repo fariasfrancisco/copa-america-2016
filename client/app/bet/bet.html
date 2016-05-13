@@ -48,10 +48,17 @@
 
 <div class="container" ng-show="!$ctrl.hasBet">
   <div class="row">
+    <a href="#" class="button" ng-click="$ctrl.openModal('restart')">
+      {{'RESTART_BUTTON' | translate}}
+    </a>
+  </div>
+
+  <div class="row">
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{group.fullName | translate}}</h3>
+
           <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -103,6 +110,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
+
           <div class="collapse-button pull-right clickable " ng-click="qfIsCollapsed = !qfIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -173,6 +181,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
+
           <div class="collapse-button pull-right clickable " ng-click="sfIsCollapsed = !sfIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -243,6 +252,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
+
           <div class="collapse-button pull-right clickable " ng-click="tpIsCollapsed = !tpIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -308,6 +318,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
+
           <div class="collapse-button pull-right clickable " ng-click="fIsCollapsed = !fIsCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
             <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -374,68 +385,31 @@
     </a>
   </div>
 
-  <div class="row podium" ng-show="!$ctrl.podium">
-    <!--<div class="col-md-push-3 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{'PODIUM' | translate}}</h3>
-          <div class="collapse-button pull-right clickable " ng-click="pIsCollapsed = !pIsCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
-          </div>
-        </div>
-        <div uib-collapse="pIsCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table">
-              <tr class="table-row gold">
-                <td class="col-md-1 coelho">{{'FIRST_PLACE_PODIUM' | translate}}</td>
-                <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.firstPlace._id)}}"
-                       alt="{{$ctrl.podium.firstPlace._id}}">
-                </td>
-                <td class="col-md-3 coelho team-left">{{$ctrl.podium.firstPlace.name}}</td>
-              </tr>
-              <tr class="table-row silver">
-                <td class="col-md-1 coelho">{{'SECOND_PLACE_PODIUM' | translate}}</td>
-                <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.secondPlace._id)}}"
-                       alt="{{$ctrl.podium.secondPlace._id}}">
-                </td>
-                <td class="col-md-3 coelho team-left">{{$ctrl.podium.secondPlace.name}}</td>
-              </tr>
-              <tr class="table-row bronzodia">
-                <td class="col-md-1 coelho">{{'THRID_PLACE_PODIUM' | translate}}</td>
-                <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.thirdPlace._id)}}"
-                       alt="{{$ctrl.podium.thirdPlace._id}}">
-                </td>
-                <td class="col-md-3 coelho team-left">{{$ctrl.podium.thirdPlace.name}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>-->
+  <div class="row podium" ng-show="$ctrl.podium">
     <div class="col-md-push-3 col-md-6">
       <h1 class="podium-title text-center">{{'PODIUM' | translate}}</h1>
+
       <div class="flex-box">
         <div class="first">
           <div class="team-holder gold">
-            <img src="/assets/images/team_logos/0.png" alt="">
+            <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.firstPlace._id)}}"
+                 alt="{{$ctrl.podium.firstPlace._id}}">
           </div>
-          <h3 class="text-center">Argentina</h3>
+          <h3 class="text-center">{{$ctrl.podium.firstPlace.name}}</h3>
         </div>
         <div class="second">
           <div class="team-holder silver">
-            <img src="/assets/images/team_logos/1.png" alt="">
+            <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.secondPlace._id)}}"
+                 alt="{{$ctrl.podium.secondPlace._id}}">
           </div>
-          <h3 class="text-center">Bolivia</h3>
+          <h3 class="text-center">{{$ctrl.podium.secondPlace.name}}</h3>
         </div>
         <div class="third">
           <div class="team-holder bronze">
-            <img src="/assets/images/team_logos/10.png" alt="">
+            <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.thirdPlace._id)}}"
+                 alt="{{$ctrl.podium.thirdPlace._id}}">
           </div>
-          <h3 class="text-center">Colombia</h3>
+          <h3 class="text-center">{{$ctrl.podium.thirdPlace.name}}</h3>
         </div>
       </div>
     </div>
@@ -443,6 +417,7 @@
 
   <div class="row" ng-show="$ctrl.podium">
     <h4>{{'GOLDEN_BOOT_HEADER' | translate}}</h4>
+
     <div class="row">
       <div class="col-md-3">
         <p>{{'TEAM' | translate}}</p>
@@ -463,12 +438,6 @@
     <a href="#" class="button" ng-class="{'button-disabled': $ctrl.disableButton}"
        ng-show="$ctrl.goldenBootPlayer.name" ng-click="$ctrl.disableButton || $ctrl.save()">
       {{'SAVE_BET_BUTTON' | translate}}
-    </a>
-  </div>
-
-  <div class="row">
-    <a href="#" class="button" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
     </a>
   </div>
 
