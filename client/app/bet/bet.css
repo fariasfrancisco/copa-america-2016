@@ -99,6 +99,8 @@ a.button-disabled:hover {
 }
 
 .col-md-1 img {
+  display: block;
+  margin: auto;
   height: 40px;
   width: 40px;
 }
@@ -108,6 +110,7 @@ a.button-disabled:hover {
 .podium .flex-box{
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .podium table {
   margin-bottom: 0;
@@ -122,6 +125,7 @@ a.button-disabled:hover {
   border: 5px solid #DEDEDE;
   border-radius: 50%;
   box-shadow: inset 0px 0px 10px rgba(0,0,0,0.2);
+  margin: 0 auto;
 }
 .podium .first {
   order: 2;
@@ -152,8 +156,7 @@ a.button-disabled:hover {
   height: 90px;
 }
 .podium .first .team-holder img {
-  width: 80px;
-  height: 80px;
+  width: 80%;
 }
 
 .podium .second .team-holder {
@@ -161,8 +164,7 @@ a.button-disabled:hover {
   height: 80px;
 }
 .podium .second .team-holder img {
-  width: 70px;
-  height: 70px;
+  width: 80%;
 }
 
 .podium .third .team-holder {
@@ -170,9 +172,11 @@ a.button-disabled:hover {
   height: 60px;
 }
 .podium .third .team-holder img {
-  width: 50px;
-  height: 50px;
+  width: 80%;
 }
+
+/* PODIUM STYLES FOR MEDIUM-UP DEVICES*/
+
 @media (min-width: 768px) {
   .podium .flex-box {
     justify-content: space-between;
@@ -188,8 +192,8 @@ a.button-disabled:hover {
     height: 180px;
   }
   .podium .first .team-holder img {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
 
   .podium .second .team-holder {
