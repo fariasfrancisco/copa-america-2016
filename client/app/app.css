@@ -1,6 +1,14 @@
 html {
   overflow-y: scroll;
 }
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 .container {
   padding-top: 60px;
 }
@@ -16,6 +24,20 @@ footer.navbar {
 /**
  * Bootstrap Fonts
  */
+
+/*ANGULAR ANIMATIONS*/
+
+
+div.ng-hide-remove {
+  transition: 0.25s linear opacity;
+  opacity: 0;
+}
+
+
+div.ng-hide-remove-active {
+  opacity: 1;
+}
+
 
 @font-face {
   font-family: 'Glyphicons Halflings';
