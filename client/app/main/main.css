@@ -89,6 +89,16 @@ a.button:hover {
   box-shadow: rgba(30, 22, 54, 0.7) 0 0 0 40px inset;
 }
 
+a.button.warn {
+  color: rgba(110, 8, 13, 0.77);
+  box-shadow: rgba(255, 10, 27, 0.4) 0 0 0 2px inset;
+}
+
+a.button.warn:hover {
+  color: rgba(110, 8, 13, 0.77);
+  box-shadow: rgba(255, 10, 27, 0.7) 0 0 0 40px inset;
+}
+
 section div a.button {
   margin: 2em auto;
 }
