@@ -3,7 +3,6 @@
 angular.module('copaamericaApp')
   .directive('selectOnClick', ['$window' ,function ($window) {
     return {
-      template: '<div></div>',
       restrict: 'A',
       link: function (scope, element, attrs) {
         element.on('click', function () {
