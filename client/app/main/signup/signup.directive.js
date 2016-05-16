@@ -51,7 +51,7 @@ class SignupController {
 angular.module('copaamericaApp')
   .directive('signup', function () {
     return {
-      templateUrl: 'app/signup/signup.html',
+      templateUrl: 'app/main/signup/signup.html',
       restrict: 'EA',
       controller: SignupController,
       controllerAs: 'signupCtrl'

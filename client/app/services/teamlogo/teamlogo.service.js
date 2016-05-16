@@ -2,7 +2,7 @@
 
 angular.module('copaamericaApp')
   .service('TeamLogoService', function () {
-    let logoPaths = [
+    const logoPaths = [
       'assets/images/team_logos/0.png',
       'assets/images/team_logos/1.png',
       'assets/images/team_logos/2.png',

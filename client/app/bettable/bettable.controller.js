@@ -14,25 +14,30 @@
 
       this.querySvc.getBets()
         .then(bets => {
-          self.bets = bets;
+          self.betTableSvc.cleanInvalidBets(bets)
+            .then(validBets => {
+              self.bets = validBets;
 
-          bets.forEach(bet => {
-            self.betRows.push({
-              user: bet.name,
-              points: {}
-            });
-          });
-
-          self.groups = self.querySvc.getGroups();
-          if (self.groups.length < 1) {
-            self.querySvc.buildGroupsAndTeams()
-              .then(() => {
-                self.groups = self.querySvc.getGroups();
-                self.process();
+              self.bets.forEach(bet => {
+                self.betRows.push({
+                  user: bet.name,
+                  points: {}
+                });
               });
-          } else {
-            self.process();
-          }
+
+              let groups = self.querySvc.getGroups();
+
+              if (groups.length < 1) {
+                self.querySvc.buildGroupsAndTeams()
+                  .then(() => {
+                    self.groups = self.querySvc.getGroups();
+                    self.process();
+                  });
+              } else {
+                self.groups = groups;
+                self.process();
+              }
+            });
         });
     }
 

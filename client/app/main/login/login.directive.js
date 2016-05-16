@@ -39,7 +39,7 @@ class LoginController {
 angular.module('copaamericaApp')
   .directive('login', function () {
     return {
-      templateUrl: 'app/login/login.html',
+      templateUrl: 'app/main/login/login.html',
       restrict: 'EA',
       controller: LoginController,
       controllerAs: 'loginCtrl'

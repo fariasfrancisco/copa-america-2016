@@ -10,7 +10,8 @@ angular.module('copaamericaApp')
       GROUP_TABLE_API = '/api/groups/table/',
       STAGE_API = '/api/groups/stage/',
       BETS_API = '/api/bets/',
-      BETS_API_USER = '/api/bets/user/';
+      BETS_API_USER = '/api/bets/user/',
+      IS_VALID_API = '/api/users/valid/';
 
     let compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -140,6 +141,19 @@ angular.module('copaamericaApp')
           .then(() => {
             return angular.copy(groups);
           });
+      },
+
+      isValid(id){
+        const IS_VALID = IS_VALID_API + id;
+
+        return $http.get(IS_VALID)
+          .then(response => {
+              return response.data;
+            },
+            () => {
+              return false;
+            }
+          );
       }
     };
   }]);

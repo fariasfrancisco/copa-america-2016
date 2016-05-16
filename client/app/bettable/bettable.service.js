@@ -3,6 +3,27 @@
 angular.module('copaamericaApp')
   .service('BetTableService', ['QueryService', 'GoldenBootCalculator', function (QueryService, GoldenBootCalculator) {
     return {
+      cleanInvalidBets(bets){
+        let validBets = [],
+          length = bets.length,
+          count = 0;
+
+        let clean = function () {
+          if (count < length) {
+            return QueryService.isValid(bets[count]._user)
+              .then(valid => {
+                if (valid) validBets.push(bets[count]);
+                count++;
+                return clean();
+              });
+          } else {
+            return Promise.resolve(validBets);
+          }
+        };
+
+        return clean();
+      },
+
       processGroups(groups, bets, betRows) {
         let now = new Date(),
           matchDate;

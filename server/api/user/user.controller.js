@@ -104,18 +104,31 @@ export function changePassword(req, res, next) {
  *  restriction: 'admin'
  */
 export function validate(req, res) {
-
   let id = req.params.id;
   let validation = Boolean(req.body.valid);
 
   return User.findById(id).exec()
     .then(user => {
       user.valid = validation;
-      return user.save().then(() => {
+      return user.save()
+        .then(() => {
           res.status(204).end();
         })
         .catch(validationError(res))
     });
+}
+
+/**
+ * Returns the value of the valid property of the user
+ */
+export function isValid(req, res) {
+  let id = req.params.id;
+
+  return User.findById(id).exec()
+    .then(user => {
+      return res.json(user.valid);
+    })
+    .catch(err => next(err));
 }
 
 /**
