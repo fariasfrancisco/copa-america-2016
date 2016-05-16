@@ -3,6 +3,23 @@
 angular.module('copaamericaApp')
   .config(function ($translateProvider) {
     $translateProvider.translations('es', {
+      //teams
+      ARG: 'Argentina',
+      BOL: 'Bolivia',
+      PER: 'Perú',
+      PAN: 'Panamá',
+      JAM: 'Jamaica',
+      MEX: 'México',
+      PAR: 'Paraguay',
+      HAI: 'Haití',
+      ECU: 'Ecuador',
+      COS: 'Costa Rica',
+      COL: 'Colombia',
+      URU: 'Uruguay',
+      USA: 'Estados Unidos',
+      CHI: 'Chile',
+      VEN: 'Venezuela',
+
       //navbar
       BET: 'Apuesta',
       ADMIN: 'Administrador',

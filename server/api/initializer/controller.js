@@ -7,20 +7,47 @@ import teams from './teams.json';
 let init = {};
 
 init.initialize = function (req, res) {
-  groups.forEach(function (group) {
-    group.matches.forEach(function (match) {
-      match.date = moment.utc(match.date);
+  try {
+    groups.forEach(group => {
+      group.matches.forEach(match => {
+        match.date = moment.utc(match.date);
+      });
+
+      Group.create(group)
+        .catch(res => {
+          console.log(res);
+          throw err;
+        });
     });
-  });
+  } catch (err) {
+    return res.status(500)
+      .json({message: 'Error when building groups'})
+      .end();
+  }
 
-  groups.forEach(group => {
-    Group.create(group);
-  });
+  try {
+    let players;
 
-  teams.forEach(team => {
-    Team.create(team);
-  });
+    teams.forEach(team => {
+      try {
+        players = require("./teams/" + team.name + ".json");
+      } catch (e) {
+        console.log('can\'t find ' + team.name + '.json');
+        players = [];
+      }
+      team.players = players;
 
+      Team.create(team)
+        .catch(res => {
+          console.log(res);
+          throw err;
+        });
+    });
+  } catch (err) {
+    return res.status(500)
+      .json({message: 'Error when building teams'})
+      .end();
+  }
   return res.status(200)
     .json({message: 'Done loading teams & groups'})
     .end();

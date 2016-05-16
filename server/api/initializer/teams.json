@@ -1,226 +1,82 @@
 [
   {
     "_id": 0,
-    "name": "Argentina",
-    "players": [
-      {
-        "name": "Messi",
-        "goals": 0
-      },
-      {
-        "name": "Aguero",
-        "goals": 0
-      }
-    ]
+    "name": "ARG",
+    "players": []
   },
   {
     "_id": 1,
-    "name": "Bolivia",
-    "players": [
-      {
-        "name": "Bolita1",
-        "goals": 0
-      },
-      {
-        "name": "Bolita2",
-        "goals": 0
-      }
-    ]
+    "name": "BOL",
+    "players": []
   },
   {
     "_id": 2,
-    "name": "Peru",
-    "players": [
-      {
-        "name": "Peruka",
-        "goals": 0
-      },
-      {
-        "name": "Mantero",
-        "goals": 0
-      }
-    ]
+    "name": "BRA",
+    "players": []
   },
   {
     "_id": 3,
-    "name": "Panama",
-    "players": [
-      {
-        "name": "Pana1",
-        "goals": 0
-      },
-      {
-        "name": "Pana2",
-        "goals": 0
-      }
-    ]
+    "name": "CHI",
+    "players": []
   },
   {
     "_id": 4,
-    "name": "Jamaica",
-    "players": [
-      {
-        "name": "Mary",
-        "goals": 0
-      },
-      {
-        "name": "Juana",
-        "goals": 0
-      }
-    ]
+    "name": "COL",
+    "players": []
   },
   {
     "_id": 5,
-    "name": "Mexico",
-    "players": [
-      {
-        "name": "Orale",
-        "goals": 0
-      },
-      {
-        "name": "Guey",
-        "goals": 0
-      }
-    ]
+    "name": "COS",
+    "players": []
   },
   {
     "_id": 6,
-    "name": "Paraguay",
-    "players": [
-      {
-        "name": "Nderacore",
-        "goals": 0
-      },
-      {
-        "name": "Chera",
-        "goals": 0
-      }
-    ]
+    "name": "ECU",
+    "players": []
   },
   {
     "_id": 7,
-    "name": "Haiti",
-    "players": [
-      {
-        "name": "Terre",
-        "goals": 0
-      },
-      {
-        "name": "Moto",
-        "goals": 0
-      }
-    ]
+    "name": "HAI",
+    "players": []
   },
   {
     "_id": 8,
-    "name": "Ecuador",
-    "players": [
-      {
-        "name": "Terre2",
-        "goals": 0
-      },
-      {
-        "name": "Moto2",
-        "goals": 0
-      }
-    ]
+    "name": "JAM",
+    "players": []
   },
   {
     "_id": 9,
-    "name": "Costa Rica",
-    "players": [
-      {
-        "name": "ASD",
-        "goals": 0
-      },
-      {
-        "name": "QWE",
-        "goals": 0
-      }
-    ]
+    "name": "MEX",
+    "players": []
   },
   {
     "_id": 10,
-    "name": "Colombia",
-    "players": [
-      {
-        "name": "Coca",
-        "goals": 0
-      },
-      {
-        "name": "Ina",
-        "goals": 0
-      }
-    ]
+    "name": "PAN",
+    "players": []
   },
   {
     "_id": 11,
-    "name": "Brazil",
-    "players": [
-      {
-        "name": "Cara",
-        "goals": 0
-      },
-      {
-        "name": "Mane",
-        "goals": 0
-      }
-    ]
+    "name": "PAR",
+    "players": []
   },
   {
     "_id": 12,
-    "name": "Uruguay",
-    "players": [
-      {
-        "name": "Washington",
-        "goals": 0
-      },
-      {
-        "name": "Provinciano",
-        "goals": 0
-      }
-    ]
+    "name": "PER",
+    "players": []
   },
   {
     "_id": 13,
-    "name": "United States",
-    "players": [
-      {
-        "name": "Faggot",
-        "goals": 0
-      },
-      {
-        "name": "Pussy",
-        "goals": 0
-      }
-    ]
+    "name": "URU",
+    "players": []
   },
   {
     "_id": 14,
-    "name": "Chile",
-    "players": [
-      {
-        "name": "Wea",
-        "goals": 0
-      },
-      {
-        "name": "Fome",
-        "goals": 0
-      }
-    ]
+    "name": "USA",
+    "players": []
   },
   {
     "_id": 15,
-    "name": "Venezuela",
-    "players": [
-      {
-        "name": "Chavez",
-        "goals": 0
-      },
-      {
-        "name": "Maduro",
-        "goals": 0
-      }
-    ]
+    "name": "VEN",
+    "players": []
   }
 ]

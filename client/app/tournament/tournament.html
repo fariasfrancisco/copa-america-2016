@@ -16,7 +16,7 @@
         <tr ng-repeat="line in group.table">
           <td class="team-name">
             <img class="team-img" height="30" width="30" ng-src="{{$ctrl.logoPaths.getPath(line.team)}}">
-            {{line.teamName}}
+            {{line.teamName | translate}}
           </td>
           <td class="table-cell">{{line.points}}</td>
           <td class="table-cell">{{line.goalsFor}}</td>
@@ -30,42 +30,42 @@
     <div class="graphChild">
       <div class="c1">
         <div class="team">
-          {{$ctrl.groups.GA.first.teamName || 'GA-1'}}
+          {{($ctrl.groups.GA.first.teamName | translate) || 'GA-1'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GA.first.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GB.second.teamName || 'GB-2'}}
+          {{($ctrl.groups.GB.second.teamName | translate) || 'GB-2'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GB.second.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GD.first.teamName || 'GD-1'}}
+          {{($ctrl.groups.GD.first.teamName | translate) || 'GD-1'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GD.first.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GC.second.teamName || 'GC-2'}}
+          {{($ctrl.groups.GC.second.teamName | translate) || 'GC-2'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GC.second.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GB.first.teamName || 'GB-1'}}
+          {{($ctrl.groups.GB.first.teamName | translate) || 'GB-1'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GB.first.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GA.second.teamName || 'GA-2'}}
+          {{($ctrl.groups.GA.second.teamName | translate) || 'GA-2'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GA.second.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GC.first.teamName || 'GC-1'}}
+          {{($ctrl.groups.GC.first.teamName | translate) || 'GC-1'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GC.first.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
         <div class="team">
-          {{$ctrl.groups.GD.second.teamName || 'GD-2'}}
+          {{($ctrl.groups.GD.second.teamName | translate) || 'GD-2'}}
           <img class="team-img"
                ng-src="{{$ctrl.logoPaths.getPath($ctrl.groups.GD.second.team) || $ctrl.logoPaths.getPath(16)}}">
         </div>
@@ -73,49 +73,49 @@
 
       <div class="c2">
         <div class="block first">
-          {{$ctrl.brackets.Q1.winner.teamName || ''}}
+          {{($ctrl.brackets.Q1.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.Q1.winner.team)}}" alt="">
         </div>
         <div class="block">
-          {{$ctrl.brackets.Q2.winner.teamName || ''}}
+          {{($ctrl.brackets.Q2.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.Q2.winner.team)}}" alt="">
         </div>
         <div class="block">
-          {{$ctrl.brackets.Q3.winner.teamName || ''}}
+          {{($ctrl.brackets.Q3.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.Q3.winner.team)}}" alt="">
         </div>
         <div class="block">
-          {{$ctrl.brackets.Q4.winner.teamName || ''}}
+          {{($ctrl.brackets.Q4.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.Q4.winner.team)}}" alt="">
         </div>
       </div>
 
       <div class="c3">
         <div class="block">
-          {{$ctrl.brackets.S1.winner.teamName || ''}}
+          {{($ctrl.brackets.S1.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.S1.winner.team)}}" alt="">
         </div>
         <div class="block low">
-          {{$ctrl.brackets.S2.winner.teamName || ''}}
+          {{($ctrl.brackets.S2.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.S2.winner.team)}}" alt="">
         </div>
         <div class="third-place">
-          {{$ctrl.brackets.S1.loser.teamName || ''}}
+          {{($ctrl.brackets.S1.loser.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.S1.winner.team)}}" alt="">
         </div>
         <div class="third-place low">
-          {{$ctrl.brackets.S2.loser.teamName || ''}}
+          {{($ctrl.brackets.S2.loser.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.S2.winner.team)}}" alt="">
         </div>
       </div>
 
       <div class="c4">
         <div class="block">
-          {{$ctrl.brackets.F.winner.teamName || ''}}
+          {{($ctrl.brackets.F.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.F.winner.team)}}" alt="">
         </div>
         <div class="block-3rd-place">
-          {{$ctrl.brackets.TP.winner.teamName || ''}}
+          {{($ctrl.brackets.TP.winner.teamName | translate) || ''}}
           <img class="team-img" ng-src="{{$ctrl.logoPaths.getPath($ctrl.brackets.TP.winner.team)}}" alt="">
         </div>
       </div>

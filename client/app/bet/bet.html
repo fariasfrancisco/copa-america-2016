@@ -28,12 +28,12 @@
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.home._team)}}">
                 </td>
-                <td class="col-md-3">{{match.home.teamName}}</td>
+                <td class="col-md-3">{{match.home.teamName | translate}}</td>
                 <td class="col-md-1 poveda">{{match.home.goals}}</td>
                 <td class="col-md-1 poveda">{{match.home.penalties}}</td>
                 <td class="col-md-1 poveda">{{match.away.penalties}}</td>
                 <td class="col-md-1 poveda">{{match.away.goals}}</td>
-                <td class="col-md-3">{{match.away.teamName}}</td>
+                <td class="col-md-3">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.away._team)}}">
                 </td>
@@ -66,9 +66,9 @@
               <tr class="table-row" ng-repeat="match in group.matches">
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.home._team)}}">
-                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.home.teamName}}</p>
+                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
-                <td class="col-md-3 coelho team-left hidden-xs">{{match.home.teamName}}</td>
+                <td class="col-md-3 coelho team-left hidden-xs">{{match.home.teamName | translate}}</td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onfocus="this.placeholder = ''"
                          onblur="this.placeholder = '0'" placeholder="0" type="text"
@@ -83,10 +83,10 @@
                          ng-disabled="$ctrl.quarterFinals" ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-xs">{{match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.away._team)}}">
-                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.away.teamName}}</p>
+                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
               </tr>
             </table>
@@ -126,9 +126,9 @@
               <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.home._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName}}</td>
+                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onfocus="this.placeholder = ''"
                          onblur="this.placeholder = '0'" placeholder="0" type="text"
@@ -161,10 +161,10 @@
                          ng-disabled="$ctrl.semiFinals"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.away._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
               </tr>
             </table>
@@ -208,9 +208,9 @@
 
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.home._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName}}</td>
+                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onblur="this.placeholder = '0'"
                          onfocus="this.placeholder = ''" placeholder="0" type="text"
@@ -245,10 +245,10 @@
                          ng-disabled="$ctrl.thirdPlace && $ctrl.finals" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath(match.away._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
 
               </tr>
@@ -294,9 +294,9 @@
                   <img height="40" width="40"
                        ng-src="{{$ctrl.logoPaths.getPath($ctrl.thirdPlace.match.home._team)}}"
                        alt="{{$ctrl.thirdPlace.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.home.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.home.teamName | translate}}</p>
                 </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.home.teamName}}</td>
+                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.home.teamName | translate}}</td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onblur="this.placeholder = '0'"
                          onfocus="this.placeholder = ''" placeholder="0" type="text"
@@ -331,12 +331,12 @@
                          ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img height="40" width="40"
                        ng-src="{{$ctrl.logoPaths.getPath($ctrl.thirdPlace.match.away._team)}}"
                        alt="{{$ctrl.thirdPlace.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.away.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.away.teamName | translate}}</p>
                 </td>
 
               </tr>
@@ -370,10 +370,10 @@
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.finals.match.home._team)}}"
                        alt="{{$ctrl.finals.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.home.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.home.teamName | translate}}</p>
                 </td>
                 <td class="hidden-sm-down col-md-3 coelho team-left hidden-sm hidden-xs">
-                  {{$ctrl.finals.match.home.teamName}}
+                  {{$ctrl.finals.match.home.teamName | translate}}
                 </td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onblur="this.placeholder = '0'"
@@ -409,11 +409,11 @@
                          ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.finals.match.away.teamName}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.finals.match.away.teamName | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.finals.match.away._team)}}"
                        alt="{{$ctrl.finals.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.away.teamName}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.away.teamName | translate}}</p>
                 </td>
               </tr>
             </table>

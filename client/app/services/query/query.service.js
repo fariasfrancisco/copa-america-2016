@@ -39,10 +39,11 @@ angular.module('copaamericaApp')
     };
 
     let queryTeams = function () {
-      return $http.get(TEAMS_API
-      ).then(response => {
-        return response.data.sort(compareTeam);
-      });
+      return $http.get(TEAMS_API)
+        .then(response => {
+          console.log(response.data);
+          return response.data.sort(compareTeam);
+        });
     };
 
     return {
@@ -98,6 +99,7 @@ angular.module('copaamericaApp')
         return queryTeams()
           .then(response => {
             teams = response;
+            console.log(teams);
 
             return queryGroups()
               .then(response => {
