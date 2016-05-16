@@ -105,7 +105,7 @@ angular.module('copaamericaApp')
       HOME_PENALTIES: 'Penales Local',
       HOME_TEAM: 'Local',
       ID: 'id',
-      TEAM: 'Equipo',
+      MAKE_BET: 'Armá tu apuesta!',
       PLAYER: 'Jugador',
       PENALTIES: 'Penales',
       PODIUM: 'Podio',
@@ -115,10 +115,11 @@ angular.module('copaamericaApp')
       SAVE_BET_BUTTON: 'Guardar',
       SECOND_PLACE_PODIUM: '2do Lugar',
       SEMI_FINALS: 'Semifinales',
+      TEAM: 'Equipo',
       THIRD_PLACE: 'Tercer Puesto',
       THRID_PLACE_PODIUM: '3er Lugar',
       USER: 'Usuario',
       TOTAL: 'Total',
-      WARNING: 'Warning!'
+      WARNING: 'Advertencia!'
     });
   });

@@ -47,9 +47,11 @@
 </div>
 
 <div class="container" ng-show="!$ctrl.hasBet">
+  <div class="row">
+    <h1 class="text-center">{{ "MAKE_BET" | translate }}</h1>
+  </div>
 
   <div class="row">
-    <h1 class="text-center">Armá tu apuesta</h1>
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
@@ -102,9 +104,6 @@
        ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
        ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">
       {{'DONE_BUTTON' | translate}}
-    </a>
-    <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
     </a>
   </div>
 
@@ -183,9 +182,6 @@
        ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
        ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">
       {{'DONE_BUTTON' | translate}}
-    </a>
-    <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
     </a>
   </div>
 
@@ -269,9 +265,6 @@
        ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">
       {{'DONE_BUTTON' | translate}}
     </a>
-    <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
-    </a>
   </div>
 
   <div class="row" ng-show="$ctrl.thirdPlace">
@@ -294,9 +287,12 @@
                   <img height="40" width="40"
                        ng-src="{{$ctrl.logoPaths.getPath($ctrl.thirdPlace.match.home._team)}}"
                        alt="{{$ctrl.thirdPlace.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.home.teamName | translate}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.home.teamName |
+                    translate}}</p>
                 </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.home.teamName | translate}}</td>
+                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.home.teamName |
+                  translate}}
+                </td>
                 <td class="col-md-1 score">
                   <input class="form-control scorearea" onblur="this.placeholder = '0'"
                          onfocus="this.placeholder = ''" placeholder="0" type="text"
@@ -331,12 +327,15 @@
                          ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.away.teamName | translate}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.thirdPlace.match.away.teamName |
+                  translate}}
+                </td>
                 <td class="col-md-1">
                   <img height="40" width="40"
                        ng-src="{{$ctrl.logoPaths.getPath($ctrl.thirdPlace.match.away._team)}}"
                        alt="{{$ctrl.thirdPlace.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.away.teamName | translate}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.thirdPlace.match.away.teamName |
+                    translate}}</p>
                 </td>
 
               </tr>
@@ -370,7 +369,8 @@
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.finals.match.home._team)}}"
                        alt="{{$ctrl.finals.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.home.teamName | translate}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.home.teamName |
+                    translate}}</p>
                 </td>
                 <td class="hidden-sm-down col-md-3 coelho team-left hidden-sm hidden-xs">
                   {{$ctrl.finals.match.home.teamName | translate}}
@@ -409,11 +409,14 @@
                          ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.finals.match.away.teamName | translate}}</td>
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.finals.match.away.teamName |
+                  translate}}
+                </td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.finals.match.away._team)}}"
                        alt="{{$ctrl.finals.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.away.teamName | translate}}</p>
+                  <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.away.teamName |
+                    translate}}</p>
                 </td>
               </tr>
             </table>
@@ -432,13 +435,9 @@
        ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">
       {{'DONE_BUTTON' | translate}}
     </a>
-    <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
-    </a>
   </div>
 
   <div class="row podium" ng-show="$ctrl.podium">
-
     <div class="col-md-offset-3 col-md-6">
       <div class="row">
         <h1 class="podium-title text-center">{{'PODIUM' | translate}}</h1>
@@ -449,24 +448,23 @@
               <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.firstPlace._id)}}"
                    alt="{{$ctrl.podium.firstPlace._id}}">
             </div>
-            <h3 class="text-center">{{$ctrl.podium.firstPlace.name}}</h3>
+            <h3 class="text-center">{{$ctrl.podium.firstPlace.name | translate}}</h3>
           </div>
           <div class="second">
             <div class="team-holder silver">
               <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.secondPlace._id)}}"
                    alt="{{$ctrl.podium.secondPlace._id}}">
             </div>
-            <h3 class="text-center">{{$ctrl.podium.secondPlace.name}}</h3>
+            <h3 class="text-center">{{$ctrl.podium.secondPlace.name | translate}}</h3>
           </div>
           <div class="third">
             <div class="team-holder bronze">
               <img ng-src="{{$ctrl.logoPaths.getPath($ctrl.podium.thirdPlace._id)}}"
                    alt="{{$ctrl.podium.thirdPlace._id}}">
             </div>
-            <h3 class="text-center">{{$ctrl.podium.thirdPlace.name}}</h3>
+            <h3 class="text-center">{{$ctrl.podium.thirdPlace.name | translate}}</h3>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -478,23 +476,19 @@
         <div>
           <div class="col-md-3">
             <p>{{'TEAM' | translate}}</p>
-            <input class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name}}" type="text"
-                   ng-model="$ctrl.goldenBootTeam"
-                   select-on-click
+            <input class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name | translate}}" type="text"
+                   ng-model="$ctrl.goldenBootTeam" select-on-click
                    uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8">
           </div>
           <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
             <p>{{'PLAYER' | translate}}</p>
             <input class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}" type="text"
-                   ng-model="$ctrl.goldenBootPlayer"
-                   select-on-click
+                   ng-model="$ctrl.goldenBootPlayer" select-on-click
                    uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8">
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 
   <div class="row" ng-show="$ctrl.goldenBootPlayer.name">
@@ -502,6 +496,9 @@
        ng-click="$ctrl.disableButton || $ctrl.save()">
       {{'SAVE_BET_BUTTON' | translate}}
     </a>
+  </div>
+
+  <div class="row">
     <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
       {{'RESTART_BUTTON' | translate}}
     </a>
