@@ -36,3 +36,7 @@
 .validated {
   color: rgb(8, 137, 12);
 }
+
+.row.alert-success {
+  text-align: center;
+}

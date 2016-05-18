@@ -7,7 +7,7 @@ angular.module('copaamericaApp')
       INITIALIZE_API = '/api/init/',
       MATCH_API = '/api/groups/match/',
       TEAMS_API = '/api/teams/',
-      GROUPS_API = '/api/groups/';
+      GROUPS_API = '/api/groups/id/';
 
     return {
       validate(user, bool) {
@@ -53,24 +53,30 @@ angular.module('copaamericaApp')
           });
       },
 
-      saveTeam(team){
-        const TEAM_UPDATE = TEAMS_API + team._id,
-          body = {players: team.players};
+      clone(obj){
+        return angular.copy(obj);
+      },
 
-        return $http.put(TEAM_UPDATE, body)
-          .then(() => {
-              return {message: 'saved'}
-            },
-            () => {
-              throw 'save Error';
-            });
+      saveTeam(team, empty){
+        const TEAM_UPDATE = TEAMS_API + team._id;
+
+        if (!empty) {
+          return $http.put(TEAM_UPDATE, team)
+            .then(() => {
+                return {message: 'saved.'}
+              },
+              () => {
+                throw 'save Error';
+              });
+        } else {
+          return Promise.resolve({message: 'Nothing to save.'})
+        }
       },
 
       saveGroup(group){
-        const GROUP_UPDATE = GROUPS_API + group._id,
-          body = {matches: group.matches};
+        const GROUP_UPDATE = GROUPS_API + group._id;
 
-        return $http.put(GROUP_UPDATE, body)
+        return $http.put(GROUP_UPDATE, group)
           .then(() => {
               return {message: 'saved'}
             },

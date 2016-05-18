@@ -43,7 +43,23 @@
           }
         });
 
-        if (found) return;
+        if (found) {
+          if (!self.match.home.team) {
+            self.adminSvc.getTeam(self.match.home._team)
+              .then(team => {
+                self.match.home.team = team;
+              });
+          }
+
+          if (!self.match.away.team) {
+            self.adminSvc.getTeam(self.match.away._team)
+              .then(team => {
+                self.match.away.team = team;
+              });
+          }
+
+          return;
+        }
       }
 
       try {
@@ -81,7 +97,12 @@
     }
 
     save() {
-      let self = this;
+      let self = this,
+        emptyHomeScorers = false,
+        emptyAwayScorers = false;
+
+      if (this.homeScorers.length < 1) emptyHomeScorers = true;
+      if (this.awayScorers.length < 1) emptyAwayScorers = true;
 
       this.match.home.team.players.forEach(player => {
         self.homeScorers.forEach(scorer => {
@@ -95,6 +116,12 @@
         });
       });
 
+      let homeTeam = this.adminSvc.clone(this.match.home.team),
+        awayTeam = this.adminSvc.clone(this.match.away.team);
+
+      delete this.match.home.team;
+      delete this.match.away.team;
+
       this.match.home._team = Number(this.match.home._team);
       this.match.away._team = Number(this.match.away._team);
       this.match.home.goals = Number(this.match.home.goals);
@@ -102,40 +129,36 @@
       this.match.home.penalties = Number(this.match.home.penalties);
       this.match.away.penalties = Number(this.match.away.penalties);
 
-      this.adminSvc.saveTeam(this.match.home.team)
+      this.adminSvc.saveTeam(homeTeam, emptyHomeScorers)
         .then(() => {
-          delete self.match.home.team;
-
-          self.adminSvc.saveTeam(self.match.away.team)
-            .then(() => {
-              self.saveTeamSuccess = true;
-              delete self.saveTeamError;
-              delete self.match.away.team;
-
-              self.adminSvc.saveGroup(self.group)
-                .then(() => {
-                  self.saveGroupSuccess = true;
-                  delete self.saveGroupError;
-                })
-                .catch(() => {
-                  self.saveGroupError = true;
-                  delete self.saveGroupSuccess;
-                });
-            })
-            .catch(() => {
-                self.saveTeamError = true;
-                delete self.saveTeamSuccess;
-              }
-            );
+          self.saveHomeTeamSuccess = true;
+          delete self.saveHomeTeamError;
         })
         .catch(() => {
-            self.saveTeamError = true;
-            delete self.saveTeamSuccess;
-          }
-        );
+          self.saveHomeTeamError = true;
+          delete self.saveHomeTeamSuccess;
+        });
+
+      this.adminSvc.saveTeam(awayTeam, emptyAwayScorers)
+        .then(() => {
+          self.saveAwayTeamSuccess = true;
+          delete self.saveAwayTeamError;
+        })
+        .catch(() => {
+          self.saveAwayTeamError = true;
+          delete self.saveAwayTeamSuccess;
+        });
+
+      this.adminSvc.saveGroup(this.group)
+        .then(() => {
+          self.saveGroupSuccess = true;
+          delete self.saveGroupError;
+        })
+        .catch(() => {
+          self.saveGroupError = true;
+          delete self.saveGroupSuccess;
+        });
     }
-    
-    //TODO UNTESTED!
   }
 
   angular.module('copaamericaApp.admin')

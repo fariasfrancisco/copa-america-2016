@@ -15,6 +15,12 @@ angular.module('copaamericaApp')
       ADD_HOME_SCORER: 'Add Home Scorer',
       ADD_AWAY_SCORER: 'Add Away Scorer',
       SAVE: 'Save',
+      SAVE_HOME_TEAM_SUCCESS: 'Home Team successfully saved',
+      SAVE_AWAY_TEAM_SUCCESS: 'Away Team successfully saved',
+      SAVE_HOME_TEAM_ERROR: 'An Error occurred when saving Home Team',
+      SAVE_AWAY_TEAM_ERROR: 'An Error occurred when saving Away Team',
+      SAVE_GROUP_SUCCESS: 'Group successfully saved',
+      SAVE_GROUP_ERROR: 'An Error occurred when saving Group',
 
       //teams
       ARG: 'Argentina',

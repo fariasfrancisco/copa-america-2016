@@ -15,6 +15,12 @@ angular.module('copaamericaApp')
       ADD_HOME_SCORER: 'Agregar Goleador Local',
       ADD_AWAY_SCORER: 'Agregar Goleador Visitante',
       SAVE: 'Guardar',
+      SAVE_HOME_TEAM_SUCCESS: 'Equipo Local Guardado Exitósamente',
+      SAVE_AWAY_TEAM_SUCCESS: 'Equipo Visitante Guardado Exitósamente',
+      SAVE_HOME_TEAM_ERROR: 'Error al guardar Equipo Local',
+      SAVE_AWAY_TEAM_ERROR: 'Error al guardar Equipo Visitante',
+      SAVE_GROUP_SUCCESS: 'Grupo Guardado Exitósamente',
+      SAVE_GROUP_ERROR: 'Error al guardar Grupo',
 
       //teams
       ARG: 'Argentina',

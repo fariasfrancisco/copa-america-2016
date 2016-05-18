@@ -100,6 +100,30 @@
         {{'SAVE' | translate}}
       </a>
     </div>
+
+    <div class="row alert alert-success" ng-show="admin.saveHomeTeamSuccess">
+      <strong>{{'SAVE_HOME_TEAM_SUCCESS' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-danger" ng-show="admin.saveHomeTeamError">
+      <strong>{{'SAVE_HOME_TEAM_ERROR' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-success" ng-show="admin.saveAwayTeamSuccess">
+      <strong>{{'SAVE_AWAY_TEAM_SUCCESS' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-danger" ng-show="admin.saveAwayTeamError">
+      <strong>{{'SAVE_AWAY_TEAM_ERROR' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-success" ng-show="admin.saveGroupSuccess">
+      <strong>{{'SAVE_GROUP_SUCCESS' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-danger" ng-show="admin.saveGroupError">
+      <strong>{{'SAVE_GROUP_ERROR' | translate}}</strong>
+    </div>
   </div>
 
   <div class="container">
