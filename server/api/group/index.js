@@ -6,6 +6,7 @@ var controller = require('./group.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/match/:id', controller.getMatch);
 router.get('/stage/:stage', controller.getFromStage);
 router.get('/table/:name', controller.getTable);
 router.get('/id/:id', controller.show);

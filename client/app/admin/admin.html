@@ -3,7 +3,8 @@
   <ul class="list-group user-list">
     <li class="list-group-item" ng-repeat="user in admin.users">
       <div class="user-info" ng-class="{validated: user.valid}">
-        <strong>{{user.name}}</strong><i class="fa fa-check-circle" aria-hidden="true" ng-show="user.valid"></i><br>
+        <strong>{{user.name}}</strong>
+        <i class="fa fa-check-circle" aria-hidden="true" ng-show="user.valid"></i><br>
         <span class="text-muted">{{user.email}}</span>
       </div>
       <a ng-click="admin.adminSvc.validate(user, true)" class="valid" ng-show="!user.valid">
@@ -17,4 +18,94 @@
       </a>
     </li>
   </ul>
+
+  <div class="container">
+    <h2>{{'UPDATE_MATCH' | translate}}</h2>
+
+    <div class="row">
+      <span>{{'MATCH_ID' | translate}}</span>
+      <input type="text" ng-model="admin.matchId" ng-pattern="/^(\d|[12]\d|3[01])$/">
+      <button type="button" class="btn btn-default" ng-click="admin.search()">
+        {{'SEARCH' | translate}}
+      </button>
+    </div>
+
+    <div class="row alert alert-danger" ng-show="admin.idError">
+      <strong>{{ 'NOT_A_NUMBER' | translate}}</strong>
+    </div>
+
+    <div class="row" ng-if="admin.match && !admin.idError">
+      <div class="col-md-4">
+        <h3>{{'HOME_TEAM' | translate}}: {{admin.match.home.team.name | translate}}</h3>
+
+        <h4>{{'TEAM_ID' | translate}}:</h4>
+        <input type="text" ng-model="admin.match.home._team" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('home', '_team')">
+
+        <h5>{{'GOALS' | translate}}:</h5>
+        <input type="text" ng-model="admin.match.home.goals" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('home', 'goals')">
+
+        <h5>{{'PENALTIES' | translate}}:</h5>
+        <input type="text" ng-model="admin.match.home.penalties" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('home', 'penalties')">
+      </div>
+
+      <div class="col-md-4">
+        <h3>{{'AWAY_TEAM' | translate}}: {{admin.match.away.team.name | translate}}</h3>
+
+        <h4>{{'TEAM_ID' | translate}}::</h4>
+        <input type="text" ng-model="admin.match.away._team" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('away', '_team')">
+
+        <h5>{{'GOALS' | translate}}:</h5>
+        <input type="text" ng-model="admin.match.away.goals" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('away', 'goals')">
+
+        <h5>{{'PENALTIES' | translate}}:</h5>
+        <input type="text" ng-model="admin.match.away.penalties" ng-pattern="/^(\d+)$/"
+               ng-change="admin.removeInvalidCharacters('away', 'penalties')">
+        <br>
+      </div>
+
+      <div class="col-md-4">
+        <h3>{{'SCORERS' | translate}}</h3>
+
+        <h4>{{'HOME_TEAM' | translate}}: {{admin.match.home.team.name | translate}}</h4>
+
+        <div class="row">
+          <div ng-repeat="homeScorer in admin.homeScorers">
+            <input placeholder="{{admin.match.home.team.players[0].name}}" type="text" ng-model="homeScorer.player"
+                   uib-typeahead="player as player.name for player in admin.match.home.team.players | filter:$viewValue | limitTo:8">
+            <input type="text" placeholder="0" ng-model="homeScorer.goals">
+          </div>
+          <button ng-click="admin.addHomeScorers()">{{'ADD_HOME_SCORER' | translate}}</button>
+        </div>
+
+        <h4>{{'AWAY_TEAM' | translate}}: {{admin.match.away.team.name | translate}}</h4>
+
+        <div class="row">
+          <div ng-repeat="awayScorer in admin.awayScorers">
+            <input placeholder="{{admin.match.away.team.players[0].name}}" type="text" ng-model="awayScorer.player"
+                   uib-typeahead="player as player.name for player in admin.match.away.team.players | filter:$viewValue | limitTo:8">
+            <input type="text" ng-pattern="/^(\d+)$/" placeholder="0" ng-model="awayScorer.goals">
+          </div>
+          <button ng-click="admin.addAwayScorers()">{{'ADD_AWAY_SCORER' | translate}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-show="admin.match && !admin.idError">
+      <a href="#" class="button" ng-click="admin.save()">
+        {{'SAVE' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <a href="#" class="button" ng-click="admin.adminSvc.initialize()">
+      {{'INIT_DB' | translate}}
+    </a>
+  </div>
 </div>
+

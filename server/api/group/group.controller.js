@@ -124,9 +124,17 @@ export function getFromStage(req, res) {
 export function getTable(req, res) {
   return Group.findOne({'name': req.params.name}).exec()
     .then(handleEntityNotFound(res))
-    .then(function (response) {
+    .then(response => {
       var table = tableGenerator.generate(response);
       res.status(200).json(table);
     })
+    .catch(handleError(res));
+}
+
+// Get by match id
+export function getMatch(req, res) {
+  return Group.findOne({'matches._id': req.params.id}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }

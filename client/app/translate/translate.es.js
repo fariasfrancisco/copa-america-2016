@@ -3,6 +3,19 @@
 angular.module('copaamericaApp')
   .config(function ($translateProvider) {
     $translateProvider.translations('es', {
+      //admin
+      INIT_DB: 'Inicializar BD',
+      NOT_A_NUMBER: 'No es un número o fuera de rango!',
+      UPDATE_MATCH: 'Actualizar Partido',
+      SEARCH: 'Buscar',
+      MATCH_ID: 'ID Partido',
+      TEAM_ID: 'ID Equipo',
+      GOALS: 'Goles',
+      SCORERS: 'Goleadores',
+      ADD_HOME_SCORER: 'Agregar Goleador Local',
+      ADD_AWAY_SCORER: 'Agregar Goleador Visitante',
+      SAVE: 'Guardar',
+
       //teams
       ARG: 'Argentina',
       BOL: 'Bolivia',
