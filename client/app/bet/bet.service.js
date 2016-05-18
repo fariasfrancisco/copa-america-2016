@@ -28,6 +28,7 @@ angular.module('copaamericaApp')
           .then(groups => {
             groups.forEach(group => {
               group.matches.forEach(match => {
+                bet.matches[match._id].name = group.name;
                 bet.matches[match._id].home._team = match.home._team;
                 bet.matches[match._id].away._team = match.away._team;
               });
@@ -39,6 +40,8 @@ angular.module('copaamericaApp')
             for (let qfIndex = 24; qfIndex < 28; qfIndex++) {
               qfHome = bet.matches[qfIndex].home;
               qfAway = bet.matches[qfIndex].away;
+
+              bet.matches[qfIndex].name = 'Q' + (qfIndex - 23);
 
               qfHome._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][0]].first;
               qfAway._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][1]].second;
@@ -64,6 +67,8 @@ angular.module('copaamericaApp')
             }
 
             for (let i = 28; i < 30; i++) {
+              bet.matches[i].name = 'S' + (i - 27);
+
               if (bet.matches[i].home.goals > bet.matches[i].away.goals) {
                 bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
                 bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
@@ -84,6 +89,9 @@ angular.module('copaamericaApp')
                 }
               }
             }
+
+            bet.matches[30].name = 'TP';
+            bet.matches[31].name = 'F';
 
             bet.matches.forEach(match => {
               match.home.teamName = QueryService.getTeams()[match.home._team].name;

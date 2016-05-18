@@ -16,6 +16,7 @@
             <table class="table table-striped">
               <thead>
               <tr>
+                <th>{{'STAGE' | translate}}</th>
                 <th class="col-md-3">{{'HOME_TEAM' | translate}}</th>
                 <th class="col-md-1 poveda">{{'HOME_GOALS' | translate}}</th>
                 <th class="col-md-1 poveda">{{'HOME_PENALTIES' | translate}}</th>
@@ -25,6 +26,7 @@
               </tr>
               </thead>
               <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
+                <td>{{match.name | translate}}</td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
                 </td>
@@ -55,7 +57,7 @@
     <div class="col-md-6" ng-repeat="group in $ctrl.groups">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{group.fullName | translate}}</h3>
+          <h3 class="panel-title groupname">{{group.name | translate}}</h3>
 
           <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
             <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
@@ -478,7 +480,7 @@
             <p>{{'TEAM' | translate}}</p>
             <input class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name | translate}}" type="text"
                    ng-model="$ctrl.goldenBootTeam" select-on-click
-                   uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8">
+                   uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8 | translate">
           </div>
           <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
             <p>{{'PLAYER' | translate}}</p>

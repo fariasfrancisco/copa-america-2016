@@ -3,7 +3,7 @@
     <div class="page-header row col-md-6 col-md-offset-2 custyle table-format"
          ng-repeat="group in $ctrl.querySvc.getGroups()">
       <table class="table table-striped custab">
-        <caption>{{group.fullName | translate}}</caption>
+        <caption>{{group.name | translate}}</caption>
         <thead>
         <tr>
           <th class="table-cell">{{'TEAM' | translate}}</th>

@@ -104,8 +104,6 @@ angular.module('copaamericaApp')
                 groups = response;
 
                 groups.forEach(group => {
-                  group.fullName = group.name.replace('G', 'GROUP_');
-
                   group.matches.forEach(match => {
                     match.home.teamName = teams[match.home._team].name;
                     match.away.teamName = teams[match.away._team].name;
