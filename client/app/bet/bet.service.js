@@ -97,6 +97,12 @@ angular.module('copaamericaApp')
               match.home.teamName = QueryService.getTeams()[match.home._team].name;
               match.away.teamName = QueryService.getTeams()[match.away._team].name;
             });
+
+            bet.goldenBoot.team = QueryService.getTeams()[bet.goldenBoot._team];
+            bet.goldenBoot.team.players.forEach(player => {
+              if (player._id === bet.goldenBoot._player) bet.goldenBoot.player = player;
+            });
+
           });
       },
 

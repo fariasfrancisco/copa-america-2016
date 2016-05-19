@@ -20,7 +20,7 @@
       if (target === 'edit') {
         this.modalSvc.setEditWarn(true);
       }
-      
+
       if (target === 'restart') {
         this.modalSvc.setRestartWarn(true);
       }

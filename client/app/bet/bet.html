@@ -40,6 +40,13 @@
                   <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
                 </td>
               </tr>
+              <tr class="table-row">
+                <td>
+                  <span>{{'GOLDEN_BOOT' | translate}}:</span>
+                  <span> {{$ctrl.userBet.goldenBoot.player.name}}</span>
+                  <span>({{$ctrl.userBet.goldenBoot.team.name | translate}})</span>
+                </td>
+              </tr>
             </table>
           </div>
         </div>
@@ -480,7 +487,7 @@
             <p>{{'TEAM' | translate}}</p>
             <input class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name | translate}}" type="text"
                    ng-model="$ctrl.goldenBootTeam" select-on-click
-                   uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8 | translate">
+                   uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8">
           </div>
           <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
             <p>{{'PLAYER' | translate}}</p>
