@@ -1,5 +1,9 @@
 html {
   overflow-y: scroll;
+  heigh: 100%
+}
+body {
+  min-heigh: calc(100% - 55px);
 }
 input[type='number'] {
   -moz-appearance:textfield;
