@@ -3,7 +3,8 @@
 angular.module('copaamericaApp')
   .service('QueryService', ['$http', function ($http) {
     let groups = [],
-      teams = [];
+      teams = [],
+      bets = [];
 
     const GROUP_STAGE_API = '/api/groups/stage/group/',
       TEAMS_API = '/api/teams/',
@@ -34,24 +35,45 @@ angular.module('copaamericaApp')
     let queryGroups = function () {
       return $http.get(GROUP_STAGE_API)
         .then(response => {
-          return response.data.sort(compareGroup);
+          groups = response.data.sort(compareGroup);
         });
     };
 
     let queryTeams = function () {
       return $http.get(TEAMS_API)
         .then(response => {
-          return response.data.sort(compareTeam);
+          teams = response.data.sort(compareTeam);
+        });
+    };
+
+    let queryBets = function () {
+      return $http.get(BETS_API)
+        .then(response => {
+          bets = response.data;
         });
     };
 
     return {
       getGroups() {
-        return groups;
+        if (groups.length < 1) {
+          return queryGroups()
+            .then(() => {
+              return groups;
+            });
+        } else {
+          return Promise.resolve(groups);
+        }
       },
 
       getTeams() {
-        return teams;
+        if (teams.length < 1) {
+          return queryTeams()
+            .then(() => {
+              return teams;
+            });
+        } else {
+          return Promise.resolve(teams);
+        }
       },
 
       getStage(stage) {
@@ -64,10 +86,13 @@ angular.module('copaamericaApp')
       },
 
       getBets() {
-        return $http.get(BETS_API)
-          .then(response => {
-            return response.data;
+        if (bets.length < 1) {
+          return queryBets().then(()=> {
+            return bets
           });
+        } else {
+          return Promise.resolve(bets);
+        }
       },
 
       getBetByUser(user) {
@@ -93,23 +118,17 @@ angular.module('copaamericaApp')
       },
 
       buildGroupsAndTeams() {
-        let self = this;
-
-        return queryTeams()
-          .then(response => {
-            teams = response;
-
-            return queryGroups()
-              .then(response => {
-                groups = response;
-
+        return this.getTeams()
+          .then(() => {
+            return this.getGroups()
+              .then(() => {
                 groups.forEach(group => {
                   group.matches.forEach(match => {
                     match.home.teamName = teams[match.home._team].name;
                     match.away.teamName = teams[match.away._team].name;
                   });
 
-                  self.buildTable(group)
+                  this.buildTable(group)
                     .then(table => {
                       group.table = table;
                     });

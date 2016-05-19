@@ -33,9 +33,12 @@ angular.module('copaamericaApp')
                   }
                 }
 
-                winner.teamName = QueryService.getTeams()[winner.team].name;
-                loser.teamName = QueryService.getTeams()[loser.team].name;
-
+                QueryService.getTeams()
+                  .then(teams => {
+                    winner.teamName = teams[winner.team].name;
+                    loser.teamName = teams[loser.team].name;
+                  });
+                
                 brackets[current.name] = {
                   winner: winner,
                   loser: loser

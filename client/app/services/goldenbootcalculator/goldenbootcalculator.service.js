@@ -11,14 +11,17 @@ angular.module('copaamericaApp')
     };
 
     let buildPlayersList = function () {
-      QueryService.getTeams().forEach(team => {
-        team.players.forEach(player => {
-          player._team = team._id;
-          if (player.goals > 0) players.push(player);
-        });
-      });
+      QueryService.getTeams()
+        .then(teams => {
+          teams.forEach(team => {
+            team.players.forEach(player => {
+              player._team = team._id;
+              if (player.goals > 0) players.push(player);
+            });
+          });
 
-      players.sort(comparePlayers);
+          players.sort(comparePlayers);
+        });
     };
 
     let trimPlayersList = function () {

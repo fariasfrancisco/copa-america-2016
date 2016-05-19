@@ -25,6 +25,7 @@ angular.module('copaamericaApp')
       //teams
       ARG: 'Argentina',
       BOL: 'Bolivia',
+      BRA: 'Brazil',
       PER: 'Peru',
       PAN: 'Panama',
       JAM: 'Jamaica',

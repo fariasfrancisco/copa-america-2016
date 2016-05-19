@@ -3,6 +3,7 @@
 (function () {
   class BetComponent {
     constructor(Auth, BetService, QueryService, BetBuilderService, ModalService, TeamLogoService, $uibModal, $state, $window) {
+      this.teams = [];
       this.auth = Auth;
       this.betSvc = BetService;
       this.querySvc = QueryService;
@@ -15,8 +16,6 @@
     }
 
     openModal(target) {
-      let self = this;
-
       if (target === 'edit') {
         this.modalSvc.setEditWarn(true);
       }
@@ -33,10 +32,10 @@
 
       modalInstance.result
         .then(() => {
-          if (self.modalSvc.getEditWarn()) self.edit();
-          else self.startOver();
+          if (this.modalSvc.getEditWarn()) this.edit();
+          else this.startOver();
         }, () => {
-          self.modalSvc.init();
+          this.modalSvc.init();
         });
     }
 
@@ -81,13 +80,12 @@
     }
 
     edit() {
-      let self = this,
-        id = this.userBet._id;
+      let id = this.userBet._id;
 
       this.querySvc.deleteBet(id)
         .then(() => {
-          delete self.userBet;
-          self.startOver();
+          delete this.userBet;
+          this.startOver();
         })
         .catch(() => {
           this.$window.alert('ERROR DELETING BET');
@@ -97,6 +95,7 @@
     startOver() {
       this.groups = {};
       this.bet = {};
+      this.teams = [];
       delete this.hasBet;
       delete this.quarterFinals;
       delete this.semiFinals;
@@ -110,20 +109,24 @@
     }
 
     $onInit() {
-      let self = this,
-        user = this.auth.getCurrentUser()._id;
+      let user = this.auth.getCurrentUser()._id;
 
       this.modalSvc.init();
+      
+      this.querySvc.getTeams()
+        .then(teams => {
+          this.teams = teams;
+        });
 
       this.querySvc.getBetByUser(user)
         .then(res => {
-          self.userBet = res.data;
-          self.hasBet = true;
-          self.betInitialize();
+          this.userBet = res.data;
+          this.hasBet = true;
+          this.betInitialize();
         })
         .catch(() => {
-          self.hasBet = false;
-          self.noBetInitialize();
+          this.hasBet = false;
+          this.noBetInitialize();
         });
     }
 
@@ -132,12 +135,10 @@
     }
 
     noBetInitialize() {
-      let self = this;
-
       this.betSvc.noBetInitialize(this.auth.getCurrentUser())
         .then(obj => {
-          self.bet = obj.bet;
-          self.groups = obj.groups;
+          this.bet = obj.bet;
+          this.groups = obj.groups;
         });
     }
 

@@ -1,4 +1,4 @@
-<div class="container" ng-show="$ctrl.hasBet">
+<div class="container" ng-if="$ctrl.hasBet">
   <div class="row">
     <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
       {{'EDIT_BUTTON' | translate}}
@@ -55,7 +55,7 @@
   </div>
 </div>
 
-<div class="container" ng-show="!$ctrl.hasBet">
+<div class="container" ng-if="!$ctrl.hasBet">
   <div class="row">
     <h1 class="text-center">{{ "MAKE_BET" | translate }}</h1>
   </div>
@@ -418,8 +418,8 @@
                          ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/"
                          select-on-click>
                 </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{$ctrl.finals.match.away.teamName |
-                  translate}}
+                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">
+                  {{$ctrl.finals.match.away.teamName | translate}}
                 </td>
                 <td class="col-md-1">
                   <img ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.away._team)}}"
@@ -485,9 +485,9 @@
         <div>
           <div class="col-md-3">
             <p>{{'TEAM' | translate}}</p>
-            <input class="form-control" placeholder="{{$ctrl.querySvc.getTeams()[0].name | translate}}" type="text"
+            <input class="form-control" placeholder="{{$ctrl.teams[0].name | translate}}" type="text"
                    ng-model="$ctrl.goldenBootTeam" select-on-click
-                   uib-typeahead="team as team.name for team in $ctrl.querySvc.getTeams() | filter:$viewValue | limitTo:8">
+                   uib-typeahead="team as (team.name | translate) for team in $ctrl.teams | filter:$viewValue | limitTo:8">
           </div>
           <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
             <p>{{'PLAYER' | translate}}</p>

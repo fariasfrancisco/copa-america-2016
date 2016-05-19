@@ -94,11 +94,18 @@ angular.module('copaamericaApp')
             bet.matches[31].name = 'F';
 
             bet.matches.forEach(match => {
-              match.home.teamName = QueryService.getTeams()[match.home._team].name;
-              match.away.teamName = QueryService.getTeams()[match.away._team].name;
+              QueryService.getTeams()
+                .then(teams => {
+                  match.home.teamName = teams[match.home._team].name;
+                  match.away.teamName = teams[match.away._team].name;
+                });
             });
 
-            bet.goldenBoot.team = QueryService.getTeams()[bet.goldenBoot._team];
+            QueryService.getTeams()
+              .then(teams => {
+                bet.goldenBoot.team = teams[bet.goldenBoot._team];
+              });
+
             bet.goldenBoot.team.players.forEach(player => {
               if (player._id === bet.goldenBoot._player) bet.goldenBoot.player = player;
             });
@@ -145,10 +152,11 @@ angular.module('copaamericaApp')
           let groupTable = TableCalculator.generate(group);
 
           groupTable.forEach(current => {
-            teams[current.groupPosition] = {
-              team: current.team,
-              teamName: QueryService.getTeams()[current.team].name
-            };
+            teams[current.groupPosition] = {team: current.team};
+            QueryService.getTeams()
+              .then(teams => {
+                teams[current.groupPosition].teamName = teams[current.groupPosition].team.name;
+              });
           });
 
           bet.groups[group.name].first = teams[group.name + '0'].team;
