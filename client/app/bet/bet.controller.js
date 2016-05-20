@@ -26,7 +26,7 @@
 
       let modalInstance = this.$uibModal.open({
         animation: true,
-        templateUrl: "/app/modal/modal.html",
+        templateUrl: '/app/modal/modal.html',
         controller: 'ModalCtrl'
       });
 
@@ -112,7 +112,7 @@
       let user = this.auth.getCurrentUser()._id;
 
       this.modalSvc.init();
-      
+
       this.querySvc.getTeams()
         .then(teams => {
           this.teams = teams;

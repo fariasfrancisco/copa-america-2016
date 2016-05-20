@@ -97,7 +97,7 @@ angular.module('copaamericaApp')
       getBets() {
         if (bets.length < 1) {
           return queryBets().then(()=> {
-            return bets
+            return bets;
           });
         } else {
           return Promise.resolve(bets);
@@ -187,7 +187,7 @@ angular.module('copaamericaApp')
           return queryValidUsersCount()
             .then(() => {
               return validCount;
-            })
+            });
         } else {
           return Promise.resolve(validCount);
         }

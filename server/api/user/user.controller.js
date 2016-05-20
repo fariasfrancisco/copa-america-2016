@@ -128,7 +128,7 @@ export function isValid(req, res) {
     .then(user => {
       return res.json(user.valid);
     })
-    .catch(err => next(err));
+    .catch(err => res.status(500).json(err));
 }
 
 /**

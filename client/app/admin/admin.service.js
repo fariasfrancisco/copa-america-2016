@@ -63,13 +63,13 @@ angular.module('copaamericaApp')
         if (!empty) {
           return $http.put(TEAM_UPDATE, team)
             .then(() => {
-                return {message: 'saved.'}
+                return {message: 'saved.'};
               },
               () => {
                 throw 'save Error';
               });
         } else {
-          return Promise.resolve({message: 'Nothing to save.'})
+          return Promise.resolve({message: 'Nothing to save.'});
         }
       },
 
@@ -78,7 +78,7 @@ angular.module('copaamericaApp')
 
         return $http.put(GROUP_UPDATE, group)
           .then(() => {
-              return {message: 'saved'}
+              return {message: 'saved'};
             },
             () => {
               throw 'save Error';

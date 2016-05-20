@@ -16,7 +16,7 @@ init.initialize = function (req, res) {
       Group.create(group)
         .catch(res => {
           console.log(res);
-          throw err;
+          throw 'Failed to create group';
         });
     });
   } catch (err) {
@@ -40,7 +40,7 @@ init.initialize = function (req, res) {
       Team.create(team)
         .catch(res => {
           console.log(res);
-          throw err;
+          throw 'Failed to create team';
         });
     });
   } catch (err) {

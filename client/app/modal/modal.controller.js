@@ -10,5 +10,5 @@ angular.module('copaamericaApp')
 
     $scope.cancel = function () {
       $uibModalInstance.dismiss();
-    }
+    };
   }]);
