@@ -6,38 +6,38 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="">
       <div class="panel panel-primary">
         <div class="panel-heading tableheading">
           <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
         </div>
         <div class="panel-body tablebody">
-          <div class="row col-md-12 bet-table">
+          <div class="">
             <table class="table table-striped">
               <thead>
               <tr>
                 <th>{{'STAGE' | translate}}</th>
-                <th class="col-md-3">{{'HOME_TEAM' | translate}}</th>
-                <th class="col-md-1 poveda">{{'HOME_GOALS' | translate}}</th>
-                <th class="col-md-1 poveda">{{'HOME_PENALTIES' | translate}}</th>
-                <th class="col-md-1 poveda">{{'AWAY_PENALTIES' | translate}}</th>
-                <th class="col-md-1 poveda">{{'AWAY_GOALS' | translate}}</th>
-                <th class="col-md-3">{{'AWAY_TEAM' | translate}}</th>
+                <th class="">{{'HOME_TEAM' | translate}}</th>
+                <th class=" ">{{'HOME_GOALS' | translate}}</th>
+                <th class=" ">{{'HOME_PENALTIES' | translate}}</th>
+                <th class=" ">{{'AWAY_PENALTIES' | translate}}</th>
+                <th class=" ">{{'AWAY_GOALS' | translate}}</th>
+                <th class="">{{'AWAY_TEAM' | translate}}</th>
               </tr>
               </thead>
               <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
                 <td>{{match.name | translate}}</td>
-                <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                <td class="">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
                 </td>
-                <td class="col-md-3">{{match.home.teamName | translate}}</td>
-                <td class="col-md-1 poveda">{{match.home.goals}}</td>
-                <td class="col-md-1 poveda">{{match.home.penalties}}</td>
-                <td class="col-md-1 poveda">{{match.away.penalties}}</td>
-                <td class="col-md-1 poveda">{{match.away.goals}}</td>
-                <td class="col-md-3">{{match.away.teamName | translate}}</td>
-                <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                <td class="">{{match.home.teamName | translate}}</td>
+                <td class=" ">{{match.home.goals}}</td>
+                <td class=" ">{{match.home.penalties}}</td>
+                <td class=" ">{{match.away.penalties}}</td>
+                <td class=" ">{{match.away.goals}}</td>
+                <td class="">{{match.away.teamName | translate}}</td>
+                <td class="">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
                 </td>
               </tr>
               <tr class="table-row">
@@ -76,7 +76,7 @@
             <table class="table table-striped">
               <tr class="table-row" ng-repeat="match in group.matches">
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
                   <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
                 <td class="col-md-3 coelho team-left hidden-xs">{{match.home.teamName | translate}}</td>
@@ -96,7 +96,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
                   <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
               </tr>
@@ -133,7 +133,7 @@
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
                 <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
@@ -171,7 +171,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
               </tr>
@@ -212,7 +212,7 @@
               <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
 
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
                 </td>
                 <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
@@ -252,7 +252,7 @@
                 </td>
                 <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
                 </td>
 
@@ -376,7 +376,7 @@
               <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
               <tr class="table-row">
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.home._team)}}"
+                  <img width="40px" height="40px"  ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.home._team)}}"
                        alt="{{$ctrl.finals.match.home._team}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.home.teamName |
                     translate}}</p>
@@ -422,7 +422,7 @@
                   {{$ctrl.finals.match.away.teamName | translate}}
                 </td>
                 <td class="col-md-1">
-                  <img ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.away._team)}}"
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.away._team)}}"
                        alt="{{$ctrl.finals.match.away._team}}">
                   <p class="text-center hidden-md hidden-lg hidden-xl">{{$ctrl.finals.match.away.teamName |
                     translate}}</p>
@@ -454,21 +454,21 @@
         <div class="flex-box">
           <div class="first">
             <div class="team-holder gold">
-              <img ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.firstPlace._id)}}"
+              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.firstPlace._id)}}"
                    alt="{{$ctrl.podium.firstPlace._id}}">
             </div>
             <h3 class="text-center">{{$ctrl.podium.firstPlace.name | translate}}</h3>
           </div>
           <div class="second">
             <div class="team-holder silver">
-              <img ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.secondPlace._id)}}"
+              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.secondPlace._id)}}"
                    alt="{{$ctrl.podium.secondPlace._id}}">
             </div>
             <h3 class="text-center">{{$ctrl.podium.secondPlace.name | translate}}</h3>
           </div>
           <div class="third">
             <div class="team-holder bronze">
-              <img ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.thirdPlace._id)}}"
+              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.thirdPlace._id)}}"
                    alt="{{$ctrl.podium.thirdPlace._id}}">
             </div>
             <h3 class="text-center">{{$ctrl.podium.thirdPlace.name | translate}}</h3>

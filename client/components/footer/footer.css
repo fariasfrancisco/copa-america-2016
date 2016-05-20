@@ -1,7 +1,16 @@
 footer.footer {
+  color: #ffffff;
   text-align: center;
   padding: 10px 0;
   margin-top: 1px;
   border-top: 1px solid #ffe708;
   height: auto;
+}
+footer.footer span {
+  display: block;
+}
+@media (min-width: 768px) {
+  footer.footer span {
+    display: initial;
+  }
 }
