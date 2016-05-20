@@ -10,6 +10,7 @@ router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/valid/:id', controller.isValid);
+router.get('/allvalid/', controller.allValid);
 router.put('/:id/validate', auth.hasRole('admin'), controller.validate);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);

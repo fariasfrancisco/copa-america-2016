@@ -4,7 +4,8 @@ angular.module('copaamericaApp')
   .service('QueryService', ['$http', function ($http) {
     let groups = [],
       teams = [],
-      bets = [];
+      bets = [],
+      validCount = null;
 
     const GROUP_STAGE_API = '/api/groups/stage/group/',
       TEAMS_API = '/api/teams/',
@@ -12,7 +13,8 @@ angular.module('copaamericaApp')
       STAGE_API = '/api/groups/stage/',
       BETS_API = '/api/bets/',
       BETS_API_USER = '/api/bets/user/',
-      IS_VALID_API = '/api/users/valid/';
+      IS_VALID_API = '/api/users/valid/',
+      ALL_VALID_API = '/api/users/allvalid/';
 
     let compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -50,6 +52,13 @@ angular.module('copaamericaApp')
       return $http.get(BETS_API)
         .then(response => {
           bets = response.data;
+        });
+    };
+
+    let queryValidUsersCount = function () {
+      return $http.get(ALL_VALID_API)
+        .then(response => {
+          validCount = response.data;
         });
     };
 
@@ -171,6 +180,17 @@ angular.module('copaamericaApp')
               return false;
             }
           );
+      },
+
+      getValidUsersCount() {
+        if (validCount === null) {
+          return queryValidUsersCount()
+            .then(() => {
+              return validCount;
+            })
+        } else {
+          return Promise.resolve(validCount);
+        }
       }
     };
   }]);

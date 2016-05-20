@@ -132,6 +132,17 @@ export function isValid(req, res) {
 }
 
 /**
+ * Returns a count of the valid users
+ */
+export function allValid(req, res) {
+  return User.find({valid: true}).exec()
+    .then(validUsers => {
+      return res.json(validUsers.length)
+    })
+    .catch(handleError(res));
+}
+
+/**
  * Get my info
  */
 export function me(req, res, next) {
