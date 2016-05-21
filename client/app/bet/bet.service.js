@@ -93,27 +93,24 @@ angular.module('copaamericaApp')
             bet.matches[30].name = 'TP';
             bet.matches[31].name = 'F';
 
+            return QueryService.getTeams();
+          })
+          .then(teams => {
             bet.matches.forEach(match => {
-              QueryService.getTeams()
-                .then(teams => {
-                  match.home.teamName = teams[match.home._team].name;
-                  match.away.teamName = teams[match.away._team].name;
-                });
+              match.home.teamName = teams[match.home._team].name;
+              match.away.teamName = teams[match.away._team].name;
             });
 
-            QueryService.getTeams()
-              .then(teams => {
-                bet.goldenBoot.team = teams[bet.goldenBoot._team];
-              });
+            bet.goldenBoot.team = teams[bet.goldenBoot._team];
 
             bet.goldenBoot.team.players.forEach(player => {
               if (player._id === bet.goldenBoot._player) bet.goldenBoot.player = player;
             });
-
           });
       },
 
       noBetInitialize(user) {
+
         return QueryService.cloneGroups()
           .then(groups => {
             let bet = {
@@ -138,93 +135,92 @@ angular.module('copaamericaApp')
       },
 
       buildQuarterFinals(groups, bet) {
-        let teams = {};
+        let qfTeams = {GA0: {}, GA1: {}, GB0: {}, GB1: {}, GC0: {}, GC1: {}, GD0: {}, GD1: {}};
 
-        groups.forEach(group => {
-          group.matches.forEach(match => {
-            if (match.home.goals === '') match.home.goals = 0;
-            if (match.away.goals === '') match.away.goals = 0;
+        return QueryService.getTeams()
+          .then(teams => {
+            groups.forEach(group => {
+              group.matches.forEach(match => {
+                if (match.home.goals === '') match.home.goals = 0;
+                if (match.away.goals === '') match.away.goals = 0;
 
-            bet.matches[match._id].home.goals = match.home.goals;
-            bet.matches[match._id].away.goals = match.away.goals;
-          });
-
-          let groupTable = TableCalculator.generate(group);
-
-          groupTable.forEach(current => {
-            teams[current.groupPosition] = {team: current.team};
-            QueryService.getTeams()
-              .then(teams => {
-                teams[current.groupPosition].teamName = teams[current.groupPosition].team.name;
+                bet.matches[match._id].home.goals = match.home.goals;
+                bet.matches[match._id].away.goals = match.away.goals;
               });
+
+              let groupTable = TableCalculator.generate(group);
+
+              groupTable.forEach(current => {
+                qfTeams[current.groupPosition].team = current.team;
+                qfTeams[current.groupPosition].teamName = teams[current.team].name;
+              });
+
+              bet.groups[group.name].first = qfTeams[group.name + '0'].team;
+              bet.groups[group.name].second = qfTeams[group.name + '1'].team;
+            });
+
+            return {
+              fullName: 'QUARTER_FINALS',
+              matches: [
+                {
+                  _id: 24, shortName: 'Q1',
+                  home: {
+                    _team: qfTeams.GA0.team,
+                    teamName: qfTeams.GA0.teamName,
+                    goals: 0, penalties: 0
+                  },
+                  away: {
+                    _team: qfTeams.GB1.team,
+                    teamName: qfTeams.GB1.teamName,
+                    goals: 0, penalties: 0
+                  }
+                },
+                {
+                  _id: 25, shortName: 'Q2',
+                  home: {
+                    _team: qfTeams.GB0.team,
+                    teamName: qfTeams.GB0.teamName,
+                    goals: 0, penalties: 0
+                  },
+                  away: {
+                    _team: qfTeams.GA1.team,
+                    teamName: qfTeams.GA1.teamName,
+                    goals: 0, penalties: 0
+                  }
+                },
+                {
+                  _id: 26, shortName: 'Q3',
+                  home: {
+                    _team: qfTeams.GC0.team,
+                    teamName: qfTeams.GC0.teamName,
+                    goals: 0, penalties: 0
+                  },
+                  away: {
+                    _team: qfTeams.GD1.team,
+                    teamName: qfTeams.GD1.teamName,
+                    goals: 0, penalties: 0
+                  }
+                },
+                {
+                  _id: 27, shortName: 'Q4',
+                  home: {
+                    _team: qfTeams.GD0.team,
+                    teamName: qfTeams.GD0.teamName,
+                    goals: 0, penalties: 0
+                  },
+                  away: {
+                    _team: qfTeams.GC1.team,
+                    teamName: qfTeams.GC1.teamName,
+                    goals: 0, penalties: 0
+                  }
+                }
+              ]
+            };
           });
-
-          bet.groups[group.name].first = teams[group.name + '0'].team;
-          bet.groups[group.name].second = teams[group.name + '1'].team;
-        });
-
-        //noinspection JSUnresolvedVariable
-        return {
-          fullName: 'QUARTER_FINALS',
-          matches: [
-            {
-              _id: 24, shortName: 'Q1',
-              home: {
-                _team: teams.GA0.team,
-                teamName: teams.GA0.teamName,
-                goals: 0, penalties: 0
-              },
-              away: {
-                _team: teams.GB1.team,
-                teamName: teams.GB1.teamName,
-                goals: 0, penalties: 0
-              }
-            },
-            {
-              _id: 25, shortName: 'Q2',
-              home: {
-                _team: teams.GB0.team,
-                teamName: teams.GB0.teamName,
-                goals: 0, penalties: 0
-              },
-              away: {
-                _team: teams.GA1.team,
-                teamName: teams.GA1.teamName,
-                goals: 0, penalties: 0
-              }
-            },
-            {
-              _id: 26, shortName: 'Q3',
-              home: {
-                _team: teams.GC0.team,
-                teamName: teams.GC0.teamName,
-                goals: 0, penalties: 0
-              },
-              away: {
-                _team: teams.GD1.team,
-                teamName: teams.GD1.teamName,
-                goals: 0, penalties: 0
-              }
-            },
-            {
-              _id: 27, shortName: 'Q4',
-              home: {
-                _team: teams.GD0.team,
-                teamName: teams.GD0.teamName,
-                goals: 0, penalties: 0
-              },
-              away: {
-                _team: teams.GC1.team,
-                teamName: teams.GC1.teamName,
-                goals: 0, penalties: 0
-              }
-            }
-          ]
-        };
       },
 
       buildSemiFinals(quarterFinals, bet) {
-        let teams = {};
+        let sfTeams = {Q1: {}, Q2: {}, Q3: {}, Q4: {}};
 
         quarterFinals.matches.forEach(match => {
           bet.matches[match._id].home.goals = match.home.goals;
@@ -233,25 +229,25 @@ angular.module('copaamericaApp')
           bet.matches[match._id].away.penalties = match.away.penalties;
 
           if (match.home.goals > match.away.goals) {
-            teams[match.shortName] = {
+            sfTeams[match.shortName] = {
               team: match.home._team,
               teamName: match.home.teamName
             };
           } else {
             if (match.home.goals < match.away.goals) {
-              teams[match.shortName] = {
+              sfTeams[match.shortName] = {
                 team: match.away._team,
                 teamName: match.away.teamName
               };
             } else {
               if (match.home.penalties > match.away.penalties) {
-                teams[match.shortName] = {
+                sfTeams[match.shortName] = {
                   team: match.home._team,
                   teamName: match.home.teamName
                 };
               } else {
                 if (match.home.penalties < match.away.penalties) {
-                  teams[match.shortName] = {
+                  sfTeams[match.shortName] = {
                     team: match.away._team,
                     teamName: match.away.teamName
                   };
@@ -263,33 +259,32 @@ angular.module('copaamericaApp')
           }
         });
 
-        //noinspection JSUnresolvedVariable
         return {
           fullName: 'SEMI_FINALS',
           matches: [
             {
               _id: 28, shortName: 'S1',
               home: {
-                _team: teams.Q1.team,
-                teamName: teams.Q1.teamName,
+                _team: sfTeams.Q1.team,
+                teamName: sfTeams.Q1.teamName,
                 goals: 0, penalties: 0
               },
               away: {
-                _team: teams.Q3.team,
-                teamName: teams.Q3.teamName,
+                _team: sfTeams.Q3.team,
+                teamName: sfTeams.Q3.teamName,
                 goals: 0, penalties: 0
               }
             },
             {
               _id: 29, shortName: 'S2',
               home: {
-                _team: teams.Q2.team,
-                teamName: teams.Q2.teamName,
+                _team: sfTeams.Q2.team,
+                teamName: sfTeams.Q2.teamName,
                 goals: 0, penalties: 0
               },
               away: {
-                _team: teams.Q4.team,
-                teamName: teams.Q4.teamName,
+                _team: sfTeams.Q4.team,
+                teamName: sfTeams.Q4.teamName,
                 goals: 0, penalties: 0
               }
             }
@@ -298,7 +293,7 @@ angular.module('copaamericaApp')
       },
 
       buildFinals(semiFinals, bet) {
-        let teams = {};
+        let fTeams = {S1W: {}, S1L: {}, S2W: {}, S2L: {}};
 
         semiFinals.matches.forEach(match => {
           bet.matches[match._id].home.goals = match.home.goals;
@@ -307,45 +302,45 @@ angular.module('copaamericaApp')
           bet.matches[match._id].away.penalties = match.away.penalties;
 
           if (match.home.goals > match.away.goals) {
-            teams[match.shortName + 'W'] = {
+            fTeams[match.shortName + 'W'] = {
               team: match.home._team,
               teamName: match.home.teamName
             };
 
-            teams[match.shortName + 'L'] = {
+            fTeams[match.shortName + 'L'] = {
               team: match.away._team,
               teamName: match.away.teamName
             };
           } else {
             if (match.home.goals < match.away.goals) {
-              teams[match.shortName + 'W'] = {
+              fTeams[match.shortName + 'W'] = {
                 team: match.away._team,
                 teamName: match.away.teamName
               };
 
-              teams[match.shortName + 'L'] = {
+              fTeams[match.shortName + 'L'] = {
                 team: match.home._team,
                 teamName: match.home.teamName
               };
             } else {
               if (match.home.penalties > match.away.penalties) {
-                teams[match.shortName + 'W'] = {
+                fTeams[match.shortName + 'W'] = {
                   team: match.home._team,
                   teamName: match.home.teamName
                 };
 
-                teams[match.shortName + 'L'] = {
+                fTeams[match.shortName + 'L'] = {
                   team: match.away._team,
                   teamName: match.away.teamName
                 };
               } else {
                 if (match.home.penalties < match.away.penalties) {
-                  teams[match.shortName + 'W'] = {
+                  fTeams[match.shortName + 'W'] = {
                     team: match.away._team,
                     teamName: match.away.teamName
                   };
 
-                  teams[match.shortName + 'L'] = {
+                  fTeams[match.shortName + 'L'] = {
                     team: match.home._team,
                     teamName: match.home.teamName
                   };
@@ -359,19 +354,18 @@ angular.module('copaamericaApp')
 
         let response = {};
 
-        //noinspection JSUnresolvedVariable
         response.thirdPlace = {
           fullName: 'THIRD_PLACE',
           match: {
             _id: 30, shortName: 'TP',
             home: {
-              _team: teams.S1L.team,
-              teamName: teams.S1L.teamName,
+              _team: fTeams.S1L.team,
+              teamName: fTeams.S1L.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams.S2L.team,
-              teamName: teams.S2L.teamName,
+              _team: fTeams.S2L.team,
+              teamName: fTeams.S2L.teamName,
               goals: 0, penalties: 0
             }
           }
@@ -383,13 +377,13 @@ angular.module('copaamericaApp')
           match: {
             _id: 31, shortName: 'F',
             home: {
-              _team: teams.S1W.team,
-              teamName: teams.S1W.teamName,
+              _team: fTeams.S1W.team,
+              teamName: fTeams.S1W.teamName,
               goals: 0, penalties: 0
             },
             away: {
-              _team: teams.S2W.team,
-              teamName: teams.S2W.teamName,
+              _team: fTeams.S2W.team,
+              teamName: fTeams.S2W.teamName,
               goals: 0, penalties: 0
             }
           }

@@ -143,7 +143,10 @@
     }
 
     buildQuarterFinals() {
-      this.quarterFinals = this.betSvc.buildQuarterFinals(this.groups, this.bet);
+      this.betSvc.buildQuarterFinals(this.groups, this.bet)
+        .then(quarterFinals => {
+          this.quarterFinals = quarterFinals
+        });
     }
 
     buildSemiFinals() {

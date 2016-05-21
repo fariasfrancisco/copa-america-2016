@@ -86,20 +86,26 @@ angular.module('copaamericaApp')
     };
 
     let cleanTable = function (table, name) {
-      table.forEach((current, index) => {
-        if (current.position > 1) table.splice(index, 1);
-        else current.groupPosition = name + current.position;
+      let cleanTable = [{}, {}];
+
+      table.forEach((current) => {
+        if (current.position < 2) {
+          current.groupPosition = name + current.position;
+          cleanTable[current.position] = current;
+        }
       });
+
+      return cleanTable;
     };
 
     return {
       generate(group) {
         let table = initializeTable(group);
+
         calculatePointsAndGoals(table, group.matches);
         calculatePositions(table);
-        cleanTable(table, group.name);
 
-        return table;
+        return cleanTable(table, group.name);
       }
     };
   });
