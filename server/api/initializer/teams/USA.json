@@ -1,9 +1,5 @@
 [
   {
-    "name": "David Bingham",
-    "goals": 0
-  },
-  {
     "name": "Brad Guzan",
     "goals": 0
   },
@@ -12,15 +8,7 @@
     "goals": 0
   },
   {
-    "name": "Nick Rimando",
-    "goals": 0
-  },
-  {
-    "name": "Kellyn Acosta",
-    "goals": 0
-  },
-  {
-    "name": "Ventura Alvarado",
+    "name": "Ethan Horvath",
     "goals": 0
   },
   {
@@ -40,19 +28,7 @@
     "goals": 0
   },
   {
-    "name": "Edgar Castillo",
-    "goals": 0
-  },
-  {
     "name": "Timothy Chandler",
-    "goals": 0
-  },
-  {
-    "name": "Brad Evans",
-    "goals": 0
-  },
-  {
-    "name": "Omar Gonzalez",
     "goals": 0
   },
   {
@@ -60,19 +36,7 @@
     "goals": 0
   },
   {
-    "name": "Eric Lichaj",
-    "goals": 0
-  },
-  {
-    "name": "Matthew Miazga",
-    "goals": 0
-  },
-  {
     "name": "Michael Orozco",
-    "goals": 0
-  },
-  {
-    "name": "Tim Ream",
     "goals": 0
   },
   {
@@ -96,10 +60,6 @@
     "goals": 0
   },
   {
-    "name": "Mix Diskerud",
-    "goals": 0
-  },
-  {
     "name": "Jermaine Jones",
     "goals": 0
   },
@@ -108,35 +68,7 @@
     "goals": 0
   },
   {
-    "name": "Alfredo Morales",
-    "goals": 0
-  },
-  {
     "name": "Darlington Nagbe",
-    "goals": 0
-  },
-  {
-    "name": "Lee Nguyen",
-    "goals": 0
-  },
-  {
-    "name": "Danny Williams",
-    "goals": 0
-  },
-  {
-    "name": "Graham Zusi",
-    "goals": 0
-  },
-  {
-    "name": "Jozy Altidore",
-    "goals": 0
-  },
-  {
-    "name": "Ethan Finlay",
-    "goals": 0
-  },
-  {
-    "name": "Jordan Perry Morris",
     "goals": 0
   },
   {
@@ -153,6 +85,10 @@
   },
   {
     "name": "Gyasi Zardes",
+    "goals": 0
+  },
+  {
+    "name": "Graham Zusi",
     "goals": 0
   }
 ]

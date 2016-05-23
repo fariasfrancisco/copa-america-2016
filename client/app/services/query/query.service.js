@@ -7,14 +7,21 @@ angular.module('copaamericaApp')
       bets = [],
       validCount = null;
 
-    const GROUP_STAGE_API = '/api/groups/stage/group/',
-      TEAMS_API = '/api/teams/',
-      GROUP_TABLE_API = '/api/groups/table/',
-      STAGE_API = '/api/groups/stage/',
-      BETS_API = '/api/bets/',
-      BETS_API_USER = '/api/bets/user/',
-      IS_VALID_API = '/api/users/valid/',
-      ALL_VALID_API = '/api/users/allvalid/';
+    const API = '/api/',
+      GROUPS = API + 'groups/',
+      USERS = API + 'users/',
+      TEAMS = API + 'teams/',
+      BETS = API + 'bets/',
+      INITIALIZE = API + 'init/',
+      GROUP_TABLE = GROUPS + 'table/',
+      STAGE = GROUPS + 'stage/',
+      MATCHES = GROUPS + 'match/',
+      GROUP_ID = GROUPS + 'id/',
+      GROUP_STAGE = STAGE + 'group/',
+      BETS_USER = BETS + 'user/',
+      IS_VALID = USERS + 'valid/',
+      ALL_VALID = USERS + 'allvalid/',
+      VALIDATE = '/validate';
 
     let compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
@@ -35,28 +42,28 @@ angular.module('copaamericaApp')
     };
 
     let queryGroups = function () {
-      return $http.get(GROUP_STAGE_API)
+      return $http.get(GROUP_STAGE)
         .then(response => {
           groups = response.data.sort(compareGroup);
         });
     };
 
     let queryTeams = function () {
-      return $http.get(TEAMS_API)
+      return $http.get(TEAMS)
         .then(response => {
           teams = response.data.sort(compareTeam);
         });
     };
 
     let queryBets = function () {
-      return $http.get(BETS_API)
+      return $http.get(BETS)
         .then(response => {
           bets = response.data;
         });
     };
 
     let queryValidUsersCount = function () {
-      return $http.get(ALL_VALID_API)
+      return $http.get(ALL_VALID)
         .then(response => {
           validCount = response.data;
         });
@@ -86,9 +93,9 @@ angular.module('copaamericaApp')
       },
 
       getStage(stage) {
-        const STAGE = STAGE_API + stage;
+        const STAGE_URL = STAGE + stage;
 
-        return $http.get(STAGE)
+        return $http.get(STAGE_URL)
           .then(response => {
             return response.data;
           });
@@ -105,9 +112,9 @@ angular.module('copaamericaApp')
       },
 
       getBetByUser(user) {
-        let USER_BET = BETS_API_USER + user;
+        let USER_BET_URL = BETS_USER + user;
 
-        return $http.get(USER_BET)
+        return $http.get(USER_BET_URL)
           .then(response => {
             return response;
           }, err => {
@@ -116,9 +123,9 @@ angular.module('copaamericaApp')
       },
 
       deleteBet(id) {
-        let BET = BETS_API + id;
+        let BET_URL = BETS + id;
 
-        return $http.delete(BET)
+        return $http.delete(BET_URL)
           .then(response => {
             return response;
           }, err => {
@@ -147,9 +154,9 @@ angular.module('copaamericaApp')
       },
 
       buildTable(group) {
-        const GROUP_TABLE = GROUP_TABLE_API + group.name;
+        const GROUP_TABLE_URL = GROUP_TABLE + group.name;
 
-        return $http.get(GROUP_TABLE)
+        return $http.get(GROUP_TABLE_URL)
           .then(function (response) {
             let table = response.data;
             table.sort(compareLine);
@@ -170,9 +177,9 @@ angular.module('copaamericaApp')
       },
 
       isValid(id){
-        const IS_VALID = IS_VALID_API + id;
+        const IS_VALID_URL = IS_VALID + id;
 
-        return $http.get(IS_VALID)
+        return $http.get(IS_VALID_URL)
           .then(response => {
               return response.data;
             },
@@ -191,6 +198,72 @@ angular.module('copaamericaApp')
         } else {
           return Promise.resolve(validCount);
         }
+      },
+
+      validate(user, bool) {
+        const USER_VALIDATE = USERS + user._id + VALIDATE,
+          body = {valid: Boolean(bool)};
+
+        return $http.put(USER_VALIDATE, body)
+          .then(() => {
+            user.valid = Boolean(bool);
+          });
+      },
+
+      initialize(){
+        $http.get(INITIALIZE)
+          .then(response => {
+              console.log(response.data, response.status);
+            },
+            err => {
+              console.log(err.data, err.status);
+            });
+      },
+
+      searchMatch(id){
+        const MATCH_URL = MATCHES + id;
+
+        return $http.get(MATCH_URL)
+          .then(response => {
+            return response.data;
+          });
+      },
+
+      searchTeam(id){
+        const TEAM_URL = TEAMS + id;
+
+        return $http.get(TEAM_URL)
+          .then(response => {
+            return response.data;
+          });
+      },
+
+      saveTeam(team, empty){
+        const TEAM_UPDATE = TEAMS + team._id;
+
+        if (!empty) {
+          return $http.put(TEAM_UPDATE, team)
+            .then(() => {
+                return {message: 'saved.'};
+              },
+              () => {
+                throw 'save Error';
+              });
+        } else {
+          return Promise.resolve({message: 'Nothing to save.'});
+        }
+      },
+
+      saveGroup(group){
+        const GROUP_UPDATE = GROUP_ID + group._id;
+
+        return $http.put(GROUP_UPDATE, group)
+          .then(() => {
+              return {message: 'saved'};
+            },
+            () => {
+              throw 'save Error';
+            });
       }
     };
   }]);

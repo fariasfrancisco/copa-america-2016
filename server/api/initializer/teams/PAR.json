@@ -1,6 +1,6 @@
 [
   {
-    "name": "Diego Daniel Barreto",
+    "name": "Justo Villar",
     "goals": 0
   },
   {
@@ -8,7 +8,19 @@
     "goals": 0
   },
   {
-    "name": "Justo Villar",
+    "name": "Diego Daniel Barreto",
+    "goals": 0
+  },
+  {
+    "name": "Gustavo Raúl Gómez",
+    "goals": 0
+  },
+  {
+    "name": "Miguel Ángel Samudio",
+    "goals": 0
+  },
+  {
+    "name": "Paulo César Da Silva",
     "goals": 0
   },
   {
@@ -20,11 +32,7 @@
     "goals": 0
   },
   {
-    "name": "Paulo César Da Silva",
-    "goals": 0
-  },
-  {
-    "name": "Gustavo Raúl Gómez",
+    "name": "Bruno Valdez",
     "goals": 0
   },
   {
@@ -32,15 +40,7 @@
     "goals": 0
   },
   {
-    "name": "Miguel Ángel Samudio",
-    "goals": 0
-  },
-  {
-    "name": "Bruno Valdez",
-    "goals": 0
-  },
-  {
-    "name": "Miguel Ángel Almirón",
+    "name": "Oscar Romero",
     "goals": 0
   },
   {
@@ -52,15 +52,23 @@
     "goals": 0
   },
   {
-    "name": "Robert Andrés Piris",
-    "goals": 0
-  },
-  {
     "name": "Rodrigo Rojas",
     "goals": 0
   },
   {
-    "name": "Oscar Romero",
+    "name": "Robert Piris Da Motta",
+    "goals": 0
+  },
+  {
+    "name": "Miguel Ángel Almirón",
+    "goals": 0
+  },
+  {
+    "name": "Roque Santa Cruz",
+    "goals": 0
+  },
+  {
+    "name": "Nelson Antonio Haedo Valdez",
     "goals": 0
   },
   {
@@ -68,15 +76,7 @@
     "goals": 0
   },
   {
-    "name": "Jorge Benítez",
-    "goals": 0
-  },
-  {
     "name": "Derlis Alberto González",
-    "goals": 0
-  },
-  {
-    "name": "Juan Manuel Iturbe",
     "goals": 0
   },
   {
@@ -84,7 +84,11 @@
     "goals": 0
   },
   {
-    "name": "Nelson Antonio Haedo Valdez",
+    "name": "Jorge Benítez",
+    "goals": 0
+  },
+  {
+    "name": "Juan Manuel Iturbe",
     "goals": 0
   }
 ]

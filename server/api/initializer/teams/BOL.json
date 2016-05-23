@@ -1,14 +1,10 @@
 [
   {
-    "name": "Carlos Lampe",
-    "goals": 0
-  },
-  {
     "name": "Romel Quiñónez",
     "goals": 0
   },
   {
-    "name": "Juan Carlos Robles",
+    "name": "Carlos Lampe",
     "goals": 0
   },
   {
@@ -16,43 +12,15 @@
     "goals": 0
   },
   {
-    "name": "Diego Bejarano",
-    "goals": 0
-  },
-  {
     "name": "Marvin Bejarano",
     "goals": 0
   },
   {
+    "name": "Diego Bejarano",
+    "goals": 0
+  },
+  {
     "name": "Nelson Cabrera",
-    "goals": 0
-  },
-  {
-    "name": "Cristian Coimbra",
-    "goals": 0
-  },
-  {
-    "name": "Ronald Eguino",
-    "goals": 0
-  },
-  {
-    "name": "Jorge Enrique Flores",
-    "goals": 0
-  },
-  {
-    "name": "Ignacio García",
-    "goals": 0
-  },
-  {
-    "name": "Luis Gutiérrez",
-    "goals": 0
-  },
-  {
-    "name": "Fernando Marteli",
-    "goals": 0
-  },
-  {
-    "name": "Omar Jesús Morales",
     "goals": 0
   },
   {
@@ -64,11 +32,19 @@
     "goals": 0
   },
   {
+    "name": "Ronald Eguino",
+    "goals": 0
+  },
+  {
+    "name": "Luis Gutiérrez",
+    "goals": 0
+  },
+  {
     "name": "Pedro Azogue",
     "goals": 0
   },
   {
-    "name": "Danny Bejarano",
+    "name": "Wálter Veizaga",
     "goals": 0
   },
   {
@@ -76,39 +52,7 @@
     "goals": 0
   },
   {
-    "name": "Rudy Cardozo",
-    "goals": 0
-  },
-  {
-    "name": "Raúl Castro",
-    "goals": 0
-  },
-  {
-    "name": "Alejandro Chumacero",
-    "goals": 0
-  },
-  {
-    "name": "Samuel Galindo",
-    "goals": 0
-  },
-  {
-    "name": "Sebastián Gamarra",
-    "goals": 0
-  },
-  {
-    "name": "Luis Enrique Hurtado",
-    "goals": 0
-  },
-  {
-    "name": "Cristian Machado",
-    "goals": 0
-  },
-  {
-    "name": "Alejandro Meleán",
-    "goals": 0
-  },
-  {
-    "name": "Mario Parrado",
+    "name": "Martin Smedberg",
     "goals": 0
   },
   {
@@ -116,35 +60,19 @@
     "goals": 0
   },
   {
-    "name": "Martín Smedberg",
+    "name": "Alejandro Meleán",
     "goals": 0
   },
   {
-    "name": "Walter Veizaga",
+    "name": "Samuel Galindo",
     "goals": 0
   },
   {
-    "name": "Gilbert Álvarez",
+    "name": "Cristhian Machado",
     "goals": 0
   },
   {
-    "name": "Carmelo Algarañaz",
-    "goals": 0
-  },
-  {
-    "name": "Juan Carlos Arce",
-    "goals": 0
-  },
-  {
-    "name": "Yasmani Duk",
-    "goals": 0
-  },
-  {
-    "name": "Juan Eduardo Fierro",
-    "goals": 0
-  },
-  {
-    "name": "Marcelo Moreno Martins",
+    "name": "Raúl Castro",
     "goals": 0
   },
   {
@@ -152,7 +80,15 @@
     "goals": 0
   },
   {
-    "name": "Rodrigo Vargas",
+    "name": "Juan Carlos Arce",
+    "goals": 0
+  },
+  {
+    "name": "Bruno Miranda",
+    "goals": 0
+  },
+  {
+    "name": "Yasmani Duk",
     "goals": 0
   }
 ]

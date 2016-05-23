@@ -1,34 +1,38 @@
 [
   {
+    "name": "Johny Placide",
+    "goals": 0
+  },
+  {
+    "name": "Steward Ceus",
+    "goals": 0
+  },
+  {
     "name": "Luis Valendi Odelus",
     "goals": 0
   },
   {
-    "name": "Brian Sylvestre",
+    "name": "Romain Genevois",
     "goals": 0
   },
   {
-    "name": "Jean Sony Alcenat",
+    "name": "Judelin Aveska",
     "goals": 0
   },
   {
-    "name": "Jean Marc Alexandre",
+    "name": "Jerome Mechack",
     "goals": 0
   },
   {
-    "name": "Judelín Aveska",
+    "name": "Stéphane Lambese",
     "goals": 0
   },
   {
-    "name": "Alex Christian",
+    "name": "Reginal Goreux",
     "goals": 0
   },
   {
-    "name": "Romain Gennevois",
-    "goals": 0
-  },
-  {
-    "name": "Reginald Goreux",
+    "name": "Jean Sony Alcénat",
     "goals": 0
   },
   {
@@ -36,27 +40,7 @@
     "goals": 0
   },
   {
-    "name": "Andrew Jean-Baptiste",
-    "goals": 0
-  },
-  {
-    "name": "Pierre Jean Jaqcues",
-    "goals": 0
-  },
-  {
-    "name": "Mechack Jerome",
-    "goals": 0
-  },
-  {
-    "name": "Junior Delva",
-    "goals": 0
-  },
-  {
-    "name": "Wilde-Donald Guerrier",
-    "goals": 0
-  },
-  {
-    "name": "Max Hilaire",
+    "name": "Alex Christian",
     "goals": 0
   },
   {
@@ -64,11 +48,19 @@
     "goals": 0
   },
   {
-    "name": "Pascal Millien",
+    "name": "Jean Marc Alexandre",
     "goals": 0
   },
   {
-    "name": "Sony Mustivar",
+    "name": "Max Hilaire",
+    "goals": 0
+  },
+  {
+    "name": "Soni Mustivar",
+    "goals": 0
+  },
+  {
+    "name": "Pascal Millien",
     "goals": 0
   },
   {
@@ -76,11 +68,19 @@
     "goals": 0
   },
   {
-    "name": "Sebastian Thuriere",
+    "name": "James Marcelin",
     "goals": 0
   },
   {
-    "name": "Kervens Belfort Fils",
+    "name": "Jean-Eudes Maurice",
+    "goals": 0
+  },
+  {
+    "name": "Kervens Belfort",
+    "goals": 0
+  },
+  {
+    "name": "Duckens Nazon",
     "goals": 0
   },
   {
@@ -88,11 +88,7 @@
     "goals": 0
   },
   {
-    "name": "Jean Eudes Maurice",
-    "goals": 0
-  },
-  {
-    "name": "Duckens Nazon",
+    "name": "Wilde-Donald Guerrier",
     "goals": 0
   }
 ]

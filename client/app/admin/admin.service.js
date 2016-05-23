@@ -1,88 +1,140 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('AdminService', ['$http', function ($http) {
-    const USER_API = '/api/users/',
-      VALIDATE = '/validate',
-      INITIALIZE_API = '/api/init/',
-      MATCH_API = '/api/groups/match/',
-      TEAMS_API = '/api/teams/',
-      GROUPS_API = '/api/groups/id/';
+  .service('AdminService', ['QueryService', function (QueryService) {
+    let clone = function (obj) {
+      return angular.copy(obj);
+    };
 
     return {
-      validate(user, bool) {
-        const id = user._id,
-          body = {valid: Boolean(bool)};
+      search(matchId, group, match) {
+        let id = Number(matchId);
 
-        const USER_VALIDATE = USER_API + id + VALIDATE;
+        if (match && match._id === id) return;
 
-        return $http.put(USER_VALIDATE, body)
-          .then(() => {
-            user.valid = Boolean(bool);
+        if (group) {
+          let found = false;
+
+          group.matches.forEach(current => {
+            if (current._id === id) {
+              found = true;
+              match = current;
+            }
           });
-      },
 
-      initialize(){
-        return $http.get(INITIALIZE_API)
-          .then(response => {
-              console.log(response.data, response.status);
-            },
-            err => {
-              console.log(err.data, err.status);
-            });
-      },
+          if (found) {
+            return QueryService.searchTeam(match.home._team)
+              .then(team => {
+                match.home.team = team;
 
-      searchMatch(id){
-        if (isNaN(parseInt(id)) || !isFinite(id)) throw 'Not a Number';
-        if (parseInt(id) > 31 || parseInt(id) < 0) throw 'Out of Range';
+                return QueryService.searchTeam(match.away._team);
+              })
+              .then(team => {
+                match.away.team = team;
 
-        const MATCH_SEARCH = MATCH_API + id;
-
-        return $http.get(MATCH_SEARCH)
-          .then(response => {
-            return response.data;
-          });
-      },
-
-      getTeam(id){
-        const TEAM_SEARCH = TEAMS_API + id;
-
-        return $http.get(TEAM_SEARCH)
-          .then(response => {
-            return response.data;
-          });
-      },
-
-      clone(obj){
-        return angular.copy(obj);
-      },
-
-      saveTeam(team, empty){
-        const TEAM_UPDATE = TEAMS_API + team._id;
-
-        if (!empty) {
-          return $http.put(TEAM_UPDATE, team)
-            .then(() => {
-                return {message: 'saved.'};
-              },
-              () => {
-                throw 'save Error';
+                return {
+                  match: match,
+                  group: group
+                };
               });
-        } else {
-          return Promise.resolve({message: 'Nothing to save.'});
+          }
         }
+
+        return QueryService.searchMatch(id)
+          .then(result => {
+            group = result;
+
+            result.matches.forEach(current => {
+              if (current._id === id) match = current;
+            });
+
+            return QueryService.searchTeam(match.home._team)
+          })
+          .then(team => {
+            match.home.team = team;
+
+            return QueryService.searchTeam(match.away._team);
+          })
+          .then(team => {
+            match.away.team = team;
+
+            return {
+              match: match,
+              group: group
+            };
+          })
+          .catch(() => {
+            throw 'error';
+          });
       },
 
-      saveGroup(group){
-        const GROUP_UPDATE = GROUPS_API + group._id;
-
-        return $http.put(GROUP_UPDATE, group)
-          .then(() => {
-              return {message: 'saved'};
+      save(match, group, homeScorers, awayScorers) {
+        let emptyHomeScorers = false,
+          emptyAwayScorers = false,
+          out = {
+            successFlags: {
+              saveHomeTeamSuccess: true,
+              saveAwayTeamSuccess: true,
+              saveGroupSuccess: true
             },
-            () => {
-              throw 'save Error';
-            });
+            errorFlags: {
+              saveHomeTeamError: false,
+              saveAwayTeamError: false,
+              saveGroupError: false
+            }
+          };
+
+
+        if (homeScorers.length < 1) emptyHomeScorers = true;
+        if (awayScorers.length < 1) emptyAwayScorers = true;
+
+        match.home.team.players.forEach(player => {
+          homeScorers.forEach(scorer => {
+            if (player._id === scorer.player._id) player.goals += Number(scorer.goals);
+          });
+        });
+
+        match.away.team.players.forEach(player => {
+          awayScorers.forEach(scorer => {
+            if (player._id === scorer.player._id) player.goals += Number(scorer.goals);
+          });
+        });
+
+        let homeTeam = clone(match.home.team),
+          awayTeam = clone(match.away.team);
+
+        delete match.home.team;
+        delete match.away.team;
+
+        match.home._team = Number(match.home._team);
+        match.away._team = Number(match.away._team);
+        match.home.goals = Number(match.home.goals);
+        match.away.goals = Number(match.away.goals);
+        match.home.penalties = Number(match.home.penalties);
+        match.away.penalties = Number(match.away.penalties);
+
+        return QueryService.saveTeam(homeTeam, emptyHomeScorers)
+          .catch(() => {
+            out.errorFlags.saveHomeTeamError = true;
+            out.successFlags.saveHomeTeamSuccess = false;
+          })
+          .then(() => {
+            return QueryService.saveTeam(awayTeam, emptyAwayScorers);
+          })
+          .catch(() => {
+            out.errorFlags.saveAwayTeamError = true;
+            out.successFlags.saveAwayTeamSuccess = false;
+          })
+          .then(() => {
+            return QueryService.saveGroup(group);
+          })
+          .catch(() => {
+            out.errorFlags.saveGroupError = true;
+            out.successFlags.saveGroupSuccess = false;
+          })
+          .then(() => {
+            return out;
+          });
       }
     };
   }]);

@@ -1,13 +1,5 @@
 [
   {
-    "name": "Esteban Alvarado Brown",
-    "goals": 0
-  },
-  {
-    "name": "Leonel Moreira",
-    "goals": 0
-  },
-  {
     "name": "Keylor Navas",
     "goals": 0
   },
@@ -16,27 +8,7 @@
     "goals": 0
   },
   {
-    "name": "Johnny Acosta",
-    "goals": 0
-  },
-  {
-    "name": "Bismark Acosta",
-    "goals": 0
-  },
-  {
-    "name": "Francisco Calvo",
-    "goals": 0
-  },
-  {
-    "name": "Júnior Díaz",
-    "goals": 0
-  },
-  {
-    "name": "Óscar Esau Duarte Gaitán",
-    "goals": 0
-  },
-  {
-    "name": "Waylon Francis",
+    "name": "Esteban Alvarado",
     "goals": 0
   },
   {
@@ -44,31 +16,7 @@
     "goals": 0
   },
   {
-    "name": "Ronald Alberto Matarrita Ulate",
-    "goals": 0
-  },
-  {
-    "name": "Roy Miller",
-    "goals": 0
-  },
-  {
-    "name": "Allan Miranda",
-    "goals": 0
-  },
-  {
-    "name": "Dave Myrie",
-    "goals": 0
-  },
-  {
-    "name": "Bryan Oviedo",
-    "goals": 0
-  },
-  {
-    "name": "Pablo Salazar",
-    "goals": 0
-  },
-  {
-    "name": "José Salvatierra",
+    "name": "Jose Salvatierra",
     "goals": 0
   },
   {
@@ -76,15 +24,31 @@
     "goals": 0
   },
   {
+    "name": "Johnny Acosta",
+    "goals": 0
+  },
+  {
+    "name": "Oscar Duarte",
+    "goals": 0
+  },
+  {
     "name": "Kendall Waston",
     "goals": 0
   },
   {
-    "name": "Randall Azofeifa",
+    "name": "Ronald Matarrita",
     "goals": 0
   },
   {
-    "name": "Christian Bolaños",
+    "name": "Bryan Oviedo",
+    "goals": 0
+  },
+  {
+    "name": "Francisco Calvo",
+    "goals": 0
+  },
+  {
+    "name": "Yeltsen Tejeda",
     "goals": 0
   },
   {
@@ -92,35 +56,23 @@
     "goals": 0
   },
   {
-    "name": "Diego Calvo",
+    "name": "Randall Azofeifa",
     "goals": 0
   },
   {
-    "name": "José Miguel Cubero",
+    "name": "Esteban Granados",
     "goals": 0
   },
   {
-    "name": "Oscar Granados",
+    "name": "Bryan Ruiz",
     "goals": 0
   },
   {
-    "name": "David Alberto Guzmán",
+    "name": "Johan Venegas",
     "goals": 0
   },
   {
-    "name": "Diego Madrigal",
-    "goals": 0
-  },
-  {
-    "name": "Bryan Ruíz",
-    "goals": 0
-  },
-  {
-    "name": "Yeltsin Tejeda",
-    "goals": 0
-  },
-  {
-    "name": "Deyver Vega",
+    "name": "Christian Bolaños",
     "goals": 0
   },
   {
@@ -128,31 +80,15 @@
     "goals": 0
   },
   {
-    "name": "David Ramírez",
+    "name": "Ariel Rodriguez",
     "goals": 0
   },
   {
-    "name": "Ariel Rodríguez Araya",
-    "goals": 0
-  },
-  {
-    "name": "Yendrick Ruiz",
-    "goals": 0
-  },
-  {
-    "name": "Álvaro Alberto Saborío",
+    "name": "Alvaro Saborio",
     "goals": 0
   },
   {
     "name": "Marcos Ureña",
-    "goals": 0
-  },
-  {
-    "name": "Johan Venegas Ulloa",
-    "goals": 0
-  },
-  {
-    "name": "Johnny Woodly",
     "goals": 0
   }
 ]
