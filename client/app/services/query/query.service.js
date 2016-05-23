@@ -211,12 +211,12 @@ angular.module('copaamericaApp')
       },
 
       initialize(){
-        $http.get(INITIALIZE)
-          .then(response => {
-              console.log(response.data, response.status);
+        return $http.get(INITIALIZE)
+          .then(() => {
+              return true;
             },
-            err => {
-              console.log(err.data, err.status);
+            () => {
+              return false;
             });
       },
 

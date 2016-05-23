@@ -77,6 +77,14 @@
           });
         });
     }
+
+    initialize() {
+      this.querySvc.initialize()
+        .then(successFlag => {
+          this.initializedSuccess = successFlag;
+          this.initializedError = !successFlag;
+        });
+    }
   }
 
   angular.module('copaamericaApp.admin')

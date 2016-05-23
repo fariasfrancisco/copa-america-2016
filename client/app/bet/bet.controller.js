@@ -13,6 +13,12 @@
       this.$uibModal = $uibModal;
       this.$state = $state;
       this.$window = $window;
+      this.canBet = (() => {
+        let today = new Date(),
+          lastDayToBet = new Date(2016, 5, 2, 23);
+
+        return today.getTime() <= lastDayToBet.getTime();
+      })();
     }
 
     openModal(target) {

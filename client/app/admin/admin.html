@@ -127,8 +127,16 @@
   </div>
 
   <div class="container">
-    <a href="#" class="button" ng-click="admin.querySvc.initialize()">
+    <a href="#" class="button" ng-click="admin.initialize()">
       {{'INIT_DB' | translate}}
     </a>
+
+    <div class="row alert alert-success" ng-if="admin.initializedSuccess">
+      <strong>{{'INITIALIZED_SUCCESS' | translate}}</strong>
+    </div>
+
+    <div class="row alert alert-danger" ng-if="admin.initializedError">
+      <strong>{{'INITIALIZED_ERROR' | translate}}</strong>
+    </div>
   </div>
 </div>

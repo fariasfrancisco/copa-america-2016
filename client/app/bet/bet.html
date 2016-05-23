@@ -1,3 +1,7 @@
+<div class="container" ng-if="!$ctrl.hasBet && !$ctrl.canBet">
+  <h1>{{'CANT_BET' | translate}}</h1>
+</div>
+
 <div class="container" ng-if="$ctrl.hasBet">
   <div class="row">
     <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
@@ -55,7 +59,7 @@
   </div>
 </div>
 
-<div class="container" ng-if="!$ctrl.hasBet">
+<div class="container" ng-if="!$ctrl.hasBet && $ctrl.canBet">
   <div class="row">
     <h1 class="text-center">{{ "MAKE_BET" | translate }}</h1>
   </div>
