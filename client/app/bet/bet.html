@@ -473,17 +473,23 @@
         <h4>{{'GOLDEN_BOOT_HEADER' | translate}}</h4>
 
         <div>
-          <div class="col-md-3">
-            <p>{{'TEAM' | translate}}</p>
-            <input class="form-control" placeholder="{{$ctrl.teams[0].name | translate}}" type="text"
-                   ng-model="$ctrl.goldenBootTeam" select-on-click
-                   uib-typeahead="team as (team.name | translate) for team in $ctrl.teams | filter:$viewValue | limitTo:8">
+          <div class="col-md-6 golden-boot-input">
+            <div class="input-group">
+              <span class="input-group-addon">{{'TEAM' | translate}}</span>
+              <input class="form-control" placeholder="{{$ctrl.teams[0].name | translate}}" type="text"
+                     ng-model="$ctrl.goldenBootTeam" select-on-click
+                     uib-typeahead="team as (team.name | translate) for team in $ctrl.teams | filter:$viewValue | limitTo:8">
+            </div>
+
           </div>
-          <div class="col-md-3" ng-show="$ctrl.goldenBootTeam.players">
-            <p>{{'PLAYER' | translate}}</p>
-            <input class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}" type="text"
-                   ng-model="$ctrl.goldenBootPlayer" select-on-click
-                   uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8">
+          <div class="col-md-6 golden-boot-input" ng-show="$ctrl.goldenBootTeam.players">
+            <div class="input-group">
+              <span class="input-group-addon">{{'PLAYER' | translate}}</span>
+              <input class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}" type="text"
+                     ng-model="$ctrl.goldenBootPlayer" select-on-click
+                     uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8">
+            </div>
+
           </div>
         </div>
       </div>

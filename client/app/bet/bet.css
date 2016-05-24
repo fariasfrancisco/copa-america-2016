@@ -124,6 +124,10 @@ a.button-disabled:hover {
 .podium tr {
   border-top: white 4px solid;
 }
+.podium .golden-boot-input {
+  max-width: 315px;
+  margin-bottom: 20px;
+}
 .podium .team-holder{
   display: flex;
   background-color: #EFEFEF;
@@ -167,6 +171,7 @@ a.button-disabled:hover {
 .podium .team-holder img {
   margin: auto;
   width: 75%;
+  height: auto;
 }
 
 /* PODIUM STYLES FOR MEDIUM-UP DEVICES*/
@@ -174,10 +179,6 @@ a.button-disabled:hover {
 @media (min-width: 768px) {
   .podium .flex-box {
     justify-content: space-between;
-  }
-  .podium .team-holder img {
-    margin: auto;
-    width: 75%;
   }
 
   .podium .first .team-holder {
