@@ -42,6 +42,7 @@
   display: block;
   margin: 0 auto;
 }
+
 .site-container {
   min-height: calc(100vh - 57px);
 }
@@ -316,4 +317,40 @@ section div a.button {
 .container.login-signup,
 .container.translate {
   padding-top: 10px;
+}
+
+/* CSS used here will be applied after bootstrap.css */
+.jumbotron {
+  width: 80%;
+  margin-left: 10%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-center {
+  margin: 0 auto;
+}
+
+.dl-horizontal dt {
+  white-space: normal;
+}
+
+.omacenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.titre {
+  color: #fff;
+}
+
+.entete {
+  background-color: #22780F;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.jumbotron .container{
+  padding-top: 0;
 }

@@ -152,6 +152,29 @@ angular.module('copaamericaApp')
       THRID_PLACE_PODIUM: '3er Lugar',
       USER: 'Usuario',
       TOTAL: 'Total',
-      WARNING: 'Advertencia!'
+      WARNING: 'Advertencia!',
+
+      //FAQ
+      FAQ: 'Preguntas Frecuentes',
+      QUESTION1: '¿Cuánto hay que pagar para participar?',
+      ANSWER1: 'Participar cuesta $70. El 100% de eso va para el pozo. Nosotros no lucramos con esto.',
+      QUESTION2: '¿Hasta cuándo puedo apostar?',
+      ANSWER2: 'Tenés tiempo de apostar y cambiar tu apuesta hasta el 02/06/2016.',
+      QUESTION3: 'Me registré e hice mi apuesta pero no aparece en la tabla, ¿qué onda?',
+      ANSWER3: 'Una vez pagues el administrador va a validar tu cuenta. Si pagaste y aun así no aparecés en la tabla contactate con alguno de los administradores para que te den una solución.',
+      QUESTION4: '¿Qué pasa si los equipos que dije que pasaban la fase de grupo no avanzan? ¿Qué pasa con las siguientes fases?',
+      ANSWER4: 'Cuando completás los resultados de un partido, en realidad estás apostando por local vs visitante en cada partido. Entonces, si apostaste que pasaba el equipo A pero en realidad avanzó el equipo B, los resultados que pusiste para A se aplican a B. Lo mismo ocurre en todas las fases, por detrás siempre se calculan los resultados en base al local vs el visitante, nunca por un equipo específico.',
+      QUESTION5: '¿Qué pasa si hay más de un jugador empatado para el premio del botín de oro?',
+      ANSWER5: 'Te llevás los puntos igual. Siempre que el jugador por el que apostaste esté dentro del conjunto de goleadores vas a tener los puntos.',
+      QUESTION6: '¿Que pasa si hay empate al final del prode?',
+      ANSWER6_EXAMPLE: 'Ejemplo ',
+      ANSWER6_TH1: 'Nombre',
+      ANSWER6_TH2: 'Puntos',
+      ANSWER6_PART1: 'Se suma la plata que le corresponde a las posiciones y se reparte entre las personas.',
+      ANSWER6_PART2: 'Se considera que Claudio salió 3ro y se toma el premio del 1er y 2do puesto, se lo suma y se reparte entre Alberto y Boris.',
+      ANSWER6_PART3: 'Se considera que Boris y Claudio salieron 2dos, no hay 3ro y se toma el premio del 2do y 3er puesto, se lo suma y se reparte entre ambos.',
+      ANSWER6_PART4: 'Se considera que los 4 salieron 1ros. Se toma todo el pozo y se lo divide entre ellos.',
+      QUESTION7: 'No confío en ustedes, creo que está todo arreglado.',
+      ANSWER7: 'No es una pregunta, pero acá tenés el repo de git con el código:'
     });
   });

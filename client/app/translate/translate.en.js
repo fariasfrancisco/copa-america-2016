@@ -152,6 +152,29 @@ angular.module('copaamericaApp')
       THRID_PLACE_PODIUM: '3rd Place',
       USER: 'User',
       TOTAL: 'Total',
-      WARNING: 'Advertencia!'
+      WARNING: 'Advertencia!',
+
+      //FAQ
+      FAQ: "F.A.Q.",
+      QUESTION1: 'How much do I have to pay to participate?',
+      ANSWER1: 'The inscription fee is $70. All of the money goes into the prize pool, we don\'t make any profit from this.',
+      QUESTION2: 'When is the last day to place a bet?',
+      ANSWER2: 'You can place and change your bet until 06/02/2016.',
+      QUESTION3: 'I registered and made a bet but it won\'t show up in the table, what gives?',
+      ANSWER3: 'Once you pay, the admin will validate your account and you will see your bet in the table. If you paid and you aren\'t showing up then contact an admin to solve this issue.',
+      QUESTION4: 'What if the teams I predicted would go through the group phase don\'t make it? What happens in the following stages?',
+      ANSWER4: 'When you guess the results of a match you are actually betting on the result of home vs away. So, if you guessed that team A would go through but team B made it instead the results you placed for A will still apply to B. This happens in every stage, you are always betting on the result of home vs away, never specific teams.',
+      QUESTION5: 'What if there are two or more players tied for the Golden Boot?',
+      ANSWER5: 'You will still earn the points if the player you guessed is in the set of top scorers.',
+      QUESTION6: 'What happens if there\'s a tie when the Prode ends?',
+      ANSWER6_EXAMPLE: 'Example ',
+      ANSWER6_TH1: 'Name',
+      ANSWER6_TH2: 'Points',
+      ANSWER6_PART1: 'You add the corresponding prize money for the tied positions and you distribute it between the people that are tied.',
+      ANSWER6_PART2: 'Then Claudio came out 3rd and you take the prize money of the 1st and 2nd place, add it together and distribute it between Alberto and Boris.',
+      ANSWER6_PART3: 'Then Boris and Claudio came out 2nd. There is no 3rd place. You add up the money corresponding to the 2nd and 3rd place and distribute it between them.',
+      ANSWER6_PART4: 'Then the 4 of them came out 1st. They distribute the whole prize pool between them.',
+      QUESTION7: 'I don\'t trust you guys, I believe this is all fixed.',
+      ANSWER7: 'That\'s not a question. Anyway, here\'s the code repo:'
     });
   });

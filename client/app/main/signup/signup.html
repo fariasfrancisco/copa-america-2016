@@ -16,7 +16,7 @@
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <form class="form" name="signupForm" ng-submit="signupCtrl.register(signupForm)" novalidate>
 
                 <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && signupCtrl.submitted,
@@ -89,7 +89,9 @@
                 </div>
               </form>
             </div>
-            <div class="col-lg-6">
+            </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-offset-3">
               <div class="oauth-buttons-container">
                 <oauth-buttons classes="btn-block"></oauth-buttons>
               </div>

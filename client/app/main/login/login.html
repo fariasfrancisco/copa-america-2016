@@ -8,14 +8,15 @@
               <a href="#login-form" class="active" id="login-form-link">{{'LOGIN' | translate}}</a>
             </div>
             <div class="col-xs-6">
-              <a href="#signup-form" id="register-form-link" ng-click="loginCtrl.toggleSignUpForm()">{{'REGISTER' | translate}}</a>
+              <a href="#signup-form" id="register-form-link" ng-click="loginCtrl.toggleSignUpForm()">{{'REGISTER' |
+                translate}}</a>
             </div>
           </div>
           <hr>
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <form class="form" name="loginForm" ng-submit="loginCtrl.login(loginForm)" novalidate>
 
                 <div class="form-group">
@@ -50,7 +51,9 @@
                 <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
               </form>
             </div>
-            <div class="col-lg-6">
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-offset-3">
               <div class="oauth-buttons-container">
                 <oauth-buttons classes="btn-block"></oauth-buttons>
               </div>
