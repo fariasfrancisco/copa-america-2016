@@ -32,8 +32,8 @@
 
       let modalInstance = this.$uibModal.open({
         animation: true,
-        templateUrl: '/app/modal/modal.html',
-        controller: 'ModalCtrl'
+        templateUrl: 'modal.html',
+        controller: 'ModalController'
       });
 
       modalInstance.result
