@@ -1,66 +1,45 @@
-<div class="container" id="login-form">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-login">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-6">
-              <a href="#login-form" class="active" id="login-form-link">{{'LOGIN' | translate}}</a>
-            </div>
-            <div class="col-xs-6">
-              <a href="#signup-form" id="register-form-link" ng-click="loginCtrl.toggleSignUpForm()">{{'REGISTER' |
-                translate}}</a>
-            </div>
-          </div>
-          <hr>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <form class="form" name="loginForm" ng-submit="loginCtrl.login(loginForm)" novalidate>
-
-                <div class="form-group">
-                  <label>{{'EMAIL' | translate}}</label>
-
-                  <input type="email" name="email" class="form-control" ng-model="loginCtrl.user.email" required>
-                </div>
-
-                <div class="form-group">
-                  <label>{{'PASSWORD' | translate}}</label>
-
-                  <input type="password" name="password" class="form-control" ng-model="loginCtrl.user.password"
-                         required>
-                </div>
-
-                <div class="form-group has-error">
-                  <p class="help-block"
-                     ng-show="loginForm.email.$error.required && loginForm.password.$error.required && loginCtrl.submitted">
-                    {{'EMAIL_PASSWORD_MISSING' | translate}}
-                  </p>
-                  <p class="help-block" ng-show="loginForm.email.$error.email && loginCtrl.submitted">
-                    {{'EMAIL_INVALID' | translate}}
-                  </p>
-
-                  <p class="help-block">{{ loginCtrl.errors.other }}</p>
-                </div>
-
-                <hr/>
-                <div class="col-sm-6 col-sm-offset-3" ng-click="loginCtrl.login(loginForm)" style="cursor: pointer">
-                  <a class="button">{{'LOGIN' | translate}}</a>
-                </div>
-                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-offset-3">
-              <div class="oauth-buttons-container">
-                <oauth-buttons classes="btn-block"></oauth-buttons>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="" id="login-form">
+  <div class="col-lg-6 col-md-offset-3">
+    <div class="oauth-buttons-container">
+      <oauth-buttons classes="btn-block"></oauth-buttons>
     </div>
+  </div>
+  <div class="col-lg-12">
+    <p class="connect-divider"><span>{{'OR_LOGIN_WITH' | translate}}</span></p>
+  </div>
+
+  <div class="col-lg-12">
+    <form class="form" name="loginForm" ng-submit="loginCtrl.login(loginForm)" novalidate>
+
+      <div class="form-group">
+        <label>{{'EMAIL' | translate}}</label>
+
+        <input type="email" name="email" class="form-control" ng-model="loginCtrl.user.email" required>
+      </div>
+
+      <div class="form-group">
+        <label>{{'PASSWORD' | translate}}</label>
+
+        <input type="password" name="password" class="form-control" ng-model="loginCtrl.user.password"
+               required>
+      </div>
+
+      <div class="form-group has-error">
+        <p class="help-block"
+           ng-show="loginForm.email.$error.required && loginForm.password.$error.required && loginCtrl.submitted">
+          {{'EMAIL_PASSWORD_MISSING' | translate}}
+        </p>
+        <p class="help-block" ng-show="loginForm.email.$error.email && loginCtrl.submitted">
+          {{'EMAIL_INVALID' | translate}}
+        </p>
+
+        <p class="help-block">{{ loginCtrl.errors.other }}</p>
+      </div>
+
+      <div class="col-sm-6 col-sm-offset-3" ng-click="loginCtrl.login(loginForm)" style="cursor: pointer">
+        <a class="button">{{'LOGIN' | translate}}</a>
+      </div>
+      <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+    </form>
   </div>
 </div>

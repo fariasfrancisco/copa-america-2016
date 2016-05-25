@@ -19,6 +19,8 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="nav.isLoggedIn()"><a href="#loginregister">{{'LOGIN' | translate}}</a></li>
+        <li ng-hide="nav.isLoggedIn()"><a href="#loginregister">{{'REGISTER' | translate}}</a></li>
         <li ng-show="nav.isLoggedIn()"><p class="navbar-text">{{'HELLO_NAVBAR' | translate}} {{ nav.getCurrentUser().name }}</p> </li>
         <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">{{'LOGOUT' | translate}}</a></li>
