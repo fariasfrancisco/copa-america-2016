@@ -18,7 +18,7 @@
 </div>
 
 <div class="container" ng-if="$ctrl.hasBet">
-  <div class="row">
+  <div class="row" ng-show="$ctrl.canBet">
     <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
       {{'EDIT_BUTTON' | translate}}
     </a>
@@ -523,8 +523,4 @@
       {{'RESTART_BUTTON' | translate}}
     </a>
   </div>
-
-  <!-- TODO STYLE OF THE GOLDEN BOOT -->
-  <!-- TODO STYLE OF BET TABLE -->
-
 </div>
