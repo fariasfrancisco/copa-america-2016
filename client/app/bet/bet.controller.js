@@ -151,7 +151,7 @@
     buildQuarterFinals() {
       this.betSvc.buildQuarterFinals(this.groups, this.bet)
         .then(quarterFinals => {
-          this.quarterFinals = quarterFinals
+          this.quarterFinals = quarterFinals;
         });
     }
 

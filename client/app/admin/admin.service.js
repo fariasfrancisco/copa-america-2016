@@ -48,7 +48,7 @@ angular.module('copaamericaApp')
               if (current._id === id) match = current;
             });
 
-            return QueryService.searchTeam(match.home._team)
+            return QueryService.searchTeam(match.home._team);
           })
           .then(team => {
             match.home.team = team;

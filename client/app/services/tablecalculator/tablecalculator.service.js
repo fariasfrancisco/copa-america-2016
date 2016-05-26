@@ -77,6 +77,12 @@ angular.module('copaamericaApp')
       else return 0;
     };
 
+    const comparePositions = function (a, b) {
+      if (a.position > b.position) return 1;
+      else if (a.position < b.position) return -1;
+      else return 0;
+    };
+
     let calculatePositions = function (table) {
       table.sort(compareTable);
 
@@ -95,7 +101,7 @@ angular.module('copaamericaApp')
         }
       });
 
-      return cleanTable;
+      return cleanTable.sort(comparePositions);
     };
 
     return {

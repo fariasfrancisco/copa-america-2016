@@ -155,7 +155,7 @@ angular.module('copaamericaApp')
       WARNING: 'Advertencia!',
 
       //FAQ
-      FAQ: "F.A.Q.",
+      FAQ: 'F.A.Q.',
       QUESTION1: 'How much do I have to pay to participate?',
       ANSWER1: 'The inscription fee is $70. All of the money goes into the prize pool, we don\'t make any profit from this.',
       QUESTION2: 'When is the last day to place a bet?',

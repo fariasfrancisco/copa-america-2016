@@ -2,28 +2,49 @@
 
 angular.module('copaamericaApp')
   .service('BetService', ['QueryService', 'TableCalculator', function (QueryService, TableCalculator) {
-
-    /**
-     * The following constant help me distribute teams in the quarter finals bracket,
-     * the number in each array references a group (i.e 0 => A, 1 => B, etc.) and the
-     * position in the array itself indicates the position in the group: 0 => first, 1 => second.
-     */
-    const QUARTER_FINALS_DIST = {
-      '24': [0, 1],
-      '25': [3, 2],
-      '26': [1, 0],
-      '27': [2, 3]
-    };
-
-    /**
-     * This constant helps me distribute teams into the finals and third place match, knowing that
-     * the teams that participate in game 28 will go into the home side and the teams that play
-     * game 29 will land on the away side.
-     */
-    const FINALS_DIST = {'28': 'home', '29': 'away'};
-
     return {
       betInitialize(bet) {
+        const GA = [0, 1, 8, 9, 16, 17],
+          GB = [2, 3, 10, 11, 18, 19],
+          GC = [4, 5, 12, 13, 20, 21],
+          GD = [6, 7, 14, 15, 22, 23],
+          QF = [24, 25, 26, 27],
+          SF = [28, 29],
+          TP = 30,
+          F = 31;
+
+        const populate = function (groupArray) {
+          let matches = [];
+
+          for (let i = 0; i < 6; i++) {
+            matches.push(bet.matches[groupArray[i]]);
+          }
+
+          return matches;
+        };
+
+        const getWinner = function (id) {
+          const home = bet.matches[id].home,
+            away = bet.matches[id].away;
+
+          if (home.goals > away.goals) return home._team;
+          else if (home.goals < away.goals) return away._team;
+          else if (home.penalties > away.penalties) return home._team;
+          else if (home.penalties < away.penalties) return away._team;
+          else throw 'WTF';
+        };
+
+        const getLoser = function (id) {
+          const home = bet.matches[id].home,
+            away = bet.matches[id].away;
+
+          if (home.goals < away.goals) return home._team;
+          else if (home.goals > away.goals) return away._team;
+          else if (home.penalties < away.penalties) return home._team;
+          else if (home.penalties > away.penalties) return away._team;
+          else throw 'WTF';
+        };
+
         return QueryService.cloneGroups()
           .then(groups => {
             groups.forEach(group => {
@@ -34,64 +55,46 @@ angular.module('copaamericaApp')
               });
             });
 
-            let winner, side, matchId, qfHome, qfAway,
-              desc = 4;
+            const GROUP_A = {matches: populate(GA)},
+              GROUP_B = {matches: populate(GB)},
+              GROUP_C = {matches: populate(GC)},
+              GROUP_D = {matches: populate(GD)},
+              GROUP_A_TABLE = TableCalculator.generate(GROUP_A),
+              GROUP_B_TABLE = TableCalculator.generate(GROUP_B),
+              GROUP_C_TABLE = TableCalculator.generate(GROUP_C),
+              GROUP_D_TABLE = TableCalculator.generate(GROUP_D);
 
-            for (let qfIndex = 24; qfIndex < 28; qfIndex++) {
-              qfHome = bet.matches[qfIndex].home;
-              qfAway = bet.matches[qfIndex].away;
+            console.log(GROUP_A_TABLE);
+            console.log(GROUP_B_TABLE);
+            console.log(GROUP_C_TABLE);
+            console.log(GROUP_D_TABLE);
+            bet.matches[QF[0]].name = 'Q1';
+            bet.matches[QF[0]].home._team = GROUP_A_TABLE[0].team;
+            bet.matches[QF[0]].away._team = GROUP_B_TABLE[1].team;
+            bet.matches[QF[1]].name = 'Q2';
+            bet.matches[QF[1]].home._team = GROUP_B_TABLE[0].team;
+            bet.matches[QF[1]].away._team = GROUP_A_TABLE[1].team;
+            bet.matches[QF[2]].name = 'Q3';
+            bet.matches[QF[2]].home._team = GROUP_D_TABLE[0].team;
+            bet.matches[QF[2]].away._team = GROUP_C_TABLE[1].team;
+            bet.matches[QF[3]].name = 'Q4';
+            bet.matches[QF[3]].home._team = GROUP_C_TABLE[0].team;
+            bet.matches[QF[3]].away._team = GROUP_D_TABLE[1].team;
 
-              bet.matches[qfIndex].name = 'Q' + (qfIndex - 23);
+            bet.matches[SF[0]].name = 'S1';
+            bet.matches[SF[0]].home._team = getWinner(QF[0]);
+            bet.matches[SF[0]].away._team = getWinner(QF[2]);
+            bet.matches[SF[1]].name = 'S2';
+            bet.matches[SF[1]].home._team = getWinner(QF[1]);
+            bet.matches[SF[1]].away._team = getWinner(QF[3]);
 
-              qfHome._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][0]].first;
-              qfAway._team = bet.groups[QUARTER_FINALS_DIST[qfIndex][1]].second;
+            bet.matches[TP].name = 'TP';
+            bet.matches[TP].home._team = getLoser(SF[0]);
+            bet.matches[TP].away._team = getLoser(SF[1]);
 
-              if (qfHome.goals > qfAway.goals) winner = qfHome._team;
-              else if (qfHome.goals < qfAway.goals) winner = qfAway._team;
-              else if (qfHome.penalties > qfAway.penalties) winner = qfHome._team;
-              else if (qfHome.penalties < qfAway.penalties) winner = qfAway._team;
-
-              //the following logic distributes the teams in the semi finals brackets.
-
-              matchId = qfIndex + desc;
-
-              if (qfIndex % 2 === 0) {
-                side = 'home';
-                desc--;
-              }
-              else {
-                side = 'away';
-              }
-
-              bet.matches[matchId][side]._team = winner;
-            }
-
-            for (let i = 28; i < 30; i++) {
-              bet.matches[i].name = 'S' + (i - 27);
-
-              if (bet.matches[i].home.goals > bet.matches[i].away.goals) {
-                bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
-                bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
-              } else {
-                if (bet.matches[i].home.goals < bet.matches[i].away.goals) {
-                  bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
-                  bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
-                } else {
-                  if (bet.matches[i].home.penalties > bet.matches[i].away.penalties) {
-                    bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
-                    bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
-                  } else {
-                    if (bet.matches[i].home.penalties < bet.matches[i].away.penalties) {
-                      bet.matches[31][FINALS_DIST[i]]._team = bet.matches[i].home._team;
-                      bet.matches[30][FINALS_DIST[i]]._team = bet.matches[i].away._team;
-                    }
-                  }
-                }
-              }
-            }
-
-            bet.matches[30].name = 'TP';
-            bet.matches[31].name = 'F';
+            bet.matches[F].name = 'F';
+            bet.matches[F].home._team = getWinner(SF[0]);
+            bet.matches[F].away._team = getWinner(SF[1]);
 
             return QueryService.getTeams();
           })
@@ -191,19 +194,6 @@ angular.module('copaamericaApp')
                 {
                   _id: 26, shortName: 'Q3',
                   home: {
-                    _team: qfTeams.GC0.team,
-                    teamName: qfTeams.GC0.teamName,
-                    goals: 0, penalties: 0
-                  },
-                  away: {
-                    _team: qfTeams.GD1.team,
-                    teamName: qfTeams.GD1.teamName,
-                    goals: 0, penalties: 0
-                  }
-                },
-                {
-                  _id: 27, shortName: 'Q4',
-                  home: {
                     _team: qfTeams.GD0.team,
                     teamName: qfTeams.GD0.teamName,
                     goals: 0, penalties: 0
@@ -211,6 +201,19 @@ angular.module('copaamericaApp')
                   away: {
                     _team: qfTeams.GC1.team,
                     teamName: qfTeams.GC1.teamName,
+                    goals: 0, penalties: 0
+                  }
+                },
+                {
+                  _id: 27, shortName: 'Q4',
+                  home: {
+                    _team: qfTeams.GC0.team,
+                    teamName: qfTeams.GC0.teamName,
+                    goals: 0, penalties: 0
+                  },
+                  away: {
+                    _team: qfTeams.GD1.team,
+                    teamName: qfTeams.GD1.teamName,
                     goals: 0, penalties: 0
                   }
                 }
