@@ -7,10 +7,12 @@
       this.betTableSvc = BetTableService;
       this.betRows = [];
       this.podium = {};
-      this.loaded = false;
     }
 
     $onInit() {
+      this.loaded = false;
+      this.noBets = false;
+
       this.querySvc.getBets()
         .then(bets => {
           this.betTableSvc.cleanInvalidBets(bets)
@@ -24,24 +26,25 @@
                 });
               });
 
-              this.querySvc.getGroups();
-            })
-            .then(groups => {
-              this.loaded = true;
-              this.groups = groups;
-              this.process();
+              this.querySvc.getGroups()
+                .then(groups => {
+                  this.groups = groups;
+                  
+                  if (this.betRows.length > 0) this.process();
+                  else this.noBets = true;
+
+                  this.loaded = true;
+                });
             });
         });
     }
 
     process() {
-      if (this.bets.length > 0) {
-        this.betTableSvc.processGroups(this.groups, this.bets, this.betRows);
-        this.betTableSvc.processStage({fullName: 'quarter-final', shortName: 'QF'}, this.bets, this.betRows);
-        this.betTableSvc.processStage({fullName: 'semi-final', shortName: 'SF'}, this.bets, this.betRows);
-        this.betTableSvc.processThirdPlaceAndFinals(this.bets, this.podium, this.betRows);
-        this.betTableSvc.processGoldenBoot(this.bets, this.betRows);
-      }
+      this.betTableSvc.processGroups(this.groups, this.bets, this.betRows);
+      this.betTableSvc.processStage({fullName: 'quarter-final', shortName: 'QF'}, this.bets, this.betRows);
+      this.betTableSvc.processStage({fullName: 'semi-final', shortName: 'SF'}, this.bets, this.betRows);
+      this.betTableSvc.processThirdPlaceAndFinals(this.bets, this.podium, this.betRows);
+      this.betTableSvc.processGoldenBoot(this.bets, this.betRows);
     }
 
     refresh() {

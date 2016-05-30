@@ -21,10 +21,7 @@ angular.module('copaamericaApp')
           }
         };
 
-        return clean()
-          .then(validBets => {
-            return validBets;
-          });
+        return clean();
       },
 
       processGroups(groups, bets, betRows) {

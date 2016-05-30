@@ -146,7 +146,7 @@ angular.module('copaamericaApp')
         const GROUP_TABLE_URL = GROUP_TABLE + group.name;
 
         return $http.get(GROUP_TABLE_URL)
-          .then(function (response) {
+          .then(response => {
             let table = response.data;
             table.sort(compareLine);
 

@@ -1,8 +1,14 @@
 <div class="container site-container" ng-if="$ctrl.loaded">
-  <div class="row">
+
+  {{$ctrl.noBets}}
+
+  <div class="row" ng-if="$ctrl.noBets">
+    <h1>{{'EMPTY_BETS' | translate}}</h1>
+  </div>
+
+  <div class="row" ng-if="!$ctrl.noBets">
     <div class="page-header row col-md-12 custyle bet-table-format">
-      <h1 ng-if="!$ctrl.betRows.length">{{'EMPTY_BETS' | translate}}</h1>
-      <table ng-if="$ctrl.betRows.length" class="table table-striped custab">
+      <table class="table table-striped custab">
         <caption>{{'BET_TABLE' | translate}}</caption>
         <thead>
         <tr>
