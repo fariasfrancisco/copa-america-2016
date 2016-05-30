@@ -16,10 +16,17 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
-  constructor(Auth) {
+  constructor(Auth, $translate) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
+    this.$translate = $translate;
+  }
+
+  toggleLanguage(langKey) {
+    let currentLang = this.$translate.use();
+
+    if (langKey !== currentLang) this.$translate.use(langKey);
   }
 }
 

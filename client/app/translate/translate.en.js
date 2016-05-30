@@ -50,6 +50,7 @@ angular.module('copaamericaApp')
       BET_TABLE: 'Bet Table',
       HELLO_NAVBAR: 'Hello',
       LOGOUT: 'Logout',
+      LANGUAGE: 'Language',
 
       //settings
       CHANGE_PASSWORD_HEADER: 'Change Password',

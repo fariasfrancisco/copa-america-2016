@@ -3,17 +3,10 @@
 (function () {
 
   class MainComponent {
-    constructor(Auth, MainService, QueryService, $translate) {
+    constructor(Auth, MainService, QueryService) {
       this.isLoggedIn = Auth.isLoggedIn;
       this.mainSvc = MainService;
       this.querySvc = QueryService;
-      this.$translate = $translate;
-    }
-
-    toggleLanguage(langKey) {
-      let currentLang = this.$translate.use();
-
-      if (langKey !== currentLang) this.$translate.use(langKey);
     }
 
     toggleLoginForm() {

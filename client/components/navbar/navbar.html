@@ -12,15 +12,31 @@
     <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li ng-repeat="item in nav.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title | translate}}</a>
+          <a ui-sref="{{item.state}}">{{item.title | translate}}</a>
         </li>
         <li ng-show="nav.isLoggedIn()"><a ui-sref="bet">{{'BET' | translate}}</a></li>
         <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">{{'ADMIN' | translate}}</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">{{'HELLO_NAVBAR' | translate}} {{ nav.getCurrentUser().name }}</p> </li>
-        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="nav.isLoggedIn()">
+          <p class="navbar-text">
+            {{'HELLO_NAVBAR' | translate}} {{nav.getCurrentUser().name}}
+          </p>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="#" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">
+            <i class="fa fa-language" aria-hidden="true"></i>
+            {{"LANGUAGE" | translate}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+            <li><a href="#" ng-click="nav.toggleLanguage('es')">{{'SPANISH' | translate}}</a></li>
+            <li><a href="#" ng-click="nav.toggleLanguage('en')">{{'ENGLISH' | translate}}</a></li>
+          </ul>
+        </li>
+        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span
+            class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">{{'LOGOUT' | translate}}</a></li>
       </ul>
     </div>
