@@ -4,7 +4,6 @@ angular.module('copaamericaApp')
   .service('QueryService', ['$http', function ($http) {
     let groups = [],
       teams = [],
-      bets = [],
       validCount = null;
 
     const API = '/api/',
@@ -23,46 +22,39 @@ angular.module('copaamericaApp')
       ALL_VALID = USERS + 'allvalid/',
       VALIDATE = '/validate';
 
-    let compareGroup = function (a, b) {
+    const compareGroup = function (a, b) {
       if (a.name < b.name) return -1;
       else if (a.name > b.name) return 1;
       else return 0;
     };
 
-    let compareTeam = function (a, b) {
+    const compareTeam = function (a, b) {
       if (a._id < b._id) return -1;
       else if (a._id > b._id) return 1;
       else return 0;
     };
 
-    let compareLine = function (a, b) {
+    const compareLine = function (a, b) {
       if (a.position < b.position) return -1;
       else if (a.position > b.position) return 1;
       else return 0;
     };
 
-    let queryGroups = function () {
+    const queryGroups = function () {
       return $http.get(GROUP_STAGE)
         .then(response => {
           groups = response.data.sort(compareGroup);
         });
     };
 
-    let queryTeams = function () {
+    const queryTeams = function () {
       return $http.get(TEAMS)
         .then(response => {
           teams = response.data.sort(compareTeam);
         });
     };
 
-    let queryBets = function () {
-      return $http.get(BETS)
-        .then(response => {
-          bets = response.data;
-        });
-    };
-
-    let queryValidUsersCount = function () {
+    const queryValidUsersCount = function () {
       return $http.get(ALL_VALID)
         .then(response => {
           validCount = response.data;
@@ -102,17 +94,14 @@ angular.module('copaamericaApp')
       },
 
       getBets() {
-        if (bets.length < 1) {
-          return queryBets().then(()=> {
-            return bets;
+        return $http.get(BETS)
+          .then(response => {
+            return response.data;
           });
-        } else {
-          return Promise.resolve(bets);
-        }
       },
 
       getBetByUser(user) {
-        let USER_BET_URL = BETS_USER + user;
+        const USER_BET_URL = BETS_USER + user;
 
         return $http.get(USER_BET_URL)
           .then(response => {
@@ -123,7 +112,7 @@ angular.module('copaamericaApp')
       },
 
       deleteBet(id) {
-        let BET_URL = BETS + id;
+        const BET_URL = BETS + id;
 
         return $http.delete(BET_URL)
           .then(response => {

@@ -12,518 +12,540 @@
   </div>
 </script>
 
-<div class="container" ng-if="!$ctrl.auth.isLoggedIn()">
-  <h1>{{'AUTH_BET' | translate}}</h1>
-</div>
-
-<div class="container" ng-if="$ctrl.auth.isLoggedIn() && !$ctrl.hasBet && !$ctrl.canBet">
-  <h1>{{'CANT_BET' | translate}}</h1>
-</div>
-
-<div class="container" ng-if="$ctrl.auth.isLoggedIn() && $ctrl.hasBet">
-  <div class="row" ng-show="$ctrl.canBet">
-    <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
-      {{'EDIT_BUTTON' | translate}}
-    </a>
+<div ng-if="$ctrl.loaded">
+  <div class="container" ng-if="!$ctrl.auth.isLoggedIn()">
+    <h1>{{'AUTH_BET' | translate}}</h1>
   </div>
 
-  <div class="row">
-    <div class="">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
-        </div>
-        <div class="panel-body tablebody">
-          <div class="">
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th>{{'STAGE' | translate}}</th>
-                <th class="">{{'HOME_TEAM' | translate}}</th>
-                <th class=" ">{{'HOME_GOALS' | translate}}</th>
-                <th class=" ">{{'HOME_PENALTIES' | translate}}</th>
-                <th class=" ">{{'AWAY_PENALTIES' | translate}}</th>
-                <th class=" ">{{'AWAY_GOALS' | translate}}</th>
-                <th class="">{{'AWAY_TEAM' | translate}}</th>
-              </tr>
-              </thead>
-              <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
-                <td>{{match.name | translate}}</td>
-                <td class="">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
-                </td>
-                <td class="">{{match.home.teamName | translate}}</td>
-                <td class=" ">{{match.home.goals}}</td>
-                <td class=" ">{{match.home.penalties}}</td>
-                <td class=" ">{{match.away.penalties}}</td>
-                <td class=" ">{{match.away.goals}}</td>
-                <td class="">{{match.away.teamName | translate}}</td>
-                <td class="">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
-                </td>
-              </tr>
-              <tr class="table-row">
-                <td>
-                  <span>{{'GOLDEN_BOOT' | translate}}:</span>
-                  <span> {{$ctrl.userBet.goldenBoot.player.name}}</span>
-                  <span>({{$ctrl.userBet.goldenBoot.team.name | translate}})</span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
+  <div class="container" ng-if="$ctrl.auth.isLoggedIn() && !$ctrl.hasBet && !$ctrl.canBet">
+    <h1>{{'CANT_BET' | translate}}</h1>
+  </div>
+
+  <div class="container" ng-if="$ctrl.auth.isLoggedIn() && $ctrl.hasBet">
+    <div class="row" ng-show="$ctrl.canBet">
+      <a href="#" class="button" ng-click="$ctrl.openModal('edit')">
+        {{'EDIT_BUTTON' | translate}}
+      </a>
     </div>
-  </div>
-</div>
 
-<div class="container" ng-if="$ctrl.auth.isLoggedIn() && !$ctrl.hasBet && $ctrl.canBet">
-  <div class="row">
-    <h1 class="text-center">{{ "MAKE_BET" | translate }}</h1>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6" ng-repeat="group in $ctrl.groups">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{group.name | translate}}</h3>
-
-          <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+    <div class="row">
+      <div class="">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
           </div>
-        </div>
-        <div uib-collapse="isCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table table-striped">
-              <tr class="table-row" ng-repeat="match in group.matches">
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
-                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
-                </td>
-                <td class="col-md-3 coelho team-left hidden-xs">{{match.home.teamName | translate}}</td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onfocus="this.placeholder = ''"
-                         onblur="this.placeholder = '0'" placeholder="0" type="text"
-                         ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-disabled="$ctrl.quarterFinals" ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
-                         select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onfocus="this.placeholder = ''"
-                         onblur="this.placeholder = '0'" placeholder="0" type="text"
-                         ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-disabled="$ctrl.quarterFinals" ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
-                         select-on-click>
-                </td>
-                <td class="col-md-3 coelho team-right hidden-xs">{{match.away.teamName | translate}}</td>
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
-                  <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
-                </td>
-              </tr>
-            </table>
+          <div class="panel-body tablebody">
+            <div class="">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>{{'STAGE' | translate}}</th>
+                  <th class="">{{'HOME_TEAM' | translate}}</th>
+                  <th class=" ">{{'HOME_GOALS' | translate}}</th>
+                  <th class=" ">{{'HOME_PENALTIES' | translate}}</th>
+                  <th class=" ">{{'AWAY_PENALTIES' | translate}}</th>
+                  <th class=" ">{{'AWAY_GOALS' | translate}}</th>
+                  <th class="">{{'AWAY_TEAM' | translate}}</th>
+                </tr>
+                </thead>
+                <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
+                  <td>{{match.name | translate}}</td>
+                  <td class="">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                  </td>
+                  <td class="">{{match.home.teamName | translate}}</td>
+                  <td class=" ">{{match.home.goals}}</td>
+                  <td class=" ">{{match.home.penalties}}</td>
+                  <td class=" ">{{match.away.penalties}}</td>
+                  <td class=" ">{{match.away.goals}}</td>
+                  <td class="">{{match.away.teamName | translate}}</td>
+                  <td class="">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <span>{{'GOLDEN_BOOT' | translate}}:</span>
+                    <span> {{$ctrl.userBet.goldenBoot.player.name}}</span>
+                    <span>({{$ctrl.userBet.goldenBoot.team.name | translate}})</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row" ng-hide="$ctrl.quarterFinals">
-    <a href="#" class="button"
-       onclick=""
-       ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
-       ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">
-      {{'DONE_BUTTON' | translate}}
-    </a>
-  </div>
+  <div class="container" ng-if="$ctrl.auth.isLoggedIn() && !$ctrl.hasBet && $ctrl.canBet">
+    <div class="row">
+      <h1 class="text-center">{{ "MAKE_BET" | translate }}</h1>
+    </div>
 
-  <div class="row" ng-show="$ctrl.quarterFinals">
-    <div class="col-md-push-3 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
+    <div class="row">
+      <div class="col-md-6" ng-repeat="group in $ctrl.groups">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{group.name | translate}}</h3>
 
-          <div class="collapse-button pull-right clickable " ng-click="qfIsCollapsed = !qfIsCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            <div class="collapse-button pull-right clickable " ng-click="isCollapsed = !isCollapsed">
+              <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+              <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
           </div>
-        </div>
-        <div uib-collapse="qfIsCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table table-striped">
-              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
-              <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
-                </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onfocus="this.placeholder = ''"
-                         onblur="this.placeholder = '0'" placeholder="0" type="text"
-                         ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
-                         ng-disabled="$ctrl.semiFinals" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
-                         ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
-                         ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         placeholder="0" onfocus="this.placeholder = ''" type="text"
-                         ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
-                         ng-disabled="$ctrl.semiFinals" select-on-click>
-                </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
-                </td>
-              </tr>
-            </table>
+          <div uib-collapse="isCollapsed" class="panel-body tablebody">
+            <div class="row col-md-12 grouptable">
+              <table class="table table-striped">
+                <tr class="table-row" ng-repeat="match in group.matches">
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                    <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.home.teamName |
+                      translate}}</p>
+                  </td>
+                  <td class="col-md-3 coelho team-left hidden-xs">{{match.home.teamName | translate}}</td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = '0'" placeholder="0" type="text"
+                           ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-disabled="$ctrl.quarterFinals"
+                           ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
+                           select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = '0'" placeholder="0" type="text"
+                           ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-disabled="$ctrl.quarterFinals"
+                           ng-change="$ctrl.removeGroupInvalidCharacters($ctrl.groups)"
+                           select-on-click>
+                  </td>
+                  <td class="col-md-3 coelho team-right hidden-xs">{{match.away.teamName | translate}}</td>
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                    <p class="text-center hidden-sm hidden-md hidden-lg hidden-xl">{{match.away.teamName |
+                      translate}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row alert alert-danger" ng-show="$ctrl.quarterFinalsError">
-    <strong>{{$ctrl.quarterFinalsError | translate}}</strong>
-  </div>
+    <div class="row" ng-hide="$ctrl.quarterFinals">
+      <a href="#" class="button"
+         onclick=""
+         ng-class="{'button-disabled': $ctrl.quarterFinals || $ctrl.disableButton}"
+         ng-click="($ctrl.quarterFinals || $ctrl.disableButton) || $ctrl.buildQuarterFinals()">
+        {{'DONE_BUTTON' | translate}}
+      </a>
+    </div>
 
-  <div class="row" ng-show="$ctrl.quarterFinals && !$ctrl.semiFinals">
-    <a href="#" class="button"
-       ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
-       ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">
-      {{'DONE_BUTTON' | translate}}
-    </a>
-  </div>
+    <div class="row" ng-show="$ctrl.quarterFinals">
+      <div class="col-md-push-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{$ctrl.quarterFinals.fullName | translate}}</h3>
 
-  <div class="row" ng-show="$ctrl.semiFinals">
-    <div class="col-md-push-3 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
-
-          <div class="collapse-button pull-right clickable " ng-click="sfIsCollapsed = !sfIsCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            <div class="collapse-button pull-right clickable " ng-click="qfIsCollapsed = !qfIsCollapsed">
+              <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+              <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
           </div>
-        </div>
-        <div uib-collapse="sfIsCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table table-striped">
-              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
-              <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
-
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
-                </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
-                         ng-disabled="$ctrl.thirdPlace && $ctrl.finals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-model="match.home.goals" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="match.home.penalties"
-                         ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
-                         ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="match.away.penalties"
-                         ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
-                         ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
-                         ng-disabled="$ctrl.thirdPlace && $ctrl.finals" ng-pattern="/^(0|[1-9][0-9]*)$/"
-                         ng-model="match.away.goals" select-on-click>
-                </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
-                <td class="col-md-1">
-                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
-                </td>
-
-              </tr>
-            </table>
+          <div uib-collapse="qfIsCollapsed" class="panel-body tablebody">
+            <div class="row col-md-12 grouptable">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="col-md-6 text-center" colspan="8">{{'PENALTIES' | translate}}</th>
+                </tr>
+                </thead>
+                <tr class="table-row" ng-repeat="match in $ctrl.quarterFinals.matches">
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
+                  </td>
+                  <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = '0'" placeholder="0" type="text"
+                           ng-model="match.home.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
+                           ng-disabled="$ctrl.semiFinals" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="match.home.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
+                           ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="match.away.penalties" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
+                           ng-disabled="$ctrl.semiFinals || match.home.goals !== match.away.goals" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           placeholder="0" onfocus="this.placeholder = ''" type="text"
+                           ng-model="match.away.goals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.quarterFinals.matches)"
+                           ng-disabled="$ctrl.semiFinals" select-on-click>
+                  </td>
+                  <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row alert alert-danger" ng-show="$ctrl.semiFinalsError">
-    <strong>{{$ctrl.semiFinalsError | translate}}</strong>
-  </div>
+    <div class="row alert alert-danger" ng-show="$ctrl.quarterFinalsError">
+      <strong>{{$ctrl.quarterFinalsError | translate}}</strong>
+    </div>
 
-  <div class="row" ng-show="$ctrl.semiFinals && !$ctrl.thirdPlace">
-    <a href="#" class="button"
-       ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton}"
-       ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">
-      {{'DONE_BUTTON' | translate}}
-    </a>
-  </div>
+    <div class="row" ng-show="$ctrl.quarterFinals && !$ctrl.semiFinals">
+      <a href="#" class="button"
+         ng-class="{'button-disabled': $ctrl.semiFinals || $ctrl.disableButton}"
+         ng-click="($ctrl.semiFinals || $ctrl.disableButton) || $ctrl.buildSemiFinals()">
+        {{'DONE_BUTTON' | translate}}
+      </a>
+    </div>
 
-  <div class="row" ng-show="$ctrl.thirdPlace">
-    <div class="col-md-push-3 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
+    <div class="row" ng-show="$ctrl.semiFinals">
+      <div class="col-md-push-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{$ctrl.semiFinals.fullName | translate}}</h3>
 
-          <div class="collapse-button pull-right clickable " ng-click="tpIsCollapsed = !tpIsCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            <div class="collapse-button pull-right clickable " ng-click="sfIsCollapsed = !sfIsCollapsed">
+              <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+              <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
           </div>
-        </div>
-        <div uib-collapse="tpIsCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table table-striped">
-              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
-              <tr class="table-row">
-                <td class="col-md-1">
-                  <img height="40" width="40"
-                       ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.thirdPlace.match.home._team)}}"
-                       alt="{{$ctrl.thirdPlace.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">
-                    {{$ctrl.thirdPlace.match.home.teamName | translate}}</p>
-                </td>
-                <td class="col-md-3 coelho team-left hidden-sm hidden-xs">
-                  {{$ctrl.thirdPlace.match.home.teamName | translate}}
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-model="$ctrl.thirdPlace.match.home.goals"
-                         ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="$ctrl.thirdPlace.match.home.penalties"
-                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="$ctrl.thirdPlace.match.away.penalties"
-                         ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals"
-                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-model="$ctrl.thirdPlace.match.away.goals"
-                         ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">
-                  {{$ctrl.thirdPlace.match.away.teamName | translate}}
-                </td>
-                <td class="col-md-1">
-                  <img height="40" width="40"
-                       ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.thirdPlace.match.away._team)}}"
-                       alt="{{$ctrl.thirdPlace.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">
-                    {{$ctrl.thirdPlace.match.away.teamName | translate}}</p>
-                </td>
-              </tr>
-            </table>
+          <div uib-collapse="sfIsCollapsed" class="panel-body tablebody">
+            <div class="row col-md-12 grouptable">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
+                </tr>
+                </thead>
+                <tr class="table-row" ng-repeat="match in $ctrl.semiFinals.matches">
+
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">{{match.home.teamName | translate}}</p>
+                  </td>
+                  <td class="col-md-3 coelho team-left hidden-sm hidden-xs">{{match.home.teamName | translate}}</td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
+                           ng-disabled="$ctrl.thirdPlace && $ctrl.finals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-model="match.home.goals" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="match.home.penalties"
+                           ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
+                           ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="match.away.penalties"
+                           ng-change="$ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
+                           ng-disabled="$ctrl.thirdPlace && $ctrl.finals || match.home.goals !== match.away.goals"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-change="$ctrl.changePenalties(match.home, match.away); $ctrl.removeMatchesInvalidCharacters($ctrl.semiFinals.matches)"
+                           ng-disabled="$ctrl.thirdPlace && $ctrl.finals" ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           ng-model="match.away.goals" select-on-click>
+                  </td>
+                  <td class="col-md-3 coelho team-right hidden-sm hidden-xs">{{match.away.teamName | translate}}</td>
+                  <td class="col-md-1">
+                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">{{match.away.teamName | translate}}</p>
+                  </td>
+
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row alert alert-danger" ng-show="$ctrl.thirdPlaceError">
-    <strong>{{$ctrl.thirdPlaceError | translate}}</strong>
-  </div>
+    <div class="row alert alert-danger" ng-show="$ctrl.semiFinalsError">
+      <strong>{{$ctrl.semiFinalsError | translate}}</strong>
+    </div>
 
-  <div class="row" ng-show="$ctrl.finals">
-    <div class="col-md-push-3 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading tableheading">
-          <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
+    <div class="row" ng-show="$ctrl.semiFinals && !$ctrl.thirdPlace">
+      <a href="#" class="button"
+         ng-class="{'button-disabled': $ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton}"
+         ng-click="($ctrl.thirdPlace && $ctrl.finals || $ctrl.disableButton) || $ctrl.buildFinals()">
+        {{'DONE_BUTTON' | translate}}
+      </a>
+    </div>
 
-          <div class="collapse-button pull-right clickable " ng-click="fIsCollapsed = !fIsCollapsed">
-            <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
-            <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+    <div class="row" ng-show="$ctrl.thirdPlace">
+      <div class="col-md-push-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{$ctrl.thirdPlace.fullName | translate}}</h3>
+
+            <div class="collapse-button pull-right clickable " ng-click="tpIsCollapsed = !tpIsCollapsed">
+              <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+              <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+          </div>
+          <div uib-collapse="tpIsCollapsed" class="panel-body tablebody">
+            <div class="row col-md-12 grouptable">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
+                </tr>
+                </thead>
+                <tr class="table-row">
+                  <td class="col-md-1">
+                    <img height="40" width="40"
+                         ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.thirdPlace.match.home._team)}}"
+                         alt="{{$ctrl.thirdPlace.match.home._team}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">
+                      {{$ctrl.thirdPlace.match.home.teamName | translate}}</p>
+                  </td>
+                  <td class="col-md-3 coelho team-left hidden-sm hidden-xs">
+                    {{$ctrl.thirdPlace.match.home.teamName | translate}}
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-model="$ctrl.thirdPlace.match.home.goals"
+                           ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="$ctrl.thirdPlace.match.home.penalties"
+                           ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="$ctrl.thirdPlace.match.away.penalties"
+                           ng-disabled="$ctrl.podium || $ctrl.thirdPlace.match.home.goals !== $ctrl.thirdPlace.match.away.goals"
+                           ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-model="$ctrl.thirdPlace.match.away.goals"
+                           ng-change="$ctrl.changePenalties($ctrl.thirdPlace.match.home, $ctrl.thirdPlace.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-3 coelho team-right hidden-sm hidden-xs">
+                    {{$ctrl.thirdPlace.match.away.teamName | translate}}
+                  </td>
+                  <td class="col-md-1">
+                    <img height="40" width="40"
+                         ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.thirdPlace.match.away._team)}}"
+                         alt="{{$ctrl.thirdPlace.match.away._team}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">
+                      {{$ctrl.thirdPlace.match.away.teamName | translate}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-        <div uib-collapse="fIsCollapsed" class="panel-body tablebody">
-          <div class="row col-md-12 grouptable">
-            <table class="table table-striped">
-              <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
-              <tr class="table-row">
-                <td class="col-md-1">
-                  <img width="40px" height="40px"
-                       ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.home._team)}}"
-                       alt="{{$ctrl.finals.match.home._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">
-                    {{$ctrl.finals.match.home.teamName | translate}}</p>
-                </td>
-                <td class="hidden-sm-down col-md-3 coelho team-left hidden-sm hidden-xs">
-                  {{$ctrl.finals.match.home.teamName | translate}}
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-model="$ctrl.finals.match.home.goals"
-                         ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="$ctrl.finals.match.home.penalties"
-                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = 'p'"
-                         onfocus="this.placeholder = ''" placeholder="p" type="text"
-                         ng-model="$ctrl.finals.match.away.penalties"
-                         ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals"
-                         ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-1 score">
-                  <input class="form-control scorearea" onblur="this.placeholder = '0'"
-                         onfocus="this.placeholder = ''" placeholder="0" type="text"
-                         ng-model="$ctrl.finals.match.away.goals"
-                         ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
-                         ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
-                </td>
-                <td class="col-md-3 coelho team-right hidden-sm hidden-xs">
-                  {{$ctrl.finals.match.away.teamName | translate}}
-                </td>
-                <td class="col-md-1">
-                  <img width="40px" height="40px"
-                       ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.away._team)}}"
-                       alt="{{$ctrl.finals.match.away._team}}">
-                  <p class="text-center hidden-md hidden-lg hidden-xl">
+      </div>
+    </div>
+
+    <div class="row alert alert-danger" ng-show="$ctrl.thirdPlaceError">
+      <strong>{{$ctrl.thirdPlaceError | translate}}</strong>
+    </div>
+
+    <div class="row" ng-show="$ctrl.finals">
+      <div class="col-md-push-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading tableheading">
+            <h3 class="panel-title groupname">{{$ctrl.finals.fullName | translate}}</h3>
+
+            <div class="collapse-button pull-right clickable " ng-click="fIsCollapsed = !fIsCollapsed">
+              <span ng-show="isCollapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+              <span ng-hide="isCollapsed"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+          </div>
+          <div uib-collapse="fIsCollapsed" class="panel-body tablebody">
+            <div class="row col-md-12 grouptable">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="8">{{'PENALTIES' | translate}}</th>
+                </tr>
+                </thead>
+                <tr class="table-row">
+                  <td class="col-md-1">
+                    <img width="40px" height="40px"
+                         ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.home._team)}}"
+                         alt="{{$ctrl.finals.match.home._team}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">
+                      {{$ctrl.finals.match.home.teamName | translate}}</p>
+                  </td>
+                  <td class="hidden-sm-down col-md-3 coelho team-left hidden-sm hidden-xs">
+                    {{$ctrl.finals.match.home.teamName | translate}}
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-model="$ctrl.finals.match.home.goals"
+                           ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="$ctrl.finals.match.home.penalties"
+                           ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = 'p'"
+                           onfocus="this.placeholder = ''" placeholder="p" type="text"
+                           ng-model="$ctrl.finals.match.away.penalties"
+                           ng-change="$ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium || $ctrl.finals.match.home.goals !== $ctrl.finals.match.away.goals"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-1 score">
+                    <input class="form-control scorearea" onblur="this.placeholder = '0'"
+                           onfocus="this.placeholder = ''" placeholder="0" type="text"
+                           ng-model="$ctrl.finals.match.away.goals"
+                           ng-change="$ctrl.changePenalties($ctrl.finals.match.home, $ctrl.finals.match.away); $ctrl.removeFinalsInvalidCharacters($ctrl.thirdPlace.match, $ctrl.finals.match)"
+                           ng-disabled="$ctrl.podium" ng-pattern="/^(0|[1-9][0-9]*)$/" select-on-click>
+                  </td>
+                  <td class="col-md-3 coelho team-right hidden-sm hidden-xs">
                     {{$ctrl.finals.match.away.teamName | translate}}
-                  </p>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row alert alert-danger" ng-show="$ctrl.finalsError">
-    <strong>{{$ctrl.finalsError | translate}}</strong>
-  </div>
-
-  <div class="row" ng-show="$ctrl.thirdPlace && $ctrl.finals && !$ctrl.podium">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
-       ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">
-      {{'DONE_BUTTON' | translate}}
-    </a>
-  </div>
-
-  <div class="row podium" ng-show="$ctrl.podium">
-    <div class="col-md-offset-3 col-md-6">
-      <div class="row">
-        <h1 class="podium-title text-center">{{'PODIUM' | translate}}</h1>
-
-        <div class="flex-box">
-          <div class="first">
-            <div class="team-holder gold">
-              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.firstPlace._id)}}"
-                   alt="{{$ctrl.podium.firstPlace._id}}">
+                  </td>
+                  <td class="col-md-1">
+                    <img width="40px" height="40px"
+                         ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.finals.match.away._team)}}"
+                         alt="{{$ctrl.finals.match.away._team}}">
+                    <p class="text-center hidden-md hidden-lg hidden-xl">
+                      {{$ctrl.finals.match.away.teamName | translate}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </div>
-            <h3 class="text-center">{{$ctrl.podium.firstPlace.name | translate}}</h3>
-          </div>
-          <div class="second">
-            <div class="team-holder silver">
-              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.secondPlace._id)}}"
-                   alt="{{$ctrl.podium.secondPlace._id}}">
-            </div>
-            <h3 class="text-center">{{$ctrl.podium.secondPlace.name | translate}}</h3>
-          </div>
-          <div class="third">
-            <div class="team-holder bronze">
-              <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.thirdPlace._id)}}"
-                   alt="{{$ctrl.podium.thirdPlace._id}}">
-            </div>
-            <h3 class="text-center">{{$ctrl.podium.thirdPlace.name | translate}}</h3>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-offset-3 col-md-6">
-      <div class="row">
-        <h2>Botín de oro</h2>
-        <h4>{{'GOLDEN_BOOT_HEADER' | translate}}</h4>
+    <div class="row alert alert-danger" ng-show="$ctrl.finalsError">
+      <strong>{{$ctrl.finalsError | translate}}</strong>
+    </div>
 
-        <div>
-          <div class="col-md-6 golden-boot-input">
-            <div class="input-group">
-              <span class="input-group-addon">{{'TEAM' | translate}}</span>
-              <input class="form-control" placeholder="{{$ctrl.teams[0].name | translate}}" type="text"
-                     ng-model="$ctrl.goldenBootTeam" select-on-click
-                     uib-typeahead="team as (team.name | translate) for team in $ctrl.teams | filter:$viewValue | limitTo:8">
+    <div class="row" ng-show="$ctrl.thirdPlace && $ctrl.finals && !$ctrl.podium">
+      <a href="#" class="button" ng-class="{'button-disabled': $ctrl.podium || $ctrl.disableButton}"
+         ng-click="($ctrl.goldenBootTeam || $ctrl.disableButton) || $ctrl.buildPodium()">
+        {{'DONE_BUTTON' | translate}}
+      </a>
+    </div>
+
+    <div class="row podium" ng-show="$ctrl.podium">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="row">
+          <h1 class="podium-title text-center">{{'PODIUM' | translate}}</h1>
+
+          <div class="flex-box">
+            <div class="first">
+              <div class="team-holder gold">
+                <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.firstPlace._id)}}"
+                     alt="{{$ctrl.podium.firstPlace._id}}">
+              </div>
+              <h3 class="text-center">{{$ctrl.podium.firstPlace.name | translate}}</h3>
             </div>
-
+            <div class="second">
+              <div class="team-holder silver">
+                <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.secondPlace._id)}}"
+                     alt="{{$ctrl.podium.secondPlace._id}}">
+              </div>
+              <h3 class="text-center">{{$ctrl.podium.secondPlace.name | translate}}</h3>
+            </div>
+            <div class="third">
+              <div class="team-holder bronze">
+                <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getLargePath($ctrl.podium.thirdPlace._id)}}"
+                     alt="{{$ctrl.podium.thirdPlace._id}}">
+              </div>
+              <h3 class="text-center">{{$ctrl.podium.thirdPlace.name | translate}}</h3>
+            </div>
           </div>
-          <div class="col-md-6 golden-boot-input" ng-show="$ctrl.goldenBootTeam.players">
-            <div class="input-group">
-              <span class="input-group-addon">{{'PLAYER' | translate}}</span>
-              <input class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}" type="text"
-                     ng-model="$ctrl.goldenBootPlayer" select-on-click
-                     uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8">
-            </div>
+        </div>
+      </div>
 
+      <div class="col-md-offset-3 col-md-6">
+        <div class="row">
+          <h2>Botín de oro</h2>
+          <h4>{{'GOLDEN_BOOT_HEADER' | translate}}</h4>
+
+          <div>
+            <div class="col-md-6 golden-boot-input">
+              <div class="input-group">
+                <span class="input-group-addon">{{'TEAM' | translate}}</span>
+                <input class="form-control" placeholder="{{$ctrl.teams[0].name | translate}}" type="text"
+                       ng-model="$ctrl.goldenBootTeam" select-on-click
+                       uib-typeahead="team as (team.name | translate) for team in $ctrl.teams | filter:$viewValue | limitTo:8">
+              </div>
+
+            </div>
+            <div class="col-md-6 golden-boot-input" ng-show="$ctrl.goldenBootTeam.players">
+              <div class="input-group">
+                <span class="input-group-addon">{{'PLAYER' | translate}}</span>
+                <input class="form-control" placeholder="{{$ctrl.goldenBootTeam.players[0].name}}" type="text"
+                       ng-model="$ctrl.goldenBootPlayer" select-on-click
+                       uib-typeahead="player as player.name for player in $ctrl.goldenBootTeam.players | filter:$viewValue | limitTo:8">
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row" ng-show="$ctrl.goldenBootPlayer.name">
-    <a href="#" class="button" ng-class="{'button-disabled': $ctrl.disableButton}"
-       ng-click="$ctrl.disableButton || $ctrl.save()">
-      {{'SAVE_BET_BUTTON' | translate}}
-    </a>
-  </div>
+    <div class="row" ng-show="$ctrl.goldenBootPlayer.name">
+      <a href="#" class="button" ng-class="{'button-disabled': $ctrl.disableButton}"
+         ng-click="$ctrl.disableButton || $ctrl.save()">
+        {{'SAVE_BET_BUTTON' | translate}}
+      </a>
+    </div>
 
-  <div class="row">
-    <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
-      {{'RESTART_BUTTON' | translate}}
-    </a>
+    <div class="row">
+      <a href="#" class="button warn" ng-click="$ctrl.openModal('restart')">
+        {{'RESTART_BUTTON' | translate}}
+      </a>
+    </div>
   </div>
 </div>

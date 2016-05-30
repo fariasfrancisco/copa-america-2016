@@ -4,13 +4,13 @@ angular.module('copaamericaApp')
   .service('GoldenBootCalculator', ['QueryService', function (QueryService) {
     let players = [];
 
-    let comparePlayers = function (a, b) {
+    const comparePlayers = function (a, b) {
       if (a.goals > b.goals) return 1;
       else if (a.goals < b.goals) return -1;
       else return 0;
     };
 
-    let buildPlayersList = function () {
+    const buildPlayersList = function () {
       QueryService.getTeams()
         .then(teams => {
           teams.forEach(team => {
@@ -24,7 +24,7 @@ angular.module('copaamericaApp')
         });
     };
 
-    let trimPlayersList = function () {
+    const trimPlayersList = function () {
       if (players.length > 0) {
         let i = 1,
           size = players.length;

@@ -15,15 +15,16 @@ angular.module('copaamericaApp')
         bet._user = betData.user._id;
         bet.name = betData.user.name;
         bet.goldenBoot = betData.goldenBoot;
-
         bet.podium = {
           first: betData.podium.firstPlace._id,
           second: betData.podium.secondPlace._id,
           third: betData.podium.thirdPlace._id
         };
 
+        let match, group;
+        
         for (let i = 0; i < 32; i++) {
-          let match = betData.matches[i];
+          match = betData.matches[i];
 
           bet.matches.push({
             _id: i,
@@ -31,9 +32,9 @@ angular.module('copaamericaApp')
             away: match.away
           });
         }
-
+        
         for (let i = 0; i < 4; i++) {
-          let group = betData.groups[GROUP_NAMES[i]];
+          group = betData.groups[GROUP_NAMES[i]];
 
           bet.groups.push({
             name: GROUP_NAMES[i],

@@ -63,11 +63,7 @@ angular.module('copaamericaApp')
               GROUP_B_TABLE = TableCalculator.generate(GROUP_B),
               GROUP_C_TABLE = TableCalculator.generate(GROUP_C),
               GROUP_D_TABLE = TableCalculator.generate(GROUP_D);
-
-            console.log(GROUP_A_TABLE);
-            console.log(GROUP_B_TABLE);
-            console.log(GROUP_C_TABLE);
-            console.log(GROUP_D_TABLE);
+            
             bet.matches[QF[0]].name = 'Q1';
             bet.matches[QF[0]].home._team = GROUP_A_TABLE[0].team;
             bet.matches[QF[0]].away._team = GROUP_B_TABLE[1].team;
@@ -374,7 +370,6 @@ angular.module('copaamericaApp')
           }
         };
 
-        //noinspection JSUnresolvedVariable
         response.finals = {
           fullName: 'FINALS',
           match: {

@@ -1,4 +1,4 @@
-<div class="container site-container">
+<div class="container site-container" ng-if="$ctrl.loaded">
   <div class="row">
     <div class="page-header row col-md-12 custyle bet-table-format">
       <h1 ng-if="!$ctrl.betRows.length">{{'EMPTY_BETS' | translate}}</h1>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="row">
-    <a href="#" class="button warn" ng-click="$ctrl.refresh()">
+    <a href="#" class="button" ng-click="$ctrl.refresh()">
       {{'REFRESH_BUTTON' | translate}}
     </a>
   </div>

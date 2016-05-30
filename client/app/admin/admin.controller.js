@@ -29,13 +29,13 @@
     }
 
     search() {
-      delete this.saveHomeTeamSuccess;
-      delete this.saveAwayTeamSuccess;
-      delete this.saveGroupSuccess;
-      delete this.saveHomeTeamError;
-      delete this.saveAwayTeamError;
-      delete this.saveGroupError;
-      delete this.idError;
+      this.saveHomeTeamSuccess = undefined;
+      this.saveAwayTeamSuccess = undefined;
+      this.saveGroupSuccess = undefined;
+      this.saveHomeTeamError = undefined;
+      this.saveAwayTeamError = undefined;
+      this.saveGroupError = undefined;
+      this.idError = undefined;
 
       if (isNaN(parseInt(this.matchId)) || !isFinite(this.matchId)) {
         this.idError = true;

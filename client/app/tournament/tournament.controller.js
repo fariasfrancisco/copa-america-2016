@@ -9,6 +9,7 @@
       this.tournamentSvc = TournamentService;
       this.groups = [];
       this.brackets = {};
+      this.loaded = false;
     }
 
     $onInit() {
@@ -44,11 +45,10 @@
               this.tournamentSvc.processBracket('semi-final', this.brackets);
               this.tournamentSvc.processBracket('third-place', this.brackets);
               this.tournamentSvc.processBracket('final', this.brackets);
+              this.loaded = true;
             });
-
         });
     }
-
   }
 
   angular.module('copaamericaApp')

@@ -19,6 +19,106 @@
 
         return today.getTime() <= lastDayToBet.getTime();
       })();
+      this.loaded = false;
+    }
+
+    $onInit() {
+      let user = this.auth.getCurrentUser()._id;
+
+      this.modalSvc.init();
+
+      this.querySvc.getTeams()
+        .then(teams => {
+          this.teams = teams;
+          this.querySvc.getBetByUser(user);
+        })
+        .then(res => {
+          if (res) {
+            this.userBet = res.data;
+            this.hasBet = true;
+            this.betInitialize();
+          } else {
+            this.hasBet = false;
+            this.noBetInitialize();
+          }
+        });
+    }
+
+    betInitialize() {
+      this.betSvc.betInitialize(this.userBet)
+        .then(()=> {
+          this.loaded = true;
+        });
+    }
+
+    noBetInitialize() {
+      this.betSvc.noBetInitialize(this.auth.getCurrentUser())
+        .then(obj => {
+          this.bet = obj.bet;
+          this.groups = obj.groups;
+          this.loaded = true;
+        });
+    }
+
+    buildQuarterFinals() {
+      this.betSvc.buildQuarterFinals(this.groups, this.bet)
+        .then(quarterFinals => {
+          this.quarterFinals = quarterFinals;
+        });
+    }
+
+    buildSemiFinals() {
+      try {
+        this.semiFinals = this.betSvc.buildSemiFinals(this.quarterFinals, this.bet);
+
+        delete this.quarterFinalsError;
+      } catch (e) {
+        this.quarterFinalsError = 'BET_ERROR';
+      }
+    }
+
+    buildFinals() {
+      try {
+        let obj = this.betSvc.buildFinals(this.semiFinals, this.bet);
+
+        this.thirdPlace = obj.thirdPlace;
+        this.finals = obj.finals;
+
+        delete this.semiFinalsError;
+      } catch (e) {
+        this.semiFinalsError = 'BET_ERROR';
+      }
+    }
+
+    buildPodium() {
+      try {
+        this.podium = this.betSvc.buildPodium(this.thirdPlace, this.finals, this.bet);
+        this.goldenBootTeam = undefined;
+        this.goldenBootPlayer = undefined;
+
+        delete this.thirdPlaceError;
+        delete this.finalsError;
+      } catch (e) {
+        if (e.thirdPlaceException) this.thirdPlaceError = 'BET_ERROR';
+        else delete this.thirdPlaceError;
+
+        if (e.finalsException) this.finalsError = 'BET_ERROR';
+        else delete this.finalsError;
+      }
+    }
+
+    save() {
+      this.bet.goldenBoot = {
+        _team: this.goldenBootTeam._id,
+        _player: this.goldenBootPlayer._id
+      };
+
+      this.bet.podium = this.podium;
+
+      this.betBuilderSvc.buildBet(this.bet)
+        .then(() => {
+          this.$state.go('main');
+        });
     }
 
     openModal(target) {
@@ -112,101 +212,6 @@
       delete this.podium;
 
       this.$onInit();
-    }
-
-    $onInit() {
-      let user = this.auth.getCurrentUser()._id;
-
-      this.modalSvc.init();
-
-      this.querySvc.getTeams()
-        .then(teams => {
-          this.teams = teams;
-        });
-
-      this.querySvc.getBetByUser(user)
-        .then(res => {
-          this.userBet = res.data;
-          this.hasBet = true;
-          this.betInitialize();
-        })
-        .catch(() => {
-          this.hasBet = false;
-          this.noBetInitialize();
-        });
-    }
-
-    betInitialize() {
-      this.betSvc.betInitialize(this.userBet);
-    }
-
-    noBetInitialize() {
-      this.betSvc.noBetInitialize(this.auth.getCurrentUser())
-        .then(obj => {
-          this.bet = obj.bet;
-          this.groups = obj.groups;
-        });
-    }
-
-    buildQuarterFinals() {
-      this.betSvc.buildQuarterFinals(this.groups, this.bet)
-        .then(quarterFinals => {
-          this.quarterFinals = quarterFinals;
-        });
-    }
-
-    buildSemiFinals() {
-      try {
-        this.semiFinals = this.betSvc.buildSemiFinals(this.quarterFinals, this.bet);
-
-        delete this.quarterFinalsError;
-      } catch (e) {
-        this.quarterFinalsError = 'BET_ERROR';
-      }
-    }
-
-    buildFinals() {
-      try {
-        let obj = this.betSvc.buildFinals(this.semiFinals, this.bet);
-
-        this.thirdPlace = obj.thirdPlace;
-        this.finals = obj.finals;
-
-        delete this.semiFinalsError;
-      } catch (e) {
-        this.semiFinalsError = 'BET_ERROR';
-      }
-    }
-
-    buildPodium() {
-      try {
-        this.podium = this.betSvc.buildPodium(this.thirdPlace, this.finals, this.bet);
-        this.goldenBootTeam = undefined;
-        this.goldenBootPlayer = undefined;
-
-        delete this.thirdPlaceError;
-        delete this.finalsError;
-      } catch (e) {
-        if (e.thirdPlaceException) this.thirdPlaceError = 'BET_ERROR';
-        else delete this.thirdPlaceError;
-
-        if (e.finalsException) this.finalsError = 'BET_ERROR';
-        else delete this.finalsError;
-      }
-    }
-
-    save() {
-      this.bet.goldenBoot = {
-        _team: this.goldenBootTeam._id,
-        _player: this.goldenBootPlayer._id
-      };
-
-      this.bet.podium = this.podium;
-
-      this.betBuilderSvc.buildBet(this.bet)
-        .then(() => {
-          this.$state.go('main');
-        });
     }
   }
 
