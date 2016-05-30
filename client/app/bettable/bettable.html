@@ -7,10 +7,10 @@
         <thead>
         <tr>
           <th class="table-cell">{{'USER' | translate}}</th>
-          <th class="table-cell">{{'GROUP_A' | translate}}</th>
-          <th class="table-cell">{{'GROUP_B' | translate}}</th>
-          <th class="table-cell">{{'GROUP_C' | translate}}</th>
-          <th class="table-cell">{{'GROUP_D' | translate}}</th>
+          <th class="table-cell">{{'GA' | translate}}</th>
+          <th class="table-cell">{{'GB' | translate}}</th>
+          <th class="table-cell">{{'GC' | translate}}</th>
+          <th class="table-cell">{{'GD' | translate}}</th>
           <th class="table-cell">{{'QUARTER_FINALS' | translate}}</th>
           <th class="table-cell">{{'SEMI_FINALS' | translate}}</th>
           <th class="table-cell">{{'FINALS' | translate}}</th>
@@ -32,10 +32,17 @@
           <td class="table-cell">{{row.points.POD}}</td>
           <td class="table-cell">{{row.points.STR}}</td>
           <td class="table-cell">{{row.points.GA + row.points.GB + row.points.GC + row.points.GD +
-            row.points.QF + row.points.SF + row.points.TP + row.points.F + row.points.POD + row.points.STR}}
+            row.points.QF + row.points.SF + row.points.TP + row.points.F +
+            row.points.POD + row.points.STR}}
           </td>
         </tr>
       </table>
     </div>
+  </div>
+
+  <div class="row">
+    <a href="#" class="button warn" ng-click="$ctrl.refresh()">
+      {{'REFRESH_BUTTON' | translate}}
+    </a>
   </div>
 </div>

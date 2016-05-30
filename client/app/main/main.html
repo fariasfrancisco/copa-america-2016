@@ -271,8 +271,12 @@
 <div class="container login-signup">
   <div class="row" id="loginregister">
     <div class="col-lg-12">
-      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowLoginForm()" login></div>
-      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowSignUpForm()" signup></div>
+      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowLoginForm()">
+        <login></login>
+      </div>
+      <div ng-show="!$ctrl.isLoggedIn() && $ctrl.mainSvc.getShowSignUpForm()">
+        <signup></signup>
+      </div>
     </div>
   </div>
 </div>

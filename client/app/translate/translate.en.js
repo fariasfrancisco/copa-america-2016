@@ -118,6 +118,7 @@ angular.module('copaamericaApp')
       GOAL_DIFFERENCE_SHORT: 'GD',
 
       //bet
+      AUTH_BET: 'Authorized Personnel Only. Why don\'t you try logging in before coming here?',
       AWAY_GOALS: 'Away Goals',
       AWAY_PENALTIES: 'Away Penalties',
       AWAY_TEAM: 'Away',
@@ -146,6 +147,7 @@ angular.module('copaamericaApp')
       STAGE: 'Stage',
       TEAM: 'Team',
       THIRD_PLACE: 'Third Place',
+      REFRESH_BUTTON: 'Refresh',
       RESTART_BUTTON: 'Start Over',
       RESTART_WARN: 'Are you sure? This will delete all your progress.',
       SECOND_PLACE_PODIUM: '2nd Place',

@@ -118,6 +118,7 @@ angular.module('copaamericaApp')
       GOAL_DIFFERENCE_SHORT: 'GD',
 
       //bet
+      AUTH_BET: 'Sólo Personal Autorizado. ¿Por qué no te logeás antes de entrar acá?',
       AWAY_GOALS: 'Goles Visitante',
       AWAY_PENALTIES: 'Penales Visitante',
       AWAY_TEAM: 'Visitante',
@@ -141,6 +142,7 @@ angular.module('copaamericaApp')
       PENALTIES: 'Penales',
       PODIUM: 'Podio',
       QUARTER_FINALS: 'Cuartos de Final',
+      REFRESH_BUTTON: 'Refresh',
       RESTART_BUTTON: 'Reiniciar',
       RESTART_WARN: '¿Estás Seguro? Esto va a eliminar todo tu progreso.',
       SAVE_BET_BUTTON: 'Guardar',

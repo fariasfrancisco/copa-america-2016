@@ -39,6 +39,12 @@
       this.betTableSvc.processThirdPlaceAndFinals(this.bets, this.podium, this.betRows);
       this.betTableSvc.processGoldenBoot(this.bets, this.betRows);
     }
+
+    refresh() {
+      this.betRows = [];
+      this.podium = {};
+      this.$onInit();
+    }
   }
 
   angular.module('copaamericaApp')
