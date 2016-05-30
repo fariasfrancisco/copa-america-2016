@@ -319,6 +319,35 @@ section div a.button {
   padding-top: 10px;
 }
 
+.login-signup p.connect-divider{
+  color: #7D7D7D;
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.login-signup p.connect-divider:before{
+  border-top: 1px solid #dfdfdf;
+  content: "";
+  margin: 0 auto;
+  /* this centers the line to the full width specified */
+  position: absolute;
+  /* positioning must be absolute here, and relative positioning must be applied to the parent */
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 95%;
+  z-index: -1;
+}
+
+.login-signup p.connect-divider span{
+  background: #fff;
+  padding: 0 15px;
+}
+/* to hide the lines from behind the text, you have to set the background color the same as the container */
+
 /* CSS used here will be applied after bootstrap.css */
 .jumbotron {
   width: 80%;
