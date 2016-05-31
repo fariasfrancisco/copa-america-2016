@@ -2,11 +2,12 @@
 (function () {
 
   class BettableComponent {
-    constructor(QueryService, BetTableService) {
+    constructor(QueryService, BetTableService, $scope) {
       this.querySvc = QueryService;
       this.betTableSvc = BetTableService;
       this.betRows = [];
       this.podium = {};
+      this.$scope = $scope;
     }
 
     $onInit() {
@@ -29,11 +30,19 @@
               this.querySvc.getGroups()
                 .then(groups => {
                   this.groups = groups;
-                  
-                  if (this.betRows.length > 0) this.process();
-                  else this.noBets = true;
 
-                  this.loaded = true;
+                  if (this.betRows.length > 0) {
+                    this.process();
+                  }
+                  else {
+                    this.$scope.$applyAsync(() => {
+                      this.noBets = true;
+                    });
+                  }
+
+                  this.$scope.$applyAsync(() => {
+                    this.loaded = true;
+                  });
                 });
             });
         });

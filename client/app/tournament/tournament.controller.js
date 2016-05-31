@@ -3,10 +3,11 @@
 (function () {
 
   class TournamentComponent {
-    constructor(QueryService, TeamLogoService, TournamentService) {
+    constructor(QueryService, TeamLogoService, TournamentService, $scope) {
       this.querySvc = QueryService;
       this.logoPaths = TeamLogoService;
       this.tournamentSvc = TournamentService;
+      this.$scope = $scope;
       this.groups = [];
       this.brackets = {};
       this.loaded = false;
@@ -45,7 +46,10 @@
               this.tournamentSvc.processBracket('semi-final', this.brackets);
               this.tournamentSvc.processBracket('third-place', this.brackets);
               this.tournamentSvc.processBracket('final', this.brackets);
-              this.loaded = true;
+              this.$scope.$applyAsync(() => {
+                this.loaded = true;
+              });
+
             });
         });
     }

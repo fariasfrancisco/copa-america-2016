@@ -2,7 +2,7 @@
 
 (function () {
   class BetComponent {
-    constructor(Auth, BetService, QueryService, BetBuilderService, ModalService, TeamLogoService, $uibModal, $state, $window) {
+    constructor(Auth, BetService, QueryService, BetBuilderService, ModalService, TeamLogoService, $uibModal, $state, $window, $scope) {
       this.teams = [];
       this.auth = Auth;
       this.betSvc = BetService;
@@ -13,11 +13,12 @@
       this.$uibModal = $uibModal;
       this.$state = $state;
       this.$window = $window;
+      this.$scope = $scope;
       this.canBet = (() => {
         let today = new Date(),
           lastDayToBet = new Date(2016, 5, 2, 23);
 
-        return today.getTime() <= lastDayToBet.getTime();
+        return today.getTime() < lastDayToBet.getTime();
       })();
       this.loaded = false;
     }
@@ -47,7 +48,9 @@
     betInitialize() {
       this.betSvc.betInitialize(this.userBet)
         .then(()=> {
-          this.loaded = true;
+          this.$scope.$applyAsync(() => {
+            this.loaded = true;
+          });
         });
     }
 
@@ -56,7 +59,9 @@
         .then(obj => {
           this.bet = obj.bet;
           this.groups = obj.groups;
-          this.loaded = true;
+          this.$scope.$applyAsync(() => {
+            this.loaded = true;
+          });
         });
     }
 

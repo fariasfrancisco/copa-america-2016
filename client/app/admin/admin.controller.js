@@ -67,7 +67,7 @@
     save() {
       return this.adminSvc.save(this.match, this.group, this.homeScorers, this.awayScorers)
         .then(out => {
-          this.$scope.$apply(() => {
+          this.$scope.$applyAsync(() => {
             this.saveHomeTeamSuccess = out.successFlags.saveHomeTeamSuccess;
             this.saveAwayTeamSuccess = out.successFlags.saveAwayTeamSuccess;
             this.saveGroupSuccess = out.successFlags.saveGroupSuccess;
