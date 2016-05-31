@@ -20,6 +20,7 @@
 
         return today.getTime() < lastDayToBet.getTime();
       })();
+      this.hasBet = false;
       this.loaded = false;
     }
 
@@ -31,15 +32,15 @@
       this.querySvc.getTeams()
         .then(teams => {
           this.teams = teams;
-          this.querySvc.getBetByUser(user);
-        })
-        .then(res => {
-          if (res) {
-            this.userBet = res.data;
+        });
+
+      this.querySvc.getBetByUser(user)
+        .then(bet => {
+          if (bet) {
+            this.userBet = bet;
             this.hasBet = true;
             this.betInitialize();
           } else {
-            this.hasBet = false;
             this.noBetInitialize();
           }
         });

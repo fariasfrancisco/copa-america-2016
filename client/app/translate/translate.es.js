@@ -143,7 +143,7 @@ angular.module('copaamericaApp')
       PENALTIES: 'Penales',
       PODIUM: 'Podio',
       QUARTER_FINALS: 'Cuartos de Final',
-      REFRESH_BUTTON: 'Refresh',
+      REFRESH_BUTTON: 'Refrescar',
       RESTART_BUTTON: 'Reiniciar',
       RESTART_WARN: '¿Estás Seguro? Esto va a eliminar todo tu progreso.',
       SAVE_BET_BUTTON: 'Guardar',

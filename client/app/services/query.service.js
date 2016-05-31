@@ -105,9 +105,9 @@ angular.module('copaamericaApp')
 
         return $http.get(USER_BET_URL)
           .then(response => {
-            return response;
-          }, err => {
-            throw err;
+            return response.data;
+          }, () => {
+            return undefined;
           });
       },
 
@@ -150,11 +150,14 @@ angular.module('copaamericaApp')
             let table = response.data;
             table.sort(compareLine);
 
-            table.forEach(line => {
-              line.teamName = teams[line.team].name;
-            });
+            return this.getTeams()
+              .then(teams => {
+                table.forEach(line => {
+                  line.teamName = teams[line.team].name;
+                });
 
-            return table;
+                return table;
+              })
           });
       },
 

@@ -13,7 +13,7 @@
     $onInit() {
       this.loaded = false;
       this.noBets = false;
-
+      
       this.querySvc.getBets()
         .then(bets => {
           this.betTableSvc.cleanInvalidBets(bets)
