@@ -354,3 +354,12 @@ section div a.button {
 .jumbotron .container{
   padding-top: 0;
 }
+
+.pool-size{
+  color: whitesmoke;
+  text-align: center;
+}
+
+.pool-size span{
+  color: #1a9f07;
+}

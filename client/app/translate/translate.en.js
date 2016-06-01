@@ -87,6 +87,7 @@ angular.module('copaamericaApp')
       HOW_YOU_FARE_P1: 'Check the Bet Table to compare your bet against the other players.',
       HOW_YOU_FARE_P2: 'See if you are ahead, and when you are, Brag on!',
       POINT_BREAKDOWN: 'Points Breakdown',
+      POOL_SIZE: 'Pool Size',
       MATCHES: 'Matches',
       MATCHES_P1: 'You can earn +2 points for each match by guessing the winner (or a tie) and +3 more points if you guess the exact result.',
       MATCHES_P2: 'With 32 matches you can earn a total of 160 points!',

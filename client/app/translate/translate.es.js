@@ -87,6 +87,7 @@ angular.module('copaamericaApp')
       HOW_YOU_FARE_P1: 'Compará los resultados de tu apuesta con los de los demás jugadores.',
       HOW_YOU_FARE_P2: 'Fijate si vas primero y después echácelo en cara a todos!',
       POINT_BREAKDOWN: 'Distribución de los Puntos',
+      POOL_SIZE: 'Pozo Acumulado',
       MATCHES: 'Partidos',
       MATCHES_P1: 'Podés ganar +2 puntos por cada partido acertando el ganador (o el empate) y si además acertás el resultado ganas +3 puntos más.',
       MATCHES_P2: 'Con 32 partidos podés ganar un total de 160 puntos!',

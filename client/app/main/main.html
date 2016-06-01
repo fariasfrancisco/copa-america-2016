@@ -3,6 +3,14 @@
     <div class="small-centered medium-uncentered medium-6 large-7 columns">
       <h1> {{'WELCOME' | translate}} </h1>
     </div>
+    <div class="pool-size">
+      <h2>
+        {{'POOL_SIZE' | translate}}:
+        <span>
+          {{70.0 * $ctrl.validUsersCount | currency : symbol : fractionSize}}
+        </span>
+      </h2>
+    </div>
     <div class="small-centered medium-uncentered medium-6 large-5 columns">
       <div class="tech-img"></div>
       <a href="#loginregister" class="button" ng-show="!$ctrl.isLoggedIn()">
