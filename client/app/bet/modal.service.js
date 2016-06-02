@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('ModalService', function () {
+  .service('ModalService', () => {
     let editWarning, restartWarning;
 
     return {

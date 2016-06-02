@@ -1,33 +1,35 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('GoldenBootCalculator', ['QueryService', function (QueryService) {
-    let players = [];
+  .service('GoldenBootCalculator', ['QueryService', (QueryService) => {
+    let players;
 
-    const comparePlayers = function (a, b) {
+    const comparePlayers = (a, b) => {
       if (a.goals > b.goals) return 1;
       else if (a.goals < b.goals) return -1;
       else return 0;
     };
 
-    const buildPlayersList = function () {
-      QueryService.getTeams()
+    const buildPlayersList = () => {
+      return QueryService.getTeams()
         .then(teams => {
+          let arr = [];
+
           teams.forEach(team => {
             team.players.forEach(player => {
               player._team = team._id;
-              if (player.goals > 0) players.push(player);
+              if (player.goals > 0) arr.push(player);
             });
           });
 
-          players.sort(comparePlayers);
+          return arr.sort(comparePlayers);
         });
     };
 
-    const trimPlayersList = function () {
+    const trimPlayersList = () => {
       if (players.length > 0) {
-        let i = 1,
-          size = players.length;
+        let i = 1;
+        const size = players.length;
 
         while (i < size) {
           if (players[i].goals < players[i - 1]) break;
@@ -39,10 +41,18 @@ angular.module('copaamericaApp')
 
     return {
       getTopScorers() {
-        buildPlayersList();
-        trimPlayersList();
+        if (players) {
+          return Promise.resolve(players);
+        } else {
+          return buildPlayersList()
+            .then(playersArr => {
+              players = playersArr;
 
-        return players;
+              trimPlayersList();
+
+              return players;
+            });
+        }
       }
     };
   }]);

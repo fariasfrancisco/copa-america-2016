@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('TournamentService', ['QueryService', function (QueryService) {
+  .service('TournamentService', ['QueryService', (QueryService) => {
     return {
       processBracket(stageName, brackets) {
         let now = new Date(),

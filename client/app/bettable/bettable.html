@@ -10,36 +10,73 @@
         <thead>
         <tr>
           <th class="table-cell">{{'USER' | translate}}</th>
-          <th class="table-cell">{{'GA' | translate}}</th>
-          <th class="table-cell">{{'GB' | translate}}</th>
-          <th class="table-cell">{{'GC' | translate}}</th>
-          <th class="table-cell">{{'GD' | translate}}</th>
-          <th class="table-cell">{{'QUARTER_FINALS' | translate}}</th>
-          <th class="table-cell">{{'SEMI_FINALS' | translate}}</th>
-          <th class="table-cell">{{'FINALS' | translate}}</th>
-          <th class="table-cell">{{'GOLDEN_BOOT' | translate}}</th>
-          <th class="table-cell">{{'PODIUM' | translate}}</th>
-          <th class="table-cell">{{'TOTAL' | translate}}</th>
+          <th class="table-cell">{{'MATCHES_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GA_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GB_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GC_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GD_SHORT' | translate}}</th>
+          <th class="table-cell">{{'GOLDEN_BOOT_SHORT' | translate}}</th>
+          <th class="table-cell">{{'PODIUM_SHORT' | translate}}</th>
+          <th class="table-cell">{{'TOTAL_SHORT' | translate}}</th>
         </tr>
         </thead>
 
         <tr ng-repeat="row in $ctrl.betRows">
           <td class="table-cell">{{row.user}}</td>
+          <td class="table-cell">{{row.points.MAT}}</td>
           <td class="table-cell">{{row.points.GA}}</td>
           <td class="table-cell">{{row.points.GB}}</td>
           <td class="table-cell">{{row.points.GC}}</td>
           <td class="table-cell">{{row.points.GD}}</td>
-          <td class="table-cell">{{row.points.QF}}</td>
-          <td class="table-cell">{{row.points.SF}}</td>
-          <td class="table-cell">{{row.points.TP + row.points.F}}</td>
           <td class="table-cell">{{row.points.POD}}</td>
           <td class="table-cell">{{row.points.STR}}</td>
           <td class="table-cell">{{row.points.GA + row.points.GB + row.points.GC + row.points.GD +
-            row.points.QF + row.points.SF + row.points.TP + row.points.F +
-            row.points.POD + row.points.STR}}
+            row.points.MAT + row.points.POD + row.points.STR}}
           </td>
         </tr>
       </table>
+    </div>
+  </div>
+
+  <div class="row" ng-if="!$ctrl.noBets">
+    <div class="panel panel-default col-md-4 col-md-offset-4">
+      <div class="panel-heading">{{'LEGEND' | translate}}</div>
+      <div class="panel-body">
+        <table>
+          <tr>
+            <td class="col-md-2">{{'MATCHES_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'MATCHES' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'GA_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'GA' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'GB_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'GB' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'GC_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'GC' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'GD_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'GD' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'GOLDEN_BOOT_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'GOLDEN_BOOT' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'PODIUM_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'PODIUM' | translate}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">{{'TOTAL_SHORT' | translate}}</td>
+            <td class="col-md-2">{{'TOTAL' | translate}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 

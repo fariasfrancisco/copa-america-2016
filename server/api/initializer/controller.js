@@ -6,7 +6,7 @@ import teams from './teams.json';
 
 let init = {};
 
-init.initialize = function (req, res) {
+init.initialize = (req, res) => {
   try {
     groups.forEach(group => {
       group.matches.forEach(match => {

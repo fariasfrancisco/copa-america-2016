@@ -1,14 +1,91 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('BetTableService', ['QueryService', 'GoldenBootCalculator', function (QueryService, GoldenBootCalculator) {
+  .service('BetTableService', ['QueryService', 'GoldenBootCalculator', 'TableCalculator', (QueryService, GoldenBootCalculator, TableCalculator) => {
+    let groups, matches, tables, podium;
+
+    const compareMatches = (a, b) => {
+      if (a._id < b._id) return -1;
+      else if (a._id > b._id) return 1;
+      else return 0;
+    };
+
+    const getTable = (group) => {
+      if (tables[group.name]) {
+        return Promise.resolve(tables[group.name]);
+      } else {
+        return QueryService.buildTable(group)
+          .then(table => {
+            tables[group.name] = table;
+
+            return table;
+          });
+      }
+    };
+
+    const buildMatchesArray = () => {
+      let arr = [];
+
+      groups.forEach(group => {
+        arr = arr.concat(group.matches)
+      });
+
+      return arr.sort(compareMatches);
+    };
+
+    const buildPodium = () => {
+      podium = {};
+
+      const thirdPlaceMatch = matches[30],
+        thirdPlaceGoals = thirdPlaceMatch.home.goals - thirdPlaceMatch.away.goals,
+        thirdPlacePenalties = thirdPlaceMatch.home.penalties - thirdPlaceMatch.away.penalties,
+        finalMatch = matches[31],
+        finalGoals = finalMatch.home.goals - finalMatch.away.goals,
+        finalPenalties = finalMatch.home.penalties - finalMatch.away.penalties;
+
+      if (thirdPlaceGoals > 0) podium.third = thirdPlaceMatch.home._team;
+      else if (thirdPlaceGoals < 0) podium.third = thirdPlaceMatch.away._team;
+      else if (thirdPlacePenalties > 0) podium.third = thirdPlaceMatch.home._team;
+      else if (thirdPlacePenalties < 0) podium.third = thirdPlaceMatch.away._team;
+      else throw new Error('failed to calculate podium');
+
+      if (finalGoals > 0) {
+        podium.first = finalMatch.home._team;
+        podium.second = finalMatch.away._team;
+      } else {
+        if (finalGoals < 0) {
+          podium.first = finalMatch.away._team;
+          podium.second = finalMatch.home._team;
+        } else {
+          if (finalPenalties > 0) {
+            podium.first = finalMatch.home._team;
+            podium.second = finalMatch.away._team;
+          } else {
+            if (finalPenalties < 0) {
+              podium.first = finalMatch.away._team;
+              podium.second = finalMatch.home._team;
+            } else {
+              throw new Error('failed to calculate podium');
+            }
+          }
+        }
+      }
+
+      return podium;
+    };
+
+    const getPodium = () => {
+      if (podium) return podium;
+      else return buildPodium();
+    };
+
     return {
       cleanInvalidBets(bets){
         let validBets = [],
           length = bets.length,
           count = 0;
 
-        let clean = function () {
+        let clean = () => {
           if (count < length) {
             return QueryService.isValid(bets[count]._user)
               .then(valid => {
@@ -24,241 +101,142 @@ angular.module('copaamericaApp')
         return clean();
       },
 
-      processGroups(groups, bets, betRows) {
-        let now = new Date(),
-          matchDate;
+      calculatePoints(bets, betRows){
+        const now = new Date();
 
-        groups.forEach(group => {
-          QueryService.buildTable(group)
-            .then(table => {
-              bets.forEach((bet, index) => {
-                let groupIndex = 0,
-                  size = bet.groups.length,
-                  allPlayed = true;
+        let matchDate, matchGoals, matchPenalties, betGoals, betPenalties, betHome, betAway,
+          lastMatchDateGroupA, lastMatchDateGroupB, lastMatchDateGroupC, lastMatchDateGroupD, lastMatchDate;
 
-                betRows[index].points[group.name] = 0;
+        QueryService.getAllGroups()
+          .then(allGroups => {
+            groups = allGroups;
+            matches = buildMatchesArray();
 
-                group.matches.forEach(match => {
-                  matchDate = new Date(match.date);
+            lastMatchDateGroupA = new Date(matches[17].date);
+            lastMatchDateGroupA.setHours(lastMatchDateGroupA.getHours() + 2);
 
-                  if (matchDate < now) {
-                    let matchGoals = match.home.goals - match.away.goals,
-                      betGoals = bet.matches[match._id].home.goals - bet.matches[match._id].away.goals;
+            lastMatchDateGroupB = new Date(matches[19].date);
+            lastMatchDateGroupB.setHours(lastMatchDateGroupB.getHours() + 2);
 
-                    if (Math.sign(matchGoals) === Math.sign(betGoals)) {
-                      betRows[index].points[group.name] += 2;
-                      if (match.home.goals === bet.matches[match._id].home.goals &&
-                        match.away.goals === bet.matches[match._id].away.goals) {
-                        betRows[index].points[group.name] += 3;
+            lastMatchDateGroupC = new Date(matches[21].date);
+            lastMatchDateGroupC.setHours(lastMatchDateGroupC.getHours() + 2);
+
+            lastMatchDateGroupD = new Date(matches[23].date);
+            lastMatchDateGroupD.setHours(lastMatchDateGroupD.getHours() + 2);
+
+            lastMatchDate = new Date(matches[31].date);
+            lastMatchDate.setHours(lastMatchDate.getHours() + 3);
+
+            bets.forEach((bet, index) => {
+              matches.forEach(match => {
+                matchDate = new Date(match.date);
+                matchDate.setHours(matchDate.getHours() + 2);
+
+                if (matchDate < now) {
+                  betHome = bet.matches[match._id].home;
+                  betAway = bet.matches[match._id].away;
+
+                  betGoals = betHome.goals - betAway.goals;
+                  matchGoals = match.home.goals - match.away.goals;
+
+                  if (Math.sign(matchGoals) === Math.sign(betGoals)) {
+                    if (match._id > 23 && betGoals === 0) {
+                      betPenalties = betHome.penalties - betAway.penalties;
+                      matchPenalties = match.home.penalties - match.away.penalties;
+
+                      if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
+                        betRows[index].points.MAT += 2;
+
+                        if (matchGoals === betGoals && matchPenalties === betPenalties) {
+                          betRows[index].points.MAT += 3;
+                        }
                       }
+                    } else {
+                      betRows[index].points.MAT += 2;
+
+                      if (matchGoals === betGoals) betRows[index].points.MAT += 3;
                     }
-                  } else {
-                    allPlayed = false;
-                  }
-                });
-
-                if (allPlayed) {
-                  while (group.name !== bet.groups[groupIndex].name && groupIndex < size) {
-                    groupIndex++;
-                  }
-
-                  if (table[0].team === bet.groups[groupIndex].first &&
-                    table[0].team === bet.groups[groupIndex].second) {
-                    betRows[index].points[group.name] += 5;
                   }
                 }
               });
-            });
-        });
-      },
 
-      processStage(stageObj, bets, betRows) {
-        QueryService.getStage(stageObj.fullName)
-          .then(stage => {
-            let now, matchDate, matchHome, matchAway, betHome, betAway;
-
-            stage.forEach(function (current) {
-              matchHome = current.matches[0].home;
-              matchAway = current.matches[0].away;
-              now = new Date();
-              matchDate = new Date(current.matches[0].date);
-
-              if (matchDate > now) {
-                bets.forEach((bet, index) => {
-                  betHome = bet.matches[current.matches[0]._id].home;
-                  betAway = bet.matches[current.matches[0]._id].away;
-
-                  betRows[index].points[stageObj.shortName] = 0;
-
-                  let matchGoals = matchHome.goals - matchAway.goals,
-                    betGoals = betHome.goals - betAway.goals,
-                    matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
-                    betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
-
-                  if (Math.sign(matchGoals) === Math.sign(betGoals)) {
-                    if (matchGoals === 0) {
-                      if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
-                        betRows[index].points[stageObj.shortName] += 2;
-
-                        if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
-                          matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
-                          betRows[index].points[stageObj.shortName] += 3;
-                        }
-                      }
-                    } else {
-                      betRows[index].points[stageObj.shortName] += 2;
-
-                      if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
-                        betRows[index].points[stageObj.shortName] += 3;
-                      }
-                    }
-                  }
-                });
-              }
-            });
-          });
-      },
-
-      processThirdPlaceAndFinals(bets, podium, betRows) {
-        QueryService.getStage('third-place')
-          .then(stage => {
-              let now = new Date(),
-                matchDate = new Date(stage[0].matches[0].date),
-                matchHome = stage[0].matches[0].home,
-                matchAway = stage[0].matches[0].away;
-
-              if (matchDate > now) {
-                bets.forEach(function (bet, index) {
-                  betRows[index].points.TP = 0;
-
-                  let betHome = bet.matches[stage[0].matches[0]._id].home,
-                    betAway = bet.matches[stage[0].matches[0]._id].away,
-                    matchGoals = matchHome.goals - matchAway.goals,
-                    betGoals = betHome.goals - betAway.goals,
-                    matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
-                    betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
-
-                  if (Math.sign(matchGoals) === Math.sign(betGoals)) {
-                    if (matchGoals === 0) {
-                      if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
-                        betRows[index].points.TP += 2;
-                        if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
-                          matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
-                          betRows[index].points.TP += 3;
-                        }
-                      }
-                    } else {
-                      betRows[index].points.TP += 2;
-                      if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
-                        betRows[index].points.TP += 3;
-                      }
-                    }
-                  }
-                });
-
-                if (matchHome.goals > matchAway.goals) podium.third = matchHome._team;
-                else if (matchHome.goals < matchAway.goals) podium.third = matchAway._team;
-                else if (matchHome.penalties > matchAway.penalties) podium.third = matchHome._team;
-                else if (matchHome.penalties < matchAway.penalties) podium.third = matchAway._team;
-
-                QueryService.getStage('final')
-                  .then(stage => {
-                    matchDate = new Date(stage[0].matches[0].date);
-                    matchHome = stage[0].matches[0].home;
-                    matchAway = stage[0].matches[0].away;
-
-                    if (matchDate > now) {
-                      bets.forEach((bet, index) => {
-                        betRows[index].points.F = 0;
-
-                        let betHome = bet.matches[stage[0].matches[0]._id].home,
-                          betAway = bet.matches[stage[0].matches[0]._id].away,
-                          matchGoals = matchHome.goals - matchAway.goals,
-                          betGoals = betHome.goals - betAway.goals,
-                          matchPenalties = matchGoals === 0 ? matchHome.penalties - matchAway.penalties : 0,
-                          betPenalties = betGoals === 0 ? betHome.penalties - betAway.penalties : 0;
-
-                        if (Math.sign(matchGoals) === Math.sign(betGoals)) {
-                          if (matchGoals === 0) {
-                            if (Math.sign(matchPenalties) === Math.sign(betPenalties)) {
-                              betRows[index].points.F += 2;
-                              if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals &&
-                                matchHome.penalties === betHome.penalties && matchAway.penalties === betAway.penalties) {
-                                betRows[index].points.F += 3;
-                              }
-                            }
-                          } else {
-                            betRows[index].points.F += 2;
-                            if (matchHome.goals === betHome.goals && matchAway.goals === betAway.goals) {
-                              betRows[index].points.F += 3;
-                            }
-                          }
-                        }
-                      });
-
-                      if (matchHome.goals > matchAway.goals) {
-                        podium.first = matchHome._team;
-                        podium.second = matchAway._team;
-                      } else {
-                        if (matchHome.goals < matchAway.goals) {
-                          podium.first = matchAway._team;
-                          podium.second = matchHome._team;
-                        } else {
-                          if (matchHome.penalties > matchAway.penalties) {
-                            podium.first = matchHome._team;
-                            podium.second = matchAway._team;
-                          } else {
-                            if (matchHome.penalties < matchAway.penalties) {
-                              podium.first = matchAway._team;
-                              podium.second = matchHome._team;
-                            }
-                          }
-                        }
-                      }
-
-                      bets.forEach((bet, index) => {
-                        let inPodium = false,
-                          rightOrder = false;
-
-                        betRows[index].points.POD = 0;
-
-                        if (bet.podium.first === podium.first &&
-                          bet.podium.second === podium.second &&
-                          bet.podium.third === podium.third) {
-                          inPodium = true;
-                          rightOrder = true;
-                        } else {
-                          if ((bet.podium.first === podium.second || bet.podium.first === podium.third) &&
-                            (bet.podium.second === podium.first || bet.podium.second === podium.third) &&
-                            (bet.podium.third === podium.first || bet.podium.third === podium.second)) {
-                            inPodium = true;
-                          }
-                        }
-
-                        if (inPodium) betRows[index].points.POD += 25;
-                        if (rightOrder) betRows[index].points.POD += 35;
-                      });
+              if (lastMatchDateGroupA < now) {
+                getTable(groups[0])
+                  .then(table => {
+                    if (table[0].team === bet.groups[0].first &&
+                      table[1].team === bet.groups[0].second) {
+                      betRows[index].points[groups[0].name] += 5;
                     }
                   });
               }
-            }
-          );
-      },
 
-      processGoldenBoot(bets, betRows) {
-        let goldenBootPlayers = GoldenBootCalculator.getTopScorers();
-
-        bets.forEach((bet, index) => {
-          if (goldenBootPlayers.length > 0) {
-            goldenBootPlayers.forEach(player => {
-              if (bet.goldenBoot._team === player._team && bet.goldenBoot._player === player._id) {
-                betRows[index].points.STR = 50;
+              if (lastMatchDateGroupB < now) {
+                getTable(groups[1])
+                  .then(table => {
+                    if (table[0].team === bet.groups[1].first &&
+                      table[1].team === bet.groups[1].second) {
+                      betRows[index].points[groups[1].name] += 5;
+                    }
+                  });
               }
+
+              if (lastMatchDateGroupC < now) {
+                getTable(groups[2])
+                  .then(table => {
+                    if (table[0].team === bet.groups[2].first &&
+                      table[1].team === bet.groups[2].second) {
+                      betRows[index].points[groups[2].name] += 5;
+                    }
+                  });
+              }
+
+              if (lastMatchDateGroupD < now) {
+                getTable(groups[3])
+                  .then(table => {
+                    if (table[0].team === bet.groups[3].first &&
+                      table[1].team === bet.groups[3].second) {
+                      betRows[index].points[groups[3].name] += 5;
+                    }
+                  });
+              }
+
+              if (lastMatchDate < now) {
+                const podium = getPodium();
+                let inPodium = false,
+                  rightOrder = false;
+
+                betRows[index].points.POD = 0;
+
+                if (bet.podium.first === podium.first &&
+                  bet.podium.second === podium.second &&
+                  bet.podium.third === podium.third) {
+                  inPodium = true;
+                  rightOrder = true;
+                } else {
+                  if ((bet.podium.first === podium.second || bet.podium.first === podium.third) &&
+                    (bet.podium.second === podium.first || bet.podium.second === podium.third) &&
+                    (bet.podium.third === podium.first || bet.podium.third === podium.second)) {
+                    inPodium = true;
+                  }
+                }
+
+                if (inPodium) betRows[index].points.POD += 25;
+                if (rightOrder) betRows[index].points.POD += 35;
+              }
+
+              GoldenBootCalculator.getTopScorers()
+                .then(goldenBootPlayers => {
+                  if (goldenBootPlayers.length > 0) {
+                    goldenBootPlayers.forEach(player => {
+                      if (bet.goldenBoot._team === player._team &&
+                        bet.goldenBoot._player === player._id) {
+                        betRows[index].points.STR += 50;
+                      }
+                    });
+                  }
+                });
             });
-          } else {
-            betRows[index].points.STR = 0;
-          }
-        });
+          });
       }
     };
   }]);

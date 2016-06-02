@@ -2,11 +2,11 @@ let moment = require('moment');
 
 module.exports = {};
 
-let isInArray = function (value, array) {
+const isInArray = (value, array) => {
   return array.indexOf(value) > -1;
 };
 
-let initializeTable = function (group) {
+const initializeTable = (group) => {
   let list = [],
     table = [];
 
@@ -27,17 +27,18 @@ let initializeTable = function (group) {
   return table;
 };
 
-let calculatePointsAndGoals = function (table, matches) {
+const calculatePointsAndGoals = (table, matches) => {
+  let matchEndTime, homeTeam, awayTeam, homeTeamIndex, awayTeamIndex, result;
+
   matches.forEach(current => {
-    let matchEndTime = moment(current.date).add(2, 'h');
+    matchEndTime = moment(current.date).add(2, 'h');
 
     if (moment().isBefore(matchEndTime)) return;
 
-    let homeTeam = current.home._team,
-      awayTeam = current.away._team,
-      homeTeamIndex = null,
-      awayTeamIndex = null,
-      result;
+    homeTeam = current.home._team;
+    awayTeam = current.away._team;
+    homeTeamIndex = null;
+    awayTeamIndex = null;
 
     table.forEach((current, index) => {
       if (current.team === homeTeam) homeTeamIndex = index;
@@ -71,7 +72,7 @@ let calculatePointsAndGoals = function (table, matches) {
   })
 };
 
-let compareTable = function (a, b) {
+const compareTable = (a, b) => {
   if (a.points < b.points) return 1;
   else if (a.points > b.points) return -1;
   else if (a.goalDifference < b.goalDifference) return 1;
@@ -81,7 +82,7 @@ let compareTable = function (a, b) {
   else return 0;
 };
 
-let calculatePositions = function (table) {
+const calculatePositions = (table) => {
   table.sort(compareTable);
 
   table.forEach((current, index) => {
@@ -89,10 +90,10 @@ let calculatePositions = function (table) {
   });
 };
 
-module.exports.generate = function (group) {
+module.exports.generate = (group) => {
   let table = initializeTable(group);
   calculatePointsAndGoals(table, group.matches);
   calculatePositions(table);
-  
+
   return table;
 };

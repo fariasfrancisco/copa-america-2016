@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('TeamLogoService', function () {
+  .service('TeamLogoService', () => {
     const largeLogoPaths = [
       'assets/images/team_logos_large/0.png',
       'assets/images/team_logos_large/1.png',
@@ -21,7 +21,7 @@ angular.module('copaamericaApp')
       'assets/images/team_logos_large/15.png',
       'assets/images/team_logos_large/q.png'
     ];
-    
+
     const smallLogoPaths = [
       'assets/images/team_logos_small/0.png',
       'assets/images/team_logos_small/1.png',
@@ -46,7 +46,7 @@ angular.module('copaamericaApp')
       getSmallPath(index) {
         return smallLogoPaths[index];
       },
-      
+
       getLargePath(index) {
         return largeLogoPaths[index];
       }

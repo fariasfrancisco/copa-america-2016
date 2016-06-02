@@ -13,7 +13,7 @@
     $onInit() {
       this.loaded = false;
       this.noBets = false;
-      
+
       this.querySvc.getBets()
         .then(bets => {
           this.betTableSvc.cleanInvalidBets(bets)
@@ -23,37 +23,25 @@
               this.bets.forEach(bet => {
                 this.betRows.push({
                   user: bet.name,
-                  points: {}
+                  points: {
+                    MAT: 0, GA: 0, GB: 0, GC: 0, GD: 0, POD: 0, STR: 0
+                  }
                 });
               });
 
-              this.querySvc.getGroups()
-                .then(groups => {
-                  this.groups = groups;
-
-                  if (this.betRows.length > 0) {
-                    this.process();
-                  }
-                  else {
-                    this.$scope.$applyAsync(() => {
-                      this.noBets = true;
-                    });
-                  }
-
-                  this.$scope.$applyAsync(() => {
-                    this.loaded = true;
-                  });
+              if (this.betRows.length > 0) {
+                this.betTableSvc.calculatePoints(this.bets, this.betRows);
+              } else {
+                this.$scope.$applyAsync(() => {
+                  this.noBets = true;
                 });
+              }
+
+              this.$scope.$applyAsync(() => {
+                this.loaded = true;
+              });
             });
         });
-    }
-
-    process() {
-      this.betTableSvc.processGroups(this.groups, this.bets, this.betRows);
-      this.betTableSvc.processStage({fullName: 'quarter-final', shortName: 'QF'}, this.bets, this.betRows);
-      this.betTableSvc.processStage({fullName: 'semi-final', shortName: 'SF'}, this.bets, this.betRows);
-      this.betTableSvc.processThirdPlaceAndFinals(this.bets, this.podium, this.betRows);
-      this.betTableSvc.processGoldenBoot(this.bets, this.betRows);
     }
 
     refresh() {

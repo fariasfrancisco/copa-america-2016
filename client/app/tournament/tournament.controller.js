@@ -28,6 +28,7 @@
 
                 group.matches.forEach(match => {
                   matchDate = new Date(match.date);
+                  
                   if (matchDate > now) allPlayed = false;
                 });
 
@@ -49,7 +50,6 @@
               this.$scope.$applyAsync(() => {
                 this.loaded = true;
               });
-
             });
         });
     }

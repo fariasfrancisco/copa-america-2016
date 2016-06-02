@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('TableCalculator', function () {
-    const isInArray = function (value, array) {
+  .service('TableCalculator', () => {
+    const isInArray = (value, array) => {
       return array.indexOf(value) > -1;
     };
 
-    const initializeTable = function (group) {
+    const initializeTable = (group) => {
       let list = [],
         table = [];
 
@@ -27,7 +27,7 @@ angular.module('copaamericaApp')
       return table;
     };
 
-    const calculatePointsAndGoals = function (table, matches) {
+    const calculatePointsAndGoals = (table, matches) => {
       let homeTeam, awayTeam, homeTeamIndex, awayTeamIndex, result;
 
       matches.forEach(current => {
@@ -67,7 +67,7 @@ angular.module('copaamericaApp')
       });
     };
 
-    const compareTable = function (a, b) {
+    const compareTable = (a, b) => {
       if (a.points < b.points) return 1;
       else if (a.points > b.points) return -1;
       else if (a.goalDifference < b.goalDifference) return 1;
@@ -77,13 +77,13 @@ angular.module('copaamericaApp')
       else return 0;
     };
 
-    const comparePositions = function (a, b) {
+    const comparePositions = (a, b) => {
       if (a.position > b.position) return 1;
       else if (a.position < b.position) return -1;
       else return 0;
     };
 
-    const calculatePositions = function (table) {
+    const calculatePositions = (table) => {
       table.sort(compareTable);
 
       table.forEach((current, index) => {
@@ -91,7 +91,7 @@ angular.module('copaamericaApp')
       });
     };
 
-    const cleanTable = function (table, name) {
+    const cleanTable = (table, name) => {
       let cleanTable = [{}, {}];
 
       table.forEach((current) => {

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('AdminService', ['QueryService', function (QueryService) {
-    let clone = function (obj) {
+  .service('AdminService', ['QueryService', (QueryService) => {
+    const clone = (obj) => {
       return angular.copy(obj);
     };
 

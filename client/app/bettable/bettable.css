@@ -6,3 +6,8 @@
 div h1 {
   text-align: center;
 }
+
+.panel-heading {
+  text-align: center;
+  font-weight: bold;
+}

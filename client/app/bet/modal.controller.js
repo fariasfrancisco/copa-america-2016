@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .controller('ModalController', ['$scope', '$uibModalInstance', 'ModalService', function ($scope, $uibModalInstance, ModalService) {
+  .controller('ModalController', ['$scope', '$uibModalInstance', 'ModalService', ($scope, $uibModalInstance, ModalService) => {
     $scope.modalSvc = ModalService;
 
-    $scope.ok = function () {
+    $scope.ok = () => {
       $uibModalInstance.close();
     };
 
-    $scope.cancel = function () {
+    $scope.cancel = () => {
       $uibModalInstance.dismiss();
     };
   }]);

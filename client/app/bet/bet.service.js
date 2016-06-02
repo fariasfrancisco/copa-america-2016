@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('BetService', ['QueryService', 'TableCalculator', function (QueryService, TableCalculator) {
+  .service('BetService', ['QueryService', 'TableCalculator', (QueryService, TableCalculator) => {
     return {
       betInitialize(bet) {
         const GA = [0, 1, 8, 9, 16, 17],
@@ -13,7 +13,7 @@ angular.module('copaamericaApp')
           TP = 30,
           F = 31;
 
-        const populate = function (groupArray) {
+        const populate = (groupArray) => {
           let matches = [];
 
           for (let i = 0; i < 6; i++) {
@@ -23,7 +23,7 @@ angular.module('copaamericaApp')
           return matches;
         };
 
-        const getWinner = function (id) {
+        const getWinner = (id) => {
           const home = bet.matches[id].home,
             away = bet.matches[id].away;
 
@@ -34,7 +34,7 @@ angular.module('copaamericaApp')
           else throw 'WTF';
         };
 
-        const getLoser = function (id) {
+        const getLoser = (id) => {
           const home = bet.matches[id].home,
             away = bet.matches[id].away;
 
@@ -63,7 +63,7 @@ angular.module('copaamericaApp')
               GROUP_B_TABLE = TableCalculator.generate(GROUP_B),
               GROUP_C_TABLE = TableCalculator.generate(GROUP_C),
               GROUP_D_TABLE = TableCalculator.generate(GROUP_D);
-            
+
             bet.matches[QF[0]].name = 'Q1';
             bet.matches[QF[0]].home._team = GROUP_A_TABLE[0].team;
             bet.matches[QF[0]].away._team = GROUP_B_TABLE[1].team;

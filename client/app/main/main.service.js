@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('MainService', function () {
+  .service('MainService', () => {
     let showLoginForm = false,
       showSignUpForm = false;
 
