@@ -3,6 +3,12 @@
     <h1>{{'EMPTY_BETS' | translate}}</h1>
   </div>
 
+  <div class="row">
+    <a href="#" class="button" ng-click="$ctrl.refresh()">
+      {{'REFRESH_BUTTON' | translate}}
+    </a>
+  </div>
+
   <div class="row" ng-if="!$ctrl.noBets">
     <div class="page-header row col-md-12 custyle bet-table-format">
       <table class="table table-striped custab">
@@ -78,11 +84,5 @@
         </table>
       </div>
     </div>
-  </div>
-
-  <div class="row">
-    <a href="#" class="button" ng-click="$ctrl.refresh()">
-      {{'REFRESH_BUTTON' | translate}}
-    </a>
   </div>
 </div>

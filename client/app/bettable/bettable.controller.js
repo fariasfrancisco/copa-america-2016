@@ -6,7 +6,6 @@
       this.querySvc = QueryService;
       this.betTableSvc = BetTableService;
       this.betRows = [];
-      this.podium = {};
       this.$scope = $scope;
     }
 
@@ -20,6 +19,15 @@
             .then(validBets => {
               this.bets = validBets;
 
+              if (this.bets.length < 1) {
+                this.$scope.$applyAsync(() => {
+                  this.loaded = true;
+                  this.noBets = true;
+                });
+
+                return;
+              }
+
               this.bets.forEach(bet => {
                 this.betRows.push({
                   user: bet.name,
@@ -29,17 +37,11 @@
                 });
               });
 
-              if (this.betRows.length > 0) {
-                this.betTableSvc.calculatePoints(this.bets, this.betRows);
-              } else {
-                this.$scope.$applyAsync(() => {
-                  this.noBets = true;
-                });
-              }
-
               this.$scope.$applyAsync(() => {
                 this.loaded = true;
               });
+
+              this.betTableSvc.calculatePoints(this.bets, this.betRows);
             });
         });
     }
@@ -47,7 +49,6 @@
     refresh() {
       this.loaded = false;
       this.betRows = [];
-      this.podium = {};
       this.$onInit();
     }
   }

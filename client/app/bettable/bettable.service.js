@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copaamericaApp')
-  .service('BetTableService', ['QueryService', 'GoldenBootCalculator', 'TableCalculator', (QueryService, GoldenBootCalculator, TableCalculator) => {
+  .service('BetTableService', ['QueryService', 'GoldenBootCalculator', (QueryService, GoldenBootCalculator) => {
     let groups, matches, tables, podium;
 
     const compareMatches = (a, b) => {
@@ -27,7 +27,7 @@ angular.module('copaamericaApp')
       let arr = [];
 
       groups.forEach(group => {
-        arr = arr.concat(group.matches)
+        arr = arr.concat(group.matches);
       });
 
       return arr.sort(compareMatches);
@@ -102,6 +102,7 @@ angular.module('copaamericaApp')
       },
 
       calculatePoints(bets, betRows){
+        
         const now = new Date();
 
         let matchDate, matchGoals, matchPenalties, betGoals, betPenalties, betHome, betAway,
