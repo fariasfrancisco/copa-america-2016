@@ -15,7 +15,6 @@
   background-color: #CD7F32;
 }
 
-
 .clickable {
   cursor: pointer;
 }
@@ -112,11 +111,12 @@ a.button-disabled:hover {
   padding-bottom: 30px;
 }
 
-.podium .flex-box{
+.podium .flex-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .podium table {
   margin-bottom: 0;
 }
@@ -124,24 +124,29 @@ a.button-disabled:hover {
 .podium tr {
   border-top: white 4px solid;
 }
+
 .podium .golden-boot-input {
   max-width: 315px;
   margin-bottom: 20px;
 }
-.podium .team-holder{
+
+.podium .team-holder {
   display: flex;
   background-color: #EFEFEF;
   border: 5px solid #DEDEDE;
   border-radius: 50%;
-  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
 }
+
 .podium .first {
   order: 2;
 }
+
 .podium .second {
   order: 1;
 }
+
 .podium .third {
   order: 3;
 }
@@ -149,9 +154,11 @@ a.button-disabled:hover {
 .podium .team-holder.gold {
   background: linear-gradient(90deg, #FBFF00 10%, #FDB446 90%);
 }
+
 .podium .team-holder.silver {
   background: linear-gradient(90deg, #E6E7E8 10%, #A3A5A8 90%);
 }
+
 .podium .team-holder.bronze {
   background: linear-gradient(90deg, #E6924A 10%, #cd6532 90%);
 }
@@ -160,14 +167,17 @@ a.button-disabled:hover {
   width: 90px;
   height: 90px;
 }
+
 .podium .second .team-holder {
   width: 80px;
   height: 80px;
 }
+
 .podium .third .team-holder {
   width: 60px;
   height: 60px;
 }
+
 .podium .team-holder img {
   margin: auto;
   width: 75%;
@@ -190,8 +200,18 @@ a.button-disabled:hover {
     width: 150px;
     height: 150px;
   }
+
   .podium .third .team-holder {
     width: 140px;
     height: 140px;
   }
+}
+
+.team-right {
+  text-align: right;
+}
+
+.head-center,
+.score-bet {
+  text-align: center;
 }

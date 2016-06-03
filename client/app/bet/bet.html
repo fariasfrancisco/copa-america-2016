@@ -29,49 +29,43 @@
     </div>
 
     <div class="row">
-      <div class="">
-        <div class="panel panel-primary">
-          <div class="panel-heading tableheading">
-            <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
-          </div>
-          <div class="panel-body tablebody">
-            <div class="">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th>{{'STAGE' | translate}}</th>
-                  <th class="">{{'HOME_TEAM' | translate}}</th>
-                  <th class=" ">{{'HOME_GOALS' | translate}}</th>
-                  <th class=" ">{{'HOME_PENALTIES' | translate}}</th>
-                  <th class=" ">{{'AWAY_PENALTIES' | translate}}</th>
-                  <th class=" ">{{'AWAY_GOALS' | translate}}</th>
-                  <th class="">{{'AWAY_TEAM' | translate}}</th>
-                </tr>
-                </thead>
-                <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
-                  <td>{{match.name | translate}}</td>
-                  <td class="">
-                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
-                  </td>
-                  <td class="">{{match.home.teamName | translate}}</td>
-                  <td class=" ">{{match.home.goals}}</td>
-                  <td class=" ">{{match.home.penalties}}</td>
-                  <td class=" ">{{match.away.penalties}}</td>
-                  <td class=" ">{{match.away.goals}}</td>
-                  <td class="">{{match.away.teamName | translate}}</td>
-                  <td class="">
-                    <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
-                  </td>
-                </tr>
-                <tr class="table-row">
-                  <td>
-                    <span>{{'GOLDEN_BOOT' | translate}}:</span>
-                    <span> {{$ctrl.userBet.goldenBoot.player.name}}</span>
-                    <span>({{$ctrl.userBet.goldenBoot.team.name | translate}})</span>
-                  </td>
-                </tr>
-              </table>
+      <div class="panel panel-primary col-md-8 col-md-offset-2">
+        <div class="panel-heading tableheading">
+          <h3 class="panel-title groupname">{{'BET' | translate}}</h3>
+        </div>
+        <div class="panel-body tablebody">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="col-md-2">{{'STAGE' | translate}}</th>
+                <th class="col-md-2 head-center">{{'HOME_TEAM' | translate}}</th>
+                <th class="col-md-1 head-center">{{'GOALS' | translate}} ({{'PENALTIES' | translate}})</th>
+                <th class="col-md-1 head-center">{{'GOALS' | translate}} ({{'PENALTIES' | translate}})</th>
+                <th class="col-md-2 head-center">{{'AWAY_TEAM' | translate}}</th>
+              </tr>
+              </thead>
+              <tr class="table-row" ng-repeat="match in $ctrl.userBet.matches">
+                <td class="col-md-2">{{match.name | translate}}</td>
+                <td class="col-md-2">
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.home._team)}}">
+                  <strong>{{match.home.teamName | translate}}</strong>
+                </td>
+                <td class="col-md-1 score-bet">{{match.home.goals}} ({{match.home.penalties}})</td>
+                <td class="col-md-1 score-bet">({{match.away.penalties}}) {{match.away.goals}}</td>
+                <td class="col-md-2 team-right">
+                  <strong>{{match.away.teamName | translate}}</strong>
+                  <img width="40px" height="40px" ng-src="{{$ctrl.logoPaths.getSmallPath(match.away._team)}}">
+                </td>
+              </tr>
+            </table>
+            <br>
+            <div class="row  head-center">
+              <span><strong>{{'GOLDEN_BOOT' | translate}}:</strong></span>
+              <span>{{$ctrl.userBet.goldenBoot.player.name}}</span>
+              <span>({{$ctrl.userBet.goldenBoot.team.name | translate}})</span>
             </div>
+            <br>
           </div>
         </div>
       </div>
