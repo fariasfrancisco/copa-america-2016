@@ -118,15 +118,6 @@ angular.module('copaamericaApp')
       GOALS_FOR_SHORT: 'GF',
       GOALS_AGAINST_SHORT: 'GC',
       GOAL_DIFFERENCE_SHORT: 'GD',
-      MATCHES_SHORT: 'PAR',
-      GA_SHORT: 'GRP A',
-      GB_SHORT: 'GRP B',
-      GC_SHORT: 'GRP C',
-      GD_SHORT: 'GRP D',
-      GOLDEN_BOOT_SHORT: 'BOT',
-      PODIUM_SHORT: 'POD',
-      TOTAL_SHORT: 'TOT',
-      LEGEND: 'Leyenda',
 
       //bet
       AUTH_BET: 'Sólo Personal Autorizado. ¿Por qué no te logeás antes de entrar acá?',
@@ -167,6 +158,17 @@ angular.module('copaamericaApp')
       TOTAL: 'Total',
       WARNING: 'Advertencia!',
 
+      //bettable
+      MATCHES_SHORT: 'PAR',
+      GA_SHORT: 'GRP A',
+      GB_SHORT: 'GRP B',
+      GC_SHORT: 'GRP C',
+      GD_SHORT: 'GRP D',
+      GOLDEN_BOOT_SHORT: 'BOT',
+      PODIUM_SHORT: 'POD',
+      TOTAL_SHORT: 'TOT',
+      LEGEND: 'Leyenda',
+      
       //FAQ
       FAQ: 'Preguntas Frecuentes',
       QUESTION1: '¿Cuánto hay que pagar para participar?',

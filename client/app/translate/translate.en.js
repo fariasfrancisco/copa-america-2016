@@ -158,6 +158,17 @@ angular.module('copaamericaApp')
       TOTAL: 'Total',
       WARNING: 'Advertencia!',
 
+      //bettable
+      MATCHES_SHORT: 'MAT',
+      GA_SHORT: 'GRP A',
+      GB_SHORT: 'GRP B',
+      GC_SHORT: 'GRP C',
+      GD_SHORT: 'GRP D',
+      GOLDEN_BOOT_SHORT: 'BOT',
+      PODIUM_SHORT: 'POD',
+      TOTAL_SHORT: 'TOT',
+      LEGEND: 'Legend',
+      
       //FAQ
       FAQ: 'F.A.Q.',
       QUESTION1: 'How much do I have to pay to participate?',
