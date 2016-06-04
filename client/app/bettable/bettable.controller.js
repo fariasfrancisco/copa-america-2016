@@ -32,7 +32,7 @@
                 this.betRows.push({
                   user: bet.name,
                   points: {
-                    MAT: 0, GA: 0, GB: 0, GC: 0, GD: 0, POD: 0, STR: 0
+                    MAT: 0, GA: 0, GB: 0, GC: 0, GD: 0, POD: 0, STR: 0, TOT: 0
                   }
                 });
               });

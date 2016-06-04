@@ -10,17 +10,10 @@ angular.module('copaamericaApp')
       else return 0;
     };
 
-    const getTable = (group) => {
-      if (tables[group.name]) {
-        return Promise.resolve(tables[group.name]);
-      } else {
-        return QueryService.buildTable(group)
-          .then(table => {
-            tables[group.name] = table;
-
-            return table;
-          });
-      }
+    const compareBets = (a, b) => {
+      if (a.points.TOT < b.points.TOT) return 1;
+      else if (a.points.TOT > b.points.TOT) return -1;
+      else return 0;
     };
 
     const buildMatchesArray = () => {
@@ -102,8 +95,8 @@ angular.module('copaamericaApp')
       },
 
       calculatePoints(bets, betRows){
-        
         const now = new Date();
+        tables = [];
 
         let matchDate, matchGoals, matchPenalties, betGoals, betPenalties, betHome, betAway,
           lastMatchDateGroupA, lastMatchDateGroupB, lastMatchDateGroupC, lastMatchDateGroupD, lastMatchDate;
@@ -116,18 +109,57 @@ angular.module('copaamericaApp')
             lastMatchDateGroupA = new Date(matches[17].date);
             lastMatchDateGroupA.setHours(lastMatchDateGroupA.getHours() + 2);
 
+            if (lastMatchDateGroupA < now) {
+              return QueryService.buildTable(groups[0]);
+            } else {
+              return Promise.resolve({});
+            }
+          })
+          .then(tableA => {
+            tables[groups[0].name] = tableA;
+
             lastMatchDateGroupB = new Date(matches[19].date);
             lastMatchDateGroupB.setHours(lastMatchDateGroupB.getHours() + 2);
+
+            if (lastMatchDateGroupB < now) {
+              return QueryService.buildTable(groups[1]);
+            } else {
+              return Promise.resolve({});
+            }
+          })
+          .then(tableB => {
+            tables[groups[1].name] = tableB;
 
             lastMatchDateGroupC = new Date(matches[21].date);
             lastMatchDateGroupC.setHours(lastMatchDateGroupC.getHours() + 2);
 
+            if (lastMatchDateGroupC < now) {
+              return QueryService.buildTable(groups[2]);
+            } else {
+              return Promise.resolve({});
+            }
+          })
+          .then(tableC => {
+            tables[groups[2].name] = tableC;
+
             lastMatchDateGroupD = new Date(matches[23].date);
             lastMatchDateGroupD.setHours(lastMatchDateGroupD.getHours() + 2);
+
+            if (lastMatchDateGroupD < now) {
+              return QueryService.buildTable(groups[3]);
+            } else {
+              return Promise.resolve({});
+            }
+          })
+          .then(tableD => {
+            tables[groups[3].name] = tableD;
 
             lastMatchDate = new Date(matches[31].date);
             lastMatchDate.setHours(lastMatchDate.getHours() + 3);
 
+            return GoldenBootCalculator.getTopScorers();
+          })
+          .then(goldenBootPlayers => {
             bets.forEach((bet, index) => {
               matches.forEach(match => {
                 matchDate = new Date(match.date);
@@ -162,43 +194,39 @@ angular.module('copaamericaApp')
               });
 
               if (lastMatchDateGroupA < now) {
-                getTable(groups[0])
-                  .then(table => {
-                    if (table[0].team === bet.groups[0].first &&
-                      table[1].team === bet.groups[0].second) {
-                      betRows[index].points[groups[0].name] += 5;
-                    }
-                  });
+                let table = tables[groups[0].name];
+
+                if (table[0].team === bet.groups[0].first &&
+                  table[1].team === bet.groups[0].second) {
+                  betRows[index].points[groups[0].name] += 5;
+                }
               }
 
               if (lastMatchDateGroupB < now) {
-                getTable(groups[1])
-                  .then(table => {
-                    if (table[0].team === bet.groups[1].first &&
-                      table[1].team === bet.groups[1].second) {
-                      betRows[index].points[groups[1].name] += 5;
-                    }
-                  });
+                let table = tables[groups[1].name];
+
+                if (table[0].team === bet.groups[1].first &&
+                  table[1].team === bet.groups[1].second) {
+                  betRows[index].points[groups[1].name] += 5;
+                }
               }
 
               if (lastMatchDateGroupC < now) {
-                getTable(groups[2])
-                  .then(table => {
-                    if (table[0].team === bet.groups[2].first &&
-                      table[1].team === bet.groups[2].second) {
-                      betRows[index].points[groups[2].name] += 5;
-                    }
-                  });
+                let table = tables[groups[2].name];
+
+                if (table[0].team === bet.groups[2].first &&
+                  table[1].team === bet.groups[2].second) {
+                  betRows[index].points[groups[2].name] += 5;
+                }
               }
 
               if (lastMatchDateGroupD < now) {
-                getTable(groups[3])
-                  .then(table => {
-                    if (table[0].team === bet.groups[3].first &&
-                      table[1].team === bet.groups[3].second) {
-                      betRows[index].points[groups[3].name] += 5;
-                    }
-                  });
+                let table = tables[groups[3].name];
+
+                if (table[0].team === bet.groups[3].first &&
+                  table[1].team === bet.groups[3].second) {
+                  betRows[index].points[groups[3].name] += 5;
+                }
               }
 
               if (lastMatchDate < now) {
@@ -225,17 +253,24 @@ angular.module('copaamericaApp')
                 if (rightOrder) betRows[index].points.POD += 35;
               }
 
-              GoldenBootCalculator.getTopScorers()
-                .then(goldenBootPlayers => {
-                  if (goldenBootPlayers.length > 0) {
-                    goldenBootPlayers.forEach(player => {
-                      if (bet.goldenBoot._team === player._team &&
-                        bet.goldenBoot._player === player._id) {
-                        betRows[index].points.STR += 50;
-                      }
-                    });
+              if (goldenBootPlayers.length > 0) {
+                goldenBootPlayers.forEach(player => {
+                  if (bet.goldenBoot._team === player._team &&
+                    bet.goldenBoot._player === player._id) {
+                    betRows[index].points.STR += 50;
                   }
                 });
+              }
+
+              betRows[index].points.TOT += betRows[index].points.MAT;
+              betRows[index].points.TOT += betRows[index].points.GA;
+              betRows[index].points.TOT += betRows[index].points.GB;
+              betRows[index].points.TOT += betRows[index].points.GC;
+              betRows[index].points.TOT += betRows[index].points.GD;
+              betRows[index].points.TOT += betRows[index].points.POD;
+              betRows[index].points.TOT += betRows[index].points.STR;
+
+              betRows.sort(compareBets);
             });
           });
       }
