@@ -5,8 +5,8 @@ angular.module('copaamericaApp')
     let players;
 
     const comparePlayers = (a, b) => {
-      if (a.goals > b.goals) return 1;
-      else if (a.goals < b.goals) return -1;
+      if (a.goals > b.goals) return -1;
+      else if (a.goals < b.goals) return 1;
       else return 0;
     };
 
@@ -26,17 +26,20 @@ angular.module('copaamericaApp')
         });
     };
 
-    const trimPlayersList = () => {
-      if (players.length > 0) {
-        let i = 1;
-        const size = players.length;
+    const trimPlayersList = (arr) => {
+      let out = [];
 
-        while (i < size) {
-          if (players[i].goals < players[i - 1]) break;
+      if (arr.length > 0) {
+        const goalAmount = arr[0].goals;
+        const length = arr.size;
+
+        for (let i = 0; i < length; i++) {
+          if (Number(player.goals) === goalAmount) out.push(player);
+          else break;
         }
-
-        if (i !== size) players.splice(i, size);
       }
+
+      return out;
     };
 
     return {
@@ -46,9 +49,7 @@ angular.module('copaamericaApp')
         } else {
           return buildPlayersList()
             .then(playersArr => {
-              players = playersArr;
-
-              trimPlayersList();
+              players = trimPlayersList(playersArr);
 
               return players;
             });
