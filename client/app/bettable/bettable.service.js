@@ -187,7 +187,9 @@ angular.module('copaamericaApp')
                     } else {
                       betRows[index].points.MAT += 2;
 
-                      if (matchGoals === betGoals) betRows[index].points.MAT += 3;
+                      if (match.home.goals === betHome.goals &&
+                        match.away.goals === betAway.goals)
+                        betRows[index].points.MAT += 3;
                     }
                   }
                 }
