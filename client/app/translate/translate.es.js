@@ -114,6 +114,7 @@ angular.module('copaamericaApp')
       S2: 'Semifinal 2',
       TP: 'Tercer Puesto',
       F: 'Final',
+      TOP_SCORERS: 'Goleadores',
       POINTS_SHORT: 'Pts',
       GOALS_FOR_SHORT: 'GF',
       GOALS_AGAINST_SHORT: 'GC',

@@ -114,6 +114,7 @@ angular.module('copaamericaApp')
       S2: 'Semi-Final 2',
       TP: 'Third Place',
       F: 'Final',
+      TOP_SCORERS: 'Top Scorers',
       POINTS_SHORT: 'Pts',
       GOALS_FOR_SHORT: 'GF',
       GOALS_AGAINST_SHORT: 'GA',
@@ -168,7 +169,7 @@ angular.module('copaamericaApp')
       PODIUM_SHORT: 'POD',
       TOTAL_SHORT: 'TOT',
       LEGEND: 'Legend',
-      
+
       //FAQ
       FAQ: 'F.A.Q.',
       QUESTION1: 'How much do I have to pay to participate?',

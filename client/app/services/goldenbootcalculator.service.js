@@ -31,10 +31,10 @@ angular.module('copaamericaApp')
 
       if (arr.length > 0) {
         const goalAmount = arr[0].goals;
-        const length = arr.size;
+        const length = arr.length;
 
         for (let i = 0; i < length; i++) {
-          if (Number(player.goals) === goalAmount) out.push(player);
+          if (Number(arr[i].goals) === goalAmount) out.push(arr[i]);
           else break;
         }
       }

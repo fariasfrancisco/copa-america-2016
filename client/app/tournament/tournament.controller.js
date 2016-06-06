@@ -3,10 +3,11 @@
 (function () {
 
   class TournamentComponent {
-    constructor(QueryService, TeamLogoService, TournamentService, $scope) {
+    constructor(QueryService, TeamLogoService, TournamentService, GoldenBootCalculator, $scope) {
       this.querySvc = QueryService;
       this.logoPaths = TeamLogoService;
       this.tournamentSvc = TournamentService;
+      this.goldenBootSvc = GoldenBootCalculator;
       this.$scope = $scope;
       this.groups = [];
       this.brackets = {};
@@ -28,7 +29,7 @@
 
                 group.matches.forEach(match => {
                   matchDate = new Date(match.date);
-                  
+
                   if (matchDate > now) allPlayed = false;
                 });
 
@@ -47,6 +48,12 @@
               this.tournamentSvc.processBracket('semi-final', this.brackets);
               this.tournamentSvc.processBracket('third-place', this.brackets);
               this.tournamentSvc.processBracket('final', this.brackets);
+
+              this.goldenBootSvc.getTopScorers()
+                .then(topScorers => {
+                  this.topScorers = topScorers;
+                });
+
               this.$scope.$applyAsync(() => {
                 this.loaded = true;
               });
