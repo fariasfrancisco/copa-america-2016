@@ -141,6 +141,8 @@ angular.module('copaamericaApp')
       HOME_TEAM: 'Home',
       ID: 'id',
       MAKE_BET: 'Make your Bet!',
+      OK: 'Accept',
+      CANCEL: 'Cancel',
       PLAYER: 'Player',
       PENALTIES: 'Penalties',
       PODIUM: 'Podium',

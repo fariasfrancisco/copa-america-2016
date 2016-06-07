@@ -38,7 +38,6 @@
         .then(bet => {
           if (bet) {
             this.userBet = bet;
-            this.hasBet = true;
             this.betInitialize();
           } else {
             this.noBetInitialize();
@@ -50,6 +49,7 @@
       this.betSvc.betInitialize(this.userBet)
         .then(()=> {
           this.$scope.$applyAsync(() => {
+            this.hasBet = true;
             this.loaded = true;
           });
         });
