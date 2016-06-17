@@ -64,7 +64,13 @@ angular.module('copaamericaApp')
             };
           })
           .catch(() => {
-            throw 'error';
+            match.home.team = {players: []};
+            match.away.team = {players: []};
+
+            return {
+              match: match,
+              group: group
+            };
           });
       },
 
