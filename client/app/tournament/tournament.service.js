@@ -4,12 +4,13 @@ angular.module('copaamericaApp')
   .service('TournamentService', ['QueryService', (QueryService) => {
     return {
       processBracket(stageName, brackets) {
-        let now = new Date(),
-          matchDate, winner, loser;
+        const now = new Date();
+        let matchDate;
 
         QueryService.getStage(stageName)
           .then(stage => {
             stage.forEach(current => {
+              let winner, loser;
               matchDate = new Date(current.matches[0].date);
 
               if (matchDate < now) {
@@ -38,7 +39,7 @@ angular.module('copaamericaApp')
                     winner.teamName = teams[winner.team].name;
                     loser.teamName = teams[loser.team].name;
                   });
-                
+
                 brackets[current.name] = {
                   winner: winner,
                   loser: loser
