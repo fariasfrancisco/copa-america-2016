@@ -101,11 +101,11 @@
         </div>
         <div class="third-place">
           {{($ctrl.brackets.S1.loser.teamName | translate) || ''}}
-          <img class="team-img" ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.brackets.S1.winner.team)}}" alt="">
+          <img class="team-img" ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.brackets.S1.loser.team)}}" alt="">
         </div>
         <div class="third-place low">
           {{($ctrl.brackets.S2.loser.teamName | translate) || ''}}
-          <img class="team-img" ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.brackets.S2.winner.team)}}" alt="">
+          <img class="team-img" ng-src="{{$ctrl.logoPaths.getSmallPath($ctrl.brackets.S2.loser.team)}}" alt="">
         </div>
       </div>
 

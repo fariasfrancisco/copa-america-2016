@@ -53,12 +53,12 @@ caption.ng-binding {
 
 .c1 .team {
   width: 100px;
-  height: 40px
+  height: 45px
 }
 
 .c2 .block, .c3 .block, .c4 .block {
-  margin-top: 40px;
-  height: 40px;
+  margin-top: 45px;
+  height: 45px;
   width: 160px;
   border-top: solid 2px #334bf5;
   border-right: solid 2px #334bf5;
@@ -68,39 +68,39 @@ caption.ng-binding {
 }
 
 .c2 .block.first {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 .c3 .block {
-  height: 80px;
-  line-height: 80px;
+  height: 90px;
+  line-height: 90px;
 }
 
 .c3 .block.low {
-  margin-top: 80px;
+  margin-top: 90px;
 }
 
 .c3 .third-place {
-  margin-top: 40px;
-  height: 80px;
-  width: 160px;
+  margin-top: 90px;
+  height: 90px;
+  width: 180px;
   text-align: right;
-  line-height: 80px;
+  line-height: 90px;
 }
 
 .c3 .third-place.low {
-  margin-top: 80px;
+  margin-top: 90px;
 }
 
 .c4 .block {
-  height: 160px;
-  line-height: 160px;
-  margin-top: 80px;
+  height: 180px;
+  line-height: 180px;
+  margin-top: 90px;
 }
 
 .c4 .block-3rd-place {
-  height: 160px;
-  line-height: 160px;
+  height: 180px;
+  line-height: 180px;
   margin-top: 120px;
   border-top: solid 2px #334bf5;
   border-right: solid 2px #334bf5;
@@ -108,19 +108,19 @@ caption.ng-binding {
 }
 
 .c5 .block {
-  margin-top: 160px;
+  margin-top: 180px;
   text-align: right;
   border-bottom: solid 2px #334bf5;
 }
 
 .c5 .block-3rd-place {
-  margin-top: 280px;
+  margin-top: 300px;
   text-align: right;
   border-bottom: solid 2px #334bf5;
 }
 
 .cup {
-  margin-top: 80px;
+  margin-top: 90px;
 }
 
 .graphParent {
@@ -139,7 +139,7 @@ div.team.ng-binding {
 
 .cup {
   float: left;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 .cup .cup-img {
@@ -148,7 +148,7 @@ div.team.ng-binding {
 }
 
 .third-place-prize {
-  margin-top: 420px;
+  margin-top: 460px;
   font-weight: bolder;
   color: #CD7F32;
 }
